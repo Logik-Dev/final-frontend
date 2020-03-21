@@ -1,0 +1,23 @@
+<div class="banner" fxLayout fxLayoutAlign="center center">
+  <form [formGroup]="searchForm" class="form" (ngSubmit)="submitForm(searchForm.value)">
+    <mat-form-field appearance="fill">
+      <mat-label>Ville</mat-label>
+      <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
+      <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city" >
+          {{city.nom +' (' + city.codeDepartement +')'}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+    <button type="submit" mat-flat-button>Rechercher</button>
+  </form>
+</div>
+<div *ngIf="rooms$">
+  <h2 *ngFor="let room of rooms$ | async">{{room.id}}</h2>
+</div>

@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+}
+.content {
+  padding-top: $navbar-height;
+  min-height: 100%;
+}
+.error-dialog {
+  background-color: #F8D7DA;
+  color: #721C24;
+}
+.success-dialog {
+  background-color: #D4EDDA;
+  color: #175826;
+}
+.mat-snack-bar-container .mat-simple-snackbar {
+  display: flex;
+  justify-content: center;
+}
+.mat-simple-snackbar-action {
+  color: grey;
+}
+
+

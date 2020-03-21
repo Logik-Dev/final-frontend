@@ -1,0 +1,36 @@
+.banner::before {
+  content: "";
+  background-image: url('../../assets/salle1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 100%;
+  position: absolute;
+  background-position: center;
+  top: 70px;
+  left: 0;
+
+}
+.banner {
+  height: 350px;
+  .form {
+    width: 360px;
+    z-index: 5;
+    padding: 48px 60px 30px 60px;
+    background-color: rgba(0,0,0,.3);
+    mat-form-field, button {
+      margin: 0 auto;
+      width: 240px;
+      display: block;
+    }
+    ::ng-deep .mat-form-field-flex{
+      background-color: rgba(255,255,255,.95);
+      border-radius: 0;
+      height: 45px;
+      border: none;
+    }
+
+  }
+}
+
+

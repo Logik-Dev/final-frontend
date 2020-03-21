@@ -1,0 +1,14 @@
+<form [formGroup]="cityForm">
+  <mat-form-field>
+    <input type="text"
+           matInput
+           placeholder="Ville"
+           formControlName="city"
+           [matAutocomplete]="autoGroup">
+    <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city.nom">
+          {{city.nom +' (' + city.codeDepartement +')'}}
+        </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
