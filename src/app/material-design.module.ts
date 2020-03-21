@@ -7,6 +7,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
 
 
 const modules: any[] = [
@@ -17,7 +18,8 @@ const modules: any[] = [
   MatSnackBarModule,
   MatIconModule,
   MatDatepickerModule,
-  MatMomentDateModule
+  MatMomentDateModule,
+  MatCarouselModule.forRoot()
 ];
 @NgModule({
   declarations: [],

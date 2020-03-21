@@ -17,6 +17,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     if (error instanceof HttpErrorResponse) {
       // Erreur serveur
+      console.log('serveur erreur');
       message = errorService.getServerMessage(error);
       // TODO implémenter logging
       // stackTrace = errorService.getServerStack(error);

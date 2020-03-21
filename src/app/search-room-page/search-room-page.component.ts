@@ -11,14 +11,15 @@ import {Room} from '../models/room';
 })
 export class SearchRoomPageComponent implements OnInit {
   rooms$: Observable<Room[]>;
+  city: string;
   constructor(private roomService: RoomService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const city = params.get('city');
+      this.city = params.get('city');
       const date = params.get('date');
-      this.rooms$ = this.roomService.findRooms(city, date);
+      this.rooms$ = this.roomService.findRooms(this.city, date);
     });
   }
 

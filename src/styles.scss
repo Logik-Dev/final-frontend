@@ -16,6 +16,9 @@ body {
   padding-top: $navbar-height;
   min-height: 100%;
 }
+.container {
+  padding: 20px 10px;
+}
 .error-dialog {
   background-color: #F8D7DA;
   color: #721C24;
