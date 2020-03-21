@@ -18,6 +18,3 @@
     <button type="submit" mat-flat-button>Rechercher</button>
   </form>
 </div>
-<div *ngIf="rooms$">
-  <h2 *ngFor="let room of rooms$ | async">{{room.id}}</h2>
-</div>

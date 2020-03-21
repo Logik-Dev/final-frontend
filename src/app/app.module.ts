@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialDesignModule} from './material-design.module';
-import { SearchCityFormComponent } from './search-city-form/search-city-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginFormComponent} from './login-page/login-form/login-form.component';
@@ -21,24 +20,26 @@ import { MenuComponent } from './menu/menu.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import { SearchRoomPageComponent } from './search-room-page/search-room-page.component';
 
 
 const routes: any[] = [
   {path: '', component: HomePageComponent},
   {path: 'login', component: LoginPageComponent},
-  {path: 'profil', component: ProfilPageComponent}
+  {path: 'profil', component: ProfilPageComponent},
+  {path: 'search', component: SearchRoomPageComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchCityFormComponent,
     LoginFormComponent,
     LoginPageComponent,
     ProfilPageComponent,
     NavbarComponent,
     MenuComponent,
-    HomePageComponent
+    HomePageComponent,
+    SearchRoomPageComponent
   ],
   imports: [
     BrowserModule,

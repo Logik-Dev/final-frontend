@@ -11,7 +11,6 @@ export class RoomService {
   constructor(private http: HttpClient) {}
 
   findRooms(city: string, date?: string ): Observable<Room[]> {
-    console.log('ok');
     return this.http.get<Room[]>(`${this.url}?city=${city}&day=${date}`);
   }
 }

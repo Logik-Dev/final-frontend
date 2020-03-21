@@ -1,0 +1,5 @@
+
+  <div *ngFor="let room of rooms$ | async">
+    <img [src]="photo.url" alt="" *ngFor="let photo of room.photos">
+  </div>
+

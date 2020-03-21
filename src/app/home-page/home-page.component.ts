@@ -8,6 +8,7 @@ import {GeoService} from '../services/geo.service';
 import {City} from '../models/city';
 import {RoomService} from '../services/room.service';
 import {Room} from '../models/room';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -18,12 +19,11 @@ export class HomePageComponent implements OnInit {
   cities$: Observable<City[]>;
   searchForm: FormGroup;
   startDate = moment();
-  rooms$: Observable<Room[]>;
 
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
-              private roomService: RoomService) {
+              private router: Router) {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
@@ -33,18 +33,17 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.cities$ = this.searchForm.get('city').valueChanges.pipe(
-      debounceTime(800),
+      debounceTime(300),
       switchMap(value => this.geoService.findCityByName(value))
     );
   }
 
   submitForm(formData) {
-    if (!formData.invalid) {
-      this.rooms$ = this.roomService.findRooms(formData.city.nom, formData.date.format('DD/MM/YYYY'));
+    if (!this.searchForm.invalid) {
+      this.router.navigate(['/search', {city: formData.city.nom, date: formData.date.format('DD/MM/YYYY')}])
     }
   }
   displayCity(city: City) {
-    console.log(city);
     return city.nom;
   }
 }
