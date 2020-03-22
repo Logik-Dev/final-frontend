@@ -23,7 +23,8 @@ export class HomePageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
-              private router: Router) {
+              private router: Router,
+              private roomService: RoomService) {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
@@ -40,7 +41,11 @@ export class HomePageComponent implements OnInit {
 
   submitForm(formData) {
     if (!this.searchForm.invalid) {
-      this.router.navigate(['/search', {city: formData.city.nom, date: formData.date.format('DD/MM/YYYY')}])
+      const city = formData.city.nom;
+      const date = formData.date;
+      this.roomService.findRooms(city, date && date.format('DD/MM/YYYY')).subscribe(
+        rooms => this.router.navigateByUrl('/rooms', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
+      );
     }
   }
   displayCity(city: City) {
