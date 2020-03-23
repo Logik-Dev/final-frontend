@@ -1,0 +1,35 @@
+@import "../../variables";
+.container {
+  height: calc(100vh - #{$navbar-height});
+  form {
+    text-align: center;
+    width: 320px;
+    margin: 50px auto;
+    padding: 20px;
+    .form-title {
+      color: #2C8A92;
+      text-align: center;
+    }
+    mat-form-field {
+      margin: 0 auto;
+      display: block;
+      max-width: 300px;
+    }
+    button {
+      width: 100%;
+    }
+    p {
+      margin: 20px 0 0 0;
+      color: gray;
+      font-style: italic;
+      font-size: 15px;
+    }
+    .register {
+      font-style: normal;
+      display: block;
+      color: crimson;
+      cursor: pointer;
+    }
+  }
+
+}

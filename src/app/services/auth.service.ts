@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TokenResponse} from '../models/token-response';
 import {Router} from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,26 @@ export class AuthService {
     this.http.post<TokenResponse>(`${this.url}`, {email, password})
       .subscribe(response => {
         sessionStorage.setItem('jwt', response.jwt);
-        this.router.navigate(['/profil']);
+        this.router.navigateByUrl('/profil');
       });
   }
   getToken(): string {
     return sessionStorage.getItem('jwt');
+  }
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+    console.log(token);
+    const expiration = jwt_decode(token).exp;
+    console.log('expiration: ' + expiration);
+    const now = new Date().getTime() / 1000;
+    console.log('now: ' + now);
+    if (now > expiration) {
+      return false;
+    }
+    return true;
+
   }
 }

@@ -1,1 +1,19 @@
-<app-login-form></app-login-form>
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="mat-elevation-z2">
+    <h1 class="form-title">Connectez vous</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Entrez votre adresse email</mat-label>
+      <input type="email" matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Entrez votre mot de passe</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Connexion</button>
+    <p>
+      Vous n'êtes pas encore inscrit ?
+      <a class="register">S'enregistrer</a>
+    </p>
+
+  </form>
+</div>

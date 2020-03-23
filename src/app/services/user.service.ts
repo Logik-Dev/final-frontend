@@ -11,7 +11,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
   getUserInfos(): Observable<User> {
     const token = sessionStorage.getItem('jwt');
-    console.log(jwt_decode(token));
     const id = jwt_decode(token).id;
 
     return this.http.get<User>(`${this.url}/${id}`);

@@ -7,11 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialDesignModule} from './material-design.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {LoginFormComponent} from './login-page/login-form/login-form.component';
 import {GlobalErrorHandler} from './global-error-handler';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {RequestInterceptorService} from './services/request-interceptor.service';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {ServerErrorInterceptor} from './server-error-interceptor';
 import { ProfilPageComponent } from './profil-page/profil-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -21,19 +20,19 @@ import { HomePageComponent } from './home-page/home-page.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { RoomListPageComponent } from './room-list-page/room-list-page.component';
+import {AuthGuardService} from './services/auth-guard.service';
 
 
-const routes: any[] = [
+const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'login', component: LoginPageComponent},
-  {path: 'profil', component: ProfilPageComponent},
+  {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
   {path: 'rooms', component: RoomListPageComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     LoginPageComponent,
     ProfilPageComponent,
     NavbarComponent,
