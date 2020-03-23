@@ -1,6 +1,6 @@
 <app-navbar (toggleMenu)="showMenu = !showMenu"></app-navbar>
 <div class="content" *ngIf="showMenu; else content">
-  <app-menu fxHide fxShow.xs></app-menu>
+  <app-menu fxHide fxShow.xs (toggleMenu)="showMenu =!showMenu"></app-menu>
 </div>
 <ng-template #content>
   <div class="content">

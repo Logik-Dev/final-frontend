@@ -1,7 +1,7 @@
 
   <ul ngClass.gt-xs="vertical-menu">
     <li class="menu-item"
-        *ngFor="let menu of menus" [routerLink]="[menu.page]">
+        *ngFor="let menu of menus" [routerLink]="[menu.page]" (click)="toggleMenu.emit()">
         <mat-icon class="menu-icon">{{menu.icon}}</mat-icon>
         <h3>{{menu.name}}</h3>
         <mat-icon class="arrow" fxHide fxShow.xs>keyboard_arrow_right</mat-icon>

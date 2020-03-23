@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
 import {Observable} from 'rxjs';
-import {debounceTime, switchMap, tap} from 'rxjs/operators';
+import {debounceTime, switchMap} from 'rxjs/operators';
 import {GeoService} from '../services/geo.service';
 import {City} from '../models/city';
 import {RoomService} from '../services/room.service';
-import {Room} from '../models/room';
 import {Router} from '@angular/router';
 
 @Component({

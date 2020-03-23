@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -6,11 +6,12 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  @Output() toggleMenu = new EventEmitter();
   menus = [
     {icon: 'home', name: 'Accueil', page: '/'},
     {icon: 'person', name: 'Mon compte', page: '/profil'},
-    {icon: 'room', name: 'Les salles', page: 'salles'},
-    {icon: 'info', name: 'Informations', page: 'informations'}
+    {icon: 'room', name: 'Les salles', page: '/rooms'},
+    {icon: 'info', name: 'Informations', page: '/informations'}
   ]
   constructor() { }
 

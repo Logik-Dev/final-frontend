@@ -33,4 +33,33 @@
   }
 }
 
+.presentation {
+  height: calc(100vh - 420px);
+  padding: 40px;
+  text-align: center;
+  .presentation-item {
+    padding: 10px 20px;
+    background-color: white;
+    margin-bottom: 30px;
+    mat-icon {
+      color: #FFD95A;
+      font-size: 40px;
+      margin-right: 20px;
+      text-shadow: 3px 3px 4px #2C8A92;
+    }
+    .comment {
+      font-size: 35px;
+      margin-right: 10px;
+    }
+    .item-title {
+      color: #2C8A92;
+      margin: -10px 0 0 0;
+    }
+    p {
+      color: gray;
+      font-style: italic;
+      font-size: 18px;
+    }
 
+  }
+}

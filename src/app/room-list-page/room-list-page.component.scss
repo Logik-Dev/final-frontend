@@ -1,8 +1,20 @@
+.filters {
+  margin: 0 auto;
+  max-width: 500px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px lightgray solid;
+  padding: 20px 0;
+}
 .card {
+  margin: 20px auto 0px auto;
   max-width: 710px;
-  margin-top: 20px;
+  .card-img {
+    max-width: 300px;
+  }
   .card-content {
     padding: 10px;
+
     .card-title {
       font-style: italic;
       font-weight: 500;
@@ -20,6 +32,12 @@
       span {
         margin-left: 5px;
       }
+      button {
+        margin-left: auto;
+      }
     }
   }
+}
+.card-small {
+  max-width: 300px;
 }
