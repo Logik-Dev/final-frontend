@@ -18,4 +18,7 @@ export class ProfilPageComponent implements OnInit {
     this.user$ = this.userService.getUserInfos();
   }
 
+  logout() {
+    this.auth.logout();
+  }
 }

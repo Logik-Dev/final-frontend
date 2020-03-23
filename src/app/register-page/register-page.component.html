@@ -4,22 +4,32 @@
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname" required>
+      <mat-error *ngIf="f.firstname.errors">Un prénom est requis</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastname" required>
+      <mat-error *ngIf="f.lastname.errors">Un nom est requis</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email" required>
+      <mat-error *ngIf="f.email.errors && f.email.errors.emailExists">Cette adresse est déjà utilisée</mat-error>
+      <mat-error *ngIf="f.email.errors && f.email.errors.required">Une adresse mail est requise</mat-error>
+      <mat-error *ngIf="f.email.errors && f.email.errors.email">L'adresse mail est invalide</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Mot de passe</mat-label>
       <input type="password" matInput formControlName="password" required>
+      <mat-error *ngIf="f.password.errors && f.password.errors.required">Un mot de passe est requis</mat-error>
+      <mat-error *ngIf="f.password.errors && f.password.errors.minlength">8 caractères minimum</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Confirmez le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck" required>
+      <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.required">Un mot de passe est requis</mat-error>
+      <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.minlength">8 caractères minimum</mat-error>
+      <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.mustMatch">Le mot de passe est différent</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">S'enregistrer</button>
   </form>

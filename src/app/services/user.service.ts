@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
+import {BooleanResponse} from '../models/boolean-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,5 +15,10 @@ export class UserService {
     const id = jwt_decode(token).id;
     return this.http.get<User>(`${this.url}/${id}`);
   }
-  getUsername
+  register(user: User): Observable<User>{
+    return this.http.post<User>(`${this.url}`, user);
+  }
+  emailExists(email: string): Observable<BooleanResponse> {
+    return this.http.get<BooleanResponse>(`${this.url}/exists?email=${email}`);
+  }
 }
