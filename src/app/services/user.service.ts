@@ -12,7 +12,7 @@ export class UserService {
   getUserInfos(): Observable<User> {
     const token = sessionStorage.getItem('jwt');
     const id = jwt_decode(token).id;
-
     return this.http.get<User>(`${this.url}/${id}`);
   }
+  getUsername
 }

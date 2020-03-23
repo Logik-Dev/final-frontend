@@ -1,1 +1,2 @@
 <p *ngIf="user$ | async as user">Bonjour {{user.firstname}}</p>
+<button mat-flat-button color="warn" (click)="auth.logout()">Se déconnecter</button>

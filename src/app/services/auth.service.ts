@@ -19,6 +19,11 @@ export class AuthService {
         this.router.navigateByUrl('/profil');
       });
   }
+  logout() {
+    sessionStorage.removeItem('jwt');
+    this.router.navigate(['/connexion']);
+  }
+
   getToken(): string {
     return sessionStorage.getItem('jwt');
   }
@@ -27,15 +32,11 @@ export class AuthService {
     if (!token) {
       return false;
     }
-    console.log(token);
     const expiration = jwt_decode(token).exp;
-    console.log('expiration: ' + expiration);
     const now = new Date().getTime() / 1000;
-    console.log('now: ' + now);
     if (now > expiration) {
       return false;
     }
     return true;
-
   }
 }

@@ -21,13 +21,15 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { RoomListPageComponent } from './room-list-page/room-list-page.component';
 import {AuthGuardService} from './services/auth-guard.service';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'login', component: LoginPageComponent},
+  {path: 'connexion', component: LoginPageComponent},
   {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
-  {path: 'rooms', component: RoomListPageComponent}
+  {path: 'salles', component: RoomListPageComponent},
+  {path: 'enregistrement', component: RegisterPageComponent}
 ]
 
 @NgModule({
@@ -38,7 +40,8 @@ const routes: Routes = [
     NavbarComponent,
     MenuComponent,
     HomePageComponent,
-    RoomListPageComponent
+    RoomListPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,

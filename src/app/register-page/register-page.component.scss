@@ -1,0 +1,18 @@
+.container {
+  form {
+    margin: 50px auto;
+    max-width: 400px;
+    text-align: center;
+    border: 1px #2C8A92 solid;
+    padding: 20px;
+    .form-title {
+      color: #2C8A92;
+    }
+    mat-form-field {
+      display: block;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}

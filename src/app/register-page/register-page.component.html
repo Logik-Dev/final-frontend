@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="mat-elevation-z6">
+    <h1 class="form-title">S'inscrire</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input type="text" matInput formControlName="firstname" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput formControlName="lastname" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Adresse email</mat-label>
+      <input type="email" matInput formControlName="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput formControlName="password" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Confirmez le mot de passe</mat-label>
+      <input type="password" matInput formControlName="passwordCheck" required>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">S'enregistrer</button>
+  </form>
+</div>

@@ -1,10 +1,12 @@
 .filters {
   margin: 0 auto;
   max-width: 500px;
-  border-radius: 5px;
-  background-color: white;
+  padding: 20px 10px;
+  border-radius: 20px;
   border: 1px lightgray solid;
-  padding: 20px 0;
+  button {
+    font-weight: lighter;
+  }
 }
 .card {
   margin: 20px auto 0px auto;
