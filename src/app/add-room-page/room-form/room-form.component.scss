@@ -1,0 +1,26 @@
+mat-form-field {
+  display: block;
+}
+.days {
+  width: 100%;
+}
+
+button {
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+}
+
+.equipement {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px lightgray solid;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin-left: 10px;
+}
+.equipement:hover {
+  background-color: red;
+  color: white;
+  transition: background-color, color 700ms;
+}

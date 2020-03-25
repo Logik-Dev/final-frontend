@@ -1,5 +1,4 @@
 
-import {Equipment} from './equipment';
 import {Photo} from './photo';
 import {Address} from './address';
 import {RoomType} from './room-type';
@@ -11,8 +10,9 @@ export interface Room {
   name: string;
   address: Address;
   maxCapacity: number;
+  availableDays: string[];
   type: RoomType;
-  equipments: Equipment[];
+  equipments: string[];
   rating: number;
   photos: Photo[];
   comments: Comment[];

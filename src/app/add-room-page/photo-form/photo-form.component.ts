@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-photo-form',
@@ -7,36 +7,30 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./photo-form.component.scss']
 })
 export class PhotoFormComponent implements OnInit {
-  innerForm: FormGroup;
-
+  form: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.innerForm = this.fb.group({
-      photos: this.fb.array([])
+    this.form = this.fb.group({
+      photos: this.fb.array([], [Validators.required])
     });
   }
-  createItem(data): FormGroup {
-    return this.fb.group(data);
-  }
-
-  get photos(): FormArray {
-    return this.innerForm.get('photos') as FormArray;
-  }
-  detectFiles(event) {
-    const files = event.target.files;
-    if (files) {
-      for (const file of files) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.photos.push(this.createItem({
-            file,
-            url: e.targe.result
-          }));
-        };
-        reader.readAsDataURL(file);
-      }
+  addFile(event) {
+    const file = event.target.files.item(0);
+    if (file && this.photos.value.length < 3) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const control = new FormControl({file, url: e.target.result}, [Validators.required]);
+        this.photos.push(control);
+      };
+      reader.readAsDataURL(file);
     }
   }
+  deletePhoto(i: number) {
+    this.photos.removeAt(i);
+  }
 
+  get photos() {
+    return this.form.get('photos') as FormArray;
+  }
 }

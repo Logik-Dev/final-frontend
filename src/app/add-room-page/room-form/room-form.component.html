@@ -1,0 +1,52 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de la salle</mat-label>
+    <input type="text" matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Tarif heure</mat-label>
+    <input type="float" matInput formControlName="price">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Taille(m2)</mat-label>
+    <input type="float" matInput formControlName="size">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre maximum de personnes</mat-label>
+    <input type="number" matInput formControlName="maxCapacity">
+  </mat-form-field>
+  <mat-form-field *ngIf="roomTypes$" appearance="outline">
+    <mat-label>Type de salle</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let type of roomTypes$ | async" [value]="type.name">
+        {{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="equipments$" appearance="outline">
+    <mat-label>Equipements</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment.name" (onSelectionChange)="newEquipment($event)">
+        {{equipment.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p *ngIf="equipments.value.length">Equipements:
+    <span *ngFor="let e of equipments.value; let i = index;"
+          class="equipement"
+          title="supprimer"
+          (click)="deleteEquipment(i)">{{e}}</span>
+  </p>
+    <p>Jours de disponibilité:</p>
+  <div gdLayout gdColumns="1fr 1fr 1fr 1fr" gdGap="10px">
+    <mat-checkbox
+      (change)="checkboxChange($event, i)"
+      *ngFor="let day of frenchDays; let i = index;" [value]="day">
+      {{day | titlecase}}
+    </mat-checkbox>
+  </div>
+  <button color="primary" mat-raised-button matStepperNext [disabled]="form.invalid">
+    Suivant
+  </button>
+
+</form>

@@ -1,7 +1,13 @@
 <div class="container">
-  <mat-horizontal-stepper >
-    <mat-step [stepControl]="photoForm.innerForm">
+  <mat-vertical-stepper linear>
+    <mat-step [stepControl]="photoForm">
+      <ng-template matStepLabel>Choisir des photos</ng-template>
       <app-photo-form></app-photo-form>
     </mat-step>
-  </mat-horizontal-stepper>
+    <mat-step [stepControl]="roomForm">
+      <ng-template matStepLabel>Infos de la salle</ng-template>
+      <app-room-form #roomForm></app-room-form>
+    </mat-step>
+  </mat-vertical-stepper>
 </div>
+
