@@ -8,6 +8,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 const modules: any[] = [
@@ -19,7 +22,10 @@ const modules: any[] = [
   MatIconModule,
   MatDatepickerModule,
   MatMomentDateModule,
-  MatCarouselModule.forRoot()
+  MatCarouselModule.forRoot(),
+  MatStepperModule,
+  MatSelectModule,
+  MatCheckboxModule
 ];
 @NgModule({
   declarations: [],

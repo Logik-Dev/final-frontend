@@ -22,6 +22,10 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdap
 import { RoomListPageComponent } from './room-list-page/room-list-page.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { RoomFormComponent } from './room-form/room-form.component';
+import {MatSelectModule} from '@angular/material/select';
+import { AddRoomPageComponent } from './add-room-page/add-room-page.component';
+import { PhotoFormComponent } from './add-room-page/photo-form/photo-form.component';
 
 
 const routes: Routes = [
@@ -41,7 +45,10 @@ const routes: Routes = [
     MenuComponent,
     HomePageComponent,
     RoomListPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    RoomFormComponent,
+    AddRoomPageComponent,
+    PhotoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FlexModule,
     ExtendedModule,
-    GridModule
+    GridModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true},

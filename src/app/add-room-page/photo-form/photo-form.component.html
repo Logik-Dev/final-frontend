@@ -1,0 +1,13 @@
+<form [formGroup]="innerForm">
+  <ng-template matStepLabel>Choisir des photos</ng-template>
+  <div *ngIf="photos.length" class="preview" fxLayout="row wrap" fxLayoutAlign="center">
+    <div class="photo-container mat-elevation-z2" formArrayName="photos" *ngFor="let photo of photos.controls; let i = index;" fxFlex="0 0 300px">
+      <div [formGroupName]="i">
+        <img [src]="photo.controls.url.value" alt="" >
+      </div>
+
+    </div>
+  </div>
+  <input type="file" (change)="detectFiles($event)" multiple>
+  <button mat-raised-button matStepperNext color="primary" [disabled]="!photos.length">Etape suivante</button>
+</form>
