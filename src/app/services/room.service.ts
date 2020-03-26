@@ -25,9 +25,11 @@ export class RoomService {
 
   addRoom(room: Room, photos: File[]) {
     const formData = new FormData();
-    Array.from(photos).forEach(photo => formData.append('files', photo));
+    photos.forEach(photo => {
+      formData.append('files', photo, photo.name);
+    });
     this.http.post<Room>(this.url, room).subscribe(
-      roomResult => this.http.post(`${this.url}/${roomResult.id}`, formData).subscribe(
+      roomResult => this.http.post(`${this.url}/${roomResult.id}/photos`, formData).subscribe(
         result => console.log(result)
       )
     );

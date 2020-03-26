@@ -1,13 +1,23 @@
 <div class="container">
   <mat-vertical-stepper linear>
     <mat-step [stepControl]="photoForm">
-      <ng-template matStepLabel>Choisir des photos</ng-template>
+      <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
     </mat-step>
     <mat-step [stepControl]="roomForm">
-      <ng-template matStepLabel>Infos de la salle</ng-template>
-      <app-room-form #roomForm></app-room-form>
+      <ng-template matStepLabel>Informations</ng-template>
+      <app-room-form></app-room-form>
+    </mat-step>
+    <mat-step [stepControl]="addressForm">
+      <ng-template matStepLabel>Adresse</ng-template>
+      <app-address-form></app-address-form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Fin</ng-template>
+      <button matStepperPrevious>Revenir</button>
+      <button mat-raised-button (click)="submit()">Valider</button>
     </mat-step>
   </mat-vertical-stepper>
+
 </div>
 

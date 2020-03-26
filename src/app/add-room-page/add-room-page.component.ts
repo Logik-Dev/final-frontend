@@ -8,6 +8,10 @@ import {
 
 import {PhotoFormComponent} from './photo-form/photo-form.component';
 import {FormGroup} from '@angular/forms';
+import {RoomFormComponent} from './room-form/room-form.component';
+import {AddressFormComponent} from './address-form/address-form.component';
+import {Room} from '../models/room';
+import {RoomService} from '../services/room.service';
 
 @Component({
   selector: 'app-add-room-page',
@@ -16,8 +20,13 @@ import {FormGroup} from '@angular/forms';
 })
 export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   @ViewChild(PhotoFormComponent) photoFormComponent: PhotoFormComponent;
+  @ViewChild(RoomFormComponent) roomFormComponent: RoomFormComponent;
+  @ViewChild(AddressFormComponent) addressFormComponent: AddressFormComponent;
   photoForm: FormGroup;
-  constructor(private cd: ChangeDetectorRef) {
+  roomForm: FormGroup;
+  addressForm: FormGroup;
+  constructor(private cd: ChangeDetectorRef,
+              private roomService: RoomService) {
   }
 
   ngOnInit(): void {
@@ -26,8 +35,17 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked(): void {
     this.cd.detectChanges();
     this.photoForm = this.photoFormComponent.form;
+    this.roomForm = this.roomFormComponent.form;
+    this.addressForm = this.addressFormComponent.form;
 
   }
+  submit() {
+    const room: Room = this.roomForm.value;
+    room.address = this.addressForm.value;
+    const photos: File[] = [];
+    this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
+    this.roomService.addRoom(room, photos);
 
+  }
 
 }

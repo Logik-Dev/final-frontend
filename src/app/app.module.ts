@@ -25,6 +25,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AddRoomPageComponent } from './add-room-page/add-room-page.component';
 import { PhotoFormComponent } from './add-room-page/photo-form/photo-form.component';
 import { RoomFormComponent } from './add-room-page/room-form/room-form.component';
+import { AddressFormComponent } from './add-room-page/address-form/address-form.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
     RegisterPageComponent,
     AddRoomPageComponent,
     PhotoFormComponent,
-    RoomFormComponent
+    RoomFormComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Adresse</mat-label>
+    <input type="text" matInput formControlName="label">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Ville</mat-label>
+    <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
+    <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
+      <mat-option *ngFor="let city of cities$ | async" [value]="city.nom" >
+        {{city.nom +' (' + city.codeDepartement +')'}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Code postal</mat-label>
+    <input type="text" matInput [value]="zipCode" formControlName="zipCode">
+  </mat-form-field>
+  <button mat-raised-button matStepperNext [disabled]="form.invalid">Suivant</button>
+</form>
