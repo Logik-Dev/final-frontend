@@ -31,7 +31,7 @@ export class RoomFormComponent implements OnInit {
     this.roomTypes$ = this.roomService.getTypes();
     this.equipments$ = this.roomService.getEquipments();
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       price: ['', Validators.required],
       size: ['', Validators.required],
       maxCapacity: ['', Validators.required],

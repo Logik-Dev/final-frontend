@@ -11,6 +11,7 @@ export class RoomListPageComponent implements OnInit {
   rooms: Room[];
   city;
   date;
+  Arr = Array;
   constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {

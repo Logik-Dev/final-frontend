@@ -1,6 +1,10 @@
 
   <form [formGroup]="form">
-    <input type="file" (change)="addFile($event)">
+    <button mat-raised-button  class="file-button" color="warn" (click)="onFileClick()">
+      <span>Ajouter une photo</span><mat-icon>cloud_download</mat-icon>
+    </button>
+
+    <input type="file" (change)="addFile($event)" class="fileinput" #fileInput>
     <div class="preview" *ngIf="photos.length" fxLayout="row wrap" fxLayoutAlign="center">
       <div class="img-container mat-elevation-z4" *ngFor="let photo of photos.controls; let i = index;">
         <img [src]="photo.value.url" alt="">

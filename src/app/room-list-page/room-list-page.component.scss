@@ -9,10 +9,32 @@
   }
 }
 .card {
+  //border: 2px rgba(44, 138, 146, .3) solid;
+  border: 2px #2C8A92 solid;
   margin: 20px auto 0px auto;
   max-width: 710px;
   .card-img {
-    max-width: 300px;
+    position: relative;
+    background-color: #2C8A92;
+    img {
+      width: 297px;
+      height: 195px;
+      object-fit: scale-down;
+    }
+    .note {
+      width: 88px;
+      position: absolute;
+      bottom: 5px; right: 0;
+      background-color: #2C8A92;
+      padding: 5px 0px 0 8px;
+      border-top-left-radius: 12px;
+      color: #FFD95A;
+      mat-icon {
+        padding: 0;
+        margin: -4px;
+        font-size: 15px;
+      }
+    }
   }
   .card-content {
     padding: 10px;

@@ -5,10 +5,11 @@
     <button mat-stroked-button>Prix <mat-icon>keyboard_arrow_down</mat-icon></button>
   </div>
   <div class="card mat-elevation-z4" ngClass.xs="card-small" *ngFor="let room of rooms" fxLayout fxLayout.lt-sm="column" >
-    <div class="card-img" fxFlex="0 0 240px">
-      <mat-carousel proportion="75" [slides]="room.photos.length" interval="8000">
-        <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
-      </mat-carousel>
+    <div class="card-img" fxFlex="0 0 auto">
+      <img [src]="room.photos[0].url" alt="">
+      <div class="note">
+        <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>
+      </div>
     </div>
     <div class="card-content" fxFlex="1 1 100%">
       <h3 class="card-title">{{room.name}}</h3>

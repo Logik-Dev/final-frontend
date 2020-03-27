@@ -1,5 +1,23 @@
 <div class="container">
-  <mat-vertical-stepper linear>
+  <mat-vertical-stepper linear *ngIf="mobile">
+    <mat-step [stepControl]="photoForm">
+      <ng-template matStepLabel>Photos</ng-template>
+      <app-photo-form></app-photo-form>
+    </mat-step>
+    <mat-step [stepControl]="roomForm">
+      <ng-template matStepLabel>Informations</ng-template>
+      <app-room-form></app-room-form>
+    </mat-step>
+    <mat-step [stepControl]="addressForm">
+      <ng-template matStepLabel>Adresse</ng-template>
+      <app-address-form></app-address-form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Fin</ng-template>
+      <button mat-raised-button (click)="submit()" color="primary">Valider</button>
+    </mat-step>
+  </mat-vertical-stepper>
+  <mat-horizontal-stepper linear *ngIf="!mobile">
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
@@ -17,7 +35,6 @@
       <button matStepperPrevious>Revenir</button>
       <button mat-raised-button (click)="submit()">Valider</button>
     </mat-step>
-  </mat-vertical-stepper>
-
+  </mat-horizontal-stepper>
 </div>
 

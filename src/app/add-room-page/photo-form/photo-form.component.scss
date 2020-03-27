@@ -1,25 +1,49 @@
-.preview {
-  .img-container {
-    position: relative;
-    background-color: lightgray;
-    margin: 15px;
-    img {
-      object-fit: scale-down;
-      width: 300px;
-      height: 200px;
+form {
+  .fileinput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  .file-button {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    mat-icon {
+      font-size: 1.4rem;
+      margin: 0 0 0px 5px;
     }
-    button {
-      position: absolute;
-      bottom: 5px; right: 5px;
-      background-color: rgba(255,255,255,.5);
-      mat-icon {
-        color: red;
+  }
+  .preview {
+    .img-container {
+      position: relative;
+      background-color: lightgray;
+      margin: 15px;
+
+      img {
+        object-fit: scale-down;
+        width: 300px;
+        height: 200px;
+      }
+
+      button {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background-color: rgba(255, 255, 255, .5);
+
+        mat-icon {
+          color: red;
+        }
       }
     }
   }
-}
-button {
-  display: block;
-  margin-top: 10px;
-  margin-left: auto;
+
+  button {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+  }
 }

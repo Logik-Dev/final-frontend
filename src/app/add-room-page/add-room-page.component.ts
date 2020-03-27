@@ -1,7 +1,7 @@
 import {
   AfterContentChecked,
   ChangeDetectorRef,
-  Component,
+  Component, HostListener,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -25,11 +25,13 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   photoForm: FormGroup;
   roomForm: FormGroup;
   addressForm: FormGroup;
+  mobile = true;
   constructor(private cd: ChangeDetectorRef,
               private roomService: RoomService) {
   }
 
   ngOnInit(): void {
+    this.mobile = window.innerWidth <= 600;
   }
 
   ngAfterContentChecked(): void {
@@ -46,6 +48,10 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
     this.roomService.addRoom(room, photos);
 
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.mobile = event.target.innerWidth <= 600;
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
   styleUrls: ['./photo-form.component.scss']
 })
 export class PhotoFormComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef;
   form: FormGroup;
   constructor(private fb: FormBuilder) { }
 
@@ -32,5 +33,9 @@ export class PhotoFormComponent implements OnInit {
 
   get photos() {
     return this.form.get('photos') as FormArray;
+  }
+
+  onFileClick() {
+    this.fileInput.nativeElement.click();
   }
 }

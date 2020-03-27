@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Room} from '../models/room';
 import {Observable} from 'rxjs';
-import {AuthService} from './auth.service';
 import {RoomType} from '../models/room-type';
 import {Equipment} from '../models/equipment';
 
