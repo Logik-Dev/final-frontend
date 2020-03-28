@@ -1,9 +1,9 @@
-<form [formGroup]="form">
-  <mat-form-field appearance="outline">
+<form [formGroup]="form" fxLayout="row wrap">
+  <mat-form-field appearance="outline" fxFlex="0 2 680px">
     <mat-label>Adresse</mat-label>
     <input type="text" matInput formControlName="label">
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" fxFlex="1 0 300px">
     <mat-label>Ville</mat-label>
     <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
     <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
@@ -12,9 +12,9 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" fxFlex="2 0 150px">
     <mat-label>Code postal</mat-label>
     <input type="text" matInput [value]="zipCode" formControlName="zipCode">
   </mat-form-field>
-  <button mat-raised-button matStepperNext [disabled]="form.invalid">Suivant</button>
+  <button mat-flat-button matStepperNext color="primary" [disabled]="form.invalid" fxFlex="2 0 150px">Suivant</button>
 </form>

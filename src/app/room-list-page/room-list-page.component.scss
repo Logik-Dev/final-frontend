@@ -1,3 +1,4 @@
+
 .filters {
   margin: 0 auto;
   max-width: 500px;
@@ -8,60 +9,50 @@
     font-weight: lighter;
   }
 }
-.card {
-  //border: 2px rgba(44, 138, 146, .3) solid;
-  border: 2px #2C8A92 solid;
-  margin: 20px auto 0px auto;
-  max-width: 710px;
-  .card-img {
-    position: relative;
-    background-color: #2C8A92;
-    img {
-      width: 297px;
-      height: 195px;
-      object-fit: scale-down;
-    }
-    .note {
-      width: 88px;
-      position: absolute;
-      bottom: 5px; right: 0;
+.card-container {
+  max-width: 1500px;
+  margin: 20px auto;
+  .card {
+    margin: 10px;
+    .card-img {
+      position: relative;
       background-color: #2C8A92;
-      padding: 5px 0px 0 8px;
-      border-top-left-radius: 12px;
-      color: #FFD95A;
-      mat-icon {
-        padding: 0;
-        margin: -4px;
-        font-size: 15px;
+      img {
+        width: 100%;
+        object-fit: scale-down;
+      }
+      .note {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: #FFD95A;
+        background-color: #2C8A92;
+        border-top-left-radius: 25px;
+        padding: 5px 0 0 15px;
+        mat-icon {
+          font-size: 16px;
+        }
+      }
+    }
+    .card-content {
+      background-color: rgba(0,0,0,.03);
+      padding: 0 0 0px 20px;
+      position: relative;
+      color: rgba(0,0,0,.8);
+      .card-title {
+        padding-top: 15px;
+        text-align: center;
+        font-weight: 400;
+        font-style: italic;
+      }
+      .line {
+        width: 100%;
+        button {
+          position: absolute;
+          bottom: 0; right: 0;
+          border-radius: 0;
+        }
       }
     }
   }
-  .card-content {
-    padding: 10px;
-
-    .card-title {
-      font-style: italic;
-      font-weight: 500;
-      text-align: center;
-    }
-    .line {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-      mat-icon {
-        font-size: 20px;
-        margin: 0;
-        padding: 0;
-      }
-      span {
-        margin-left: 5px;
-      }
-      button {
-        margin-left: auto;
-      }
-    }
-  }
-}
-.card-small {
-  max-width: 300px;
 }
