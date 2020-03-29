@@ -13,6 +13,7 @@
   max-width: 1500px;
   margin: 20px auto;
   .card {
+    cursor: pointer;
     margin: 10px;
     .card-img {
       position: relative;
@@ -36,21 +37,22 @@
     }
     .card-content {
       background-color: rgba(0,0,0,.03);
-      padding: 0 0 0px 20px;
-      position: relative;
+      padding: 0 20px 20px 20px;
       color: rgba(0,0,0,.8);
       .card-title {
-        padding-top: 15px;
+        padding-top: 10px;
+        margin: 0 0 10px 0;
         text-align: center;
         font-weight: 400;
         font-style: italic;
       }
       .line {
+        flex: 0 0 180px;
+        margin-top: 5px;
         width: 100%;
-        button {
-          position: absolute;
-          bottom: 0; right: 0;
-          border-radius: 0;
+        mat-icon {
+          font-size: 20px;
+          vertical-align: middle;
         }
       }
     }

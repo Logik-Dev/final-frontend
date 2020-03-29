@@ -1,22 +1,22 @@
-<form [formGroup]="form" ngClass.gt-xs="large-form">
-  <div class="field-container" fxLayout.gt-xs="row wrap" fxLayoutAlign.gt-xs="space-around">
-    <mat-form-field appearance="outline">
+<form [formGroup]="form" fxLayout="row wrap" fxLayoutGap="20px">
+
+    <mat-form-field appearance="outline" fxFlex="0 2 680px">
       <mat-label>Nom de la salle</mat-label>
       <input type="text" matInput formControlName="name" required>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" fxFlex="1 0 160px">
       <mat-label>Tarif heure</mat-label>
       <input type="number" matInput formControlName="price" required>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" fxFlex="1 0 160px">
       <mat-label>Taille(m2)</mat-label>
       <input type="number" matInput formControlName="size" required>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre maximum de personnes</mat-label>
+    <mat-form-field appearance="outline" fxFlex="1 0 160px">
+      <mat-label>Max Personnes</mat-label>
       <input type="number" matInput formControlName="maxCapacity" required>
     </mat-form-field>
-    <mat-form-field *ngIf="roomTypes$" appearance="outline">
+    <mat-form-field *ngIf="roomTypes$" appearance="outline" fxFlex="2 0 160px">
       <mat-label>Type de salle</mat-label>
       <mat-select formControlName="type">
         <mat-option *ngFor="let type of roomTypes$ | async" [value]="type.name" required>
@@ -24,7 +24,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field *ngIf="equipments$" appearance="outline">
+    <mat-form-field *ngIf="equipments$" appearance="outline" fxFlex="2 0 160px">
       <mat-label>Equipements</mat-label>
       <mat-select>
         <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment.name"
@@ -33,17 +33,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <p *ngIf="equipments.value.length" class="equipement-container">Equipements:
+    <p *ngIf="equipments.value.length" class="equipement-container" fxFlex="0 1 680px">
       <span *ngFor="let e of equipments.value; let i = index;"
             class="equipement"
             title="supprimer"
             (click)="deleteEquipment(i)">{{e}}</span>
     </p>
-  </div>
-  <div class="days-container">
-    <p class="days-title">Disponibilité:</p>
-    <div gdColumns="1fr 1fr 1fr" gdGap="10px">
-      <mat-checkbox
+  <div class="days-container" fxFlex="0 1 680px">
+    <h3 class="days-title" align="center">Disponibilité:</h3>
+    <div fxLayout="row wrap" fxLayoutGap="35px" class="days">
+      <mat-checkbox fxFlex="0 0 60px"
         (change)="checkboxChange($event, i)"
         *ngFor="let day of frenchDays; let i = index;" [value]="day">
         {{day | titlecase}}
@@ -51,8 +50,10 @@
     </div>
   </div>
 
-
-  <button color="primary" mat-raised-button matStepperNext [disabled]="form.invalid">
+  <button class="previous" mat-raised-button matStepperPrevious>
+    Revenir
+  </button>
+  <button class="next" color="primary" mat-flat-button matStepperNext [disabled]="form.invalid">
     Suivant
   </button>
 

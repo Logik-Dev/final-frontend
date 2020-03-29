@@ -11,7 +11,7 @@
     </button>
   </div>
   <div class="card-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
-    <div class="card mat-elevation-z4" *ngFor="let room of rooms" fxLayout="row wrap" fxFlex="0 1 720px">
+    <div class="card mat-elevation-z4" *ngFor="let room of rooms" fxLayout="row wrap" fxFlex="0 1 720px" title="Détails">
       <div class="card-img" fxFlex="1 0 280px">
         <img [src]="room.photos[0].url" alt="">
         <div class="note">
@@ -20,34 +20,27 @@
       </div>
       <div class="card-content" fxFlex="2 0 280px">
         <h2 class="card-title">{{room.name}}</h2>
-        <div class="line">
-          <mat-icon>persons</mat-icon>
-          <span>{{room.maxCapacity}} personnes max</span>
+        <div class="card-content-items" fxLayout="row wrap" fxLayoutAlign="start center">
+          <div class="line">
+            <mat-icon>category</mat-icon>
+            <span>{{room.type.name}}</span>
+          </div>
+          <div class="line">
+            <mat-icon>persons</mat-icon>
+            <span>{{room.maxCapacity}} personnes max</span>
+          </div>
+          <div class="line">
+            <mat-icon>euro_symbol</mat-icon>
+            <span>A partir de {{room.price}} euros</span>
+          </div>
+          <div class="line">
+            <mat-icon>crop_free</mat-icon>
+            <span>{{room.size}} m2</span>
+          </div>
         </div>
-        <div class="line">
-          <mat-icon>euro_symbol</mat-icon>
-          <span>A partir de {{room.price}} euros</span>
-        </div>
-        <div class="line">
-          <button mat-flat-button color="primary">Voir détails</button>
-        </div>
+
       </div>
     </div>
   </div>
-  <!--  <div class="card-container" >
-      <div class="card-flex mat-elevation-z2" *ngFor="let room of rooms" fxLayout="row wrap" fxLayoutAlign="start center" >
-        <div class="card-image" fxFlex="0 1 240px">
-          <img [src]="room.photos[0].url" alt="">
-        </div>
-        <div class="card-inside" fxFlex="0 0 300px">
-          <h2 class="card-title">
-            {{room.name}}
-          </h2>
-          <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid excepturi illum
-            pariatur. Accusamus asperiores consequuntur dolor enim in nam nisi nobis voluptatem! Adipisci aliquid at, aut
-          </div>
-        </div>
-      </div>
-    </div>-->
 </div>
 
