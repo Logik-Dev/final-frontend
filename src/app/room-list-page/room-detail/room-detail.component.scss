@@ -1,0 +1,56 @@
+.container {
+  padding: 0;
+  background-color: rgba(0,0,0,.1);
+  min-height: calc(100vh - 70px);
+  h1 {
+    color: rgba(0,0,0,.8);
+    font-style: italic;
+    padding: 40px 0;
+    margin: 0;
+    background-color: #2C8A92;
+    border-bottom: 2px #FAFAFA solid;
+  }
+  .carousel {
+    margin: 0 auto;
+
+  }
+  .content {
+
+    padding: 20px;
+    mat-accordion {
+      padding: 0;
+      margin: 10px 0;
+      mat-expansion-panel-header {
+      }
+      mat-panel-title {
+        mat-icon {
+          font-size: 18px;
+        }
+      }
+      .infos {
+        margin-top: -20px;
+        .info {
+          flex: 0 1 150px;
+          mat-icon {
+            color: gray;
+            vertical-align: bottom;
+            margin: 15px 5px 0 0;
+          }
+          span {
+            font-size: 16px;
+          }
+        }
+      }
+      .equipments {
+        margin-top: -10px;
+        .equipment {
+          padding: 0 20px;
+          border: 1px lightgrey solid;
+          border-radius: 10px;
+          background-color: white;
+        }
+      }
+    }
+
+  }
+}

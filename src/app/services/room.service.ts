@@ -12,6 +12,10 @@ export class RoomService {
   url = `http://localhost:8080/api/rooms`;
   constructor(private http: HttpClient) {}
 
+  findById(id: number): Observable<Room> {
+    return this.http.get<Room>(`${this.url}/${id}`);
+  }
+
   findRooms(city?: string, date?: string ): Observable<Room[]> {
     if (city) {
       this.url += `?city=${city}`;

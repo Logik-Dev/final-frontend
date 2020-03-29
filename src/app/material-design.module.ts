@@ -11,6 +11,7 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 const modules: any[] = [
@@ -25,7 +26,8 @@ const modules: any[] = [
   MatCarouselModule.forRoot(),
   MatStepperModule,
   MatSelectModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatExpansionModule
 ];
 @NgModule({
   declarations: [],
