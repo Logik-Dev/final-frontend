@@ -10,8 +10,10 @@ export class BookingService {
   url = 'http://localhost:8080/api/bookings';
   constructor(private http: HttpClient) { }
 
-  newBooking(data, roomId: number): Observable<Booking> {
-      return this.http.post<Booking>(`${this.url}/rooms/${roomId}`, data);
+  newBooking(data, roomId: number) {
+      this.http.post(`${this.url}/rooms/1`, data).subscribe(
+        result => console.log(result)
+      );
   }
 
 }

@@ -16,6 +16,7 @@ export class ErrorService {
     return error.stack;
   }
   getServerMessage(error: HttpErrorResponse): string {
+    console.log(error);
     return error.error.message;
   }
   getServerStack(error: HttpErrorResponse) {

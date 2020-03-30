@@ -47,8 +47,9 @@ export class BookingFormComponent implements OnInit {
       } else {
         end = data.startDate.format('DD/MM/YYYY') + ' ' + data.endTime;
       }
-      this.bookingService.newBooking({begin, end, weekRepetition: data.weekRepetition}, this.room.id)
-        .subscribe(result => console.log(result));
+      const booking = {begin, end, weekRepetition: data.weekRepetition};
+      console.log(booking);
+      this.bookingService.newBooking(booking, this.room.id);
     }
   }
 }
