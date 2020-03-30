@@ -13,7 +13,7 @@
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
     </mat-form-field>
     <button type="submit" mat-flat-button>Rechercher</button>
   </form>

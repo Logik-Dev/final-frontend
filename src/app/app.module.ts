@@ -26,6 +26,8 @@ import { AddRoomPageComponent } from './add-room-page/add-room-page.component';
 import { PhotoFormComponent } from './add-room-page/photo-form/photo-form.component';
 import { RoomFormComponent } from './add-room-page/room-form/room-form.component';
 import { AddressFormComponent } from './add-room-page/address-form/address-form.component';
+import { RoomDetailComponent } from './room-list-page/room-detail/room-detail.component';
+import { BookingFormComponent } from './booking-form/booking-form.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,7 @@ const routes: Routes = [
   {path: 'connexion', component: LoginPageComponent},
   {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
   {path: 'salles', component: RoomListPageComponent},
+  {path: 'salles/:id', component: RoomDetailComponent},
   {path: 'enregistrement', component: RegisterPageComponent}
 ]
 
@@ -49,7 +52,9 @@ const routes: Routes = [
     AddRoomPageComponent,
     PhotoFormComponent,
     RoomFormComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    RoomDetailComponent,
+    BookingFormComponent
   ],
   imports: [
     BrowserModule,

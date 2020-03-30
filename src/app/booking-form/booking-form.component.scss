@@ -1,0 +1,14 @@
+form {
+  mat-form-field, button {
+    margin: 4px 10px;
+  }
+  mat-checkbox {
+    margin: 0 15px 5px 15px;
+  }
+  button {
+    margin-top: 20px;
+  }
+  #end + button {
+    margin-top: 0px;
+  }
+}

@@ -4,23 +4,15 @@ import {RoomService} from '../../services/room.service';
 import {Observable} from 'rxjs';
 import {RoomType} from '../../models/room-type';
 import {Equipment} from '../../models/equipment';
+import {getDays, getFrenchDays} from '../../utils/days';
 
-const days = {
-  LUNDI: 'MONDAY',
-  MARDI: 'TUESDAY',
-  MERCREDI: 'WEDNESDAY',
-  JEUDI: 'THURSDAY',
-  VENDREDI: 'FRIDAY',
-  SAMEDI: 'SATURDAY',
-  DIMANCHE: 'SUNDAY'
-}
 @Component({
   selector: 'app-room-form',
   templateUrl: './room-form.component.html',
   styleUrls: ['./room-form.component.scss']
 })
 export class RoomFormComponent implements OnInit {
-  frenchDays = Object.keys(days);
+  frenchDays = getFrenchDays();
   roomTypes$: Observable<RoomType[]>;
   equipments$: Observable<Equipment[]>;
   form: FormGroup;
@@ -45,7 +37,7 @@ export class RoomFormComponent implements OnInit {
   checkboxChange(event, i) {
 
     if (event.checked) {
-      this.availableDays.push(new FormControl(days[event.source.value]));
+      this.availableDays.push(new FormControl(getDays()[event.source.value]));
     } else {
       this.availableDays.removeAt(i);
     }

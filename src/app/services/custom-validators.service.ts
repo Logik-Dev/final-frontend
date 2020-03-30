@@ -25,7 +25,22 @@ export class CustomValidatorsService {
       }
     };
   }
+  dayAvailable(dateControlName: string, availableDays: string[]) {
+    return (formGroup: FormGroup) => {
+      const dateControl = formGroup.controls[dateControlName];
+      const englishDay = dateControl.value.locale('en').format('dddd').toUpperCase();
+      if (dateControl.errors && dateControl.errors.dayUnavailable) {
+        return;
+      }
 
+      if (availableDays.includes(englishDay)) {
+        dateControl.setErrors(null);
+      } else {
+        dateControl.setErrors({dayUnavailable: true});
+      }
+
+    };
+  }
   emailAvailable(): AsyncValidatorFn {
     return (emailControl: AbstractControl): Observable<ValidationErrors | null> => {
       const email = emailControl.value;

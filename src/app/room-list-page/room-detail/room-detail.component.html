@@ -1,13 +1,14 @@
+<h1 class="mat-display-1 title" align="center">{{(room$|async)?.name}}</h1>
 <div class="container" *ngIf="room$ | async as room" fxLayout="row wrap">
-  <h1 class="mat-display-2 title" align="center" fxFlex="0 0 100%">{{room.name}}</h1>
-  <div class="carousel" fxFlex="0 1 680px">
+
+  <div class="carousel" fxFlex="0 1 500px">
     <mat-carousel [hideIndicators]="false" [loop]="true" color="accent" proportion="70"
                   [slides]="room.photos.length" maxWidth="680px">
       <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url">
       </mat-carousel-slide>
     </mat-carousel>
   </div>
-  <div class="content" fxLayout="row wrap" fxLayoutAlign="space-around center" fxFlex="1 0 150px">
+  <div class="content" fxLayout="row wrap" fxLayoutAlign.xs="space-around center" fxFlex="1 0 150px">
     <mat-accordion fxFlex="0 1 400px">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -34,9 +35,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title><mat-icon>speaker</mat-icon> Equipements</mat-panel-title>
           </mat-expansion-panel-header>
-          <div class="equipments" fxLayout="row wrap" fxLayoutGap="10px">
+          <div class="equipments" fxLayout="row wrap" fxLayoutGap="10px" *ngIf="room.equipments.length else noEquipment">
             <div class="equipment" *ngFor="let equipment of room.equipments">{{equipment.name}}</div>
           </div>
+          <ng-template #noEquipment>Aucun équipement</ng-template>
         </mat-expansion-panel>
       </mat-accordion>
     <mat-accordion fxFlex="0 1 400px">
@@ -47,6 +49,23 @@
         <div class="equipments" fxLayout="row wrap" fxLayoutGap="10px">
           <div class="equipment" *ngFor="let day of room.availableDays">{{day}}</div>
         </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion fxFlex="0 1 400px">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>comment</mat-icon> Commentaires</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="comments" *ngIf="room.comments.length else noComments"></div>
+        <ng-template #noComments>Aucun commentaires</ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion fxFlex="0 1 400px">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>booking</mat-icon> Reserver</mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-booking-form [room]="room" *ngIf="room"></app-booking-form>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

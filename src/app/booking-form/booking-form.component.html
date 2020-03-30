@@ -1,0 +1,35 @@
+<form [formGroup]="form" fxLayout="row wrap" (ngSubmit)="onSubmit(form.value)">
+    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="startpicker" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+      <mat-datepicker #startpicker [startAt]="startDate"></mat-datepicker>
+      <mat-error *ngIf="f.startDate.errors">
+        <span *ngIf="f.startDate.errors.dayUnavailable">Ce jour n'est pas disponible</span>
+      </mat-error>
+    </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="1 0 150px">
+    <mat-label>Heure de début</mat-label>
+    <input type="time" matInput formControlName="startTime">
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="1 0 150px">
+    <mat-label>Heure de fin</mat-label>
+    <input type="time" matInput formControlName="endTime">
+  </mat-form-field>
+  <mat-checkbox formControlName="weekly" fxFlex="0 0 150px">Recurrente</mat-checkbox>
+  <mat-form-field *ngIf="f.weekly && f.weekly.value" fxFlex="1 0 300px" appearance="outline">
+    <mat-label>Toutes les</mat-label>
+    <mat-select formControlName="weekRepetition">
+      <mat-option *ngFor="let repeat of weekRepetition" [value]="repeat">{{repeat}} semaines</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" fxFlex="1 0 300px" id="end">
+    <mat-label>Termine le</mat-label>
+    <input matInput [matDatepicker]="endpicker" formControlName="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+    <mat-datepicker #endpicker [startAt]="endDate"></mat-datepicker>
+  </mat-form-field>
+  <button mat-flat-button color="primary" [disabled]="form.invalid" fxFlex="1 0 300px">
+    Demander une réservation
+  </button>
+</form>

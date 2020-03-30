@@ -36,4 +36,7 @@ body {
   color: grey;
 }
 
+@import '~@angular/material/theming';
 
+$custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif;');
+@include mat-core($custom-typography);
