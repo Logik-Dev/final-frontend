@@ -13,7 +13,7 @@ export class AuthService {
               private router: Router) { }
 
   login(email: string, password: string) {
-    this.http.post<TokenResponse>(`${this.url}`, {email, password})
+    this.http.post<TokenResponse>(this.url, {email, password})
       .subscribe(response => {
         sessionStorage.setItem('jwt', response.jwt);
         this.router.navigateByUrl('/profil');

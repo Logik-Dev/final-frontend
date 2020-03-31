@@ -6,6 +6,7 @@ import {CustomValidatorsService} from '../services/custom-validators.service';
 import {Room} from '../models/room';
 import {BookingService} from '../services/booking.service';
 import {NotificationService} from '../services/notification.service';
+import {Router} from '@angular/router';
 
 
 const ftr = 'DD/MM/YYYY';
@@ -26,7 +27,8 @@ export class BookingFormComponent implements OnInit {
               private adapter: DateAdapter<any>,
               private validator: CustomValidatorsService,
               private bookingService: BookingService,
-              private notification: NotificationService) {
+              private notification: NotificationService,
+              private router: Router) {
   }
 
   get f() {
@@ -56,7 +58,7 @@ export class BookingFormComponent implements OnInit {
       this.bookingService.newBooking({begin, end, weekRepetition: data.weekRepetition}, this.room.id).subscribe(
         result => {
           this.notification.showSuccess('Demande enregistrée, vous serez notifié lors de la validation');
-          this.form.reset();
+          this.router.navigateByUrl('/profil');
         }
       );
     }

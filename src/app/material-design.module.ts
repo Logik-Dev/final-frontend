@@ -12,7 +12,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 const modules: any[] = [
@@ -28,7 +28,8 @@ const modules: any[] = [
   MatStepperModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTooltipModule
 ];
 @NgModule({
   declarations: [],

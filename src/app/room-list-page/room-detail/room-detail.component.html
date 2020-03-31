@@ -47,7 +47,7 @@
           <mat-panel-title><mat-icon>event</mat-icon> Jours disponibles</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="equipments" fxLayout="row wrap" fxLayoutGap="10px">
-          <div class="equipment" *ngFor="let day of room.availableDays">{{day}}</div>
+          <div class="equipment" *ngFor="let day of availableDays">{{day}}</div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
@@ -65,7 +65,10 @@
         <mat-expansion-panel-header>
           <mat-panel-title><mat-icon>booking</mat-icon> Reserver</mat-panel-title>
         </mat-expansion-panel-header>
-        <app-booking-form [room]="room" *ngIf="room"></app-booking-form>
+        <app-booking-form [room]="room" *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
+        <ng-template #unauthenticated>
+          <a routerLink="/profil">Connectez</a> vous pour pouvoir réserver
+        </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
