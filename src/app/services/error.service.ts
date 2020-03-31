@@ -12,15 +12,8 @@ export class ErrorService {
     }
     return error.message ? error.message : error.toString();
   }
-  getClientStack(error: Error): string {
-    return error.stack;
-  }
   getServerMessage(error: HttpErrorResponse): string {
-    console.log(error);
     return error.error.message;
   }
-  getServerStack(error: HttpErrorResponse) {
-    // gérer la pille
-    return 'stack';
-  }
+
 }

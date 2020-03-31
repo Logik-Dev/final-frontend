@@ -13,7 +13,7 @@ export class NotificationService {
     this.zone.run(() =>
       this.snackBar.open(message, 'X', {
         panelClass: classes,
-        duration: 3000,
+        duration: 4000,
         verticalPosition: 'bottom'})
     );
   }

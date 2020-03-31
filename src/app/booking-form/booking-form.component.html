@@ -29,6 +29,9 @@
     <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
     <mat-datepicker #endpicker [startAt]="endDate"></mat-datepicker>
   </mat-form-field>
+  <mat-error *ngIf="form.errors?.isUnavailable" fxFlex="1 0 300px" class="error">
+    Déjà réservée
+  </mat-error>
   <button mat-flat-button color="primary" [disabled]="form.invalid" fxFlex="1 0 300px">
     Demander une réservation
   </button>

@@ -4,8 +4,11 @@ import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
 import {CustomValidatorsService} from '../services/custom-validators.service';
 import {Room} from '../models/room';
-import {VariableAst} from '@angular/compiler';
 import {BookingService} from '../services/booking.service';
+import {NotificationService} from '../services/notification.service';
+
+
+const ftr = 'DD/MM/YYYY';
 
 @Component({
   selector: 'app-booking-form',
@@ -18,38 +21,46 @@ export class BookingFormComponent implements OnInit {
   startDate = moment();
   endDate = moment().add(1, 'week');
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
+
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private validator: CustomValidatorsService,
-              private bookingService: BookingService) { }
+              private bookingService: BookingService,
+              private notification: NotificationService) {
+  }
+
+  get f() {
+    return this.form.controls;
+  }
 
   ngOnInit(): void {
     this.adapter.setLocale('fr');
     this.form = this.fb.group({
-      startDate: [this.startDate, Validators.required ],
+      startDate: [this.startDate, Validators.required],
       endDate: [this.endDate, Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       weekly: false,
       weekRepetition: 0
     }, {
-      validator: this.validator.dayAvailable('startDate', this.room.availableDays)
+      validator: this.validator.dayAvailable('startDate', this.room.availableDays),
+      asyncValidators: this.validator.dateAvailable(this.room.id)
     });
   }
-  get f() { return this.form.controls; }
 
   onSubmit(data) {
     if (!this.form.invalid) {
-      const begin = data.startDate.format('DD/MM/YYYY') + ' ' + data.startTime;
-      let end;
-      if (data.weekly) {
-        end = data.endDate.format('DD/MM/YYYY') + ' ' + data.endTime;
-      } else {
-        end = data.startDate.format('DD/MM/YYYY') + ' ' + data.endTime;
-      }
-      const booking = {begin, end, weekRepetition: data.weekRepetition};
-      console.log(booking);
-      this.bookingService.newBooking(booking, this.room.id);
+      const begin = `${data.startDate.format(ftr)} ${data.startTime}`;
+      let end = data.weekly ? data.endDate.format(ftr) : data.startDate.format(ftr);
+      end += ` ${data.endTime}`;
+      this.bookingService.newBooking({begin, end, weekRepetition: data.weekRepetition}, this.room.id).subscribe(
+        result => {
+          this.notification.showSuccess('Demande enregistrée, vous serez notifié lors de la validation');
+          this.form.reset();
+        }
+      );
     }
   }
+
+
 }

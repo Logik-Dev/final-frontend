@@ -11,15 +11,11 @@ export class GlobalErrorHandler implements ErrorHandler {
     const errorService = this.injector.get(ErrorService);
     const notificationService = this.injector.get(NotificationService);
 
+    // TODO implémenter logging
     let message;
-    // let stackTrace;
-
-
     if (error instanceof HttpErrorResponse) {
       // Erreur serveur
       message = errorService.getServerMessage(error);
-      // TODO implémenter logging
-      // stackTrace = errorService.getServerStack(error);
       notificationService.showError(message);
 
     } else {
@@ -27,7 +23,6 @@ export class GlobalErrorHandler implements ErrorHandler {
       message = errorService.getClientMessage(error);
       notificationService.showError(message);
     }
-
     console.log(error);
   }
 

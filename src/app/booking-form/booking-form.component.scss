@@ -5,6 +5,11 @@ form {
   mat-checkbox {
     margin: 0 15px 5px 15px;
   }
+
+  mat-error.error {
+    text-align: center;
+  }
+
   button {
     margin-top: 20px;
   }

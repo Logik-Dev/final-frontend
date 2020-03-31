@@ -14,7 +14,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
         if (error.status === 401 || error.status === 403 || error.status === 404 || error.status === 409) {
           return throwError(error);
         } else {
-          return throwError({error: {message: 'Erreur serveur'}});
+          return throwError( {message: 'Une erreur est survenue'});
       }
       } )
     );
