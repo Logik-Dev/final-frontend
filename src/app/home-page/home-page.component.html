@@ -1,8 +1,9 @@
-<div class="banner" fxLayout fxLayoutAlign="center center">
+<div class="banner" fxLayout fxLayoutAlign="center center" ngClass.gt-sm="large-banner">
   <form [formGroup]="searchForm" class="form" (ngSubmit)="submitForm(searchForm.value)">
     <mat-form-field appearance="fill">
       <mat-label>Ville</mat-label>
       <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
+      <mat-icon matSuffix>place</mat-icon>
       <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
         <mat-option *ngFor="let city of cities$ | async" [value]="city" >
           {{city.nom +' (' + city.codeDepartement +')'}}
@@ -18,13 +19,13 @@
     <button type="submit" mat-flat-button>Rechercher</button>
   </form>
 </div>
-<div class="presentation" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around center">
+<div class="presentation" fxLayout="row wrap" fxLayoutAlign="space-around center" ngClass.gt-xs="large-presentation">
   <div class="presentation-item">
     <mat-icon>search</mat-icon>
     <h2 class="item-title">Trouvez la salle adaptée à votre besoin</h2>
     <p>Capacité, prix et notes des utilisateurs</p>
   </div>
-  <div class="presentation-item">
+  <div class="presentation-item" >
     <mat-icon>add</mat-icon>
     <h2 class="item-title">Ajoutez facilement une salle</h2>
     <p>Il suffit de vous inscrire</p>

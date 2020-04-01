@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
       const city = formData.city.nom;
       const date = formData.date;
       this.roomService.findRooms(city, date && date.format('DD/MM/YYYY')).subscribe(
-        rooms => this.router.navigateByUrl('/rooms', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
+        rooms => this.router.navigateByUrl('/salles', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
       );
     }
   }

@@ -24,7 +24,7 @@ export class RoomDetailComponent implements OnInit {
     this.room$ = this.route.paramMap.pipe(
       switchMap(params =>
         this.roomService.findById(+params.get('id')).pipe(
-          tap(room => this.availableDays = this.dates.sortDays(room.availableDays))
+          tap(room =>  this.availableDays = this.dates.sortDays(room.availableDays))
         ))
     );
   }

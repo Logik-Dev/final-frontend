@@ -1,29 +1,35 @@
-.title {
-  color: papayawhip;
-  font-family: 'Domine';
-  font-style: italic;
-  padding: 30px 0;
-  margin: 0px;
-  background-color: #2C8A92;
-  border-bottom: 2px #FAFAFA solid;
-}
+/*
 .container {
   padding: 0;
-  margin: 0;
-  background-color: rgba(0,0,0,.1);
-  .carousel {
-    margin: 0 auto;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, .8);
+  min-height: calc(100vh - 70px);
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 102px 1fr 1fr;
+  grid-template-areas: "title" "carousel" "content";
+  .title {
+    grid-area: title;
+    color: papayawhip;
+    font-family: 'Domine', serif;
+    font-style: italic;
+    padding: 30px 0;
+    margin: 0px;
+    background-color: #2C8A92;
     border-bottom: 2px #FAFAFA solid;
-
+    text-align: center;
+  }
+  .carousel {
+    grid-area: carousel;
+    margin: 0 20px;
   }
   .content {
-
-    padding: 20px;
+    grid-area: content;
+    padding: 0;
     mat-accordion {
       padding: 0;
-      margin: 10px 0;
-      mat-expansion-panel-header {
-      }
+      margin: 0px 20px 10px 20px;
       mat-panel-title {
         mat-icon {
           font-size: 18px;
@@ -31,6 +37,7 @@
       }
       .infos {
         margin-top: -20px;
+
         .info {
           flex: 0 1 150px;
           mat-icon {
@@ -45,6 +52,7 @@
       }
       .equipments {
         margin-top: -10px;
+
         .equipment {
           margin-top: 5px;
           padding: 0 20px;
@@ -53,7 +61,65 @@
           background-color: white;
         }
       }
+      .comments {
+        .comment {
+          display: flex;
+          flex-wrap: wrap;
+          background-color: rgba(150, 150, 150, .1);
+          padding: 15px 20px;
+          margin: 0;
+
+          .signature {
+            display: block;
+            margin-left: auto;
+            font-style: italic;
+
+          }
+          .comment-content {
+            flex: 1 0 100%;
+            margin: 0;
+          }
+        }
+      }
     }
 
+  }
+}
+.container.large-grid {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 102px 1fr;
+  grid-template-areas: "title title" "carousel content";
+}
+*/
+.container {
+  padding: 0;
+  max-width: 690px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,.2);
+  border: 1px grey solid;
+  min-height: 500px;
+  .title {
+    background-color: rgba(50,50,50,.8);
+    color: papayawhip;
+    text-align: center;
+    font-family: 'Domine', serif;
+    padding: 30px 0;
+    height: 100px;
+    margin: 0;
+  }
+  .carousel {
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgba(50,50,50,.8);
+  }
+  .content {
+    padding: 0;
+  }
+}
+.large-container {
+  max-width: 1280px;
+  margin: 40px auto;
+  .mat-accordion {
+    margin: 20px;
   }
 }

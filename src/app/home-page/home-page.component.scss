@@ -1,32 +1,40 @@
-.banner::before {
+.banner.large-banner::before {
   content: "";
-  background-image: url('../../assets/salle1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 350px;
-  width: 100%;
-  position: absolute;
-  background-position: center;
-  top: 70px;
-  left: 0;
-
+  flex: 1 0 10px;
+  background: linear-gradient(to right, rgba(50,50,50,.8) , transparent);
+  height: 100%;
+}
+.banner.large-banner::after {
+  content: "";
+  background: linear-gradient(to left, rgba(50,50,50,.8) , transparent);
+  flex: 1 0 10px;
+  height: 100%;
 }
 .banner {
+  background-image: url("../../assets/salle2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px rgba(150,150,150,.5) solid;
   height: 350px;
   .form {
     width: 360px;
     z-index: 5;
     padding: 48px 60px 30px 60px;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(50,50,50,.5);
     mat-form-field, button {
       margin: 0 auto;
       width: 240px;
       display: block;
     }
+    mat-icon {
+      color: #7A7770;
+      margin-right: 5px;
+    }
     ::ng-deep .mat-form-field-flex{
       background-color: rgba(255,255,255,.95);
       border-radius: 0;
-      height: 45px;
+      height: 55px;
       border: none;
     }
 
@@ -34,13 +42,14 @@
 }
 
 .presentation {
-  height: calc(100vh - 420px);
-  padding: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
   text-align: center;
   .presentation-item {
-    padding: 10px 20px;
+    flex: 0 1 500px;
+    padding: 30px 10px;
+    border: 1px rgba(150, 150, 150, .2) solid;
     background-color: white;
-    margin-bottom: 30px;
     mat-icon {
       color: #FFD95A;
       font-size: 40px;
@@ -61,5 +70,10 @@
       font-size: 18px;
     }
 
+  }
+}
+.large-presentation {
+  .presentation-item {
+    margin: 30px 20px 0 20px;
   }
 }
