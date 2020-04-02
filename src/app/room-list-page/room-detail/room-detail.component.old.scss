@@ -1,0 +1,146 @@
+/*
+.container {
+  padding: 0;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, .8);
+  min-height: calc(100vh - 70px);
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 102px 1fr 1fr;
+  grid-template-areas: "title" "carousel" "content";
+  .title {
+    grid-area: title;
+    color: papayawhip;
+    font-family: 'Domine', serif;
+    font-style: italic;
+    padding: 30px 0;
+    margin: 0px;
+    background-color: #2C8A92;
+    border-bottom: 2px #FAFAFA solid;
+    text-align: center;
+  }
+  .carousel {
+    grid-area: carousel;
+    margin: 0 20px;
+  }
+  .content {
+    grid-area: content;
+    padding: 0;
+    mat-accordion {
+      padding: 0;
+      margin: 0px 20px 10px 20px;
+
+    }
+
+  }
+}
+.container.large-grid {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 102px 1fr;
+  grid-template-areas: "title title" "carousel content";
+}
+*/
+.container {
+  padding: 0;
+  max-width: 690px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,.2);
+
+  min-height: 500px;
+  .title {
+    background-color: rgba(50,50,50,.7);
+    color: papayawhip;
+    text-align: center;
+    font-family: 'Domine', serif;
+    padding: 30px 0;
+    height: 100px;
+    margin: 0;
+    width: 100%;
+  }
+  .carousel {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .content {
+    padding: 0;
+    .mat-accordion {
+      margin: 5px;
+    }
+    mat-panel-title {
+      mat-icon {
+        font-size: 18px;
+      }
+    }
+    .infos {
+      margin-top: -20px;
+
+      .info {
+        flex: 0 1 100px;
+        mat-icon {
+          color: gray;
+          vertical-align: bottom;
+          margin: 15px 5px 0 0;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+    .equipments {
+      margin-top: -10px;
+
+      .equipment {
+        margin-top: 5px;
+        padding: 0 20px;
+        border: 1px lightgrey solid;
+        border-radius: 10px;
+        background-color: white;
+      }
+    }
+    .comments {
+      .comment {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: rgba(150, 150, 150, .1);
+        padding: 15px 20px;
+        margin: 0;
+
+        .signature {
+          display: block;
+          margin-left: auto;
+          font-style: italic;
+
+        }
+        .comment-content {
+          flex: 1 0 100%;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+.large-container {
+  max-width: 1280px;
+  margin: 40px auto;
+  border: 1px grey solid;
+  display: grid;
+  grid-template-columns: 700px 1fr;
+  grid-template-rows: 100px;
+  grid-template-areas: "photo title"
+                       "photo main";
+  .title {
+    grid-area: title;
+  }
+  .carousel {
+    grid-area: photo;
+  }
+  .content {
+    grid-area: main;
+  }
+
+  .mat-accordion {
+    margin: 5px;
+
+  }
+}

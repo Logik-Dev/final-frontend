@@ -1,4 +1,4 @@
-import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {debounceTime, map} from 'rxjs/operators';
@@ -28,20 +28,17 @@ export class CustomValidatorsService {
     };
   }
 
-  dayAvailable(dateControlName: string, availableDays: string[]) {
-    return (formGroup: FormGroup) => {
-      const dateControl = formGroup.controls[dateControlName];
+  dayAvailable(availableDays: string[]): ValidatorFn {
+    return (dateControl: AbstractControl): ValidationErrors | null => {
       const englishDay = dateControl.value && dateControl.value.locale('en').format('dddd').toUpperCase();
-      if (dateControl.errors && dateControl.errors.dayUnavailable) {
+      if (dateControl.errors && !dateControl.errors.dayUnavailable) {
         return;
       }
-
       if (availableDays.includes(englishDay)) {
-        dateControl.setErrors(null);
+        return null;
       } else {
-        dateControl.setErrors({dayUnavailable: true});
+        return {dayUnavailable: true};
       }
-
     };
   }
 

@@ -7,13 +7,14 @@ form {
   }
 
   mat-error.error {
-    text-align: center;
+    text-align: right;
+    max-height: 50px;
   }
 
   button {
-    margin-top: 20px;
+    max-width: 300px;
+    margin: 70px auto 10px auto;
+
   }
-  #end + button {
-    margin-top: 0px;
-  }
+
 }

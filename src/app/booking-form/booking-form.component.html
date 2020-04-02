@@ -1,5 +1,5 @@
 <form [formGroup]="form" fxLayout="row wrap" (ngSubmit)="onSubmit(form.value)">
-    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+    <mat-form-field appearance="outline" fxFlex="0 1 100%">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="startpicker" formControlName="startDate">
       <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
@@ -16,7 +16,7 @@
     <mat-label>Heure de fin</mat-label>
     <input type="time" matInput formControlName="endTime">
   </mat-form-field>
-  <mat-checkbox formControlName="weekly" fxFlex="0 0 150px">Recurrente</mat-checkbox>
+  <mat-checkbox formControlName="weekly" fxFlex="0 1 100%">Recurrente</mat-checkbox>
   <mat-form-field *ngIf="f.weekly && f.weekly.value" fxFlex="1 0 300px" appearance="outline">
     <mat-label>Toutes les</mat-label>
     <mat-select formControlName="weekRepetition">
@@ -32,7 +32,7 @@
   <mat-error *ngIf="form.errors?.isUnavailable" fxFlex="1 0 300px" class="error">
     Déjà réservée
   </mat-error>
-  <button mat-flat-button color="primary" [disabled]="form.invalid" fxFlex="1 0 300px">
+  <button mat-flat-button color="primary" [disabled]="form.invalid" fxFlex="1 0 300px" (click)="onClick($event)">
     Demander une réservation
   </button>
 </form>
