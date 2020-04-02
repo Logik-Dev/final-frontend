@@ -21,7 +21,10 @@ export class GlobalErrorHandler implements ErrorHandler {
     } else {
       // Erreur client
       message = errorService.getClientMessage(error);
-      notificationService.showError(message);
+      if (!message.substring('TypeError')) {
+        notificationService.showError(message);
+      }
+
     }
     console.log(error);
   }

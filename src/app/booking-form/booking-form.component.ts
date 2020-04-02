@@ -38,15 +38,14 @@ export class BookingFormComponent implements OnInit {
   ngOnInit(): void {
     this.adapter.setLocale('fr');
     this.form = this.fb.group({
-      startDate: [this.startDate, Validators.required],
+      startDate: [this.startDate, [Validators.required, this.validator.dayAvailable(this.room.availableDays)]],
       endDate: [this.endDate, Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       weekly: false,
       weekRepetition: 0
     }, {
-      validator: this.validator.dayAvailable('startDate', this.room.availableDays),
-      asyncValidators: this.validator.dateAvailable(this.room.id)
+      asyncValidators: [this.validator.dateAvailable(this.room.id)]
     });
   }
 
@@ -63,6 +62,8 @@ export class BookingFormComponent implements OnInit {
       );
     }
   }
-
+  onClick(event) {
+    console.log(event);
+  }
 
 }

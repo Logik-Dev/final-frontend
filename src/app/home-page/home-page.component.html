@@ -5,7 +5,7 @@
       <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
       <mat-icon matSuffix>place</mat-icon>
       <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
-        <mat-option *ngFor="let city of cities$ | async" [value]="city" >
+        <mat-option *ngFor="let city of cities" [value]="city" >
           {{city.nom +' (' + city.codeDepartement +')'}}
         </mat-option>
       </mat-autocomplete>
@@ -14,7 +14,7 @@
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <button type="submit" mat-flat-button>Rechercher</button>
   </form>

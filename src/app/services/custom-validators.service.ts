@@ -1,9 +1,10 @@
-import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {debounceTime, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {BookingService} from './booking.service';
+import {City} from '../models/city';
 
 @Injectable({providedIn: 'root'})
 export class CustomValidatorsService {
@@ -28,20 +29,17 @@ export class CustomValidatorsService {
     };
   }
 
-  dayAvailable(dateControlName: string, availableDays: string[]) {
-    return (formGroup: FormGroup) => {
-      const dateControl = formGroup.controls[dateControlName];
+  dayAvailable(availableDays: string[]): ValidatorFn {
+    return (dateControl: AbstractControl): ValidationErrors | null => {
       const englishDay = dateControl.value && dateControl.value.locale('en').format('dddd').toUpperCase();
-      if (dateControl.errors && dateControl.errors.dayUnavailable) {
+      if (dateControl.errors && !dateControl.errors.dayUnavailable) {
         return;
       }
-
       if (availableDays.includes(englishDay)) {
-        dateControl.setErrors(null);
+        return null;
       } else {
-        dateControl.setErrors({dayUnavailable: true});
+        return {dayUnavailable: true};
       }
-
     };
   }
 
@@ -52,6 +50,31 @@ export class CustomValidatorsService {
         debounceTime(800),
         map(response => response.result ? {emailExists: true} : null)
       );
+    };
+  }
+  cityInvalid(): ValidatorFn {
+    return (cityControl: AbstractControl): ValidationErrors | null => {
+      if (cityControl.errors && !cityControl.errors.cityInvalid) {
+        return;
+      }
+      if (!cityControl.value.nom || !cityControl.value.codesPostaux) {
+        return {cityInvalid: true};
+      } else {
+        return null;
+      }
+    };
+  }
+
+  addressInvalid(): ValidatorFn {
+    return (addressControl: AbstractControl): ValidationErrors | null => {
+      if (addressControl.errors && !addressControl.errors.addressInvalid) {
+        return;
+      }
+      if (addressControl.value.properties && !addressControl.value.properties.name) {
+        return {addressInvalid: true};
+      } else {
+        return null;
+      }
     };
   }
 

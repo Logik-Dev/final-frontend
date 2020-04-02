@@ -15,9 +15,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  cities$: Observable<City[]>;
+  cities: City[];
   searchForm: FormGroup;
-  startDate = moment();
 
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
@@ -27,22 +26,27 @@ export class HomePageComponent implements OnInit {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
-      date: moment()
+      date: null
     });
   }
 
   ngOnInit(): void {
-    this.cities$ = this.searchForm.get('city').valueChanges.pipe(
+    this.searchForm.get('city').valueChanges.pipe(
       debounceTime(300),
       switchMap(value => this.geoService.findCityByName(value))
-    );
+    ).subscribe(cities => this.cities = cities);
   }
 
   submitForm(formData) {
+    if (!formData.city.nom) {
+      return;
+    }
     if (!this.searchForm.invalid) {
       const city = formData.city.nom;
+      const zipCode = formData.city.codesPostaux[0];
+      console.log(zipCode);
       const date = formData.date;
-      this.roomService.findRooms(city, date && date.format('DD/MM/YYYY')).subscribe(
+      this.roomService.findRooms(city, zipCode, date && date.format('DD/MM/YYYY')).subscribe(
         rooms => this.router.navigateByUrl('/salles', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
       );
     }
@@ -50,4 +54,5 @@ export class HomePageComponent implements OnInit {
   displayCity(city: City) {
     return city.nom;
   }
+
 }

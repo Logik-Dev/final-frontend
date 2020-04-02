@@ -12,7 +12,11 @@ export class RequestInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
+    if (req.url.startsWith('https://api-adresse.data.gouv.fr/')){
+      return next.handle(req);
+    }
     let newHeaders = req.headers;
+
     if (token && this.authService.isAuthenticated()) {
       newHeaders = newHeaders.append('Authorization', `Bearer ${token}`);
     }

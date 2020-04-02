@@ -1,13 +1,18 @@
 <form [formGroup]="form" fxLayout="row wrap">
   <mat-form-field appearance="outline" fxFlex="0 2 680px">
     <mat-label>Adresse</mat-label>
-    <input type="text" matInput formControlName="label">
+    <input type="text" matInput  [matAutocomplete]="addressComplete" formControlName="address">
+    <mat-autocomplete #addressComplete [displayWith]="displayAddress">
+      <mat-option *ngFor="let address of addresses$ | async" [value]="address">
+        {{address.properties.label}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
   <mat-form-field appearance="outline" fxFlex="1 0 300px">
     <mat-label>Ville</mat-label>
-    <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
-    <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
-      <mat-option *ngFor="let city of cities$ | async" [value]="city.nom" >
+    <input type="text" matInput [matAutocomplete]="cityComplete" formControlName="city">
+    <mat-autocomplete #cityComplete [displayWith]="displayCity" (optionSelected)="onCitySelected()">
+      <mat-option *ngFor="let city of cities$ | async" [value]="city">
         {{city.nom +' (' + city.codeDepartement +')'}}
       </mat-option>
     </mat-autocomplete>

@@ -16,14 +16,10 @@ export class RoomService {
     return this.http.get<Room>(`${this.url}/${id}`);
   }
 
-  findRooms(city?: string, date?: string ): Observable<Room[]> {
-    if (city) {
-      this.url += `?city=${city}`;
-    }
-    if (date) {
-      this.url += `&date=${date}`;
-    }
-    return this.http.get<Room[]>(this.url);
+  findRooms(city?: string, zipCode?: number, date?: string ): Observable<Room[]> {
+    let url = city ? `${this.url}?city=${city}&zipCode=${zipCode}` : this.url;
+    url = date ? `${url}&day=${date}` : url;
+    return this.http.get<Room[]>(url);
   }
 
   addRoom(room: Room, photos: File[]) {
