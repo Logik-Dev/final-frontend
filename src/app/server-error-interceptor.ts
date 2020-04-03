@@ -11,7 +11,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403 || error.status === 404 || error.status === 409) {
+        if (error.status >= 400) {
           return throwError(error);
         } else {
           return throwError( {message: 'Une erreur est survenue'});

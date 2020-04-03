@@ -1,13 +1,4 @@
 <form [formGroup]="form" fxLayout="row wrap">
-  <mat-form-field appearance="outline" fxFlex="0 2 680px">
-    <mat-label>Adresse</mat-label>
-    <input type="text" matInput  [matAutocomplete]="addressComplete" formControlName="address">
-    <mat-autocomplete #addressComplete [displayWith]="displayAddress">
-      <mat-option *ngFor="let address of addresses$ | async" [value]="address">
-        {{address.properties.label}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
   <mat-form-field appearance="outline" fxFlex="1 0 300px">
     <mat-label>Ville</mat-label>
     <input type="text" matInput [matAutocomplete]="cityComplete" formControlName="city">
@@ -20,6 +11,15 @@
   <mat-form-field appearance="outline" fxFlex="2 0 150px">
     <mat-label>Code postal</mat-label>
     <input type="text" matInput [value]="zipCode" formControlName="zipCode">
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="0 2 680px">
+    <mat-label>Adresse</mat-label>
+    <input type="text" matInput  [matAutocomplete]="addressComplete" formControlName="label">
+    <mat-autocomplete #addressComplete="matAutocomplete" [displayWith]="displayAddress" (optionSelected)="onAddressSelected()">
+      <mat-option *ngFor="let address of addresses$ | async" [value]="address">
+        {{address.properties.label}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
   <button mat-flat-button matStepperNext color="primary" [disabled]="form.invalid" fxFlex="2 0 150px">Suivant</button>
 </form>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {City} from '../models/city';
 import { map} from 'rxjs/operators';
 
@@ -29,8 +29,10 @@ export class GeoService {
   findCityByName(name: string): Observable<City[]> {
     return this.http.get<City[]>(`${this.urlCity}/communes?nom=${name}&fields=nom,codeDepartement,codesPostaux`);
   }
-  findAddress(name: string, zipCode: number): Observable<ApiAddress[]> {
-    return this.http.get<AddressResponse>(`${this.urlAddress}${name}&postcode=${zipCode}&limit=50`)
-      .pipe(map((response: AddressResponse) => response.features));
+  findAddress(name?: string, zipCode?: number): Observable<ApiAddress[]> {
+    return this.http.get<AddressResponse>(`${this.urlAddress}${name}&postcode=${zipCode}&limit=10`)
+      .pipe(
+        map(response => response.features));
+
   }
 }

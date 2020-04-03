@@ -42,8 +42,16 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
 
   }
   submit() {
+    const address = {
+      id: null,
+      city: this.addressForm.get('city').value.nom,
+      label: this.addressForm.get('label').value.properties.name,
+      longitude: this.addressForm.get('longitude').value,
+      latitude: this.addressForm.get('latitude').value,
+      zipCode: this.addressForm.get('zipCode').value
+    }
     const room: Room = this.roomForm.value;
-    room.address = this.addressForm.value;
+    room.address = address;
     const photos: File[] = [];
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
     this.roomService.addRoom(room, photos);

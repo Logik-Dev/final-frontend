@@ -54,7 +54,7 @@ const routes: Routes = [
     RoomFormComponent,
     AddressFormComponent,
     RoomDetailComponent,
-    BookingFormComponent
+    BookingFormComponent,
   ],
   imports: [
     BrowserModule,
