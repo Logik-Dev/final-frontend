@@ -1,26 +1,36 @@
 .container {
   padding: 0;
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 800px;
+
   .title {
     margin: 0;
     padding: 25px;
     text-align: center;
-    background-color: rgba(0,0,0,.8);
-    color: #FAFAFA;
+    background-color: rgba(0,0,0,.03);
+    color: rgba(0,0,0,.7);
     font-family: 'Domine', serif;
     font-weight: 400;
     font-size: 30px;
     font-style: italic;
   }
+  .carousel {
+    .carousel-slide {
+      height: 300px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
   .content {
     margin: 0 auto;
     padding: 0;
-    min-height: 50vh;
+    border: 1px rgba(0,0,0,.3) solid;
+    border-top: none;
   }
 
 }
 .large-container {
+  max-width: 1280px;
   mat-expansion-panel {
     border-radius: 0;
   }
@@ -33,8 +43,12 @@
       "title title"
       "carousel booking";
     margin: 20px auto 0 auto;
+    border: 1px rgba(0,0,0,.3) solid;
     .title {
       grid-area: title;
+      border: none;
+      border-bottom: 1px rgba(0,0,0,.3) solid;
+
     }
     .carousel {
       width: 100%;
@@ -52,5 +66,14 @@
 
     grid-template-columns: 1fr 1fr;
     align-content: start;
+  }
+}
+@media screen and (min-width: 800px) {
+  .container {
+    margin-top: 20px;
+  }
+  .title {
+    border: 1px rgba(0,0,0,.3) solid;
+
   }
 }

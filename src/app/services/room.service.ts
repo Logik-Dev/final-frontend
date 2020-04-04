@@ -4,6 +4,7 @@ import {Room} from '../models/room';
 import {Observable} from 'rxjs';
 import {RoomType} from '../models/room-type';
 import {Equipment} from '../models/equipment';
+import {first, map, mergeMap, switchMap, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +23,13 @@ export class RoomService {
     return this.http.get<Room[]>(url);
   }
 
-  addRoom(room: Room, photos: File[]) {
+  addRoom(room: Room, photos: File[]): Observable<Room> {
     const formData = new FormData();
     photos.forEach(photo => {
       formData.append('files', photo, photo.name);
     });
-    this.http.post<Room>(this.url, room).subscribe(
-      roomResult => this.http.post(`${this.url}/${roomResult.id}/photos`, formData).subscribe(
-        result => console.log(result)
-      )
+    return this.http.post<Room>(this.url, room).pipe(
+      mergeMap(roomResult => this.http.post<Room>(`${this.url}/${roomResult.id}/photos`, formData))
     );
   }
   getEquipments(): Observable<Equipment[]> {

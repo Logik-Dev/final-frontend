@@ -17,10 +17,13 @@
     margin: 10px;
     .card-img {
       position: relative;
-      background-color: #2C8A92;
+      background: linear-gradient(to top, #2C8A92 10px, transparent 10px);
       img {
+        height: 200px;
         width: 100%;
-        object-fit: scale-down;
+        object-fit: cover;
+        overflow: hidden;
+        background-color: rgba(0,0,0,.1);
       }
       .note {
         position: absolute;
@@ -58,4 +61,5 @@
     }
   }
 }
+
 

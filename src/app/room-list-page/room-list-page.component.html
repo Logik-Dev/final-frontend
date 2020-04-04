@@ -10,10 +10,11 @@
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
   </div>
+
   <div class="card-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
     <div class="card mat-elevation-z4" *ngFor="let room of rooms" fxLayout="row wrap" fxFlex="0 1 720px"
-         title="En détail" [routerLink]="['/salles', room.id]">
-      <div class="card-img" fxFlex="1 0 280px">
+         title="En détail" [routerLink]="['/salles', room.id]" >
+      <div class="card-img" fxFlex="1 0 280px" *ngIf="room.photos.length" >
         <img [src]="room.photos[0].url" alt="">
         <div class="note">
           <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>

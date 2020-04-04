@@ -12,6 +12,8 @@ import {RoomFormComponent} from './room-form/room-form.component';
 import {AddressFormComponent} from './address-form/address-form.component';
 import {Room} from '../models/room';
 import {RoomService} from '../services/room.service';
+import {NotificationService} from '../services/notification.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-room-page',
@@ -27,7 +29,9 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   addressForm: FormGroup;
   mobile = true;
   constructor(private cd: ChangeDetectorRef,
-              private roomService: RoomService) {
+              private roomService: RoomService,
+              private notification: NotificationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -54,7 +58,12 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
     room.address = address;
     const photos: File[] = [];
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
-    this.roomService.addRoom(room, photos);
+    this.roomService.addRoom(room, photos).subscribe(
+      result => {
+        this.notification.showSuccess('Votre salle est enregistrée !');
+        this.router.navigateByUrl('/salles');
+      }
+    );
 
   }
   @HostListener('window:resize', ['$event'])
