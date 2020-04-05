@@ -1,7 +1,7 @@
 <div class="container"  ngClass.gt-md="large-container" #container>
   <div *ngIf="room$ | async as room">
     <div class="grid mat-elevation-z2">
-      <h1 class="title mat-elevation-z2" *ngIf="isLarge()">{{room.name}}</h1>
+      <h1 class="title mat-elevation-z1" *ngIf="isLarge()">{{room.name}}</h1>
       <div class="carousel">
         <mat-carousel [hideIndicators]="false" [loop]="true" color="accent" proportion="60"
                       [slides]="room.photos.length" maxWidth="970px">

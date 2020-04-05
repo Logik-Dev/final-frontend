@@ -15,7 +15,7 @@
   <mat-form-field appearance="outline" fxFlex="0 2 680px">
     <mat-label>Adresse</mat-label>
     <input type="text" matInput  [matAutocomplete]="addressComplete" formControlName="label">
-    <mat-autocomplete #addressComplete="matAutocomplete" [displayWith]="displayAddress" (optionSelected)="onAddressSelected()">
+    <mat-autocomplete #addressComplete [displayWith]="displayAddress" (optionSelected)="onAddressSelected()">
       <mat-option *ngFor="let address of addresses$ | async" [value]="address">
         {{address.properties.label}}
       </mat-option>

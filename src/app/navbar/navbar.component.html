@@ -3,5 +3,14 @@
       <mat-icon>menu</mat-icon>
     </button>
     <app-menu fxShow fxHide.xs ></app-menu>
+  <div class="home-menu" *ngIf="auth.isAuthenticated()">
+    <button mat-icon-button [matMenuTriggerFor]="homeMenu">
+      <mat-icon>home</mat-icon>
+    </button>
+    <mat-menu #homeMenu>
+      <button mat-menu-item (click)="auth.logout()">Deconnexion</button>
+    </mat-menu>
+  </div>
+
 </nav>
 

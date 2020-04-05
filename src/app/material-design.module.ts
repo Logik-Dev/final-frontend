@@ -13,6 +13,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const modules: any[] = [
@@ -29,7 +31,9 @@ const modules: any[] = [
   MatSelectModule,
   MatCheckboxModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatMenuModule,
+  MatTabsModule
 ];
 @NgModule({
   declarations: [],

@@ -24,5 +24,9 @@ nav {
   app-menu {
     width: 100%;
   }
-
+  .home-menu {
+    mat-icon {
+      font-size: 35px;
+    }
+  }
 }
