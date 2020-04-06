@@ -1,10 +1,10 @@
 import {AfterContentChecked, AfterContentInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {RoomService} from '../../services/room.service';
+import {RoomService} from '../../../../services/room.service';
 import {Observable} from 'rxjs';
-import {RoomType} from '../../models/room-type';
-import {Equipment} from '../../models/equipment';
-import {getDays, getFrenchDays} from '../../utils/days';
+import {RoomType} from '../../../../models/room-type';
+import {Equipment} from '../../../../models/equipment';
+import {getDays, getFrenchDays} from '../../../../utils/days';
 
 @Component({
   selector: 'app-room-form',

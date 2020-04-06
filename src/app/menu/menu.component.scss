@@ -1,19 +1,21 @@
-ul {
+.menu {
   padding: 0;
   margin: 0;
   background-color: #2C8A92;
+  .menu-item:focus {
+    outline: none;
+  }
   .menu-item {
     cursor: pointer;
     border-bottom: 1px #EEEEEE solid;
-    padding: 20px 0;
+    padding: 20px 5px;
     display: flex;
     align-items: center;
     color: #EEEEEE;
-    .menu-icon {
-      margin: 0 10px 0 20px;
-    }
+    margin: 0 20px;
+
     h3 {
-      margin: 0;
+      margin: 0 0 0 5px;
       font-weight: 500;
     }
     .arrow {
@@ -27,9 +29,11 @@ ul {
   display: flex;
   justify-content: center;
   .menu-item {
+    justify-content: center;
     border: none;
   }
 
 }
+
 
 

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ApiAddress, GeoService} from '../../services/geo.service';
-import {City} from '../../models/city';
+import {ApiAddress, GeoService} from '../../../../services/geo.service';
+import {City} from '../../../../models/city';
 import {Observable, of} from 'rxjs';
 import {debounceTime, switchMap} from 'rxjs/operators';
-import {CustomValidatorsService} from '../../services/custom-validators.service';
+import {CustomValidatorsService} from '../../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-address-form',

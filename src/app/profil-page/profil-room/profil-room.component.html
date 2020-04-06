@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>add</mat-icon>Ajouter une salle</mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-add-room-page></app-add-room-page>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>apartment</mat-icon>Mes salles</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngIf="rooms$ | async; else noRoom">
+        <div class="room" *ngFor="let room of rooms$ | async">
+          {{room.name}}
+        </div>
+      </div>
+      <ng-template #noRoom>Vous n'avez aucune salle enregistrée</ng-template>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>favorites</mat-icon>Mes favorites</mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

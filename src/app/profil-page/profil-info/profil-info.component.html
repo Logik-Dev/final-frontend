@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="form" ngClass.gt-sm="medium" fxLayout="row wrap">
+    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+      <mat-label>Prénom</mat-label>
+      <input type="text" matInput formControlName="firstname">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput formControlName="lastname">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="0 1 100%">
+      <mat-label>Adresse email</mat-label>
+      <input type="email" matInput formControlName="email">
+    </mat-form-field>
+  </form>
+</div>

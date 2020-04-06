@@ -22,12 +22,16 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdap
 import { RoomListPageComponent } from './room-list-page/room-list-page.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { AddRoomPageComponent } from './add-room-page/add-room-page.component';
-import { PhotoFormComponent } from './add-room-page/photo-form/photo-form.component';
-import { RoomFormComponent } from './add-room-page/room-form/room-form.component';
-import { AddressFormComponent } from './add-room-page/address-form/address-form.component';
+import { AddRoomPageComponent } from './profil-page/profil-room/add-room-page/add-room-page.component';
+import { PhotoFormComponent } from './profil-page/profil-room/add-room-page/photo-form/photo-form.component';
+import { RoomFormComponent } from './profil-page/profil-room/add-room-page/room-form/room-form.component';
+import { AddressFormComponent } from './profil-page/profil-room/add-room-page/address-form/address-form.component';
 import { RoomDetailComponent } from './room-list-page/room-detail/room-detail.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
+import { ProfilRoomComponent } from './profil-page/profil-room/profil-room.component';
+import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.component';
+import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
+import { ProfilNotificationComponent } from './profil-page/profil-notification/profil-notification.component';
 
 
 const routes: Routes = [
@@ -55,6 +59,10 @@ const routes: Routes = [
     AddressFormComponent,
     RoomDetailComponent,
     BookingFormComponent,
+    ProfilRoomComponent,
+    ProfilInfoComponent,
+    ProfilBookingComponent,
+    ProfilNotificationComponent,
   ],
   imports: [
     BrowserModule,

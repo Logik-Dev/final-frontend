@@ -15,6 +15,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatRippleModule} from '@angular/material/core';
 
 
 const modules: any[] = [
@@ -33,7 +34,8 @@ const modules: any[] = [
   MatExpansionModule,
   MatTooltipModule,
   MatMenuModule,
-  MatTabsModule
+  MatTabsModule,
+  MatRippleModule
 ];
 @NgModule({
   declarations: [],

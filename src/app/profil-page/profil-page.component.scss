@@ -1,4 +1,7 @@
 .container {
   max-width: 970px;
   margin: 0 auto;
+  ::ng-deep.mat-tab-body {
+    overflow: hidden;
+  }
 }

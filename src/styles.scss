@@ -40,3 +40,7 @@ body {
 
 $custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif;');
 @include mat-core($custom-typography);
+
+.mat-form-field {
+  font-family: 'Roboto', sans-serif;
+}

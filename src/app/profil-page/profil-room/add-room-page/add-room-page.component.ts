@@ -10,9 +10,9 @@ import {PhotoFormComponent} from './photo-form/photo-form.component';
 import {FormGroup} from '@angular/forms';
 import {RoomFormComponent} from './room-form/room-form.component';
 import {AddressFormComponent} from './address-form/address-form.component';
-import {Room} from '../models/room';
-import {RoomService} from '../services/room.service';
-import {NotificationService} from '../services/notification.service';
+import {Room} from '../../../models/room';
+import {RoomService} from '../../../services/room.service';
+import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
 
 @Component({

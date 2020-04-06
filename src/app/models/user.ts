@@ -1,4 +1,5 @@
 import {Address} from './address';
+import {Booking} from './booking';
 
 export interface User {
   id: number;
@@ -7,4 +8,5 @@ export interface User {
   email: string;
   address: Address;
   bookingNotifications: number[];
+  bookings: Booking[];
 }

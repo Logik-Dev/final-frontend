@@ -22,7 +22,9 @@ export class RoomService {
     url = date ? `${url}&day=${date}` : url;
     return this.http.get<Room[]>(url);
   }
-
+  findByUser(id: number): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.url}/users/${id}`);
+  }
   addRoom(room: Room, photos: File[]): Observable<Room> {
     const formData = new FormData();
     photos.forEach(photo => {
