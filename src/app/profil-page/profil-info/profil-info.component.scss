@@ -1,12 +1,21 @@
 .container {
+
   form {
     max-width: 700px;
-    padding: 10px;
+    padding: 40px;
     margin: 0  auto;
-    mat-form-field {
-      margin: 0 10px;
-    }
-
+    background-color: white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 10px;
   }
+  form.medium {
+    grid-template-columns: 1fr 1fr;
+    .large-input {
+      grid-column: span 2;
+    }
+  }
+
 
 }

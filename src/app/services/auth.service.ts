@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {TokenResponse} from '../models/token-response';
 import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,14 @@ import * as jwt_decode from 'jwt-decode';
 export class AuthService {
   url = `http://localhost:8080/api/users/login`;
   constructor(private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private location: Location) { }
 
   login(email: string, password: string) {
     this.http.post<TokenResponse>(this.url, {email, password})
       .subscribe(response => {
         sessionStorage.setItem('jwt', response.jwt);
-        this.router.navigateByUrl('/profil');
+        this.location.back();
       });
   }
   logout() {

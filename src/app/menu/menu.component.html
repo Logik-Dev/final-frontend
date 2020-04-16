@@ -1,5 +1,5 @@
 
-  <ul ngClass.gt-xs="menu vertical-menu">
+  <ul ngClass.gt-xs="vertical-menu" class="menu">
     <li matRipple class="menu-item"
         *ngFor="let menu of menus" [routerLink]="[menu.page]" (click)="toggleMenu.emit()">
         <mat-icon class="menu-icon">{{menu.icon}}</mat-icon>

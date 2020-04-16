@@ -1,0 +1,21 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+}
+mat-sidenav {
+  padding-top: 70px;
+  width: 300px;
+  background-color: #2C8A92;
+}
+mat-sidenav-container {
+  flex: 1 0 auto;
+}
+mat-sidenav-content {
+  background-color: rgba(0,0,0,0.025);
+}

@@ -12,11 +12,13 @@ nav {
   padding: 10px 20px;
   display: flex;
   align-items: center;
+
   button {
     width: 55px;
     height: 55px;
+
     mat-icon {
-      font-size: 45px;
+      font-size: 25px;
       width: 100%;
       color: #EEEEEE;
     }
@@ -25,8 +27,11 @@ nav {
     width: 100%;
   }
   .home-menu {
+    margin-left: auto;
     mat-icon {
-      font-size: 35px;
+      font-size: 25px;
+      color: #FAFAFA;
     }
   }
 }
+

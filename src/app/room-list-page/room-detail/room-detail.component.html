@@ -1,6 +1,6 @@
 <div class="container"  ngClass.gt-md="large-container" #container>
   <div *ngIf="room$ | async as room">
-    <div class="grid mat-elevation-z2">
+    <div class="grid mat-elevation-z8">
       <h1 class="title mat-elevation-z1" *ngIf="isLarge()">{{room.name}}</h1>
       <div class="carousel">
         <mat-carousel [hideIndicators]="false" [loop]="true" color="accent" proportion="60"
@@ -75,22 +75,6 @@
           </div>
         </mat-expansion-panel>
       </mat-accordion>
-      <!--
-      <mat-accordion *ngIf="!isLarge()">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <mat-icon>booking</mat-icon>
-              Reserver
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-booking-form [room]="room"
-                            *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
-          <ng-template #unauthenticated>
-            <a routerLink="/profil">Connectez</a> vous pour pouvoir réserver
-          </ng-template>
-        </mat-expansion-panel>
-      </mat-accordion> -->
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -107,6 +91,21 @@
             </p>
           </div>
           <ng-template #noComments>Aucun commentaires</ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion *ngIf="!isLarge()">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>booking</mat-icon>
+              Reserver
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-booking-form [room]="room"
+                            *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
+          <ng-template #unauthenticated>
+            <a routerLink="/profil">Connectez</a> vous pour pouvoir réserver
+          </ng-template>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

@@ -14,6 +14,16 @@ form {
   button {
     max-width: 300px;
     margin: 70px auto 10px auto;
+    font-size: 17px;
+    font-weight: 600;
+    .price {
+      margin: 0 2px 0 10px;
+      font-size: 16px;
+    }
+    mat-icon {
+      margin-top: 6px;
+      font-size: 17px;
+    }
 
   }
 

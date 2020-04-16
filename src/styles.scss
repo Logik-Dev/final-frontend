@@ -6,7 +6,7 @@
 }
 html, body {
   height: 100%;
-  background-color: #FAFAFA;
+  background-color: rgba(0,0,0,.025);
 }
 body {
   margin: 0;
@@ -43,4 +43,12 @@ $custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif
 
 .mat-form-field {
   font-family: 'Roboto', sans-serif;
+}
+
+.paypal-dialog {
+  mat-dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

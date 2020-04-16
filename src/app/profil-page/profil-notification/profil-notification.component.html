@@ -1,4 +1,13 @@
 <div class="container">
-  <div class="notifications" *ngIf="user.bookingNotifications.length; else noNotifications"></div>
+  <div class="notifications" *ngIf="user.bookingNotifications.length; else noNotifications">
+    <h3 *ngIf="confirmed.length">Les réservations suivantes ont été confirmées:</h3>
+    <div class="confirmed">
+
+    </div>
+    <h3 *ngIf="pending.length">Les réservations suivantes sont à confirmer ou  à annuler:</h3>
+    <div class="pending">
+      
+    </div>
+  </div>
   <ng-template #noNotifications>Vous n'avez aucune notification</ng-template>
 </div>

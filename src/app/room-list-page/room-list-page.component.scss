@@ -3,8 +3,9 @@
   margin: 0 auto;
   max-width: 500px;
   padding: 20px 10px;
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px lightgray solid;
+  background-color: #FAFAFA;
   button {
     font-weight: lighter;
   }
@@ -13,6 +14,7 @@
   max-width: 1500px;
   margin: 20px auto;
   .card {
+    border-radius: 5px;
     cursor: pointer;
     margin: 10px;
     .card-img {
@@ -39,7 +41,7 @@
       }
     }
     .card-content {
-      background-color: rgba(0,0,0,.03);
+      background-color: #FAFAFA;
       padding: 0 20px 20px 20px;
       color: rgba(0,0,0,.8);
       .card-title {
@@ -62,4 +64,11 @@
   }
 }
 
-
+.card-container.xs {
+  .card-img {
+    flex: 2 0 400px;
+    img {
+      height: 400px;
+    }
+  }
+}

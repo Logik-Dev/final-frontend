@@ -10,18 +10,21 @@
     border-bottom: 1px #EEEEEE solid;
     padding: 20px 5px;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
     color: #EEEEEE;
-    margin: 0 20px;
+    margin: 0 10px;
 
     h3 {
       margin: 0 0 0 5px;
       font-weight: 500;
+      font-size: 13px;
     }
     .arrow {
-      flex-grow: 2;
+
       text-align: right;
-      margin-right: 20px;
+      margin-left: auto;
     }
   }
 }

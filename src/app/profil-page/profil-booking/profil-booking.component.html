@@ -1,4 +1,29 @@
 <div class="container">
-  <div class="bookings" *ngIf="user.bookings.length; else noBooking"></div>
+  <div class="bookings" *ngIf="user.bookings.length; else noBooking">
+    <table mat-table [dataSource]="user.bookings">
+      <ng-container matColumnDef="begin">
+        <th mat-header-cell *matHeaderCellDef>Date de début</th>
+        <td mat-cell *matCellDef="let booking">{{parseDate(booking.begin)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef>Date de fin</th>
+        <td mat-cell *matCellDef="let booking">{{parseDate(booking.end)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="start">
+        <th mat-header-cell *matHeaderCellDef>Heure de début</th>
+        <td mat-cell *matCellDef="let booking">{{parseHour(booking.begin)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="finish">
+        <th mat-header-cell *matHeaderCellDef>Heure de fin</th>
+        <td mat-cell *matCellDef="let booking">{{parseHour(booking.end)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="weekly">
+        <th mat-header-cell *matHeaderCellDef>Récurrente</th>
+        <td mat-cell *matCellDef="let booking">{{booking.weekRepetition ? 'Oui' : 'Non'}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
   <ng-template #noBooking>Vous n'avez aucune réservation enregistrée</ng-template>
 </div>

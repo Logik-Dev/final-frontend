@@ -10,7 +10,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ProfilInfoComponent implements OnInit {
   @Input() user: User;
   form: FormGroup;
-
   constructor(private fb: FormBuilder) {
 
   }
@@ -19,7 +18,9 @@ export class ProfilInfoComponent implements OnInit {
     this.form = this.fb.group({
       firstname: [this.user.firstname, Validators.required],
       lastname: [this.user.lastname, Validators.required],
-      email: [this.user.email, [Validators.required, Validators.email]]
+      email: [this.user.email, [Validators.required, Validators.email]],
+      password: ['', []],
+      passwordCheck: ['', []]
     });
   }
 

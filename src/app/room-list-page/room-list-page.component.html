@@ -11,7 +11,7 @@
     </button>
   </div>
 
-  <div class="card-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div class="card-container" fxLayout="row wrap" fxLayoutAlign="space-around center" ngClass.xs="xs">
     <div class="card mat-elevation-z4" *ngFor="let room of rooms" fxLayout="row wrap" fxFlex="0 1 720px"
          title="En détail" [routerLink]="['/salles', room.id]" >
       <div class="card-img" fxFlex="1 0 280px" *ngIf="room.photos.length" >
@@ -20,7 +20,7 @@
           <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>
         </div>
       </div>
-      <div class="card-content" fxFlex="2 0 280px">
+      <div class="card-content" fxFlex="3 0 280px">
         <h2 class="card-title">{{room.name}}</h2>
         <div class="card-content-items" fxLayout="row wrap" fxLayoutAlign="start center">
           <div class="line">

@@ -8,11 +8,12 @@
     padding: 25px;
     text-align: center;
     background-color: rgba(0,0,0,.03);
-    color: rgba(0,0,0,.7);
     font-family: 'Domine', serif;
     font-weight: 400;
     font-size: 30px;
     font-style: italic;
+    background-color: #2C8A92;
+    color: rgba(255,255,255,.9);
   }
   .carousel {
     .carousel-slide {
@@ -24,8 +25,65 @@
   .content {
     margin: 0 auto;
     padding: 0;
-    border: 1px rgba(0,0,0,.3) solid;
     border-top: none;
+    mat-expansion-panel {
+      border-radius: 0;
+    }
+    mat-panel-title {
+      font-size: 16px;
+      font-weight: 400;
+      mat-icon {
+        font-size: 16px;
+        color: #2C8A92;
+        margin-top: 3px;
+      }
+    }
+    .infos {
+      margin-top: -20px;
+
+      .info {
+        flex: 0 1 200px;
+        mat-icon {
+          color: gray;
+          vertical-align: bottom;
+          margin: 15px 5px 0 0;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+    .equipments {
+      margin-top: -10px;
+
+      .equipment {
+        margin-top: 5px;
+        padding: 0 20px;
+        border: 1px lightgrey solid;
+        border-radius: 10px;
+        background-color: white;
+      }
+    }
+    .comments {
+      .comment {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: rgba(150, 150, 150, .1);
+        padding: 15px 20px;
+        margin: 0;
+
+        .signature {
+          display: block;
+          margin-left: auto;
+          font-style: italic;
+
+        }
+        .comment-content {
+          flex: 1 0 100%;
+          margin: 0;
+        }
+      }
+    }
   }
 
 }
@@ -43,11 +101,11 @@
       "title title"
       "carousel booking";
     margin: 20px auto 0 auto;
-    border: 1px rgba(0,0,0,.3) solid;
+
     .title {
       grid-area: title;
       border: none;
-      border-bottom: 1px rgba(0,0,0,.3) solid;
+      border-bottom: 1px #2C8A92 solid;
 
     }
     .carousel {
@@ -55,6 +113,7 @@
       grid-area: carousel;
     }
     .book {
+      padding: 20px;
       h1 {
         margin: 15px;
         text-align: center;
@@ -63,7 +122,6 @@
   }
   .content{
     display: grid;
-
     grid-template-columns: 1fr 1fr;
     align-content: start;
   }
@@ -73,7 +131,6 @@
     margin-top: 20px;
   }
   .title {
-    border: 1px rgba(0,0,0,.3) solid;
 
   }
 }

@@ -1,16 +1,27 @@
 <div class="container">
-  <form [formGroup]="form" ngClass.gt-sm="medium" fxLayout="row wrap">
-    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+  <form [formGroup]="form" ngClass.gt-sm="medium" >
+    <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
     </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="1 0 300px">
+    <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastname">
     </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="0 1 100%">
+    <mat-form-field appearance="outline" class="large-input">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email">
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nouveau mot de passe</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Vérifier le mot de passe</mat-label>
+      <input type="password" matInput formControlName="passwordCheck">
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary" class="large-input">
+      Modifier
+    </button>
   </form>
 </div>

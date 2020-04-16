@@ -1,7 +1,11 @@
 .container {
   max-width: 970px;
   margin: 0 auto;
-  ::ng-deep.mat-tab-body {
-    overflow: hidden;
+  overflow: hidden;
+  min-height: 50vh;
+  ::ng-deep.mat-tab-body-wrapper {
+    margin-top: 20px;
+    min-height: 50vh;
+
   }
 }
