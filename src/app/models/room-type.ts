@@ -1,5 +1,5 @@
+import {Resource} from './resource';
 
-export interface RoomType {
-  id: number;
-  name: string;
+export interface RoomType extends Resource {
+  id: string;
 }

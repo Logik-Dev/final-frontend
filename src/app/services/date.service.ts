@@ -24,29 +24,35 @@ export class DateService {
     return moment.utc(date).local(true).locale('fr').format('LL');
   }
   concatDateTime(date, time) {
-    return moment(date.format('DD/MM/YYYY') + ' ' + time, 'DD/MM/YYYY HH:mm');
+    return moment(date.format('DD/MM/YYYY') + ' ' + time, 'DD/MM/YYYY HH:mm').locale('fr');
   }
-  calculatePrice(form, price) {
-    const result = [];
+  calculatePrice(form, price): number {
     const startDateTime = this.concatDateTime(form.startDate, form.startTime);
+    const endDateTime = this.concatDateTime(form.startDate, form.endTime);
+    const hours = this.getDuration(startDateTime, endDateTime);
     if (form.weekRepetition === 0) {
-      const endDateTime = this.concatDateTime(form.startDate, form.endTime);
-      const hours = moment.duration(endDateTime.diff(startDateTime)).asHours();
       return this.makeCalculation(hours, price);
-      return;
     }
-
+    const allDates = [];
     let date = form.startDate;
-    while (form.endDate > date) {
-      result.push(date);
-      date = moment(date).add(form.weekRepetition * 7 , 'days');
+    while (date <= form.endDate) {
+      allDates.push(date);
+      const nextDate = moment(date).add(form.weekRepetition * 7 , 'days');
+      if (nextDate > form.endDate) {
+        break;
+      } else {
+        date = nextDate;
+      }
     }
-    console.log(result);
-  }
+    return this.makeCalculation(hours * allDates.length, price);
 
-  makeCalculation(hours, price) {
+  }
+  getDuration(start, end): number {
+    return moment.duration(end.diff(start)).asHours();
+  }
+  makeCalculation(hours, price): number {
     let total = hours * price;
     total += total / 10;
-    return total;
+    return parseFloat(total.toFixed(1));
   }
 }

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {RoomService} from '../../services/room.service';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap, tap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Room} from '../../models/room';
 import {AuthService} from '../../services/auth.service';
@@ -14,20 +14,17 @@ import {DateService} from '../../services/date.service';
 })
 export class RoomDetailComponent implements OnInit {
   room$: Observable<Room>;
-  availableDays: string[];
   @ViewChild('container') container: ElementRef;
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
               public auth: AuthService,
-              public dates: DateService,
-              private el: ElementRef) { }
+              public dates: DateService) { }
 
   ngOnInit(): void {
     this.room$ = this.route.paramMap.pipe(
       switchMap(params =>
-        this.roomService.findById(+params.get('id')).pipe(
-          tap(room =>  this.availableDays = this.dates.sortDays(room.availableDays))
-        ))
+        this.roomService.findById(+params.get('id'))
+      )
     );
   }
   isLarge() {

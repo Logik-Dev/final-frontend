@@ -4,15 +4,14 @@ import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
 import {CustomValidatorsService} from '../services/custom-validators.service';
 import {Room} from '../models/room';
-import {BookingService} from '../services/booking.service';
-import {NotificationService} from '../services/notification.service';
-import {Router} from '@angular/router';
 import {DateService} from '../services/date.service';
 import {MatDialog} from '@angular/material/dialog';
 import {PaymentComponent} from '../payment/payment.component';
-
-
-const ftr = 'DD/MM/YYYY';
+import {dateAvailable, datePassed, dayAvailable, hoursValid} from '../utils/validators';
+import {Booking} from '../models/booking';
+import {BookingSerializer} from '../utils/booking-serializer';
+import {TIME_FORMAT} from '../utils/dates';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-booking-form',
@@ -29,6 +28,7 @@ export class BookingFormComponent implements OnInit {
               private adapter: DateAdapter<any>,
               private validator: CustomValidatorsService,
               private dateService: DateService,
+              private auth: AuthService,
               public dialog: MatDialog) {
   }
 
@@ -39,33 +39,39 @@ export class BookingFormComponent implements OnInit {
   ngOnInit(): void {
     this.adapter.setLocale('fr');
     this.form = this.fb.group({
-      startDate: ['', [Validators.required, this.validator.dayAvailable(this.room.availableDays)]],
-      endDate: [this.endDate, Validators.required],
+      startDate: ['', [Validators.required, dayAvailable(this.room.availableDays), datePassed]],
+      endDate: [this.endDate, [Validators.required, datePassed]],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       weekly: false,
       weekRepetition: 0
     }, {
-      asyncValidators: [this.validator.dateAvailable(this.room.id)]
+      validators: [hoursValid(), dateAvailable(this.room)]
     });
     this.form.valueChanges.subscribe(value => {
       if (!this.form.invalid) {
         this.price = this.dateService.calculatePrice(value, this.room.price);
       }
     });
+    this.form.get('startDate').valueChanges.subscribe(
+      value => this.form.get('endDate').setValue(moment(value).add(7, 'days'))
+    );
   }
 
   onSubmit() {
     if (!this.form.invalid) {
-
+        this.openDialog();
     }
   }
-  generateRequestObject() {
+  createBooking(): Booking {
     const data = this.form.value;
-    const begin = `${data.startDate.format(ftr)} ${data.startTime}`;
-    let end = data.weekly ? data.endDate.format(ftr) : data.startDate.format(ftr);
-    end += ` ${data.endTime}`;
-    return {begin, end, weekRepetition: data.weekRepetition};
+    const start = data.startDate;
+    const end = data.weekly > 0 ? data.endDate : start;
+    const begin = moment(data.startTime, TIME_FORMAT);
+    const finish = moment(data.endTime, TIME_FORMAT);
+    const weekly = data.weekRepetition;
+    const slots = new BookingSerializer().getSlots(start, end, begin, finish, weekly);
+    return {slots, client: {id: this.auth.getUserId()}, price: this.price, room: {id: this.room.id}};
   }
   openDialog() {
     this.dialog.open(PaymentComponent, {
@@ -73,7 +79,7 @@ export class BookingFormComponent implements OnInit {
       width: '400px',
       panelClass: 'paypal-dialog',
       data: {
-        request: this.generateRequestObject()
+        booking: this.createBooking()
       }
     });
   }

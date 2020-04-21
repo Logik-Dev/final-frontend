@@ -1,6 +1,7 @@
+import {Resource} from './resource';
 
-export interface Address {
-  id: number;
+export interface Address extends Resource {
+  id?: number;
   label: string;
   zipCode: number;
   longitude: number;

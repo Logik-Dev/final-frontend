@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Room} from '../models/room';
-import {Observable} from 'rxjs';
-import {RoomType} from '../models/room-type';
-import {Equipment} from '../models/equipment';
-import {first, map, mergeMap, switchMap, take} from 'rxjs/operators';
+import {ResourceService} from './resource.service';
+import {RoomSerializer} from '../utils/room-serializer';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoomService {
-  url = `http://localhost:8080/api/rooms`;
-  constructor(private http: HttpClient) {}
-
+export class RoomService extends ResourceService<Room> {
+  url = environment.API_URL;
+  constructor(http: HttpClient) {
+    super(http, 'rooms', new RoomSerializer(), 'users');
+  }
+  /**
   findById(id: number): Observable<Room> {
     return this.http.get<Room>(`${this.url}/${id}`);
   }
@@ -40,4 +41,5 @@ export class RoomService {
   getTypes(): Observable<RoomType[]> {
     return this.http.get<RoomType[]>(`${this.url}/types`);
   }
+   */
 }

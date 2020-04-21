@@ -3,14 +3,12 @@ import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {debounceTime, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {BookingService} from './booking.service';
-import {City} from '../models/city';
+import * as moment from 'moment';
 
 @Injectable({providedIn: 'root'})
 export class CustomValidatorsService {
 
-  constructor(private userService: UserService,
-              private bookingService: BookingService) {
+  constructor(private userService: UserService) {
   }
 
   comparePasswords(passwordControlName: string, passwordCheckControlName: string) {
@@ -18,9 +16,6 @@ export class CustomValidatorsService {
       const passwordControl = formGroup.controls[passwordControlName];
       const passwordCheckControl = formGroup.controls[passwordCheckControlName];
 
-      if (passwordCheckControl.errors && !passwordCheckControl.errors.mustMatch) {
-        return;
-      }
       if (passwordControl.value !== passwordCheckControl.value) {
         passwordCheckControl.setErrors({mustMatch: true});
       } else {
@@ -31,15 +26,8 @@ export class CustomValidatorsService {
 
   dayAvailable(availableDays: string[]): ValidatorFn {
     return (dateControl: AbstractControl): ValidationErrors | null => {
-      const englishDay = dateControl.value && dateControl.value.locale('en').format('dddd').toUpperCase();
-      if (dateControl.errors && !dateControl.errors.dayUnavailable) {
-        return;
-      }
-      if (availableDays.includes(englishDay)) {
-        return null;
-      } else {
-        return {dayUnavailable: true};
-      }
+      const day = dateControl.value && dateControl.value.locale('fr').format('dddd');
+      return availableDays.includes(day) ? null : {dayUnavailable: true};
     };
   }
 
@@ -52,47 +40,21 @@ export class CustomValidatorsService {
       );
     };
   }
+
   cityInvalid(): ValidatorFn {
     return (cityControl: AbstractControl): ValidationErrors | null => {
-      if (cityControl.errors && !cityControl.errors.cityInvalid) {
-        return;
-      }
-      if (!cityControl.value.nom || !cityControl.value.codesPostaux) {
-        return {cityInvalid: true};
-      } else {
-        return null;
-      }
+      return !cityControl.value.nom || !cityControl.value.codesPostaux ? {cityInvalid: true} : null;
     };
   }
 
   addressInvalid(): ValidatorFn {
     return (addressControl: AbstractControl): ValidationErrors | null => {
-      if (addressControl.errors && !addressControl.errors.addressInvalid) {
-        return;
-      }
-      if (addressControl.value.properties && !addressControl.value.properties.name) {
-        return {addressInvalid: true};
-      } else {
-        return null;
-      }
+      return addressControl.value.properties && !addressControl.value.properties.name ? {addressInvalid: true} : null;
     };
   }
 
-  dateAvailable(roomId: number): AsyncValidatorFn {
-  return (f: FormGroup): Observable<ValidationErrors | null> => {
-      const ftr = 'DD/MM/YYYY';
-      const startDate = f.get('startDate').value.format(ftr);
-      const endDate = f.get('endDate').value && f.get('endDate').value.format(ftr);
-      const startTime = f.get('startTime').value;
-      const endTime = f.get('endTime').value;
-      if (!startTime || !endTime || !startDate) {
-        return;
-      }
-      const begin = `${startDate} ${startTime}`;
-      const end = f.get('weekly').value ? `${endDate} ${endTime}` : `${startDate} ${endTime}`;
-      return this.bookingService.isAvailable(begin, end, f.get('weekRepetition').value, roomId)
-        .pipe(debounceTime(800),
-          map(response => response.result ? null : {isUnavailable: true}));
-    };
-  }
+
+
+
+
 }

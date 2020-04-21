@@ -1,6 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 
+interface DisplayedBooking {
+  start: string;
+  end: string;
+  begin: string;
+  finish: string;
+}
+
 @Component({
   selector: 'app-profil-booking',
   templateUrl: './profil-booking.component.html',
@@ -8,17 +15,13 @@ import {User} from '../../models/user';
 })
 export class ProfilBookingComponent implements OnInit {
   @Input() user: User;
-  displayedColumns: string[] = ['begin', 'end', 'start', 'finish', 'weekly'];
+
   constructor() { }
 
   ngOnInit(): void {
+    if (this.user) {
+      console.log(this.user.bookings);
+    }
 
-  }
-
-  parseDate(date): string {
-    return date.split(' ')[0];
-  }
-  parseHour(date): string {
-    return date.split(' ')[1];
   }
 }

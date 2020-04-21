@@ -1,19 +1,47 @@
 form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-areas:
+    "startDate startDate"
+    "startTime endTime"
+    "weekly error"
+    "weekRepetition weekRepetition"
+    "endDate endDate"
+    "submit submit";
+  .startDate {
+    grid-area: startDate;
+  }
+  .startTime {
+    grid-area: startTime;
+  }
+  .endTime {
+    grid-area: endTime;
+  }
+  .weekly {
+    grid-area: weekly;
+  }
+  .errors {
+    grid-area: error;
+    text-align: center;
+  }
+  .weekRepetition {
+    grid-area: weekRepetition;
+  }
+  .endDate {
+    grid-area: endDate;
+  }
+
+
   mat-form-field, button {
     margin: 4px 10px;
   }
   mat-checkbox {
     margin: 0 15px 5px 15px;
   }
-
-  mat-error.error {
-    text-align: right;
-    max-height: 50px;
-  }
-
   button {
-    max-width: 300px;
-    margin: 70px auto 10px auto;
+    grid-area: submit;
     font-size: 17px;
     font-weight: 600;
     .price {

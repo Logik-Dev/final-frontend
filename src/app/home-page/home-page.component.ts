@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
-import {Observable} from 'rxjs';
 import {debounceTime, switchMap} from 'rxjs/operators';
 import {GeoService} from '../services/geo.service';
 import {City} from '../models/city';
 import {RoomService} from '../services/room.service';
 import {Router} from '@angular/router';
+
+interface Query {
+  city: string;
+  zipCode: string;
+  date?: string;
+}
 
 @Component({
   selector: 'app-home-page',
@@ -44,9 +48,12 @@ export class HomePageComponent implements OnInit {
     if (!this.searchForm.invalid) {
       const city = formData.city.nom;
       const zipCode = formData.city.codesPostaux[0];
-      console.log(zipCode);
       const date = formData.date;
-      this.roomService.findRooms(city, zipCode, date && date.format('DD/MM/YYYY')).subscribe(
+      const query: Query = {city, zipCode};
+      if (date) {
+        query.date = date.format('dd/MM/yyyy');
+      }
+      this.roomService.findAll(query).subscribe(
         rooms => this.router.navigateByUrl('/salles', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
       );
     }

@@ -4,7 +4,7 @@
   </button>
   <app-menu fxShow fxHide.xs></app-menu>
   <div class="home-menu" *ngIf="auth.isAuthenticated()">
-    <mat-icon [matMenuTriggerFor]="homeMenu" [matBadge]="user?.bookingNotifications.length" matBadgeSize="medium">notifications
+    <mat-icon [matMenuTriggerFor]="homeMenu">home
     </mat-icon>
 
     <mat-menu #homeMenu>

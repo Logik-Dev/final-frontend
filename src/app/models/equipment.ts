@@ -1,5 +1,5 @@
+import {Resource} from './resource';
 
-export interface Equipment {
-  id: number;
-  name: string;
+export interface Equipment extends Resource {
+  id: string;
 }

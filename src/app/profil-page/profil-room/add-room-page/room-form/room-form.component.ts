@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {RoomType} from '../../../../models/room-type';
 import {Equipment} from '../../../../models/equipment';
 import {getDays, getFrenchDays} from '../../../../utils/days';
+import {RoomTypeService} from '../../../../services/room-type.service';
+import {EquipmentService} from '../../../../services/equipment.service';
 
 @Component({
   selector: 'app-room-form',
@@ -17,11 +19,13 @@ export class RoomFormComponent implements OnInit {
   equipments$: Observable<Equipment[]>;
   form: FormGroup;
   constructor(private fb: FormBuilder,
-              private roomService: RoomService) { }
+              private roomService: RoomService,
+              private roomTypeService: RoomTypeService,
+              private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
-    this.roomTypes$ = this.roomService.getTypes();
-    this.equipments$ = this.roomService.getEquipments();
+    this.roomTypes$ = this.roomTypeService.findAll();
+    this.equipments$ = this.equipmentService.findAll();
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       price: ['', Validators.required],

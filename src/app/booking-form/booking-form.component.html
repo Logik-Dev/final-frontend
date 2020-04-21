@@ -1,43 +1,43 @@
-<form [formGroup]="form" fxLayout="row wrap" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" fxFlex="0 1 100%">
-      <mat-label>Date</mat-label>
-      <input matInput [matDatepicker]="startpicker" formControlName="startDate">
-      <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
-      <mat-datepicker #startpicker></mat-datepicker>
-      <mat-error *ngIf="f.startDate.errors">
-        <span *ngIf="f.startDate.errors.dayUnavailable">Ce jour n'est pas disponible</span>
-      </mat-error>
-    </mat-form-field>
-  <mat-form-field appearance="outline" fxFlex="1 0 150px">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="startDate">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="startpicker" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+    <mat-datepicker #startpicker></mat-datepicker>
+    <mat-error *ngIf="f.startDate.errors">
+      <span *ngIf="f.startDate.errors.datePassed">Cette date est dépassée</span>
+      <span *ngIf="f.startDate.errors.dayUnavailable">Ce jour n'est pas disponible</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="startTime">
     <mat-label>Heure de début</mat-label>
     <input type="time" matInput formControlName="startTime">
   </mat-form-field>
-  <mat-form-field appearance="outline" fxFlex="1 0 150px">
+  <mat-form-field appearance="outline" class="endTime">
     <mat-label>Heure de fin</mat-label>
     <input type="time" matInput formControlName="endTime">
   </mat-form-field>
-  <mat-checkbox formControlName="weekly" fxFlex="0 1 100%">Recurrente</mat-checkbox>
-  <mat-form-field *ngIf="f.weekly && f.weekly.value" fxFlex="1 0 300px" appearance="outline">
+  <mat-checkbox formControlName="weekly" class="weekly">Recurrente</mat-checkbox>
+  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline"  class="weekRepetition">
     <mat-label>Toutes les</mat-label>
     <mat-select formControlName="weekRepetition">
       <mat-option *ngFor="let repeat of weekRepetition" [value]="repeat">{{repeat}} semaines</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" fxFlex="1 0 300px" id="end">
+  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" id="end" class="endDate">
     <mat-label>Termine le</mat-label>
     <input matInput [matDatepicker]="endpicker" formControlName="endDate">
     <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
     <mat-datepicker #endpicker [startAt]="endDate"></mat-datepicker>
   </mat-form-field>
-  <mat-error *ngIf="form.errors?.isUnavailable" fxFlex="1 0 300px" class="error">
-    Déjà réservée
+  <mat-error *ngIf="form.errors" class="errors">
+    <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
+    <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
   </mat-error>
-
-  <button mat-flat-button color="primary" [disabled]="form.invalid" fxFlex="1 0 300px" (click)="openDialog()">
+  <button mat-flat-button color="primary" [disabled]="form.invalid" type="submit">
     <span class="payer">Payer</span>
     <span class="price" *ngIf="price">{{price}}</span>
     <mat-icon *ngIf="price">euros</mat-icon>
   </button>
-  <!-- <app-payment *ngIf="!form.invalid" [booking]="generateRequestObject()" [room]="room"></app-payment> -->
 
 </form>

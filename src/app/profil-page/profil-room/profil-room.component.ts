@@ -16,7 +16,7 @@ export class ProfilRoomComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.rooms$ = this.roomService.findByUser(this.auth.getUserId())
+    this.rooms$ = this.roomService.findByChildId(this.auth.getUserId())
       .pipe(catchError(error => of(null)));
   }
 

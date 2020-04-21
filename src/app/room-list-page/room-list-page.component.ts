@@ -19,7 +19,7 @@ export class RoomListPageComponent implements OnInit {
     this.city = history.state.city;
     this.date = history.state.date;
     if (!this.rooms) {
-      this.roomService.findRooms().subscribe(
+      this.roomService.findAll().subscribe(
         rooms => this.rooms = rooms
       );
     }

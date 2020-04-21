@@ -52,3 +52,18 @@ $custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif
     justify-content: center;
   }
 }
+
+mat-error span {
+ display: none;
+}
+mat-error span:first-child {
+  display: block;
+}
+
+.message-block .error-message {
+  // Hidden by default
+  display: none;
+}
+.message-block .error-message:first-child {
+
+}

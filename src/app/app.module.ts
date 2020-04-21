@@ -31,7 +31,6 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ProfilRoomComponent } from './profil-page/profil-room/profil-room.component';
 import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.component';
 import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
-import { ProfilNotificationComponent } from './profil-page/profil-notification/profil-notification.component';
 import { PaymentComponent } from './payment/payment.component';
 
 
@@ -63,8 +62,7 @@ const routes: Routes = [
     ProfilRoomComponent,
     ProfilInfoComponent,
     ProfilBookingComponent,
-    ProfilNotificationComponent,
-    PaymentComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

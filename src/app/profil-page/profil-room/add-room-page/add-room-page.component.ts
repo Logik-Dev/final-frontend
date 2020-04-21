@@ -58,8 +58,9 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
     room.address = address;
     const photos: File[] = [];
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
-    this.roomService.addRoom(room, photos).subscribe(
+    this.roomService.create(room).subscribe(
       result => {
+        // TODO ajouter photoService
         this.notification.showSuccess('Votre salle est enregistrée !');
         this.router.navigateByUrl('/salles');
       }
