@@ -4,7 +4,7 @@ import {ApiAddress, GeoService} from '../../../../services/geo.service';
 import {City} from '../../../../models/city';
 import {Observable, of} from 'rxjs';
 import {debounceTime, switchMap} from 'rxjs/operators';
-import {CustomValidatorsService} from '../../../../services/custom-validators.service';
+import {addressInvalid, cityInvalid} from '../../../../utils/validators';
 
 @Component({
   selector: 'app-address-form',
@@ -18,11 +18,10 @@ export class AddressFormComponent implements OnInit {
   addresses$: Observable<ApiAddress[]>;
 
   constructor(private fb: FormBuilder,
-              private geoService: GeoService,
-              private validator: CustomValidatorsService) {
+              private geoService: GeoService) {
     this.form = this.fb.group({
-      label: [{value: '', disabled: true}, [Validators.required, this.validator.addressInvalid()]],
-      city: ['', [Validators.required, this.validator.cityInvalid()]],
+      label: [{value: '', disabled: true}, [Validators.required, addressInvalid]],
+      city: ['', [Validators.required, cityInvalid]],
       zipCode: ['', Validators.required],
       longitude: '',
       latitude: ''

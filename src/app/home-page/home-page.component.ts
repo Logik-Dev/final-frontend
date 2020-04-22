@@ -4,8 +4,9 @@ import {DateAdapter} from '@angular/material/core';
 import {debounceTime, switchMap} from 'rxjs/operators';
 import {GeoService} from '../services/geo.service';
 import {City} from '../models/city';
-import {RoomService} from '../services/room.service';
 import {Router} from '@angular/router';
+import {DATE_FORMAT} from '../utils/dates';
+import * as moment from 'moment';
 
 interface Query {
   city: string;
@@ -25,8 +26,7 @@ export class HomePageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
-              private router: Router,
-              private roomService: RoomService) {
+              private router: Router) {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
@@ -51,11 +51,9 @@ export class HomePageComponent implements OnInit {
       const date = formData.date;
       const query: Query = {city, zipCode};
       if (date) {
-        query.date = date.format('dd/MM/yyyy');
+        query.date = date.locale('fr').format(DATE_FORMAT);
       }
-      this.roomService.findAll(query).subscribe(
-        rooms => this.router.navigateByUrl('/salles', {state: {rooms, city, date: date && date.locale('fr').format('LL')}})
-      );
+      this.router.navigate(['salles', query]);
     }
   }
   displayCity(city: City) {

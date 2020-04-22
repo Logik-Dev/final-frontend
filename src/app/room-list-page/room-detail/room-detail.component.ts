@@ -5,7 +5,6 @@ import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Room} from '../../models/room';
 import {AuthService} from '../../services/auth.service';
-import {DateService} from '../../services/date.service';
 
 @Component({
   selector: 'app-room-detail',
@@ -17,8 +16,7 @@ export class RoomDetailComponent implements OnInit {
   @ViewChild('container') container: ElementRef;
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
-              public auth: AuthService,
-              public dates: DateService) { }
+              public auth: AuthService) { }
 
   ngOnInit(): void {
     this.room$ = this.route.paramMap.pipe(

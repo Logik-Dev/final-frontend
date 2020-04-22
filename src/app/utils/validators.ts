@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {TimeSlot} from '../models/time-slot';
 import {DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT} from './dates';
 import {BookingSerializer} from './booking-serializer';
+import {BookingService} from '../services/booking.service';
 
 
 export const dayAvailable = (availableDays: string[]): ValidatorFn => {
@@ -12,13 +13,13 @@ export const dayAvailable = (availableDays: string[]): ValidatorFn => {
     const day = dateControl.value && dateControl.value.locale('fr').format('dddd');
     return availableDays.includes(day) ? null : {dayUnavailable: true};
   };
-}
+};
 
 export const datePassed = (): ValidatorFn  => {
   return (dateControl: AbstractControl): ValidationErrors | null => {
     return moment(dateControl.value).isBefore(moment()) ? {datePassed: true} : null;
   };
-}
+};
 
 export const hoursValid = (): ValidatorFn => {
   return (formGroup: FormGroup): ValidationErrors | null => {
@@ -38,12 +39,12 @@ export const dateAvailable = (room: Room): ValidatorFn => {
     if (!start || !end || !begin || !finish) {
       return null;
     }
-    const slots = new BookingSerializer().getSlots(start, end, begin, finish, weekly);
+    const slots = BookingService.getSlots(start, end, begin, finish, weekly);
     return isAvailable(room, slots) ? null : {dateUnavailable: true};
 
   };
 };
-const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
+export const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
   let result = null;
   room.bookings.forEach(booking => booking.slots.forEach(roomSlot =>
       slots.forEach(s => {
@@ -58,3 +59,22 @@ const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
   return result !== false;
 };
 
+export const cityInvalid = (): ValidatorFn => {
+  return (cityControl: AbstractControl): ValidationErrors | null => {
+    return !cityControl.value.nom || !cityControl.value.codesPostaux ? {cityInvalid: true} : null;
+  };
+};
+
+export const addressInvalid = (): ValidatorFn => {
+  return (addressControl: AbstractControl): ValidationErrors | null => {
+    return addressControl.value.properties && !addressControl.value.properties.name ? {addressInvalid: true} : null;
+  };
+};
+
+export const comparePasswords = (): ValidatorFn => {
+  return (formGroup: FormGroup) => {
+    const password = formGroup.get('password').value;
+    const passwordCheck = formGroup.get('passwordCheck').value;
+    return password !== passwordCheck ? {mustMatch: true} : null;
+  };
+};

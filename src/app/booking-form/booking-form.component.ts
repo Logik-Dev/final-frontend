@@ -2,16 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
-import {CustomValidatorsService} from '../services/custom-validators.service';
 import {Room} from '../models/room';
-import {DateService} from '../services/date.service';
 import {MatDialog} from '@angular/material/dialog';
 import {PaymentComponent} from '../payment/payment.component';
 import {dateAvailable, datePassed, dayAvailable, hoursValid} from '../utils/validators';
 import {Booking} from '../models/booking';
-import {BookingSerializer} from '../utils/booking-serializer';
 import {TIME_FORMAT} from '../utils/dates';
 import {AuthService} from '../services/auth.service';
+import {BookingService} from '../services/booking.service';
 
 @Component({
   selector: 'app-booking-form',
@@ -26,15 +24,12 @@ export class BookingFormComponent implements OnInit {
   price = 0;
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
-              private validator: CustomValidatorsService,
-              private dateService: DateService,
               private auth: AuthService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private bookingService: BookingService) {
   }
 
-  get f() {
-    return this.form.controls;
-  }
+
 
   ngOnInit(): void {
     this.adapter.setLocale('fr');
@@ -50,7 +45,7 @@ export class BookingFormComponent implements OnInit {
     });
     this.form.valueChanges.subscribe(value => {
       if (!this.form.invalid) {
-        this.price = this.dateService.calculatePrice(value, this.room.price);
+        this.price = this.bookingService.getPrice(this.createBooking(), this.room.price);
       }
     });
     this.form.get('startDate').valueChanges.subscribe(
@@ -70,7 +65,7 @@ export class BookingFormComponent implements OnInit {
     const begin = moment(data.startTime, TIME_FORMAT);
     const finish = moment(data.endTime, TIME_FORMAT);
     const weekly = data.weekRepetition;
-    const slots = new BookingSerializer().getSlots(start, end, begin, finish, weekly);
+    const slots = BookingService.getSlots(start, end, begin, finish, weekly);
     return {slots, client: {id: this.auth.getUserId()}, price: this.price, room: {id: this.room.id}};
   }
   openDialog() {
@@ -82,5 +77,8 @@ export class BookingFormComponent implements OnInit {
         booking: this.createBooking()
       }
     });
+  }
+  get f() {
+    return this.form.controls;
   }
 }

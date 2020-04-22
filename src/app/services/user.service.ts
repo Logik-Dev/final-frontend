@@ -19,7 +19,6 @@ export class UserService {
     return this.http.post<User>(`${this.url}`, user);
   }
   emailExists(email: string): Observable<BooleanResponse> {
-    console.log('is there');
     return this.http.get<BooleanResponse>(`${this.url}/exists?email=${email}`);
   }
 }

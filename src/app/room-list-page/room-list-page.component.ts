@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from '../models/room';
 import {RoomService} from '../services/room.service';
-
+import {ActivatedRoute} from '@angular/router';
+import {map} from 'rxjs/operators';
+interface ParamMap {
+  params: any;
+}
 @Component({
   selector: 'app-room-list-page',
   templateUrl: './room-list-page.component.html',
@@ -9,20 +13,13 @@ import {RoomService} from '../services/room.service';
 })
 export class RoomListPageComponent implements OnInit {
   rooms: Room[];
-  city;
-  date;
   Arr = Array;
-  constructor(private roomService: RoomService) { }
+  constructor(private roomService: RoomService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.rooms = history.state.rooms;
-    this.city = history.state.city;
-    this.date = history.state.date;
-    if (!this.rooms) {
-      this.roomService.findAll().subscribe(
-        rooms => this.rooms = rooms
-      );
-    }
+    this.route.params.subscribe(
+      params => this.roomService.findAll(params).subscribe(rooms => this.rooms = rooms)
+    );
   }
 
   sortRooms(filter: string) {

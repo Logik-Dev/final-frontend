@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
-import {CustomValidatorsService} from '../services/custom-validators.service';
+import {comparePasswords} from '../utils/validators';
+import {Observable} from 'rxjs';
+import {debounceTime, map} from 'rxjs/operators';
 
 
 @Component({
@@ -14,32 +16,48 @@ import {CustomValidatorsService} from '../services/custom-validators.service';
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
+
   constructor(private fb: FormBuilder,
               private userService: UserService,
-              private router: Router,
-              private validator: CustomValidatorsService) { }
+              private router: Router) {
+  }
+
+  get f() {
+    return this.registerForm.controls;
+  }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email], [this.validator.emailAvailable()]],
+      email: new FormControl('', {
+        validators: [Validators.email, Validators.required],
+        asyncValidators: this.emailAvailable(),
+        updateOn: 'blur'
+      }),
       password: ['', [Validators.required, Validators.minLength(8)]],
       passwordCheck: ['', [Validators.required, Validators.minLength(8)]]
     }, {
-      validator: [this.validator.comparePasswords('password', 'passwordCheck')]
+      validator: [comparePasswords]
     });
   }
+
   onSubmit(data: User) {
     this.submitted = true;
-    if (!this.registerForm.invalid)  {
+    if (!this.registerForm.invalid) {
       this.userService.register(data).subscribe(
         user => this.router.navigate(['/profil'])
       );
     }
   }
 
-  get f() {
-    return this.registerForm.controls;
+  emailAvailable(): AsyncValidatorFn {
+    return (emailControl: AbstractControl): Observable<ValidationErrors | null> => {
+      const email = emailControl.value;
+      return this.userService.emailExists(email).pipe(
+        debounceTime(800),
+        map(response => response.result ? {emailExists: true} : null)
+      );
+    };
   }
 }
