@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="bookings" *ngIf="user.bookings.length; else noBooking">
+  <div class="bookings" *ngIf="user.bookings; else noBooking">
     <div class="booking" *ngFor="let booking of user.bookings">
       <div class="start">
         <span>Le {{booking.slots[0].start}}</span>

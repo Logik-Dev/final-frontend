@@ -1,11 +1,7 @@
 form {
   margin: 0 auto;
   max-width: 680px;
-  mat-form-field, button {
+  mat-form-field {
     margin: 0 10px;
-  }
-  button {
-    margin-top: 4px;
-    max-height: 50px;
   }
 }

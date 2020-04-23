@@ -6,6 +6,7 @@ import {Comment} from './comment';
 import {Resource} from './resource';
 import {Equipment} from './equipment';
 import {Booking} from './booking';
+import {User} from './user';
 
 export interface Room extends Resource {
   id?: number;
@@ -21,4 +22,5 @@ export interface Room extends Resource {
   photos?: Array<Photo>;
   comments?: Array<Comment>;
   bookings?: Booking[];
+  owner?: User;
 }

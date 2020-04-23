@@ -40,7 +40,15 @@
       height: 55px;
       border: none;
     }
-
+    .around-me {
+      margin-top: 20px;
+      text-align: center;
+      cursor: pointer;
+      mat-icon {
+        color: #FFD95A;
+        font-size: 35px;
+      }
+    }
   }
 }
 
@@ -80,3 +88,4 @@
     margin: 30px 20px 0 20px;
   }
 }
+

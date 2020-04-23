@@ -21,5 +21,8 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button mat-flat-button matStepperNext color="primary" [disabled]="form.invalid" fxFlex="2 0 150px">Suivant</button>
+  <div class="step">
+    <button matStepperPrevious mat-raised-button class="back-button">Revenir</button>
+    <button mat-raised-button class="next-button" color="primary" [disabled]="form.invalid" matStepperNext>Valider</button>
+  </div>
 </form>

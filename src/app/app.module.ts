@@ -32,6 +32,7 @@ import { ProfilRoomComponent } from './profil-page/profil-room/profil-room.compo
 import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.component';
 import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
 import { PaymentComponent } from './payment/payment.component';
+import { MapComponent } from './room-list-page/room-detail/map/map.component';
 
 
 const routes: Routes = [
@@ -62,7 +63,8 @@ const routes: Routes = [
     ProfilRoomComponent,
     ProfilInfoComponent,
     ProfilBookingComponent,
-    PaymentComponent
+    PaymentComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

@@ -1,60 +1,59 @@
 <form [formGroup]="form" fxLayout="row wrap" fxLayoutGap="20px">
 
-    <mat-form-field appearance="outline" fxFlex="0 2 680px">
-      <mat-label>Nom de la salle</mat-label>
-      <input type="text" matInput formControlName="name" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="1 0 160px">
-      <mat-label>Tarif heure</mat-label>
-      <input type="number" matInput formControlName="price" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="1 0 160px">
-      <mat-label>Taille(m2)</mat-label>
-      <input type="number" matInput formControlName="size" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="1 0 160px">
-      <mat-label>Max Personnes</mat-label>
-      <input type="number" matInput formControlName="maxCapacity" required>
-    </mat-form-field>
-    <mat-form-field *ngIf="roomTypes$" appearance="outline" fxFlex="2 0 160px">
-      <mat-label>Type de salle</mat-label>
-      <mat-select formControlName="type">
-        <mat-option *ngFor="let type of roomTypes$ | async" [value]="type.name" required>
-          {{type.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="equipments$" appearance="outline" fxFlex="2 0 160px">
-      <mat-label>Equipements</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment.name"
-                    (onSelectionChange)="newEquipment($event)">
-          {{equipment.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <p *ngIf="equipments.value.length" class="equipement-container" fxFlex="0 1 680px">
+  <mat-form-field appearance="outline" fxFlex="0 2 680px">
+    <mat-label>Nom de la salle</mat-label>
+    <input type="text" matInput formControlName="name" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="1 0 160px">
+    <mat-label>Tarif heure</mat-label>
+    <input type="number" matInput formControlName="price" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="1 0 160px">
+    <mat-label>Taille(m2)</mat-label>
+    <input type="number" matInput formControlName="size" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="1 0 160px">
+    <mat-label>Max Personnes</mat-label>
+    <input type="number" matInput formControlName="maxCapacity" required>
+  </mat-form-field>
+  <mat-form-field *ngIf="roomTypes$" appearance="outline" fxFlex="2 0 160px">
+    <mat-label>Type de salle</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let type of roomTypes$ | async" [value]="type.id" required>
+        {{type.id}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="equipments$" appearance="outline" fxFlex="2 0 160px">
+    <mat-label>Equipements</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment.id"
+                  (onSelectionChange)="newEquipment($event)">
+        {{equipment.id}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p *ngIf="equipments.value.length" class="equipement-container" fxFlex="0 1 680px">
       <span *ngFor="let e of equipments.value; let i = index;"
             class="equipement"
             title="supprimer"
             (click)="deleteEquipment(i)">{{e}}</span>
-    </p>
+  </p>
   <div class="days-container" fxFlex="0 1 680px">
     <h3 class="days-title" align="center">Disponibilité:</h3>
     <div fxLayout="row wrap" fxLayoutGap="35px" class="days">
       <mat-checkbox fxFlex="0 0 60px"
-        (change)="checkboxChange($event, i)"
-        *ngFor="let day of frenchDays; let i = index;" [value]="day">
+                    (change)="checkboxChange($event, i)"
+                    *ngFor="let day of days; let i = index;" [value]="day">
         {{day | titlecase}}
       </mat-checkbox>
     </div>
   </div>
 
-  <button class="previous" mat-raised-button matStepperPrevious>
-    Revenir
-  </button>
-  <button class="next" color="primary" mat-flat-button matStepperNext [disabled]="form.invalid">
-    Suivant
-  </button>
+  <div class="step">
+    <button matStepperPrevious mat-raised-button class="back-button">Revenir</button>
+    <button mat-raised-button class="next-button" color="primary" [disabled]="form.invalid" matStepperNext>Valider
+    </button>
+  </div>
 
 </form>

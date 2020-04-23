@@ -7,6 +7,7 @@ import { Moment} from 'moment';
 import * as moment from 'moment';
 import {TimeSlot} from '../models/time-slot';
 import {DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT} from '../utils/dates';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class BookingService extends ResourceService<Booking> {
     if (weekly > 0) {
       while (date <= end) {
         slots.push({start: date, end: date});
-        const nextDate = moment(date).add(weekly * 7, 'days');
+        const nextDate = moment(date).add(weekly, 'week');
         if (nextDate > end) {
           break;
         } else {
@@ -50,7 +51,7 @@ export class BookingService extends ResourceService<Booking> {
   getPrice(booking: Booking, roomPrice: number): number {
     const hours = moment.duration(booking.slots[0].end.diff(booking.slots[0].start)).asHours();
     let total = hours * roomPrice * booking.slots.length;
-    total /= 10;
+    total += total / environment.COMMISSION;
     return parseFloat(total.toFixed(1));
   }
 

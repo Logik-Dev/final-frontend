@@ -99,7 +99,8 @@
     grid-template-rows: 90px auto;
     grid-template-areas:
       "title title"
-      "carousel booking";
+      "carousel booking"
+      "map map";
     margin: 20px auto 0 auto;
 
     .title {
@@ -118,6 +119,9 @@
         margin: 15px;
         text-align: center;
       }
+    }
+    .map {
+      grid-area: map;
     }
   }
   .content{

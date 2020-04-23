@@ -67,3 +67,14 @@ mat-error span:first-child {
 .message-block .error-message:first-child {
 
 }
+.step {
+  display: flex;
+  width: 100%;
+  .back-button {
+    margin-right: auto;
+  }
+  .next-button {
+    margin-left: auto;
+  }
+
+}

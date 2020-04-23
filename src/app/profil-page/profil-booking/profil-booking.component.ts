@@ -1,13 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 
-interface DisplayedBooking {
-  start: string;
-  end: string;
-  begin: string;
-  finish: string;
-}
-
 @Component({
   selector: 'app-profil-booking',
   templateUrl: './profil-booking.component.html',
@@ -19,9 +12,6 @@ export class ProfilBookingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.user) {
-      console.log(this.user.bookings);
-    }
 
   }
 }

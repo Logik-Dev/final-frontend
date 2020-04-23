@@ -17,6 +17,9 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <button type="submit" mat-flat-button>Rechercher</button>
+    <div class="around-me"(click)="aroundMe()" title="Autour de moi">
+      <mat-icon>place</mat-icon>
+    </div>
   </form>
 </div>
 <div class="presentation" fxLayout="row wrap" fxLayoutAlign="space-around center" ngClass.gt-xs="large-presentation">

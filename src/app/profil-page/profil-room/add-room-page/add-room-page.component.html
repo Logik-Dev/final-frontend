@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-vertical-stepper  *ngIf="mobile" linear>
+  <mat-vertical-stepper  *ngIf="mobile">
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
@@ -14,10 +14,13 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Fin</ng-template>
-      <button mat-raised-button (click)="submit()" color="primary">Valider</button>
+      <div class="step">
+        <button matStepperPrevious mat-raised-button class="back-button">Revenir</button>
+        <button mat-raised-button (click)="submit()" class="next-button" color="primary">Valider</button>
+      </div>
     </mat-step>
   </mat-vertical-stepper>
-  <mat-horizontal-stepper *ngIf="!mobile" linear>
+  <mat-horizontal-stepper *ngIf="!mobile" >
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
@@ -32,8 +35,11 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Fin</ng-template>
-      <button matStepperPrevious>Revenir</button>
-      <button mat-raised-button (click)="submit()">Valider</button>
+      <div class="step">
+        <button matStepperPrevious mat-raised-button class="back-button">Revenir</button>
+        <button mat-raised-button (click)="submit()" class="next-button" color="primary">Valider</button>
+      </div>
+
     </mat-step>
   </mat-horizontal-stepper>
 </div>

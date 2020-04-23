@@ -45,7 +45,7 @@ export class RegisterPageComponent implements OnInit {
   onSubmit(data: User) {
     this.submitted = true;
     if (!this.registerForm.invalid) {
-      this.userService.register(data).subscribe(
+      this.userService.create(data).subscribe(
         user => this.router.navigate(['/profil'])
       );
     }
@@ -54,8 +54,7 @@ export class RegisterPageComponent implements OnInit {
   emailAvailable(): AsyncValidatorFn {
     return (emailControl: AbstractControl): Observable<ValidationErrors | null> => {
       const email = emailControl.value;
-      return this.userService.emailExists(email).pipe(
-        debounceTime(800),
+      return this.userService.exists({email}).pipe(
         map(response => response.result ? {emailExists: true} : null)
       );
     };

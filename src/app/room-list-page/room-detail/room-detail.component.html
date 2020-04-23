@@ -1,5 +1,6 @@
-<div class="container"  ngClass.gt-md="large-container" #container>
+<div class="container" ngClass.gt-md="large-container" #container>
   <div *ngIf="room$ | async as room">
+
     <div class="grid mat-elevation-z8">
       <h1 class="title mat-elevation-z1" *ngIf="isLarge()">{{room.name}}</h1>
       <div class="carousel">
@@ -8,16 +9,18 @@
           <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url">
           </mat-carousel-slide>
         </mat-carousel>
-        <h1 class="title" *ngIf="!isLarge()" >{{room.name}}</h1>
+        <h1 class="title" *ngIf="!isLarge()">{{room.name}}</h1>
       </div>
-        <div *ngIf="isLarge()" class="book">
-          <h1>Réserver</h1>
-          <app-booking-form [room]="room"
-                            *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
-          <ng-template #unauthenticated>
-            <a routerLink="/profil">Connectez</a> vous pour pouvoir réserver
-          </ng-template>
-        </div>
+      <div *ngIf="isLarge()" class="book">
+        <h1>Réserver</h1>
+        <app-booking-form [room]="room"
+                          *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
+        <ng-template #unauthenticated>
+          <a routerLink="/profil">Connectez</a> vous pour pouvoir réserver
+        </ng-template>
+      </div>
+      <app-map class="map" [latitude]="room.address.latitude" [longitude]="room.address.longitude"
+               [address]="room.address.label"></app-map>
     </div>
     <div class="content">
       <mat-accordion>
@@ -27,6 +30,7 @@
               <mat-icon>info</mat-icon>
               <span>Informations</span></mat-panel-title>
           </mat-expansion-panel-header>
+
           <div class="infos" fxLayout="row wrap" fxLayoutAlign="space-around">
             <div class="info">
               <mat-icon>place</mat-icon>
@@ -109,5 +113,7 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+
   </div>
+
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter} from '@angular/material/core';
 import {debounceTime, switchMap} from 'rxjs/operators';
@@ -7,6 +7,7 @@ import {City} from '../models/city';
 import {Router} from '@angular/router';
 import {DATE_FORMAT} from '../utils/dates';
 import * as moment from 'moment';
+import {NotificationService} from '../services/notification.service';
 
 interface Query {
   city: string;
@@ -26,7 +27,8 @@ export class HomePageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
-              private router: Router) {
+              private router: Router,
+              private notification: NotificationService) {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
@@ -56,8 +58,20 @@ export class HomePageComponent implements OnInit {
       this.router.navigate(['salles', query]);
     }
   }
+
   displayCity(city: City) {
     return city.nom;
   }
 
+  aroundMe() {
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(position => {
+        const coords = {lat: position.coords.latitude, lon: position.coords.longitude};
+        this.router.navigate(['salles', coords])
+          .then(_ => location.reload());
+      });
+    } else {
+      this.notification.showError('Navigateur non supporté');
+    }
+  }
 }

@@ -32,7 +32,9 @@ form {
   .endDate {
     grid-area: endDate;
   }
-
+  input {
+    color: black;
+  }
 
   mat-form-field, button {
     margin: 4px 10px;

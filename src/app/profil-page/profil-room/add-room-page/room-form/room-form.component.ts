@@ -1,12 +1,12 @@
-import {AfterContentChecked, AfterContentInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../../../services/room.service';
 import {Observable} from 'rxjs';
 import {RoomType} from '../../../../models/room-type';
 import {Equipment} from '../../../../models/equipment';
-import {getDays, getFrenchDays} from '../../../../utils/days';
 import {RoomTypeService} from '../../../../services/room-type.service';
 import {EquipmentService} from '../../../../services/equipment.service';
+import {DAYS} from '../../../../utils/days';
 
 @Component({
   selector: 'app-room-form',
@@ -14,7 +14,7 @@ import {EquipmentService} from '../../../../services/equipment.service';
   styleUrls: ['./room-form.component.scss']
 })
 export class RoomFormComponent implements OnInit {
-  frenchDays = getFrenchDays();
+  days = DAYS;
   roomTypes$: Observable<RoomType[]>;
   equipments$: Observable<Equipment[]>;
   form: FormGroup;
@@ -39,9 +39,8 @@ export class RoomFormComponent implements OnInit {
 
 
   checkboxChange(event, i) {
-
     if (event.checked) {
-      this.availableDays.push(new FormControl(getDays()[event.source.value]));
+      this.availableDays.push(new FormControl(event.source.value));
     } else {
       this.availableDays.removeAt(i);
     }

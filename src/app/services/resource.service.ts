@@ -47,6 +47,10 @@ export class ResourceService<T extends Resource> {
                 return this.http.delete(`${this.url}/${this.endpoint}/${id}`);
               }
 
+              public exists(options: any): Observable<{result: boolean}> {
+                return this.http.get<{result: boolean}>(`${this.url}/${this.endpoint}${this.optionsToString(options)}`);
+              }
+
               private convert(data: any): T[] {
                 return data.map(item => this.serializer.fromJson(item) as T);
               }

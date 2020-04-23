@@ -8,19 +8,6 @@ import {BookingSerializer} from './booking-serializer';
 import {BookingService} from '../services/booking.service';
 
 
-export const dayAvailable = (availableDays: string[]): ValidatorFn => {
-  return (dateControl: AbstractControl): ValidationErrors | null => {
-    const day = dateControl.value && dateControl.value.locale('fr').format('dddd');
-    return availableDays.includes(day) ? null : {dayUnavailable: true};
-  };
-};
-
-export const datePassed = (): ValidatorFn  => {
-  return (dateControl: AbstractControl): ValidationErrors | null => {
-    return moment(dateControl.value).isBefore(moment()) ? {datePassed: true} : null;
-  };
-};
-
 export const hoursValid = (): ValidatorFn => {
   return (formGroup: FormGroup): ValidationErrors | null => {
     const start = parseFloat(formGroup.get('startTime').value.replace(':', '.'));
@@ -44,7 +31,7 @@ export const dateAvailable = (room: Room): ValidatorFn => {
 
   };
 };
-export const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
+const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
   let result = null;
   room.bookings.forEach(booking => booking.slots.forEach(roomSlot =>
       slots.forEach(s => {

@@ -44,4 +44,5 @@ export class AuthService {
   getUserId() {
     return jwt_decode(this.getToken()).id;
   }
+
 }

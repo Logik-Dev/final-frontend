@@ -59,8 +59,8 @@ export class AddressFormComponent implements OnInit {
   onAddressSelected() {
     const label = this.form.get('label');
     if (label.valid) {
-      this.form.get('latitude').setValue(label.value.geometry.coordinates[0]);
-      this.form.get('longitude').setValue(label.value.geometry.coordinates[1]);
+      this.form.get('latitude').setValue(label.value.geometry.coordinates[1]);
+      this.form.get('longitude').setValue(label.value.geometry.coordinates[0]);
     }
   }
 
