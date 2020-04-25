@@ -1,8 +1,8 @@
 <nav>
-  <button mat-icon-button (click)="toggleMenu.emit()" fxHide fxShow.xs>
+  <button mat-icon-button (click)="toggleMenu.emit()" fxHide fxShow.lt-md>
     <mat-icon>menu</mat-icon>
   </button>
-  <app-menu fxShow fxHide.xs></app-menu>
+  <app-menu fxShow fxHide.lt-md></app-menu>
   <div class="home-menu" *ngIf="auth.isAuthenticated()">
     <mat-icon [matMenuTriggerFor]="homeMenu">home
     </mat-icon>

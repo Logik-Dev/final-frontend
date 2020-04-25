@@ -1,12 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 @import "variables";
+@import "mixins";
 
 * {
   box-sizing: border-box;
 }
 html, body {
   height: 100%;
-  background-color: rgba(0,0,0,.025);
+  background-color: $background-secondary;
 }
 body {
   margin: 0;
@@ -14,23 +14,24 @@ body {
   min-height: 100vh;
 }
 .content {
-  padding-top: $navbar-height;
+  padding-top: 5rem;
   min-height: 100%;
 }
 .container {
-  padding: 20px 10px;
+  padding: 1.5rem 1rem;
+  margin: 0 auto;
+  max-width: 150rem;
 }
 .error-dialog {
   background-color: #F8D7DA;
-  color: #721C24;
+  color: $error-color;
 }
 .success-dialog {
   background-color: #D4EDDA;
-  color: #175826;
+  color: $success-color;
 }
 .mat-snack-bar-container .mat-simple-snackbar {
-  display: flex;
-  justify-content: center;
+  @include flexbox();
 }
 .mat-simple-snackbar-action {
   color: grey;
@@ -47,9 +48,7 @@ $custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif
 
 .paypal-dialog {
   mat-dialog-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include flexbox($direction: column)
   }
 }
 
@@ -60,13 +59,6 @@ mat-error span:first-child {
   display: block;
 }
 
-.message-block .error-message {
-  // Hidden by default
-  display: none;
-}
-.message-block .error-message:first-child {
-
-}
 .step {
   display: flex;
   width: 100%;

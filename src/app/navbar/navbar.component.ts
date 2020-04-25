@@ -15,6 +15,9 @@ export class NavbarComponent implements OnInit {
               public userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.findById(this.auth.getUserId()).subscribe(user => this.user = user );
+    if (this.auth.isAuthenticated()) {
+      this.userService.findById(this.auth.getUserId())
+        .subscribe(user => this.user = user );
+    }
   }
 }

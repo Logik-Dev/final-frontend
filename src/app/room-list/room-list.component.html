@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="filters mat-elevation-z1" fxLayout fxLayoutAlign="space-evenly">
+    <button mat-stroked-button class="filter" (click)="sortRooms('rating')">
+      Note
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+
+    <button mat-stroked-button (click)="sortRooms('maxCapacity')" class="filter">Capacité
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <button mat-stroked-button (click)="sortRooms('price')" class="filter">Prix
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+  </div>
+</div>

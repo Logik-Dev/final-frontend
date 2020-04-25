@@ -1,29 +1,23 @@
+@import "src/mixins";
 .menu {
   padding: 0;
   margin: 0;
-  background-color: #2C8A92;
-  .menu-item:focus {
-    outline: none;
-  }
   .menu-item {
+    @include flexbox(row, start, center, nowrap);
     cursor: pointer;
     border-bottom: 1px #EEEEEE solid;
-    padding: 20px 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
+    padding: 1.5rem;
     color: #EEEEEE;
-    margin: 0 10px;
-
-    h3 {
-      margin: 0 0 0 5px;
+    font-size: 1rem;
+    &:focus {
+      outline: none;
+    }
+    @include icon();
+    .menu-item-title {
+      margin-left: 5px;
       font-weight: 500;
-      font-size: 13px;
     }
     .arrow {
-
-      text-align: right;
       margin-left: auto;
     }
   }

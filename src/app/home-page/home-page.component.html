@@ -1,10 +1,13 @@
-<div class="banner" fxLayout fxLayoutAlign="center center" ngClass.gt-sm="large-banner">
+<div class="banner" ngClass.xs="xs">
   <form [formGroup]="searchForm" class="form" (ngSubmit)="submitForm(searchForm.value)">
     <mat-form-field appearance="fill">
-      <mat-label>Ville</mat-label>
+      <mat-label>Localisation</mat-label>
       <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
-      <mat-icon matSuffix>place</mat-icon>
       <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
+        <mat-option (focus)="aroundMe()" class="around-me">
+          <mat-icon matSuffix>place</mat-icon>
+          Autour de moi
+        </mat-option>
         <mat-option *ngFor="let city of cities" [value]="city" >
           {{city.nom +' (' + city.codeDepartement +')'}}
         </mat-option>
@@ -12,31 +15,27 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput [matDatepicker]="picker" formControlName="date" (focus)="picker.open()" [min]="min">
+      <mat-datepicker #picker ></mat-datepicker>
     </mat-form-field>
-    <button type="submit" mat-flat-button>Rechercher</button>
-    <div class="around-me"(click)="aroundMe()" title="Autour de moi">
-      <mat-icon>place</mat-icon>
-    </div>
+    <button type="submit" mat-flat-button class="btn-submit">Rechercher</button>
   </form>
 </div>
-<div class="presentation" fxLayout="row wrap" fxLayoutAlign="space-around center" ngClass.gt-xs="large-presentation">
+<div class="container" ngClass.gt-xs="sm">
   <div class="presentation-item">
     <mat-icon>search</mat-icon>
-    <h2 class="item-title">Trouvez la salle adaptée à votre besoin</h2>
-    <p>Capacité, prix et notes des utilisateurs</p>
+    <h3 class="presentation-title">Trouvez la salle adaptée à votre besoin</h3>
+    <p class="presentation-subtitle">Capacité, prix et notes des utilisateurs</p>
   </div>
   <div class="presentation-item" >
     <mat-icon>add</mat-icon>
-    <h2 class="item-title">Ajoutez facilement une salle</h2>
-    <p>Il suffit de vous inscrire</p>
+    <h3 class="presentation-title">Ajoutez facilement une salle</h3>
+    <p class="presentation-subtitle">Il suffit de vous inscrire</p>
   </div>
   <div class="presentation-item">
-    <mat-icon class="comment">comment</mat-icon>
-    <h2 class="item-title">Partagez votre expérience</h2>
-    <p>En notant et commentant les salles</p>
+    <mat-icon>comment</mat-icon>
+    <h3 class="presentation-title">Partagez votre expérience</h3>
+    <p class="presentation-subtitle">En notant et commentant les salles</p>
   </div>
 
 </div>

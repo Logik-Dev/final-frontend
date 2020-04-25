@@ -33,13 +33,14 @@ import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.compo
 import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MapComponent } from './room-list-page/room-detail/map/map.component';
+import { RoomListComponent } from './room-list/room-list.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'connexion', component: LoginPageComponent},
   {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
-  {path: 'salles', component: RoomListPageComponent},
+  {path: 'salles', component: RoomListComponent},
   {path: 'salles/:id', component: RoomDetailComponent},
   {path: 'enregistrement', component: RegisterPageComponent}
 ]
@@ -64,7 +65,8 @@ const routes: Routes = [
     ProfilInfoComponent,
     ProfilBookingComponent,
     PaymentComponent,
-    MapComponent
+    MapComponent,
+    RoomListComponent
   ],
   imports: [
     BrowserModule,

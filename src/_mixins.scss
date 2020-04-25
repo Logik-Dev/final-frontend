@@ -1,0 +1,28 @@
+@mixin icon($square: 1em, $size: 1.3em, $color: inherit ){
+  .mat-icon {
+    height: $square;
+    width: $square;
+    font-size: $size;
+    color: $color;
+    margin-right: 0;
+  }
+}
+@mixin flexbox($direction: row, $justify: center, $align: center, $wrap: wrap){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+@mixin simple-grid($columns: 1, $column-gap: 1rem, $row-gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-column-gap: $column-gap;
+  grid-row-gap: $row-gap;
+}
+@mixin bg-cover($url){
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

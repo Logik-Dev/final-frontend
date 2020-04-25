@@ -23,7 +23,7 @@ interface Query {
 export class HomePageComponent implements OnInit {
   cities: City[];
   searchForm: FormGroup;
-
+  min = moment();
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,

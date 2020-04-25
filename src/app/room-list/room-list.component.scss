@@ -1,0 +1,13 @@
+.filters {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem;
+  .filter {
+    font-size: 1rem;
+    .mat-icon  {
+      font-size: 1.8em;
+      width: 1em;
+      height: 1em;
+    }
+  }
+}

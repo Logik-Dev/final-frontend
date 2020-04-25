@@ -1,91 +1,69 @@
-.banner.large-banner::before {
-  content: "";
-  flex: 1 0 10px;
-  background: linear-gradient(to right, rgba(50,50,50,.8) , transparent);
-  height: 100%;
-}
-.banner.large-banner::after {
-  content: "";
-  background: linear-gradient(to left, rgba(50,50,50,.8) , transparent);
-  flex: 1 0 10px;
-  height: 100%;
-}
+@import "src/mixins";
+
 .banner {
-  background-image: url("../../assets/salle2.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-bottom: 1px rgba(150,150,150,.5) solid;
-  height: 350px;
+  @include flexbox();
+  @include bg-cover("../../assets/salle2.jpg");
+  height: 20rem;
   .form {
-    width: 360px;
+    @include simple-grid(2, $row-gap: 0);
+    padding: 4rem;
+    max-width: 40rem;
     z-index: 5;
-    padding: 48px 60px 30px 60px;
-    background-color: rgba(50,50,50,.5);
-    mat-form-field, button {
-      margin: 0 auto;
-      width: 240px;
-      display: block;
-    }
-    button {
-      margin-top: 10px;
-    }
-    mat-icon {
-      color: #7A7770;
-      margin-right: 5px;
-    }
+    background-color: rgba(0,0,0,.3);
+    border-radius: 4px;
+    font-size: .9rem;
     ::ng-deep .mat-form-field-flex{
       background-color: rgba(255,255,255,.95);
-      border-radius: 0;
-      height: 55px;
-      border: none;
-    }
-    .around-me {
-      margin-top: 20px;
-      text-align: center;
-      cursor: pointer;
-      mat-icon {
-        color: #FFD95A;
-        font-size: 35px;
-      }
+      border-radius: 4px;
     }
   }
 }
-
-.presentation {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
+.around-me {
+  color: grey;
+  @include icon($color: grey);
+}
+.btn-submit {
+  grid-column: span 2;
+  background-color: #2C8A92;
+  color: #FAFAFA;
+}
+.container {
+  @include flexbox(row, space-around, center);
+  padding: 0;
   .presentation-item {
-    flex: 0 1 500px;
-    padding: 30px 10px;
+    @include flexbox(column, center, center);
+    flex: 0 1 35rem;
+    padding: 2.5rem;
     border: 1px rgba(150, 150, 150, .2) solid;
     background-color: white;
-    mat-icon {
+    @include icon(1em, 2em);
+    .mat-icon {
       color: #FFD95A;
-      font-size: 40px;
-      margin-right: 20px;
-      text-shadow: 3px 3px 4px #2C8A92;
+      text-shadow: 2px 0 4px #2C8A92;
     }
-    .comment {
-      font-size: 35px;
-      margin-right: 10px;
-    }
-    .item-title {
+    .presentation-title {
+      margin: 0;
       color: #2C8A92;
-      margin: -10px 0 0 0;
+      font-weight: 300;
     }
-    p {
+    .presentation-subtitle {
       color: gray;
       font-style: italic;
-      font-size: 18px;
+      margin: 0;
     }
-
   }
 }
-.large-presentation {
+.container.sm {
   .presentation-item {
-    margin: 30px 20px 0 20px;
+    margin: 2rem 1.5rem 0 1.5rem;
   }
 }
 
+.banner.xs {
+  .form {
+    grid-template-columns: 1fr;
+    .btn-submit{
+      grid-column: 1;
+    }
+  }
+}
