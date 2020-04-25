@@ -1,7 +1,7 @@
 @import "../variables";
 
 mat-sidenav {
-  padding-top: 5rem;
+  padding-top: $navbar-height;
   width: 50%;
   background-color: $primary-color;
 }
