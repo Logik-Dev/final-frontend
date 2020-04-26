@@ -11,7 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 export class RoomListComponent implements OnInit {
   rooms: Room[];
   Arr = Array;
-  constructor(private roomService: RoomService, private route: ActivatedRoute) { }
+  constructor(private roomService: RoomService, private route: ActivatedRoute, ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -22,4 +22,5 @@ export class RoomListComponent implements OnInit {
   sortRooms(filter: string) {
     this.rooms.sort((a, b) => b[filter] - a[filter]);
   }
+
 }

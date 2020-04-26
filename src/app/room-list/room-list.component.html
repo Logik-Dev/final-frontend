@@ -35,7 +35,9 @@
         </div>
         <div class="btn-container">
           <button class="btn-book" mat-stroked-button>Réserver</button>
-          <button class="btn-more" mat-stroked-button >En détail</button>
+          <button class="btn-more" mat-stroked-button [routerLink]="['/salles', room.id]">
+            En détail
+          </button>
         </div>
 
       </div>

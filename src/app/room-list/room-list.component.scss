@@ -1,56 +1,41 @@
 @import "../../mixins";
 @import "../../variables";
-
+@import "../../layout";
 .filters {
+  background-color: $background-secondary;
   max-width: 40rem;
   margin: 0 auto 2rem auto;
   padding: 1rem;
-
+  border-radius: 3px;
   .filter {
     font-size: 1rem;
-
-    .mat-icon {
-      font-size: 1.8em;
-      width: 1em;
-      height: 1em;
-    }
+    @include icon(1em, 1.7em)
   }
 }
 
 .room-list {
-  @include simple-grid(1, $row-gap: 2rem);
-
-  &.sm {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  &.md {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  &.lg {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+  grid-gap: 1rem;
+  justify-content: center;
 }
 
 .card {
+  background-color: $background-secondary;
   border-radius: 3px;
-  max-width: 25rem;
-  margin: 0 auto;
-  width: 100%;
+  max-width: 29rem;
   @include simple-grid(1, $row-gap: 0);
   grid-template-rows:  minmax(210px, 270px);
   .card-img {
-    flex: 0 0 50%;
     position: relative;
     padding-bottom: .4em;
     background-color: $primary-color;
+    @extend %border-top-radius;
   }
   img {
+    @extend %border-top-radius;
     width: 100%;
     height: 100%;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
     object-fit: cover;
   }
   .rating {
@@ -68,6 +53,7 @@
     padding: 1rem 2rem 3rem 1rem;
     @include icon(1em, .8em, $primary-color);
     .card-title {
+      text-align: center;
       margin: 0 0 .5rem 0;
       font-weight: 200;
     }
@@ -79,30 +65,30 @@
     .price {
       margin-bottom: 2rem;
     }
-    .btn-container {
-      position: absolute;
-      left: 1rem; right: 1rem; bottom: 1rem;
-      font-size: .8em;
-      @include flexbox($justify: space-between, $align: center);
-    }
-    .btn-more, .btn-book {
-      width: 40%;
-      font-size: .9em;
-      height: 3.2em;
-    }
-    .btn-book {
-      margin-right: auto;
-      background-color: rgba(150,150,150,.1);
 
-      &:hover {
-        background-color: white;
-        color: black;
-      }
-    }
-
-    .btn-more {
-      margin-left: auto;
-    }
 
   }
+}
+.btn-container {
+  position: absolute;
+  left: 1rem; right: 1rem; bottom: 1rem;
+  font-size: .8em;
+  @include flexbox($justify: space-between, $align: center);
+}
+.btn-more, .btn-book {
+  width: 40%;
+  font-size: .9em;
+  height: 3.2em;
+}
+.btn-book {
+  margin-right: auto;
+  background-color: rgba(150,150,150,.1);
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}
+.btn-more {
+  margin-left: auto;
 }
