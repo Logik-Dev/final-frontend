@@ -4,8 +4,6 @@
       Note
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
-
-
     <button mat-stroked-button (click)="sortRooms('maxCapacity')" class="filter">Capacité
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
@@ -13,4 +11,34 @@
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
   </div>
+  <ul class="room-list" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
+    <li class="card mat-elevation-z2" *ngFor="let room of rooms">
+      <div class="card-img">
+        <img [src]="room.photos[0].url" alt="">
+        <div class="rating">
+          <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>
+        </div>
+      </div>
+      <div class="card-infos">
+        <h2 class="card-title">{{room.name}}</h2>
+        <div class="address">
+          <mat-icon>place</mat-icon>
+          {{room.address.city}} {{room.address.zipCode}}
+        </div>
+        <div class="capacity">
+          <mat-icon>person</mat-icon>
+          {{room.maxCapacity}} personnes max.
+        </div>
+        <div class="price">
+          <mat-icon>euros</mat-icon>
+          {{room.price + room.price / 10}} euro / h
+        </div>
+        <div class="btn-container">
+          <button class="btn-book" mat-stroked-button>Réserver</button>
+          <button class="btn-more" mat-stroked-button >En détail</button>
+        </div>
+
+      </div>
+    </li>
+  </ul>
 </div>

@@ -1,16 +1,18 @@
 <div class="container">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="mat-elevation-z8" fxLayout="row wrap">
-    <h1 class="form-title" fxFlex="0 1 100%">Connectez vous</h1>
-    <mat-form-field appearance="outline" fxFlex="0 1 100%">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form mat-elevation-z4">
+    <h1 class="form-title">Connexion</h1>
+    <mat-form-field appearance="outline">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email">
     </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="0 1 100%">
+    <mat-form-field appearance="outline">
       <mat-label>Mot de passe</mat-label>
       <input type="password" matInput formControlName="password">
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary" fxFlex="0 1 100%" [disabled]="loginForm.invalid">Connexion</button>
-    <p fxFlex="0 1 100%">
+    <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid" class="btn-submit">
+      Connexion
+    </button>
+    <p class="question">
       Vous n'êtes pas encore inscrit ?
       <a class="register" routerLink="/enregistrement">S'enregistrer</a>
     </p>

@@ -5,7 +5,7 @@
   @include flexbox();
   @include bg-cover("../../assets/salle2.jpg");
   height: 20rem;
-  .form {
+  .search-form {
     @include simple-grid(2, $row-gap: 0);
     padding: 4rem;
     max-width: 40rem;
@@ -61,7 +61,8 @@
 }
 
 .banner.xs {
-  .form {
+  .search-form {
+    padding: 2.5rem 6rem;
     grid-template-columns: 1fr;
     .btn-submit{
       grid-column: 1;

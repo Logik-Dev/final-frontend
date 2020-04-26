@@ -10,7 +10,6 @@ export class RoomSerializer implements Serializer {
     const room = {...json};
     room.comments = json.comments ? json.comments.map(comment => new CommentSerializer().fromJson(comment)) : [];
     room.bookings = json.bookings ? json.bookings.map(booking => new BookingSerializer().fromJson(booking)) : [];
-    room.owner = json.owner && new UserSerializer().fromJson(json.owner);
     return room;
   }
 

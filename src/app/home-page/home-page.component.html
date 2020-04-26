@@ -1,6 +1,6 @@
 <div class="banner" ngClass.xs="xs">
-  <form [formGroup]="searchForm" class="form" (ngSubmit)="submitForm(searchForm.value)">
-    <mat-form-field appearance="fill">
+  <form [formGroup]="searchForm" class="search-form" (ngSubmit)="submitForm(searchForm.value)">
+    <mat-form-field appearance="fill" >
       <mat-label>Localisation</mat-label>
       <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
       <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">

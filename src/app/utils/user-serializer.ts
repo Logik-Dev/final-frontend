@@ -12,10 +12,7 @@ export class UserSerializer implements Serializer {
   }
 
   toJson(user: User): any {
-    const json = {...user};
-    json.bookings = user.bookings.map(booking => new BookingSerializer().toJson(booking));
-    json.rooms = user.rooms.map(room => new RoomSerializer().toJson(room));
-    return json;
+    return user;
   }
 
 }

@@ -1,12 +1,11 @@
 <nav>
-  <button mat-icon-button (click)="toggleMenu.emit()" fxHide fxShow.lt-md>
+  <button mat-icon-button (click)="toggleMenu.emit()" fxHide fxShow.lt-md class="btn-menu">
     <mat-icon>menu</mat-icon>
   </button>
-  <app-menu fxShow fxHide.lt-md></app-menu>
-  <div class="home-menu" *ngIf="auth.isAuthenticated()">
+  <app-menu fxShow fxHide.lt-md class="menu"></app-menu>
+  <div class="user-menu" *ngIf="auth.isAuthenticated()">
     <mat-icon [matMenuTriggerFor]="homeMenu">home
     </mat-icon>
-
     <mat-menu #homeMenu>
       <button mat-menu-item (click)="auth.logout()">Deconnexion</button>
     </mat-menu>

@@ -1,6 +1,6 @@
 @import "variables";
 @import "mixins";
-
+@import "layout";
 * {
   box-sizing: border-box;
 }
@@ -20,7 +20,10 @@ body {
 .container {
   padding: 1.5rem 1rem;
   margin: 0 auto;
-  max-width: 150rem;
+  max-width: 100rem;
+}
+.form {
+  @extend %form;
 }
 .error-dialog {
   background-color: #F8D7DA;
@@ -68,5 +71,9 @@ mat-error span:first-child {
   .next-button {
     margin-left: auto;
   }
-
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

@@ -19,6 +19,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 const modules: any[] = [
@@ -41,7 +42,8 @@ const modules: any[] = [
   MatRippleModule,
   MatSidenavModule,
   MatTableModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatDividerModule
 ];
 @NgModule({
   declarations: [],

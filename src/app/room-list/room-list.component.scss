@@ -1,13 +1,108 @@
+@import "../../mixins";
+@import "../../variables";
+
 .filters {
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   padding: 1rem;
+
   .filter {
     font-size: 1rem;
-    .mat-icon  {
+
+    .mat-icon {
       font-size: 1.8em;
       width: 1em;
       height: 1em;
     }
+  }
+}
+
+.room-list {
+  @include simple-grid(1, $row-gap: 2rem);
+
+  &.sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &.md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &.lg {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  border-radius: 3px;
+  max-width: 25rem;
+  margin: 0 auto;
+  width: 100%;
+  @include simple-grid(1, $row-gap: 0);
+  grid-template-rows:  minmax(210px, 270px);
+  .card-img {
+    flex: 0 0 50%;
+    position: relative;
+    padding-bottom: .4em;
+    background-color: $primary-color;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    object-fit: cover;
+  }
+  .rating {
+    position: absolute;
+    bottom: 0; right: 0;
+    background-color: $primary-color;
+    border-right: 1px $primary-color solid;
+    border-top-left-radius: 1em;
+    padding: .3em .5em 0 .5em;
+    @include icon(1em, 1em, $secondary-color)
+  }
+  .card-infos {
+    position: relative;
+    line-height: 1.5;
+    padding: 1rem 2rem 3rem 1rem;
+    @include icon(1em, .8em, $primary-color);
+    .card-title {
+      margin: 0 0 .5rem 0;
+      font-weight: 200;
+    }
+    .address, .capacity, .price {
+      color: grey;
+      font-size: 1rem;
+      font-weight: 200;
+    }
+    .price {
+      margin-bottom: 2rem;
+    }
+    .btn-container {
+      position: absolute;
+      left: 1rem; right: 1rem; bottom: 1rem;
+      font-size: .8em;
+      @include flexbox($justify: space-between, $align: center);
+    }
+    .btn-more, .btn-book {
+      width: 40%;
+      font-size: .9em;
+      height: 3.2em;
+    }
+    .btn-book {
+      margin-right: auto;
+      background-color: rgba(150,150,150,.1);
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+
+    .btn-more {
+      margin-left: auto;
+    }
+
   }
 }

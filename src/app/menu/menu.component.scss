@@ -3,7 +3,7 @@
   padding: 0;
   margin: 0;
   .menu-item {
-    @include flexbox(row, start, center, nowrap);
+    @include flexbox(row, flex-start, center, nowrap);
     cursor: pointer;
     border-bottom: 1px #EEEEEE solid;
     padding: 1.5rem;

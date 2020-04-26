@@ -6,31 +6,29 @@ nav {
   height: $navbar-height;
   left: 0;
   top: 0;
-  background-color: #2C8A92;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.50);
-  padding: 1rem 2rem;
+  background-color: $primary-color;
+  color: $background-secondary;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.50);
   display: flex;
+  padding: 1rem;
   align-items: center;
 
-  button {
-    width: 55px;
-    height: 55px;
-
-    mat-icon {
-      font-size: 25px;
-      width: 100%;
-      color: #EEEEEE;
-    }
-  }
-  app-menu {
+  .menu {
     width: 100%;
   }
-  .home-menu {
+
+  .user-menu {
     margin-left: auto;
-    mat-icon {
+    .mat-icon {
       font-size: 25px;
       color: #FAFAFA;
     }
   }
 }
 
+.btn-menu {
+  .mat-icon {
+    width: 100%;
+    font-size: 3em;
+  }
+}

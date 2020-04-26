@@ -1,37 +1,18 @@
+@import "../../variables";
 
-.container {
-  form {
-    text-align: center;
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 30px 50px;
-    border: 1px lightgrey solid;
-    border-radius: 5px;
-    background-color: #FAFAFA;
-    .form-title {
-      color: #2C8A92;
-      text-align: center;
-    }
-    mat-form-field {
-      margin: 0 auto;
-      display: block;
-    }
-    button {
-      padding: 5px 0;
-    }
-    p {
-      margin: 20px 0 0 0;
-      color: gray;
-      font-style: italic;
-      font-size: 15px;
-    }
-    .register {
-      font-style: normal;
-      display: block;
-      color: crimson;
-      cursor: pointer;
-      text-decoration: none;
-    }
+.form {
+  .question {
+    margin-top: 1.3rem;
+    color: gray;
+    font-style: italic;
+    font-size: 15px;
   }
 
+  .register {
+    font-style: normal;
+    display: block;
+    color: crimson;
+    cursor: pointer;
+    text-decoration: none;
+  }
 }

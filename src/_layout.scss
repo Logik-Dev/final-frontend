@@ -1,0 +1,27 @@
+@import "variables";
+%form {
+  text-align: center;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 4px;
+  background-color: $background-secondary;
+  .form-title {
+    color: $background-secondary;
+    font-weight: 300;
+    margin: -2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: $primary-color;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .mat-form-field {
+    display: block;
+    width: 100%;
+  }
+  .btn-submit {
+    padding: .4rem 0;
+    width: 100%;
+  }
+}

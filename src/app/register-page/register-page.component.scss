@@ -1,18 +1,12 @@
-.container {
-  form {
-    margin: 50px auto;
-    max-width: 400px;
-    text-align: center;
-    border: 1px #2C8A92 solid;
-    padding: 20px;
-    .form-title {
-      color: #2C8A92;
-    }
-    mat-form-field {
-      display: block;
-    }
-    button {
-      width: 100%;
-    }
-  }
+@import "../../mixins";
+
+.form {
+  @include simple-grid(2, $row-gap: 0);
+  .form-title, .email, .btn-submit {grid-column: span 2;}
+
+}
+
+.form.xs {
+  grid-template-columns: 1fr;
+  .form-title, .email, .btn-submit { grid-column: 1;}
 }

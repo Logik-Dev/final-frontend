@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {comparePasswords} from '../utils/validators';
 import {Observable} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
+import {NotificationService} from '../services/notification.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private notification: NotificationService) {
   }
 
   get f() {
@@ -47,6 +49,7 @@ export class RegisterPageComponent implements OnInit {
     if (!this.registerForm.invalid) {
       this.userService.create(data).subscribe(
         user => this.router.navigate(['/profil'])
+          .then(_ => this.notification.showSuccess('Merci pour votre enregistrement, vous pouvez maintenant vous connecter'))
       );
     }
   }
