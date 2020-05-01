@@ -12,7 +12,7 @@
         <h1 class="title" *ngIf="!isLarge()">{{room.name}}</h1>
       </div>
       <div *ngIf="isLarge()" class="book">
-        <h1>Réserver</h1>
+        <h3 class="book-title">Réserver</h3>
         <app-booking-form [room]="room"
                           *ngIf="room && auth.isAuthenticated() else unauthenticated"></app-booking-form>
         <ng-template #unauthenticated>

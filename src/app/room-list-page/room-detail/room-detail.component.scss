@@ -5,12 +5,12 @@
 
   .title {
     margin: 0;
-    padding: 25px;
+    padding: 2rem;
     text-align: center;
     background-color: rgba(0,0,0,.03);
     font-family: 'Domine', serif;
-    font-weight: 400;
-    font-size: 30px;
+    font-weight: 300;
+    font-size: 2rem;
     font-style: italic;
     background-color: #2C8A92;
     color: rgba(255,255,255,.9);
@@ -115,8 +115,10 @@
     }
     .book {
       padding: 20px;
-      h1 {
-        margin: 15px;
+      .book-title {
+        font-weight: 300;
+        font-size: 1.8rem;
+        margin: 1rem;
         text-align: center;
       }
     }

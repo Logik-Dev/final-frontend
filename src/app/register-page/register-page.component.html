@@ -31,6 +31,6 @@
       <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.minlength">8 caractères minimum</mat-error>
       <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.mustMatch">Le mot de passe est différent</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" class="btn-submit">S'enregistrer</button>
+    <button type="submit" mat-raised-button color="primary" class="btn-submit" [disabled]="registerForm.invalid">S'enregistrer</button>
   </form>
 </div>

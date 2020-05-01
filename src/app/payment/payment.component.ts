@@ -53,7 +53,7 @@ export class PaymentComponent implements OnInit {
   makeRequest() {
     this.bookingService.create(this.data.booking).subscribe(
       result => {
-        this.notification.showSuccess('Demande enregistrée, vous serez notifié lors de la validation');
+        this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
         this.router.navigateByUrl('/profil');
       }
     );

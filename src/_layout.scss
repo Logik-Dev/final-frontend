@@ -4,17 +4,17 @@
   max-width: 40rem;
   margin: 2rem auto;
   padding: 2rem;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: $background-secondary;
   .form-title {
     color: $background-secondary;
     font-weight: 300;
     margin: -2rem;
     margin-bottom: 2rem;
-    padding: 1.5rem;
+    padding: 1.2rem;
     background-color: $primary-color;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    font-size: 1.7rem;
+    @extend %border-top-radius;
   }
   .mat-form-field {
     display: block;
