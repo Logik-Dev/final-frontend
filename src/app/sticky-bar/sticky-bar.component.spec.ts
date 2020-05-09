@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoomDetailComponent } from './room-detail.component';
+import { StickyBarComponent } from './sticky-bar.component';
 
-describe('RoomDetailComponent', () => {
-  let component: RoomDetailComponent;
-  let fixture: ComponentFixture<RoomDetailComponent>;
+describe('StickyBarComponent', () => {
+  let component: StickyBarComponent;
+  let fixture: ComponentFixture<StickyBarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoomDetailComponent ]
+      declarations: [ StickyBarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoomDetailComponent);
+    fixture = TestBed.createComponent(StickyBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

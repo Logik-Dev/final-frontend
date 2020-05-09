@@ -19,21 +19,21 @@ import { MenuComponent } from './menu/menu.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import { RoomListPageComponent } from './room-list-page/room-list-page.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AddRoomPageComponent } from './profil-page/profil-room/add-room-page/add-room-page.component';
 import { PhotoFormComponent } from './profil-page/profil-room/add-room-page/photo-form/photo-form.component';
 import { RoomFormComponent } from './profil-page/profil-room/add-room-page/room-form/room-form.component';
 import { AddressFormComponent } from './profil-page/profil-room/add-room-page/address-form/address-form.component';
-import { RoomDetailComponent } from './room-list-page/room-detail/room-detail.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ProfilRoomComponent } from './profil-page/profil-room/profil-room.component';
 import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.component';
 import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
 import { PaymentComponent } from './payment/payment.component';
-import { MapComponent } from './room-list-page/room-detail/map/map.component';
+import { MapComponent } from './room/map/map.component';
 import { RoomListComponent } from './room-list/room-list.component';
+import { RoomComponent } from './room/room.component';
+import { StickyBarComponent } from './sticky-bar/sticky-bar.component';
 
 
 const routes: Routes = [
@@ -41,9 +41,9 @@ const routes: Routes = [
   {path: 'connexion', component: LoginPageComponent},
   {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
   {path: 'salles', component: RoomListComponent},
-  {path: 'salles/:id', component: RoomDetailComponent},
+  {path: 'salles/:id', component: RoomComponent},
   {path: 'enregistrement', component: RegisterPageComponent}
-]
+];
 
 @NgModule({
   declarations: [
@@ -53,20 +53,20 @@ const routes: Routes = [
     NavbarComponent,
     MenuComponent,
     HomePageComponent,
-    RoomListPageComponent,
     RegisterPageComponent,
     AddRoomPageComponent,
     PhotoFormComponent,
     RoomFormComponent,
     AddressFormComponent,
-    RoomDetailComponent,
     BookingFormComponent,
     ProfilRoomComponent,
     ProfilInfoComponent,
     ProfilBookingComponent,
     PaymentComponent,
     MapComponent,
-    RoomListComponent
+    RoomListComponent,
+    RoomComponent,
+    StickyBarComponent
   ],
   imports: [
     BrowserModule,

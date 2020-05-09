@@ -1,9 +1,21 @@
+@import "../../variables";
+.container {
+  margin-top: 6rem;
+  padding: .3rem;
+  background-color: $primary-color;
+  border-radius: 3px;
+}
 form {
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  width: 100%;
+  background-color: #FAFAFA;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-areas:
+    "title title"
     "startDate startDate"
     "startTime endTime"
     "weekly error"
@@ -57,4 +69,10 @@ form {
 
   }
 
+}
+.form-title {
+  font-weight: 400;
+  color: $primary-color;
+  text-align: center;
+  grid-area: title;
 }

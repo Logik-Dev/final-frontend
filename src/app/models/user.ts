@@ -8,7 +8,10 @@ export interface User extends Resource {
   firstname?: string;
   lastname?: string;
   email?: string;
+  phoneNumber?: string;
   address?: Address;
   bookings?: Array<Booking>;
   rooms?: Array<Room>;
+  favorites?: Array<Room>;
 }
+

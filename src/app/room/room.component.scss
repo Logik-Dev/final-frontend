@@ -1,0 +1,143 @@
+@import "../../mixins";
+@import "../../variables";
+
+.carousel {
+  background-color: #222;
+  padding: 1rem 0;
+  height: 16rem;
+  &.sm {
+    height: 21rem;
+  }
+  &.md {
+    height: 25rem;
+  }
+  &.lg {
+    height: 30rem;
+  }
+}
+.page {
+  background-color: rgba(0,0,0,.005);
+}
+.container.xs {
+  padding-top: 0;
+}
+.card-container {
+  max-width: 62rem;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  grid-column-gap: 2rem;
+  grid-template-columns: 30rem;
+  justify-items: center;
+  justify-content: center;
+  &.xs {
+    .card-wrapper {
+      background-color: #FAFAFA;
+    }
+  }
+  &.md {
+    margin-top: -14rem;
+    grid-template-columns: 30rem 32rem;
+  }
+  &.lg {
+    margin-top: -20rem;
+    grid-template-columns: 30rem 32rem;
+  }
+}
+.card-wrapper {
+  padding: .3rem;
+  border-radius: 3px;
+  background-color: $primary-color;
+}
+.card {
+  width: 100%;
+  background-color: #FAFAFA;
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  font-weight: 300;
+}
+.card-title {
+  font-weight: 400;
+  color: #2C8A92;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+.address {
+  margin: 0 0 .3rem 0;
+  text-align: center;
+  font-style: italic;
+  color: grey;
+}
+
+.category-title {
+  font-weight: 200;
+  color: grey;
+  margin: 2.1rem 0 .3rem 0;
+}
+.rating-infos {
+  @include flexbox(column, center, center, nowrap);
+  font-size: .8rem;
+  .stars {
+    @include icon(.9em, 1.3em, $secondary-color);
+    background-color: $primary-color;
+    padding: .4rem 0 0 0;
+    border-radius: 3px;
+    width: 80%;
+    text-align: center;
+  }
+  .comments-number {
+    margin-top: .5em;
+    font-size: 1.2em;
+    font-style: italic;
+    color: darkred;
+  }
+}
+.properties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1.5rem;
+}
+.property {
+  font-size: .9rem;
+  @include icon(1em, 2.1em, $primary-color);
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  grid-column-gap: .4rem;
+  align-items: center;
+  padding: .3rem;
+  .label {
+    color: $primary-color;
+    font-weight: 400;
+  }
+  .value {
+    color: grey;
+    font-weight: 300;
+    font-size: .9em;
+  }
+}
+.volumes {
+  color: grey;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  @include icon(1em, 2.1em, $primary-color);
+  .icon {
+    margin-right: .4rem
+  }
+  .volume {
+    padding: .5rem;
+    @include flexbox(row, flex-start, center, wrap);
+  }
+}
+.events {
+  font-size: .8rem;
+  margin-bottom: 1.5rem;
+  .event {
+    display: inline-block;
+    padding: .5em;
+    margin: .5rem;
+    border-radius: 6px;
+    background-color: $primary-color;
+    color: $secondary-color;
+  }
+}

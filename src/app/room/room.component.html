@@ -1,0 +1,79 @@
+<div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg">
+  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false">
+    <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
+  </mat-carousel>
+</div>
+<div class="page">
+  <div class="container" ngClass.xs="xs">
+    <div class="card-container" ngClass.xs="xs" ngClass.md="md" ngClass.gt-md="lg">
+      <div class="card-wrapper mat-elevation-z8">
+        <div class="card" *ngIf="room$ | async as room">
+          <h2 class="card-title">{{room.name}}</h2>
+          <p class="address">{{room.address.label | titlecase}} {{room.address.city}} {{room.address.zipCode}}</p>
+          <div class="rating-infos">
+            <div class="stars">
+              <mat-icon *ngFor="let start of Arr(room.rating)" class="star">star</mat-icon>
+            </div>
+            <span class="comments-number">
+        {{room.comments.length ? room.comments.length : 'Aucun'}} avis
+      </span>
+          </div>
+          <h3 class="category-title">Infos</h3>
+          <div class="properties">
+            <div class="property">
+              <mat-icon class="icon">euro</mat-icon>
+              <div class="label">Prix
+                <div class="value">{{room.price}} euros/h</div>
+              </div>
+            </div>
+            <div class="property">
+              <mat-icon class="icon">people</mat-icon>
+              <div class="label">Capacité max.
+                <div class="value">{{room.maxCapacity}} personnes</div>
+              </div>
+            </div>
+            <div class="property">
+              <mat-icon class="icon">category</mat-icon>
+              <div class="label">Type
+                <div class="value">{{room.type.id | titlecase}}</div>
+              </div>
+            </div>
+            <div class="property">
+              <mat-icon class="icon">home</mat-icon>
+              <div class="label">Surface
+                <div class="value">{{room.size}}m²</div>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <h3 class="category-title">Localisation</h3>
+          <app-map [longitude]="room.address.longitude" [latitude]="room.address.latitude"
+                   [address]="room.address.label"></app-map>
+          <mat-divider></mat-divider>
+          <h3 class="category-title">Type d'évenement</h3>
+          <div class="events">
+            <span class="event" *ngFor="let event of room.eventTypes">{{event.id}}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <h3 class="category-title">Ambiance</h3>
+          <div class="volumes">
+            <div class="volume" *ngIf="room.maxVolume === 'CALME'">
+              <mat-icon class="icon">volume_mute</mat-icon>
+              Calme
+            </div>
+            <div class="volume" *ngIf="room.maxVolume === 'MOYEN'">
+              <mat-icon class="icon">volume_down</mat-icon>
+              Résonnable
+            </div>
+            <div class="volume" *ngIf="room.maxVolume === 'BRUYANT'">
+              <mat-icon class="icon">volume_up</mat-icon>
+              Bruyant
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-booking-form fxHide.lt-md></app-booking-form>
+    </div>
+  </div>
+</div>
+<app-sticky-bar fxHide.gt-sm></app-sticky-bar>

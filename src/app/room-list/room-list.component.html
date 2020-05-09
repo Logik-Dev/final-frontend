@@ -32,33 +32,12 @@
         <div class="price">
           <mat-icon>euros</mat-icon>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           {{room.price + room.price / 10}} euro / h
         </div>
-        <div class="btn-container">
-          <button class="btn-book" mat-stroked-button>Réserver</button>
+        <div class="btn-container" (click)="setFavorite(room.id)">
+          <button class="btn-favorite" mat-icon-button [ngClass]="isFavorite(room.id) && 'favorite'" >
+            <mat-icon class="icon-favorite">favorite</mat-icon>
+          </button>
           <button class="btn-more" mat-stroked-button [routerLink]="['/salles', room.id]">
             En détail
           </button>

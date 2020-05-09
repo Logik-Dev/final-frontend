@@ -65,8 +65,23 @@
     .price {
       margin-bottom: 2rem;
     }
-
-
+    .btn-favorite {
+      margin-right: auto;
+      font-size: 3em;
+      .mat-icon {
+        color: lightgrey;
+      }
+      &:hover {
+        mat-icon {
+          color: red;
+        }
+      }
+      &.favorite {
+        .mat-icon {
+          color: red;
+        }
+      }
+    }
   }
 }
 .btn-container {
@@ -75,20 +90,13 @@
   font-size: .8em;
   @include flexbox($justify: space-between, $align: center);
 }
-.btn-more, .btn-book {
+.btn-more {
   width: 40%;
   font-size: .9em;
   height: 3.2em;
 }
-.btn-book {
-  margin-right: auto;
-  background-color: rgba(150,150,150,.1);
 
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-}
+
 .btn-more {
   margin-left: auto;
 }
