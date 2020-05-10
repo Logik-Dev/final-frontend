@@ -51,7 +51,7 @@ $custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif
 
 .paypal-dialog {
   mat-dialog-container {
-    @include flexbox($direction: column)
+    @include flexbox($direction: column, $justify: center, $align: none);
   }
 }
 
