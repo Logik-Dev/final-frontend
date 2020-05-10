@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {RoomService} from '../services/room.service';
 import {Observable} from 'rxjs';
 import {Room} from '../models/room';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-room',
@@ -12,7 +13,7 @@ import {Room} from '../models/room';
 export class RoomComponent implements OnInit {
   room$: Observable<Room>;
   Arr = Array;
-  constructor(private route: ActivatedRoute, private roomService: RoomService) { }
+  constructor(private route: ActivatedRoute, private roomService: RoomService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.route.paramMap

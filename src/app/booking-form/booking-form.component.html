@@ -1,9 +1,9 @@
 <div class="container mat-elevation-z8">
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
   <h2 class="form-title">Réserver</h2>
   <mat-form-field appearance="outline" class="startDate">
     <mat-label>Date</mat-label>
-    <input matInput [matDatepicker]="startpicker" formControlName="startDate" [min]="min" [max]="max" [matDatepickerFilter]="filterDays()">
+    <input matInput [matDatepicker]="startpicker" formControlName="startDate" [min]="startMin" [max]="startMax" [matDatepickerFilter]="filterDays()">
     <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
     <mat-datepicker #startpicker disabled="false"></mat-datepicker>
   </mat-form-field>
@@ -24,9 +24,9 @@
   </mat-form-field>
   <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" id="end" class="endDate">
     <mat-label>Termine le</mat-label>
-    <input matInput [matDatepicker]="endpicker" formControlName="endDate" [min]="min.add(1, 'week')" [max]="max" [matDatepickerFilter]="filterDays()">
+    <input matInput [matDatepicker]="endpicker" formControlName="endDate" [min]="endMin" [max]="endMax" [matDatepickerFilter]="filterDays()">
     <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
-    <mat-datepicker #endpicker [startAt]="endDate" disabled="false"></mat-datepicker>
+    <mat-datepicker #endpicker [startAt]="endMin" disabled="false"></mat-datepicker>
   </mat-form-field>
   <mat-error *ngIf="form.errors" class="errors">
     <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
@@ -37,6 +37,5 @@
     <span class="price" *ngIf="price">{{price}}</span>
     <mat-icon *ngIf="price">euros</mat-icon>
   </button>
-
 </form>
 </div>

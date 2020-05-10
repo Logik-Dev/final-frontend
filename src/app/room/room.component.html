@@ -1,14 +1,14 @@
-<div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg">
+<div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
   <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false">
     <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
   </mat-carousel>
 </div>
 <div class="page">
   <div class="container" ngClass.xs="xs">
-    <div class="card-container" ngClass.xs="xs" ngClass.md="md" ngClass.gt-md="lg">
+    <div class="card-container" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg" [class.authenticated]="auth.isAuthenticated()">
       <div class="card-wrapper mat-elevation-z8">
         <div class="card" *ngIf="room$ | async as room">
-          <h2 class="card-title">{{room.name}}</h2>
+          <h1 class="card-title">{{room.name}}</h1>
           <p class="address">{{room.address.label | titlecase}} {{room.address.city}} {{room.address.zipCode}}</p>
           <div class="rating-infos">
             <div class="stars">
@@ -18,7 +18,7 @@
         {{room.comments.length ? room.comments.length : 'Aucun'}} avis
       </span>
           </div>
-          <h3 class="category-title">Infos</h3>
+          <h2 class="category-title">Infos</h2>
           <div class="properties">
             <div class="property">
               <mat-icon class="icon">euro</mat-icon>
@@ -46,16 +46,16 @@
             </div>
           </div>
           <mat-divider></mat-divider>
-          <h3 class="category-title">Localisation</h3>
+          <h2 class="category-title">Localisation</h2>
           <app-map [longitude]="room.address.longitude" [latitude]="room.address.latitude"
                    [address]="room.address.label"></app-map>
           <mat-divider></mat-divider>
-          <h3 class="category-title">Type d'évenement</h3>
+          <h2 class="category-title">Type d'évenement</h2>
           <div class="events">
             <span class="event" *ngFor="let event of room.eventTypes">{{event.id}}</span>
           </div>
           <mat-divider></mat-divider>
-          <h3 class="category-title">Ambiance</h3>
+          <h2 class="category-title">Ambiance</h2>
           <div class="volumes">
             <div class="volume" *ngIf="room.maxVolume === 'CALME'">
               <mat-icon class="icon">volume_mute</mat-icon>
@@ -72,7 +72,10 @@
           </div>
         </div>
       </div>
-      <app-booking-form fxHide.lt-md></app-booking-form>
+      <div *ngIf="room$ | async as room">
+        <app-booking-form fxHide.lt-md [room]="room" *ngIf="auth.isAuthenticated()"></app-booking-form>
+      </div>
+
     </div>
   </div>
 </div>

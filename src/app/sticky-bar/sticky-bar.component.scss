@@ -1,13 +1,12 @@
 @import "../../variables";
 @import "../../mixins";
 .bar {
-  position: fixed;
-  bottom: 1rem; left: 10%; right: 10%;
+  position: sticky;
+  bottom: 0; left: 10%; right: 10%;
   background-color: #555;
   padding: 1rem;
   z-index: 5;
   color: #FAFAFA;
-  border-radius: 3px;
   font-size: .9rem;
   @include icon(1em, 1.5em);
   @include flexbox(row, space-evenly, center, nowrap);

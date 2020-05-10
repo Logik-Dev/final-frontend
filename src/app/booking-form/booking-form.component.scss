@@ -4,16 +4,19 @@
   padding: .3rem;
   background-color: $primary-color;
   border-radius: 3px;
+  z-index: 5;
+  position: relative;
+
 }
-form {
+.booking-form {
   border-radius: 3px;
   padding: 1rem 2rem;
-  width: 100%;
+  //width: 100%;
   background-color: #FAFAFA;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 10rem 10rem;
+  grid-column-gap: .5rem;
+  //grid-auto-rows: minmax(min-content, max-content);
   grid-template-areas:
     "title title"
     "startDate startDate"
@@ -66,9 +69,7 @@ form {
       margin-top: 6px;
       font-size: 17px;
     }
-
   }
-
 }
 .form-title {
   font-weight: 400;
@@ -76,3 +77,4 @@ form {
   text-align: center;
   grid-area: title;
 }
+
