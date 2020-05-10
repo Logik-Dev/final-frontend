@@ -78,3 +78,12 @@
   grid-area: title;
 }
 
+.unauthenticated {
+  grid-area: title;
+  text-align: center;
+  padding: 1rem;
+  a {
+    color: $primary-color;
+    text-decoration: none;
+  }
+}

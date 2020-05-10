@@ -13,12 +13,10 @@ import {AuthService} from '../services/auth.service';
 export class RoomComponent implements OnInit {
   room$: Observable<Room>;
   Arr = Array;
-  constructor(private route: ActivatedRoute, private roomService: RoomService, public auth: AuthService) { }
+  constructor(private route: ActivatedRoute, private roomService: RoomService) { }
 
   ngOnInit(): void {
     this.route.paramMap
       .subscribe(params => this.room$ = this.roomService.findById(params.get('id')));
   }
-
-
 }

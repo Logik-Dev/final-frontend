@@ -5,7 +5,7 @@
 </div>
 <div class="page">
   <div class="container" ngClass.xs="xs">
-    <div class="card-container" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg" [class.authenticated]="auth.isAuthenticated()">
+    <div class="card-container" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
       <div class="card-wrapper mat-elevation-z8">
         <div class="card" *ngIf="room$ | async as room">
           <h1 class="card-title">{{room.name}}</h1>
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div *ngIf="room$ | async as room">
-        <app-booking-form fxHide.lt-md [room]="room" *ngIf="auth.isAuthenticated()"></app-booking-form>
+        <app-booking-form fxHide.lt-md [room]="room"></app-booking-form>
       </div>
 
     </div>

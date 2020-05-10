@@ -43,13 +43,16 @@ export class BookingFormComponent implements OnInit {
       validators: [hoursValid(), dateAvailable(this.room)]
     });
     this.form.valueChanges.subscribe(value => {
-      if (!this.form.invalid) {
+      if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
         this.price = this.bookingService.getPrice(booking, this.room.price);
       }
     });
     this.form.get('weekly').valueChanges
       .subscribe(value => !value && this.form.get('weekRepetition').setValue(0));
+    if (!this.auth.isAuthenticated()) {
+      this.form.disable();
+    }
   }
   filterDays() {
     return (date: moment.Moment): boolean => {
