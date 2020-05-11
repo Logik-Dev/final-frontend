@@ -1,18 +1,22 @@
 @import "../../variables";
 @import "../../mixins";
 .bar {
-  position: sticky;
-  bottom: 0; left: 10%; right: 10%;
-  background-color: #555;
-  padding: 1rem;
-  z-index: 5;
-  color: #FAFAFA;
-  font-size: .9rem;
-  @include icon(1em, 1.5em);
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background-color: #666;
   @include flexbox(row, space-evenly, center, nowrap);
-  .label {
-    margin-left: -1.8em;
-    font-weight: 100;
-  }
+  color: #FAFAFA;
+  padding: .7rem;
+}
+.item {
+  @include flexbox(row, center, center, nowrap);
+  @include icon(1em, 1.2em);
+  cursor: pointer;
+}
+.label {
+  margin-left: .2rem;
 }
 
+app-booking-form {
+  margin-top: -6rem;
+}

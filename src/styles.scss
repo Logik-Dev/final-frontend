@@ -77,3 +77,8 @@ ul {
   padding: 0;
   list-style: none;
 }
+.booking-dialog .mat-dialog-container {
+  display: flex;
+  padding: 0;
+  overflow-x: hidden;
+}

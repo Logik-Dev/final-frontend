@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BookingService} from '../services/booking.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../services/notification.service';
@@ -54,7 +54,8 @@ export class PaymentComponent implements OnInit {
     this.bookingService.create(this.data.booking).subscribe(
       result => {
         this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
-        this.router.navigateByUrl('/profil');
+        this.router.navigateByUrl(`/salles`);
+
       }
     );
   }

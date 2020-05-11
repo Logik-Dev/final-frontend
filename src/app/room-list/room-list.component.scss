@@ -12,7 +12,9 @@
     @include icon(1em, 1.7em)
   }
 }
-
+.container {
+  padding: 1rem 3rem;
+}
 .room-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, auto));

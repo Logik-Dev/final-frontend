@@ -1,8 +1,17 @@
 <div class="bar">
-  <mat-icon>booking</mat-icon>
-  <div class="label">Réserver</div>
-  <mat-icon>favorite</mat-icon>
-  <div class="label">Favoris</div>
-  <mat-icon>mail</mat-icon>
-  <div class="label">Message</div>
+  <div class="item" (click)="openDialog()">
+    <mat-icon>booking</mat-icon>
+    <div class="label">Réserver</div>
+  </div>
+  <div class="item">
+    <mat-icon>favorite</mat-icon>
+    <div class="label">Favoris</div>
+  </div>
+  <div class="item">
+    <mat-icon>mail</mat-icon>
+    <div class="label">Message</div>
+  </div>
 </div>
+<ng-template #dialogRef let-data>
+  <app-booking-form [room]="room" (closeDialog)="closeDialog()"></app-booking-form>
+</ng-template>

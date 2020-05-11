@@ -79,4 +79,7 @@
     </div>
   </div>
 </div>
-<app-sticky-bar fxHide.gt-sm></app-sticky-bar>
+<div *ngIf="room$ | async as room">
+  <app-sticky-bar fxHide.gt-sm [room]="room"></app-sticky-bar>
+</div>
+

@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
   <h2 class="form-title" *ngIf="auth.isAuthenticated(); else unauthenticated">Réserver</h2>
   <ng-template #unauthenticated>
-    <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion">connecter</a></div>
+    <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
   </ng-template>
   <mat-form-field appearance="outline" class="startDate">
     <mat-label>Date</mat-label>

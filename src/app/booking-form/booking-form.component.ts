@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
@@ -17,8 +17,9 @@ import {BookingService} from '../services/booking.service';
   styleUrls: ['./booking-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookingFormComponent implements OnInit {
+export class BookingFormComponent implements OnInit, OnDestroy {
   @Input() room: Room;
+  @Output() closeDialog = new EventEmitter();
   form: FormGroup;
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
   price = 0;
@@ -29,7 +30,9 @@ export class BookingFormComponent implements OnInit {
               public dialog: MatDialog,
               private bookingService: BookingService) {
   }
-
+  ngOnDestroy(): void {
+    this.dialog.closeAll();
+  }
   ngOnInit(): void {
     this.adapter.setLocale('fr');
     this.form = this.fb.group({
