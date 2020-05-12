@@ -10,6 +10,6 @@ import {NoOpSerializer} from '../utils/no-op-serializer';
 export class RoomTypeService extends ResourceService<RoomType> {
 
   constructor(http: HttpClient) {
-    super(http, 'rooms/types', new NoOpSerializer<RoomType>());
+    super(http, 'types', new NoOpSerializer<RoomType>());
   }
 }

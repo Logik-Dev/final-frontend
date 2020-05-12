@@ -1,6 +1,7 @@
+import {Equipment} from './equipment';
 
 export interface RoomEquipment {
   id?: number;
-  label?: string;
+  equipment: Equipment;
   quantity?: number;
 }

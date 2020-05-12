@@ -58,7 +58,7 @@
           <h2 class="category-title">Equipements</h2>
           <div class="equipments">
             <span class="badge" *ngFor="let equipment of room.equipments">
-              {{equipment.label}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
+              {{equipment.equipment.id}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
             </span>
           </div>
           <mat-divider></mat-divider>

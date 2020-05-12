@@ -11,6 +11,6 @@ import {NoOpSerializer} from '../utils/no-op-serializer';
 export class EventTypeService extends ResourceService<EventType> {
 
   constructor(http: HttpClient) {
-    super(http, 'rooms/events', new NoOpSerializer<EventType>());
+    super(http, 'events', new NoOpSerializer<EventType>());
   }
 }

@@ -10,6 +10,6 @@ import {ResourceService} from './resource.service';
 export class EquipmentService extends ResourceService<Equipment>{
 
   constructor(http: HttpClient) {
-    super(http, 'rooms/equipments', new NoOpSerializer<Equipment>());
+    super(http, 'equipments', new NoOpSerializer<Equipment>());
   }
 }
