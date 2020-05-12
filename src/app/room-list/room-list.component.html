@@ -1,15 +1,19 @@
 <div class="container">
-  <div class="filters mat-elevation-z1" fxLayout fxLayoutAlign="space-evenly">
-    <button mat-stroked-button class="filter" (click)="sortRooms('rating')">
-      Note
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-    <button mat-stroked-button (click)="sortRooms('maxCapacity')" class="filter">Capacité
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-    <button mat-stroked-button (click)="sortRooms('price')" class="filter">Prix
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
+  <div class="filters mat-elevation-z1">
+    <form [formGroup]="form" class="search-form">
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput formControlName="search" placeholder="Rechercher">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="filter-menu">
+      <button  [matMenuTriggerFor]="menu" class="filter-btn" mat-stroked-button>
+
+        <span>Filtrer</span>
+      </button>
+      <mat-menu #menu></mat-menu>
+    </div>
+
   </div>
   <ul class="room-list" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
     <li class="card mat-elevation-z2" *ngFor="let room of rooms">

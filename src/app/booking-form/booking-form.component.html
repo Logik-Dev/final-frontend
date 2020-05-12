@@ -35,7 +35,7 @@
     <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
     <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
   </mat-error>
-  <button mat-flat-button color="primary" [disabled]="form.invalid || !auth.isAuthenticated()" type="submit">
+  <button mat-flat-button color="primary" [disabled]="invalid || !auth.isAuthenticated()" type="submit">
     <span class="payer">Payer</span>
     <span class="price" *ngIf="price">{{price}}</span>
     <mat-icon *ngIf="price">euros</mat-icon>

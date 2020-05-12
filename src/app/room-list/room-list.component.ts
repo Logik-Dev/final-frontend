@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-room-list',
@@ -15,9 +16,11 @@ export class RoomListComponent implements OnInit {
   rooms: Room[];
   Arr = Array;
   user: User;
-  constructor(private roomService: RoomService, private route: ActivatedRoute, private auth: AuthService, private userService: UserService) { }
+  form: FormGroup;
+  constructor(private roomService: RoomService, private route: ActivatedRoute, private auth: AuthService, private userService: UserService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.createForm();
     this.route.params.subscribe(
       params => this.roomService.findAll(params).subscribe(rooms => this.rooms = rooms)
     );
@@ -25,7 +28,11 @@ export class RoomListComponent implements OnInit {
       this.user = this.auth.currentUser.value;
     }
   }
-
+  createForm() {
+    this.form = this.fb.group({
+      search: ['']
+    });
+  }
   sortRooms(filter: string) {
     this.rooms.sort((a, b) => b[filter] - a[filter]);
   }

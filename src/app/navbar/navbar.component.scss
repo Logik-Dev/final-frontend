@@ -2,33 +2,41 @@
 nav {
   z-index: 10;
   position: fixed;
-  width: 100%;
   height: $navbar-height;
-  left: 0;
-  top: 0;
-  background-color: $primary-color;
-  color: $background-secondary;
+  left: 0; top: 0; right: 0;
+  background-color: white;
+  //color: $background-secondary;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.50);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   padding: 1rem;
   align-items: center;
-
-  .menu {
-    width: 100%;
-  }
-
-  .user-menu {
-    margin-left: auto;
-    .mat-icon {
-      font-size: 25px;
-      color: #FAFAFA;
-    }
+  justify-items: center;
+}
+.logo {
+  font-family: 'Frijole', cursive;
+  cursor: pointer;
+  color: $primary-color;
+  font-size: 1.5rem;
+  &:focus {
+    outline: none;
   }
 }
+.menu {
 
-.btn-menu {
-  .mat-icon {
-    width: 100%;
-    font-size: 3em;
+  //border: 1px red solid;
+}
+.room-btn {
+  margin-left: 1rem;
+}
+.account-buttons {
+  margin-left: auto;
+  .connexion {
+    color: $primary-color;
   }
 }
+::ng-deep .mat-menu-content{
+  height: 100%;
+  overflow: hidden;
+}
+

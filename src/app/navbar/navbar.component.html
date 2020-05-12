@@ -1,14 +1,56 @@
 <nav>
-  <button mat-icon-button (click)="toggleMenu.emit()" fxHide fxShow.lt-md class="btn-menu">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <app-menu fxShow fxHide.lt-md class="menu"></app-menu>
-  <div class="user-menu" *ngIf="auth.isAuthenticated()">
-    <mat-icon [matMenuTriggerFor]="homeMenu">home
-    </mat-icon>
-    <mat-menu #homeMenu>
-      <button mat-menu-item (click)="auth.logout()">Deconnexion</button>
-    </mat-menu>
+  <div class="logo" routerLink="/">
+    TocTocToc
   </div>
 
+  <div class="menu">
+    <button mat-stroked-button color="primary-color" class="add-btn">
+      <mat-icon>add</mat-icon>
+      <span>Ajouter une salle</span>
+    </button>
+    <button mat-stroked-button class="room-btn" routerLink="/salles">
+      <span>Toutes nos salles</span>
+    </button>
+    <button mat-stroked-button class="room-btn" [matMenuTriggerFor]="menus">
+      <span>Par critère</span>
+    </button>
+    <mat-menu #menus>
+      <button mat-menu-item (click)="aroundMe()">
+        <mat-icon>place</mat-icon>
+        <span>Autour de moi</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="typesMenu">
+        <mat-icon>category</mat-icon>
+        <span>Type</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="eventsMenu">
+        <mat-icon>cake</mat-icon>
+        <span>Evènement</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="equipmentsMenu">
+        <mat-icon>mic</mat-icon>
+        <span>Equipement</span>
+      </button>
+    </mat-menu>
+    <mat-menu #typesMenu>
+      <button mat-menu-item *ngFor="let type of types$ | async" [routerLink]="['salles', {type: type.id}]">{{type.id | titlecase}}</button>
+    </mat-menu>
+    <mat-menu #eventsMenu>
+      <button mat-menu-item *ngFor="let event of events$ | async" [routerLink]="['salles', {event: event.id}]">{{event.id | titlecase}}</button>
+    </mat-menu>
+    <mat-menu #equipmentsMenu>
+      <button mat-menu-item *ngFor="let equipment of equipments$ | async" [routerLink]="['salles', {equipment: equipment.id}]">{{equipment.id | titlecase}}</button>
+    </mat-menu>
+  </div>
+  <div class="account-buttons">
+    <div class="unauthenticated-buttons" *ngIf="!auth.isAuthenticated(); else userMenu">
+      <button class="register" mat-flat-button routerLink="/enregistrement">S'inscrire</button>
+      <button class="connexion" mat-flat-button routerLink="/connexion">Se connecter</button>
+    </div>
+    <ng-template #userMenu>
+      <button mat-icon-button>
+        <mat-icon>home</mat-icon>
+      </button>
+    </ng-template>
+  </div>
 </nav>

@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
@@ -15,7 +25,6 @@ import {BookingService} from '../services/booking.service';
   selector: 'app-booking-form',
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingFormComponent implements OnInit, OnDestroy {
   @Input() room: Room;
@@ -23,21 +32,26 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
   price = 0;
-
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               public auth: AuthService,
               public dialog: MatDialog,
               private bookingService: BookingService) {
   }
+
+  ngOnInit(): void {
+    this.adapter.setLocale('fr');
+    this.createForm();
+    !this.auth.isAuthenticated() && this.form.disable();
+
+  }
   ngOnDestroy(): void {
     this.dialog.closeAll();
   }
-  ngOnInit(): void {
-    this.adapter.setLocale('fr');
+  createForm() {
     this.form = this.fb.group({
       startDate: [{value: '', disabled: true, validators: Validators.required}],
-      endDate: [{value: '', disabled: true, validators: Validators.required}],
+      endDate: [{value: '', disabled: true}],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       weekly: '',
@@ -45,17 +59,29 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     }, {
       validators: [hoursValid(), dateAvailable(this.room)]
     });
-    this.form.valueChanges.subscribe(value => {
+    this.changeListeners();
+  }
+  changeListeners() {
+    this.formChangeListener();
+    this.fieldsChangeListener();
+  }
+  formChangeListener() {
+    this.form.valueChanges.subscribe(_ => {
       if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
         this.price = this.bookingService.getPrice(booking, this.room.price);
       }
     });
+  }
+  fieldsChangeListener() {
     this.form.get('weekly').valueChanges
-      .subscribe(value => !value && this.form.get('weekRepetition').setValue(0));
-    if (!this.auth.isAuthenticated()) {
-      this.form.disable();
-    }
+      .subscribe(value => {
+          !value && this.form.get('weekRepetition').setValue(0);
+          value && this.form.get('endDate').setValidators([Validators.required]);
+          this.form.updateValueAndValidity();
+          console.log(this.form);
+        }
+      );
   }
   filterDays() {
     return (date: moment.Moment): boolean => {
@@ -91,7 +117,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   get startMin() {
     return moment();
   }
@@ -103,6 +128,9 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   }
   get endMax() {
     return this.startMax.add(1, 'week');
+  }
+  get invalid() {
+    return this.form.invalid;
   }
   get f() {
     return this.form.controls;

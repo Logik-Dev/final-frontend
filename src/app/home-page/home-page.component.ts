@@ -24,6 +24,7 @@ export class HomePageComponent implements OnInit {
   cities: City[];
   searchForm: FormGroup;
   min = moment();
+
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
@@ -64,14 +65,9 @@ export class HomePageComponent implements OnInit {
   }
 
   aroundMe() {
-    if (window.navigator && window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(position => {
-        const coords = {lat: position.coords.latitude, lon: position.coords.longitude};
-        this.router.navigate(['salles', coords])
-          .then(_ => location.reload());
-      });
-    } else {
-      this.notification.showError('Navigateur non supporté');
-    }
+    this.geoService.getPosition().subscribe(coords =>
+      this.router.navigate(['salles', coords])
+        .then(_ => location.reload())
+    );
   }
 }

@@ -1,5 +1,5 @@
 <div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
-  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false">
+  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false" >
     <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
   </mat-carousel>
 </div>
@@ -52,7 +52,14 @@
           <mat-divider></mat-divider>
           <h2 class="category-title">Type d'évenement</h2>
           <div class="events">
-            <span class="event" *ngFor="let event of room.eventTypes">{{event.id}}</span>
+            <span class="badge" *ngFor="let event of room.eventTypes">{{event.id}}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <h2 class="category-title">Equipements</h2>
+          <div class="equipments">
+            <span class="badge" *ngFor="let equipment of room.equipments">
+              {{equipment.label}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
+            </span>
           </div>
           <mat-divider></mat-divider>
           <h2 class="category-title">Ambiance</h2>
@@ -82,4 +89,4 @@
 <div *ngIf="room$ | async as room">
   <app-sticky-bar fxHide.gt-sm [room]="room"></app-sticky-bar>
 </div>
-
+<img src="" alt="">

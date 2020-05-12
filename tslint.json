@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-unused-expression": [true, "allow-fast-null-checks"],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {

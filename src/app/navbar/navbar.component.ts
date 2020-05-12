@@ -2,6 +2,16 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {RoomTypeService} from '../services/room-type.service';
+import {Observable} from 'rxjs';
+import {RoomType} from '../models/room-type';
+import {EventTypeService} from '../services/event-type.service';
+import {EventType} from '../models/event-type';
+import {EquipmentService} from '../services/equipment.service';
+import {Equipment} from '../models/equipment';
+import {GeoService} from '../services/geo.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +20,45 @@ import {User} from '../models/user';
 })
 export class NavbarComponent implements OnInit {
   @Output() toggleMenu = new EventEmitter();
+  form: FormGroup;
   user: User;
+  types$: Observable<RoomType[]>;
+  events$: Observable<EventType[]>;
+  equipments$: Observable<Equipment[]>;
   constructor(public auth: AuthService,
-              public userService: UserService) { }
+              private userService: UserService,
+              private roomTypeService: RoomTypeService,
+              private eventTypeService: EventTypeService,
+              private equipmentService: EquipmentService,
+              private geoService: GeoService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.getUser();
+    this.getTypes();
+    this.getEvents();
+    this.getEquipments();
+  }
+  getUser() {
     if (this.auth.isAuthenticated()) {
       this.userService.findById(this.auth.getUserId())
         .subscribe(user => this.user = user );
     }
   }
+  getTypes() {
+    this.types$ = this.roomTypeService.findAll();
+  }
+  getEvents() {
+    this.events$ = this.eventTypeService.findAll();
+  }
+  getEquipments() {
+    this.equipments$ = this.equipmentService.findAll();
+  }
+  aroundMe() {
+    this.geoService.getPosition().subscribe(
+      coords => this.router.navigate(['salles', coords])
+        .then(_ => location.reload())
+    );
+  }
+
 }

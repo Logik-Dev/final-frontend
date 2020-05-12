@@ -14,6 +14,10 @@
   &.lg {
     height: 30rem;
   }
+  ::ng-deep .mat-icon {
+    font-size: 3rem;
+    color: #FAFAFA;
+  }
 }
 .page {
   background-color: rgba(0,0,0,.05);
@@ -137,15 +141,15 @@
     @include flexbox(row, flex-start, center, wrap);
   }
 }
-.events {
+.events, .equipments {
   font-size: .8rem;
   margin-bottom: 1.5rem;
-  .event {
-    display: inline-block;
-    padding: .5em;
-    margin: .5rem;
-    border-radius: 6px;
-    background-color: $primary-color;
-    color: $secondary-color;
-  }
+}
+.badge {
+  display: inline-block;
+  padding: .5em;
+  margin: .5rem;
+  border-radius: 6px;
+  background-color: $primary-color;
+  color: $secondary-color;
 }

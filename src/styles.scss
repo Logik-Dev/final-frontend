@@ -16,7 +16,19 @@ body {
 .mat-sidenav-content.content {
   padding-top: $navbar-height;
   min-height: 100vh;
+  position: relative;
 }
+.mat-sidenav-content.content::before {
+  content: "";
+  height: 20rem;
+  border-bottom-left-radius: 15rem;
+  border-bottom-right-radius: 15rem;
+  background-color: $primary-color;
+  position: absolute;
+  top: 0; left:0; right: 0;
+  z-index: -10;
+}
+
 .container {
   padding: 1.5rem 1rem;
   margin: 0 auto;
@@ -81,4 +93,12 @@ ul {
   display: flex;
   padding: 0;
   overflow-x: hidden;
+}
+.mat-primary-color {
+  background-color: $primary-color;
+  color: white;
+}
+.mat-primary-outline {
+  border: 1px $primary-color solid;
+  color: $primary-color;
 }
