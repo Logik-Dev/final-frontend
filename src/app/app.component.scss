@@ -2,8 +2,11 @@
 
 mat-sidenav {
   padding-top: $navbar-height;
-  width: 50%;
   background-color: $primary-color;
+  width: 40%;
+  &.xs {
+    width: 60%;
+  }
 }
 mat-sidenav-container {
   flex: 1 0 auto;

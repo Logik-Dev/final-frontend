@@ -23,9 +23,10 @@ body {
   height: 20rem;
   border-bottom-left-radius: 15rem;
   border-bottom-right-radius: 15rem;
+  //border-radius: 50%;
   background-color: $primary-color;
   position: absolute;
-  top: 0; left:0; right: 0;
+  top: 0rem; left:0; right: 0;
   z-index: -10;
 }
 

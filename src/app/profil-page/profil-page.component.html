@@ -1,26 +1,7 @@
-<div class="container" *ngIf="user">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>info</mat-icon>
-        Informations
-      </ng-template>
-      <app-profil-info [user]="user"></app-profil-info>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>booking</mat-icon>
-        Réservations
-      </ng-template>
-      <app-profil-booking [user]="user"></app-profil-booking>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>room</mat-icon>
-        Salles
-      </ng-template>
-      <app-profil-room></app-profil-room>
-    </mat-tab>
-  </mat-tab-group>
+<div class="container">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">{{link.label}}</a>
+  </nav>
+  <router-outlet></router-outlet>
 </div>
-

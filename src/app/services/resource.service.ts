@@ -9,8 +9,8 @@ import {map} from 'rxjs/operators';
 
 export class ResourceService<T extends Resource> {
   url = environment.API_URL;
-  constructor(private http: HttpClient,
-              private endpoint: string,
+  constructor(protected http: HttpClient,
+              protected endpoint: string,
               private serializer: Serializer,
               private childEndpoint?: string) {}
 

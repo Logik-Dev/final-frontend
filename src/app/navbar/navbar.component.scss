@@ -1,4 +1,5 @@
 @import "../../variables";
+@import "../../mixins";
 nav {
   z-index: 10;
   position: fixed;
@@ -12,6 +13,26 @@ nav {
   padding: 1rem;
   align-items: center;
   justify-items: center;
+  &.sm {
+    grid-template-columns: 2rem 1fr;
+  }
+}
+
+
+.mat-icon-button, .burger-btn {
+    color: $primary-color;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
+    .mat-icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      line-height: 2.5rem;
+      font-size: 2.5rem;
+    }
+}
+.user-menu-btn {
+  color: #333;
 }
 .logo {
   font-family: 'Frijole', cursive;
@@ -22,14 +43,12 @@ nav {
     outline: none;
   }
 }
-.menu {
 
-  //border: 1px red solid;
-}
 .room-btn {
   margin-left: 1rem;
 }
 .account-buttons {
+  border: 1px transparent solid;
   margin-left: auto;
   .connexion {
     color: $primary-color;
@@ -38,5 +57,8 @@ nav {
 ::ng-deep .mat-menu-content{
   height: 100%;
   overflow: hidden;
+}
+.burger-btn ::ng-deep .mat-button-focus-overlay {
+  display: none;
 }
 

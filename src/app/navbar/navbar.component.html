@@ -1,9 +1,14 @@
-<nav>
+<nav ngClass.sm="sm">
+  <div class="burger" fxHide.gt-sm>
+    <button mat-icon-button (click)="toggleMenu.emit()" class="burger-btn">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
   <div class="logo" routerLink="/">
     TocTocToc
   </div>
 
-  <div class="menu">
+  <div class="menu" fxHide.lt-md>
     <button mat-stroked-button color="primary-color" class="add-btn">
       <mat-icon>add</mat-icon>
       <span>Ajouter une salle</span>
@@ -42,15 +47,22 @@
       <button mat-menu-item *ngFor="let equipment of equipments$ | async" [routerLink]="['salles', {equipment: equipment.id}]">{{equipment.id | titlecase}}</button>
     </mat-menu>
   </div>
-  <div class="account-buttons">
-    <div class="unauthenticated-buttons" *ngIf="!auth.isAuthenticated(); else userMenu">
+  <div class="account-buttons" fxHide.lt-md>
+    <div class="unauthenticated-buttons" *ngIf="!(us.isLoggedIn | async); else userButton">
       <button class="register" mat-flat-button routerLink="/enregistrement">S'inscrire</button>
       <button class="connexion" mat-flat-button routerLink="/connexion">Se connecter</button>
     </div>
-    <ng-template #userMenu>
-      <button mat-icon-button>
-        <mat-icon>home</mat-icon>
+    <ng-template #userButton>
+      <button mat-icon-button class="user-menu-btn" [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
       </button>
+      <mat-menu #userMenu>
+        <button mat-menu-item routerLink="/profil">Profil</button>
+        <button mat-menu-item routerLink="/profil/favoris">Mes favoris</button>
+        <button mat-menu-item (click)="us.logout()">Déconnexion</button>
+        <button mat-menu-item *ngIf="(user$ | async)?.rooms.length">Mes salles</button>
+      </mat-menu>
+
     </ng-template>
   </div>
 </nav>

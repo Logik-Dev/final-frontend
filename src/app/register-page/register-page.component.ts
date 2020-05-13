@@ -19,7 +19,7 @@ export class RegisterPageComponent implements OnInit {
   submitted = false;
 
   constructor(private fb: FormBuilder,
-              private userService: UserService,
+              private us: UserService,
               private router: Router,
               private notification: NotificationService) {
   }
@@ -47,7 +47,7 @@ export class RegisterPageComponent implements OnInit {
   onSubmit(data: User) {
     this.submitted = true;
     if (!this.registerForm.invalid) {
-      this.userService.create(data).subscribe(
+      this.us.create(data).subscribe(
         user => this.router.navigate(['/profil'])
           .then(_ => this.notification.showSuccess('Merci pour votre enregistrement, vous pouvez maintenant vous connecter'))
       );
@@ -57,7 +57,7 @@ export class RegisterPageComponent implements OnInit {
   emailAvailable(): AsyncValidatorFn {
     return (emailControl: AbstractControl): Observable<ValidationErrors | null> => {
       const email = emailControl.value;
-      return this.userService.exists({email}).pipe(
+      return this.us.exists({email}).pipe(
         map(response => response.result ? {emailExists: true} : null)
       );
     };

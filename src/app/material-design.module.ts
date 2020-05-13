@@ -20,6 +20,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 
 const modules: any[] = [
@@ -43,7 +44,8 @@ const modules: any[] = [
   MatSidenavModule,
   MatTableModule,
   MatBadgeModule,
-  MatDividerModule
+  MatDividerModule,
+  MatListModule
 ];
 @NgModule({
   declarations: [],

@@ -28,8 +28,7 @@ export class HomePageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
-              private router: Router,
-              private notification: NotificationService) {
+              private router: Router) {
     this.adapter.setLocale('fr');
     this.searchForm = this.fb.group({
       city: ['', Validators.required],

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
-import {AuthService} from '../services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profil-page',
@@ -9,13 +9,15 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./profil-page.component.scss']
 })
 export class ProfilPageComponent implements OnInit {
-  user: User;
-  constructor(private userService: UserService, private auth: AuthService) { }
+  user$: Observable<User>;
+  navLinks = [
+    {path: '/profil/infos', label: 'Infos'},
+    {path: '/profil/favoris', label: 'Favoris'}
+  ];
+  constructor(private us: UserService) { }
 
   ngOnInit(): void {
-    this.userService.findById(this.auth.getUserId()).subscribe(
-      user => this.user = user
-    );
+    this.user$ = this.us.currentUser;
   }
 
 }

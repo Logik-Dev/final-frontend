@@ -1,45 +1,6 @@
-@import "../../mixins";
 @import "../../variables";
+@import "../../mixins";
 @import "../../layout";
-.filters {
-   background-color: $background-secondary;
-  max-width: 40rem;
-  margin: 1rem auto 2rem auto;
-  padding:  1rem 2rem;
-  border-radius: 3px;
-  display: grid;
-  grid-template-columns: minmax(15rem, 30rem) 10rem;
-}
-.search-form {
-  //background-color: $background-secondary;
-  border-right: 1px lightgrey solid;
-  padding-right: 3rem;
-  .mat-form-field {
-    width: 100%;
-  }
-  .mat-form-field-wrapper {
-    margin: 0;
-    padding: 0;
-  }
-}
-.filter-menu {
-  display: flex;
-  align-items: center;
-}
-.filter-btn {
-  margin-left: 3rem;
-  width: 100%;
-}
-.container {
-  padding: 1rem 3rem;
-}
-.room-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, auto));
-  grid-gap: 1rem;
-  justify-content: center;
-}
-
 .card {
   background-color: $background-secondary;
   border-radius: 3px;

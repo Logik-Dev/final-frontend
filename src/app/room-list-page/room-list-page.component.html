@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="filters mat-elevation-z1">
-    <form [formGroup]="form" class="search-form">
+<div class="container" ngClass.xs="xs">
+  <div class="filters mat-elevation-z1" ngClass.xs="xs">
+    <form [formGroup]="form" class="search-form" ngClass.xs="xs">
       <mat-form-field appearance="legacy">
         <input type="text" matInput formControlName="search" placeholder="Rechercher">
         <mat-icon matSuffix>search</mat-icon>
@@ -16,7 +16,7 @@
 
   </div>
   <ul class="room-list" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
-    <li class="card mat-elevation-z2" *ngFor="let room of rooms">
+    <li class="card mat-elevation-z2" *ngFor="let room of rooms$ | async">
       <div class="card-img">
         <img [src]="room.photos[0].url" alt="">
         <div class="rating">
@@ -39,7 +39,7 @@
           {{room.price + room.price / 10}} euro / h
         </div>
         <div class="btn-container" (click)="setFavorite(room.id)">
-          <button class="btn-favorite" mat-icon-button [ngClass]="isFavorite(room.id) && 'favorite'" >
+          <button class="btn-favorite" mat-icon-button [ngClass]="isFavorite(room.id) && 'favorite'"*ngIf="user$ | async">
             <mat-icon class="icon-favorite">favorite</mat-icon>
           </button>
           <button class="btn-more" mat-stroked-button [routerLink]="['/salles', room.id]">

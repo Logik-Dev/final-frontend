@@ -1,14 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
@@ -18,8 +8,8 @@ import {PaymentComponent} from '../payment/payment.component';
 import {dateAvailable, hoursValid} from '../utils/validators';
 import {Booking} from '../models/booking';
 import {TIME_FORMAT} from '../utils/dates';
-import {AuthService} from '../services/auth.service';
 import {BookingService} from '../services/booking.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-booking-form',
@@ -34,15 +24,15 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   price = 0;
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
-              public auth: AuthService,
+              public us: UserService,
               public dialog: MatDialog,
               private bookingService: BookingService) {
+    this.adapter.setLocale('fr');
   }
 
   ngOnInit(): void {
-    this.adapter.setLocale('fr');
     this.createForm();
-    !this.auth.isAuthenticated() && this.form.disable();
+    !this.us.isLoggedIn.value && this.form.disable();
 
   }
   ngOnDestroy(): void {
@@ -105,7 +95,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     const finish = moment(data.endTime, TIME_FORMAT);
     const weekly = data.weekRepetition;
     const slots = BookingService.getSlots(start, end, begin, finish, weekly);
-    return {slots, client: {id: this.auth.getUserId()}, price: this.price, room: {id: this.room.id}};
+    return {slots, client: {id: this.us.userId}, price: this.price, room: {id: this.room.id}};
   }
   openDialog() {
     this.dialog.open(PaymentComponent, {

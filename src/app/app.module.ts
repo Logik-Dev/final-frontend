@@ -15,7 +15,6 @@ import {ServerErrorInterceptor} from './server-error-interceptor';
 import { ProfilPageComponent } from './profil-page/profil-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {ExtendedModule, FlexModule, GridModule} from '@angular/flex-layout';
-import { MenuComponent } from './menu/menu.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -31,18 +30,26 @@ import { ProfilInfoComponent } from './profil-page/profil-info/profil-info.compo
 import { ProfilBookingComponent } from './profil-page/profil-booking/profil-booking.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MapComponent } from './room/map/map.component';
-import { RoomListComponent } from './room-list/room-list.component';
+import { RoomListPageComponent } from './room-list-page/room-list-page.component';
 import { RoomComponent } from './room/room.component';
 import { StickyBarComponent } from './sticky-bar/sticky-bar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { ProfilFavoriteComponent } from './profil-favorite/profil-favorite.component';
+import { RoomCardComponent } from './room-card/room-card.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'connexion', component: LoginPageComponent},
-  {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService]},
-  {path: 'salles', component: RoomListComponent},
+  {path: 'salles', component: RoomListPageComponent},
   {path: 'salles/:id', component: RoomComponent},
-  {path: 'enregistrement', component: RegisterPageComponent}
+  {path: 'enregistrement', component: RegisterPageComponent},
+  {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService], children: [
+      {path: '', redirectTo: 'infos', pathMatch: 'full'},
+      {path: 'infos', component: ProfilInfoComponent},
+      {path: 'favoris', component: ProfilFavoriteComponent}
+    ]}
 ];
 
 @NgModule({
@@ -51,7 +58,6 @@ const routes: Routes = [
     LoginPageComponent,
     ProfilPageComponent,
     NavbarComponent,
-    MenuComponent,
     HomePageComponent,
     RegisterPageComponent,
     AddRoomPageComponent,
@@ -64,22 +70,26 @@ const routes: Routes = [
     ProfilBookingComponent,
     PaymentComponent,
     MapComponent,
-    RoomListComponent,
+    RoomListPageComponent,
     RoomComponent,
-    StickyBarComponent
+    StickyBarComponent,
+    SidenavComponent,
+    ProfilFavoriteComponent,
+    RoomCardComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialDesignModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    FlexModule,
-    ExtendedModule,
-    GridModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialDesignModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes),
+        FlexModule,
+        ExtendedModule,
+        GridModule,
+        CdkAccordionModule,
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true},

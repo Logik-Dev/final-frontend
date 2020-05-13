@@ -1,0 +1,4 @@
+<div *ngIf="user$ | async as user">
+  <app-room-card [room]="room" *ngFor="let room of user.favorites"></app-room-card>
+</div>
+

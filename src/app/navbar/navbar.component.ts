@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AuthService} from '../services/auth.service';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {RoomTypeService} from '../services/room-type.service';
 import {Observable} from 'rxjs';
 import {RoomType} from '../models/room-type';
@@ -21,12 +20,11 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
   @Output() toggleMenu = new EventEmitter();
   form: FormGroup;
-  user: User;
+  user$: Observable<User>;
   types$: Observable<RoomType[]>;
   events$: Observable<EventType[]>;
   equipments$: Observable<Equipment[]>;
-  constructor(public auth: AuthService,
-              private userService: UserService,
+  constructor(public us: UserService,
               private roomTypeService: RoomTypeService,
               private eventTypeService: EventTypeService,
               private equipmentService: EquipmentService,
@@ -40,10 +38,7 @@ export class NavbarComponent implements OnInit {
     this.getEquipments();
   }
   getUser() {
-    if (this.auth.isAuthenticated()) {
-      this.userService.findById(this.auth.getUserId())
-        .subscribe(user => this.user = user );
-    }
+    this.user$ = this.us.currentUser;
   }
   getTypes() {
     this.types$ = this.roomTypeService.findAll();

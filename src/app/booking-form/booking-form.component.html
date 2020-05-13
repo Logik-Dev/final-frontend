@@ -1,6 +1,6 @@
 <div class="container mat-elevation-z8">
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
-  <h2 class="form-title" *ngIf="auth.isAuthenticated(); else unauthenticated">Réserver</h2>
+  <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
   <ng-template #unauthenticated>
     <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
   </ng-template>
@@ -8,7 +8,7 @@
     <mat-label>Date</mat-label>
     <input matInput [matDatepicker]="startpicker" formControlName="startDate" [min]="startMin" [max]="startMax" [matDatepickerFilter]="filterDays()">
     <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
-    <mat-datepicker #startpicker [disabled]="!auth.isAuthenticated()"></mat-datepicker>
+    <mat-datepicker #startpicker [disabled]="!(us.isLoggedIn | async)"></mat-datepicker>
   </mat-form-field>
   <mat-form-field appearance="outline" class="startTime">
     <mat-label>Heure de début</mat-label>
@@ -35,7 +35,7 @@
     <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
     <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
   </mat-error>
-  <button mat-flat-button color="primary" [disabled]="invalid || !auth.isAuthenticated()" type="submit">
+  <button mat-flat-button color="primary" [disabled]="invalid || !(us.isLoggedIn | async)" type="submit">
     <span class="payer">Payer</span>
     <span class="price" *ngIf="price">{{price}}</span>
     <mat-icon *ngIf="price">euros</mat-icon>

@@ -1,0 +1,137 @@
+@import "../../mixins";
+@import "../../variables";
+@import "../../layout";
+.container.xs {
+  padding: 0;
+}
+.filters {
+  background-color: $background-secondary;
+  max-width: 40rem;
+  margin: 1rem auto 2rem auto;
+  padding:  1rem 2rem;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: minmax(10rem, 30rem) minmax(5rem, 10rem);
+  &.xs {
+    margin: 0 0 .5rem 0;
+    grid-template-columns: 1fr;
+    border-bottom: 1px lightgrey solid;
+    .filter-btn {
+      margin-left: 0;
+    }
+  }
+}
+.search-form {
+  //background-color: $background-secondary;
+  border-right: 1px lightgrey solid;
+  padding-right: 3rem;
+  &.xs {
+    padding-right: 0;
+    border-right: none;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+  .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+}
+.filter-menu {
+  display: flex;
+  align-items: center;
+}
+.filter-btn {
+  margin-left: 3rem;
+  width: 100%;
+}
+.container {
+  padding: 1rem 3rem;
+}
+.room-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+  grid-gap: 1rem;
+  justify-content: center;
+}
+
+.card {
+  background-color: $background-secondary;
+  border-radius: 3px;
+  max-width: 29rem;
+  @include simple-grid(1, $row-gap: 0);
+  grid-template-rows:  minmax(210px, 270px);
+  .card-img {
+    position: relative;
+    padding-bottom: .4em;
+    background-color: $primary-color;
+    @extend %border-top-radius;
+  }
+  img {
+    @extend %border-top-radius;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .rating {
+    position: absolute;
+    bottom: 0; right: 0;
+    background-color: $primary-color;
+    border-right: 1px $primary-color solid;
+    border-top-left-radius: 1em;
+    padding: .3em .5em 0 .5em;
+    @include icon(1em, 1em, $secondary-color)
+  }
+  .card-infos {
+    position: relative;
+    line-height: 1.5;
+    padding: 1rem 2rem 3rem 1rem;
+    @include icon(1em, .8em, $primary-color);
+    .card-title {
+      text-align: center;
+      margin: 0 0 .5rem 0;
+      font-weight: 200;
+    }
+    .address, .capacity, .price {
+      color: grey;
+      font-size: 1rem;
+      font-weight: 200;
+    }
+    .price {
+      margin-bottom: 2rem;
+    }
+    .btn-favorite {
+      margin-right: auto;
+      font-size: 3em;
+      .mat-icon {
+        color: lightgrey;
+      }
+      &:hover {
+        mat-icon {
+          color: red;
+        }
+      }
+      &.favorite {
+        .mat-icon {
+          color: red;
+        }
+      }
+    }
+  }
+}
+.btn-container {
+  position: absolute;
+  left: 1rem; right: 1rem; bottom: 1rem;
+  font-size: .8em;
+  @include flexbox($justify: space-between, $align: center);
+}
+.btn-more {
+  width: 40%;
+  font-size: .9em;
+  height: 3.2em;
+}
+
+
+.btn-more {
+  margin-left: auto;
+}
