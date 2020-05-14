@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../models/user';
 import {ResourceService} from './resource.service';
 import {UserSerializer} from '../utils/user-serializer';
-import {switchMap, tap} from 'rxjs/operators';
+import {delay, switchMap, tap} from 'rxjs/operators';
 import {TokenResponse} from '../models/token-response';
 import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
@@ -24,7 +24,7 @@ export class UserService extends ResourceService<User> {
 
   update(item: User): Observable<User> {
     return super.update(item).pipe(
-      tap(user => this.storedUser = user)
+      tap(user => this.storedUser = user),
     );
   }
 

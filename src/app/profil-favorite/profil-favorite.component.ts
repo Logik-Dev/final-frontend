@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profil-favorite',
@@ -9,11 +9,14 @@ import {Observable} from 'rxjs';
   styleUrls: ['./profil-favorite.component.scss']
 })
 export class ProfilFavoriteComponent implements OnInit {
-  user$: Observable<User>;
-  constructor(private us: UserService) { }
+  user: User;
+  constructor(private us: UserService) {
+    this.user = this.us.currentUser.value;
+  }
 
   ngOnInit(): void {
-    this.user$ = this.us.currentUser;
+
+
   }
 
 }

@@ -37,6 +37,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { ProfilFavoriteComponent } from './profil-favorite/profil-favorite.component';
 import { RoomCardComponent } from './room-card/room-card.component';
+import { RoomListComponent } from './room-list/room-list.component';
 
 
 const routes: Routes = [
@@ -75,7 +76,8 @@ const routes: Routes = [
     StickyBarComponent,
     SidenavComponent,
     ProfilFavoriteComponent,
-    RoomCardComponent
+    RoomCardComponent,
+    RoomListComponent
   ],
     imports: [
         BrowserModule,

@@ -10,7 +10,7 @@ import {switchMap} from 'rxjs/operators';
 import {NotificationService} from '../services/notification.service';
 
 @Component({
-  selector: 'app-room-list',
+  selector: 'app-room-list-page',
   templateUrl: './room-list-page.component.html',
   styleUrls: ['./room-list-page.component.scss']
 })
@@ -56,8 +56,8 @@ export class RoomListPageComponent implements OnInit {
       user.favorites = user.favorites.map(room => {
         return {id: room.id};
       });
-      this.us.update(user)
-        .subscribe(_ => this.ngOnInit());
+      this.us.update(user).subscribe(this.user$);
+
     } else {
         this.notification.showError('Connectez vous pour ajouter une salle à vos favoris');
     }

@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../models/room';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {filter, flatMap, map, mergeAll} from 'rxjs/operators';
 
 @Component({
   selector: 'app-room-card',
@@ -10,34 +11,30 @@ import {BehaviorSubject, Observable} from 'rxjs';
   styleUrls: ['./room-card.component.scss']
 })
 export class RoomCardComponent implements OnInit {
-  user$: BehaviorSubject<User>;
+  user: User;
   Arr = Array;
   @Input() room: Room;
-  constructor(private us: UserService) { }
+  constructor(private us: UserService) {}
 
   ngOnInit(): void {
-    this.user$ = this.us.currentUser;
+    this.user = this.us.currentUser.value;
   }
-
 
   isFavorite(id: number): boolean {
-    const favorite = this.user$.value.favorites.filter(room => room.id === id);
+    const favorite = this.user.favorites.filter(room => room.id === id);
     return favorite.length === 1;
-
   }
+
   setFavorite(id: number) {
-    if (this.user$.value) {
-      const user = {id: this.user$.value.id, favorites: this.user$.value.favorites};
       if (this.isFavorite(id)) {
-        user.favorites = user.favorites.filter(room => room.id !== id);
+        this.user.favorites = this.user.favorites.filter(room => room.id !== id);
       } else {
-        user.favorites.push({id});
+        this.user.favorites.push({id});
       }
-      user.favorites = user.favorites.map(room => {
+      this.user.favorites = this.user.favorites.map(room => {
         return {id: room.id };
       });
-      this.us.update(user).subscribe(_ => this.ngOnInit());
+      this.us.update(this.user).subscribe(user => this.user = user);
     }
-  }
 
 }
