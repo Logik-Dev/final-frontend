@@ -9,15 +9,17 @@
   </div>
 
   <div class="menu" fxHide.lt-md>
-    <button mat-stroked-button color="primary-color" class="add-btn">
+    <button mat-stroked-button class="btn" routerLink="/ajouter">
       <mat-icon>add</mat-icon>
       <span>Ajouter une salle</span>
     </button>
-    <button mat-stroked-button class="room-btn" routerLink="/salles">
-      <span>Toutes nos salles</span>
+    <button mat-stroked-button  class="room-btn btn" routerLink="/salles">
+      <mat-icon>list</mat-icon>
+      <span>Toutes les salles</span>
     </button>
-    <button mat-stroked-button class="room-btn" [matMenuTriggerFor]="menus">
-      <span>Par critère</span>
+    <button mat-stroked-button class="room-btn btn" [matMenuTriggerFor]="menus">
+      <mat-icon>search</mat-icon>
+      <span>Trouver</span>
     </button>
     <mat-menu #menus>
       <button mat-menu-item (click)="aroundMe()">

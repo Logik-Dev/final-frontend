@@ -1,10 +1,10 @@
 import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {BookingService} from '../services/booking.service';
+import {BookingService} from '../../services/booking.service';
 import {Router} from '@angular/router';
-import {NotificationService} from '../services/notification.service';
+import {NotificationService} from '../../services/notification.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Booking} from '../models/booking';
-import {DATE_FORMAT} from '../utils/dates';
+import {Booking} from '../../models/booking';
+import {DATE_FORMAT} from '../../utils/dates';
 declare var paypal;
 
 interface BookingData {
@@ -24,7 +24,6 @@ export class PaymentComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: BookingData) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     const slots = this.data.booking.slots;
     paypal
       .Buttons({
@@ -45,7 +44,6 @@ export class PaymentComponent implements OnInit {
         onApprove: async (data, actions) => {
           this.makeRequest();
           const order = await actions.order.capture();
-          console.log(order);
         }
       })
       .render(this.paypalElement.nativeElement);

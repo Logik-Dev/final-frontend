@@ -7,13 +7,11 @@
       </mat-form-field>
     </form>
     <div class="filter-menu">
-      <button  [matMenuTriggerFor]="menu" class="filter-btn" mat-stroked-button>
-
+      <button [matMenuTriggerFor]="menu" class="filter-btn" mat-stroked-button>
         <span>Filtrer</span>
       </button>
       <mat-menu #menu></mat-menu>
     </div>
-
   </div>
   <app-room-list [rooms]="rooms$ | async"></app-room-list>
 </div>

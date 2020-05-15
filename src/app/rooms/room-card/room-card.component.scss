@@ -1,6 +1,6 @@
-@import "../../variables";
-@import "../../mixins";
-@import "../../layout";
+@import "src/variables";
+@import "src/mixins";
+@import "src/layout";
 .card {
   background-color: $background-secondary;
   border-radius: 3px;

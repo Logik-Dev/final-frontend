@@ -20,13 +20,13 @@ body {
 }
 .mat-sidenav-content.content::before {
   content: "";
-  height: 20rem;
-  border-bottom-left-radius: 15rem;
-  border-bottom-right-radius: 15rem;
-  //border-radius: 50%;
+  height: 30rem;
+  //border-bottom-left-radius: 15rem;
+  //border-bottom-right-radius: 15rem;
+  border-radius: 50%;
   background-color: $primary-color;
   position: absolute;
-  top: 0rem; left:0; right: 0;
+  top: -12rem; left: -5rem; right: -5rem;
   z-index: -10;
 }
 
@@ -46,10 +46,11 @@ body {
   background-color: #D4EDDA;
   color: $success-color;
 }
+
 .mat-snack-bar-container .mat-simple-snackbar {
   @include flexbox();
 }
-.mat-simple-snackbar-action {
+ .mat-simple-snackbar-action {
   color: grey;
 }
 

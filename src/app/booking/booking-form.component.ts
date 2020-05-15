@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DateAdapter} from '@angular/material/core';
 import {Room} from '../models/room';
 import {MatDialog} from '@angular/material/dialog';
-import {PaymentComponent} from '../payment/payment.component';
+import {PaymentComponent} from './payment/payment.component';
 import {dateAvailable, hoursValid} from '../utils/validators';
 import {Booking} from '../models/booking';
 import {TIME_FORMAT} from '../utils/dates';
@@ -15,6 +15,7 @@ import {UserService} from '../services/user.service';
   selector: 'app-booking-form',
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingFormComponent implements OnInit, OnDestroy {
   @Input() room: Room;
@@ -22,6 +23,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
   price = 0;
+  invalid = true;
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               public us: UserService,
@@ -41,7 +43,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   createForm() {
     this.form = this.fb.group({
       startDate: [{value: '', disabled: true, validators: Validators.required}],
-      endDate: [{value: '', disabled: true}],
+      endDate: [{value: '', disabled: true, validators: Validators.required}],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       weekly: '',
@@ -57,6 +59,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   }
   formChangeListener() {
     this.form.valueChanges.subscribe(_ => {
+      this.invalid = this.form.invalid;
+      console.log(this.form.get('endDate'));
       if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
         this.price = this.bookingService.getPrice(booking, this.room.price);
@@ -66,10 +70,16 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   fieldsChangeListener() {
     this.form.get('weekly').valueChanges
       .subscribe(value => {
-          !value && this.form.get('weekRepetition').setValue(0);
-          value && this.form.get('endDate').setValidators([Validators.required]);
-          this.form.updateValueAndValidity();
-          console.log(this.form);
+          if (value === false) {
+            this.form.get('weekRepetition').setValue(0);
+            this.form.get('endDate').setErrors(null);
+            this.form.updateValueAndValidity();
+          }
+          for (const name in this.form.controls) {
+            if (this.form.controls[name].invalid){
+              console.log(this.form.controls[name]);
+            }
+          }
         }
       );
   }
@@ -119,9 +129,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   get endMax() {
     return this.startMax.add(1, 'week');
   }
-  get invalid() {
-    return this.form.invalid;
-  }
+
   get f() {
     return this.form.controls;
   }

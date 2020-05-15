@@ -7,7 +7,7 @@ import {UserService} from '../services/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {NotificationService} from '../services/notification.service';
+
 
 @Component({
   selector: 'app-room-list-page',
@@ -16,15 +16,13 @@ import {NotificationService} from '../services/notification.service';
 })
 export class RoomListPageComponent implements OnInit {
   rooms$: Observable<Room[]>;
-  Arr = Array;
   user$: BehaviorSubject<User>;
   form: FormGroup;
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
               private us: UserService,
-              private fb: FormBuilder,
-              private notification: NotificationService) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -40,26 +38,4 @@ export class RoomListPageComponent implements OnInit {
     });
   }
 
-  isFavorite(id: number): boolean {
-    const favorites = this.user$.value.favorites.filter(room => room.id === id);
-    return favorites.length === 1;
-  }
-
-  setFavorite(id: number) {
-    if (this.user$.value) {
-      const user = {id: this.user$.value.id, favorites: this.user$.value.favorites};
-      if (this.isFavorite(id)) {
-        user.favorites = user.favorites.filter(room => room.id !== id);
-      } else {
-        user.favorites.push({id});
-      }
-      user.favorites = user.favorites.map(room => {
-        return {id: room.id};
-      });
-      this.us.update(user).subscribe(this.user$);
-
-    } else {
-        this.notification.showError('Connectez vous pour ajouter une salle à vos favoris');
-    }
-  }
 }

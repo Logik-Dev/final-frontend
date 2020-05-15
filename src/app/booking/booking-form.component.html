@@ -1,5 +1,5 @@
 <div class="container mat-elevation-z8">
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form" ngClass.xs="xs">
   <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
   <ng-template #unauthenticated>
     <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
@@ -11,11 +11,11 @@
     <mat-datepicker #startpicker [disabled]="!(us.isLoggedIn | async)"></mat-datepicker>
   </mat-form-field>
   <mat-form-field appearance="outline" class="startTime">
-    <mat-label>Heure de début</mat-label>
+    <mat-label>Début</mat-label>
     <input type="time" matInput formControlName="startTime">
   </mat-form-field>
   <mat-form-field appearance="outline" class="endTime">
-    <mat-label>Heure de fin</mat-label>
+    <mat-label>Fin</mat-label>
     <input type="time" matInput formControlName="endTime">
   </mat-form-field>
   <mat-checkbox formControlName="weekly" class="weekly">Recurrente</mat-checkbox>

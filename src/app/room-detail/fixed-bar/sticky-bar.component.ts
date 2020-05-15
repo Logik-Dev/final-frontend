@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Room} from '../models/room';
+import {Room} from '../../models/room';
 
 @Component({
   selector: 'app-sticky-bar',

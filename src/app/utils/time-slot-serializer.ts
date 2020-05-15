@@ -13,10 +13,11 @@ export class TimeSlotSerializer implements Serializer {
   }
 
   toJson(timeSlot: TimeSlot): any {
+    console.log(timeSlot.start);
     return {
-      id: timeSlot.id,
-      start: timeSlot.start.format(DATE_TIME_FORMAT),
-      end: timeSlot.end.format(DATE_TIME_FORMAT)
+      id: timeSlot.id && timeSlot.id,
+      start: timeSlot.start && timeSlot.start.format(DATE_TIME_FORMAT),
+      end: timeSlot.end && timeSlot.end.format(DATE_TIME_FORMAT)
     };
   }
 

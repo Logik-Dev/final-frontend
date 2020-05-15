@@ -7,13 +7,13 @@
   border-radius: 3px;
   background-color: $background-secondary;
   .form-title {
-    color: $background-secondary;
     font-weight: 300;
     margin: -2rem;
     margin-bottom: 2rem;
     padding: 1.2rem;
-    background-color: $primary-color;
+    background-color: lightgrey;
     font-size: 1.7rem;
+    color: rgba(0,0,0,.8);
     @extend %border-top-radius;
   }
   .mat-form-field {
