@@ -27,7 +27,11 @@ export class UserService extends ResourceService<User> {
       tap(user => this.storedUser = user),
     );
   }
-
+  delete(id: number) {
+    return super.delete(id).pipe(
+      tap(_ => this.logout())
+    );
+  }
   login(email: string, password: string): Observable<User> {
     return this.http.post<TokenResponse>(`${this.url}/${this.endpoint}/login`, {email, password})
       .pipe(

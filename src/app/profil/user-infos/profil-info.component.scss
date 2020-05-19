@@ -1,21 +1,33 @@
+@import "../../../variables";
 .container {
-
-  form {
-    max-width: 700px;
-    padding: 40px;
-    margin: 0  auto;
+  max-width: 50rem;
+  .update-form {
+    border: 5px lightgrey solid;
+    padding: 3rem;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-column-gap: 10px;
-  }
-  form.medium {
-    grid-template-columns: 1fr 1fr;
-    .large-input {
-      grid-column: span 2;
+    grid-column-gap: 1rem;
+    &.sm {
+      grid-template-columns: 1fr 1fr;
+      .large-input {
+        grid-column: span 2;
+      }
     }
   }
-
-
+}
+.mat-raised-button {
+  margin: .5rem 0;
+}
+.container.xs {
+  padding: 0;
+}
+.dialog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+  p {
+    grid-column: span 2;
+  }
 }

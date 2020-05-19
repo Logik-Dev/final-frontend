@@ -1,5 +1,5 @@
-<div class="container">
-  <form [formGroup]="form" ngClass.gt-sm="medium" >
+<div class="container" ngClass.xs="xs">
+  <form [formGroup]="form" ngClass.gt-xs="sm" class="update-form mat-elevation-z2">
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
@@ -20,8 +20,19 @@
       <mat-label>Vérifier le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck">
     </mat-form-field>
-    <button type="submit" mat-flat-button color="primary" class="large-input">
-      Modifier
+    <button mat-flat-button color="primary" (click)="updateClick()">
+      Modifier mes infos
     </button>
+    <button mat-flat-button color="warn" (click)="deleteClick()">Supprimer mon compte</button>
+    <ng-template #confirmDialog let-data>
+      <div class="dialog">
+        <p>Etes vous sur de vouloir
+          <span *ngIf="data.update">modifier</span>
+          <span *ngIf="!data.update">supprimer</span> votre profil ?
+        </p>
+        <button mat-stroked-button (click)="data.update ? updateUser() : deleteUser()">Oui</button>
+        <button mat-stroked-button (click)="closeDialog()">Non</button>
+      </div>
+    </ng-template>
   </form>
 </div>
