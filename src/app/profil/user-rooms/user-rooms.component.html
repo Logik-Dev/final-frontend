@@ -1,5 +1,5 @@
-<div class="container mat-elevation-z8" *ngIf="(rooms$ | async)?.length">
-  <table mat-table [dataSource]="rooms$">
+<div class="container" *ngIf="(rooms$ | async)?.length">
+  <table mat-table [dataSource]="rooms$" class="mat-elevation-z8">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">

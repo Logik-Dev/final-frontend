@@ -5,6 +5,8 @@
   background-color: #333;
   padding: 1rem 0;
   height: 16rem;
+  z-index: 0;
+  position: relative;
   &.sm {
     height: 21rem;
   }
@@ -21,6 +23,7 @@
 }
 .page {
   background-color: rgba(0,0,0,.05);
+  min-height: 160vh;
 }
 .container.xs {
   padding: 0;
@@ -102,6 +105,7 @@
     font-size: 1.2em;
     font-style: italic;
     color: darkred;
+    text-decoration: none;
   }
 }
 .properties {
@@ -152,4 +156,22 @@
   border-radius: 6px;
   background-color: $primary-color;
   color: $secondary-color;
+}
+.comment {
+  margin-left: .3rem;
+  background-color: rgba(0,0,0,.1);
+  border-radius: 3px;
+  padding: 1.5rem;
+  color: #666;
+  @include flexbox(column, center, center, wrap)
+}
+
+.comment-content {
+  font-style: italic;
+  text-align: center;
+}
+
+.author {
+  margin-top: .5rem;
+  font-size: .8rem;
 }

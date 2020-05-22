@@ -1,5 +1,5 @@
 <div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
-  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false" >
+  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false">
     <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
   </mat-carousel>
 </div>
@@ -14,9 +14,9 @@
             <div class="stars">
               <mat-icon *ngFor="let start of Arr(room.rating)" class="star">star</mat-icon>
             </div>
-            <span class="comments-number">
-        {{room.comments.length ? room.comments.length : 'Aucun'}} avis
-      </span>
+            <a class="comments-number" [href]="'/salles/'+ room.id + '#comments'" title="Voir les commentaires">
+              {{room.comments.length ? room.comments.length : 'Aucun'}} avis
+            </a>
           </div>
           <h2 class="category-title">Infos</h2>
           <div class="properties">
@@ -58,7 +58,7 @@
           <h2 class="category-title">Equipements</h2>
           <div class="equipments">
             <span class="badge" *ngFor="let equipment of room.equipments">
-              {{equipment.equipment.id}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
+              {{equipment.equipment.id | titlecase}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
             </span>
           </div>
           <mat-divider></mat-divider>
@@ -77,16 +77,24 @@
               Bruyant
             </div>
           </div>
+          <mat-divider></mat-divider>
+          <h2 class="category-title">Commentaires</h2>
+          <div id="comments">
+            <div class="comment" *ngFor="let comment of room.comments">
+              <div class="comment-content">"{{comment.content}}"</div>
+              <div class="author">{{comment.author.firstname | titlecase}}
+                le {{comment.publishedOn.locale('fr').format('LL')}} :
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div *ngIf="room$ | async as room">
         <app-booking-form fxHide.lt-md [room]="room"></app-booking-form>
       </div>
-
     </div>
   </div>
 </div>
 <div *ngIf="room$ | async as room">
   <app-sticky-bar fxHide.gt-sm [room]="room"></app-sticky-bar>
 </div>
-<img src="" alt="">

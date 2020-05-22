@@ -1,0 +1,15 @@
+<form class="comment-form" *ngIf="canComment(); else cannotComment" [formGroup]="form">
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Commentaire</mat-label>
+    <textarea matInput formControlName="content"></textarea>
+  </mat-form-field>
+  <div class="field">
+    <mat-label>Note</mat-label>
+    <mat-slider min="1" max="5" step="1" value="5" formControlName="rating" thumbLabel></mat-slider>
+  </div>
+  <button mat-raised-button (click)="onSubmit(form.value)">Valider</button>
+  <button mat-raised-button (click)="cancel()">Annuler</button>
+</form>
+<ng-template #cannotComment>
+  <p>Vous pouvez commenter uniquement les réservations terminées</p>
+</ng-template>

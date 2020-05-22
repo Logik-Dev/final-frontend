@@ -21,6 +21,7 @@ import {MatHeaderRowDef, MatTableModule} from '@angular/material/table';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 const modules: any[] = [
@@ -46,6 +47,7 @@ const modules: any[] = [
   MatBadgeModule,
   MatDividerModule,
   MatListModule,
+  MatSliderModule
 ];
 @NgModule({
   declarations: [],

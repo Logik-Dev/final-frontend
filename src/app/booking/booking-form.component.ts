@@ -60,7 +60,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   formChangeListener() {
     this.form.valueChanges.subscribe(_ => {
       this.invalid = this.form.invalid;
-      console.log(this.form.get('endDate'));
       if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
         this.price = this.bookingService.getPrice(booking, this.room.price);
@@ -74,11 +73,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
             this.form.get('weekRepetition').setValue(0);
             this.form.get('endDate').setErrors(null);
             this.form.updateValueAndValidity();
-          }
-          for (const name in this.form.controls) {
-            if (this.form.controls[name].invalid){
-              console.log(this.form.controls[name]);
-            }
           }
         }
       );

@@ -42,6 +42,7 @@ import { UserRoomsComponent } from './profil/user-rooms/user-rooms.component';
 import { TestComponent } from './test/test.component';
 import {MatHeaderRow, MatHeaderRowDef, MatRowDef, MatTableModule} from '@angular/material/table';
 import { UserBookingsComponent } from './profil/user-bookings/user-bookings.component';
+import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 
 
 const routes: Routes = [
@@ -88,7 +89,8 @@ const routes: Routes = [
     RoomListComponent,
     UserRoomsComponent,
     TestComponent,
-    UserBookingsComponent
+    UserBookingsComponent,
+    CommentDialogComponent
   ],
     imports: [
         BrowserModule,

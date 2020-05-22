@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-table [dataSource]="(user$ | async)?.bookings">
+  <mat-table [dataSource]="(user$ | async)?.bookings" class="mat-elevation-z8">
     <ng-container matColumnDef="salle">
       <mat-header-cell *matHeaderCellDef> Salle </mat-header-cell>
       <mat-cell *matCellDef="let booking"> {{booking.room.name}} </mat-cell>
@@ -23,7 +23,7 @@
     <ng-container matColumnDef="commenter">
       <mat-header-cell *matHeaderCellDef> Commenter </mat-header-cell>
       <mat-cell *matCellDef="let booking">
-        <button mat-icon-button><mat-icon>comments</mat-icon></button>
+        <button mat-icon-button (click)="openDialog(booking)"><mat-icon>comments</mat-icon></button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
