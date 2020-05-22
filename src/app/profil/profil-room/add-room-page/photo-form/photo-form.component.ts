@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../../services/notification.service';
+import {UserService} from '../../../../services/user.service';
 
 @Component({
   selector: 'app-photo-form',
@@ -11,7 +12,9 @@ export class PhotoFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private notification: NotificationService) {
+  constructor(private fb: FormBuilder,
+              private notification: NotificationService,
+              public us: UserService) {
   }
 
   get photos() {

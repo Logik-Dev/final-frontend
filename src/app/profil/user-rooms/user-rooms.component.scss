@@ -1,0 +1,14 @@
+@import "../../../variables";
+
+.container {
+  border: 1rem lightgrey solid;
+  padding: 0;
+  max-width: 40rem;
+}
+.mat-table {
+  width: 100%;
+}
+
+.delete-icon {
+  color: red;
+}

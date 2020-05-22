@@ -1,0 +1,32 @@
+<div class="container">
+  <mat-table [dataSource]="(user$ | async)?.bookings">
+    <ng-container matColumnDef="salle">
+      <mat-header-cell *matHeaderCellDef> Salle </mat-header-cell>
+      <mat-cell *matCellDef="let booking"> {{booking.room.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="commence le">
+      <mat-header-cell *matHeaderCellDef> Commence le </mat-header-cell>
+      <mat-cell *matCellDef="let booking"> {{getFirstDate(booking.slots)}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="termine le">
+      <mat-header-cell *matHeaderCellDef> Termine le </mat-header-cell>
+      <mat-cell *matCellDef="let booking"> {{getLastDate(booking.slots)}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="heure de début">
+      <mat-header-cell *matHeaderCellDef> Heure de début </mat-header-cell>
+      <mat-cell *matCellDef="let booking"> {{getStartHour(booking.slots)}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="heure de fin">
+      <mat-header-cell *matHeaderCellDef> Heure de fin </mat-header-cell>
+      <mat-cell *matCellDef="let booking"> {{getEndHour(booking.slots)}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="commenter">
+      <mat-header-cell *matHeaderCellDef> Commenter </mat-header-cell>
+      <mat-cell *matCellDef="let booking">
+        <button mat-icon-button><mat-icon>comments</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

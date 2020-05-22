@@ -17,7 +17,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRippleModule} from '@angular/material/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatTableModule} from '@angular/material/table';
+import {MatHeaderRowDef, MatTableModule} from '@angular/material/table';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
@@ -45,7 +45,7 @@ const modules: any[] = [
   MatTableModule,
   MatBadgeModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
 ];
 @NgModule({
   declarations: [],

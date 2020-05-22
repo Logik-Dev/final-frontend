@@ -35,12 +35,17 @@ import { RoomComponent } from './room-detail/room.component';
 import { StickyBarComponent } from './room-detail/fixed-bar/sticky-bar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import { ProfilFavoriteComponent } from './profil/favorites/profil-favorite.component';
+import { ProfilFavoriteComponent } from './profil/user-favorites/profil-favorite.component';
 import { RoomCardComponent } from './rooms/room-card/room-card.component';
 import { RoomListComponent } from './rooms/room-list/room-list.component';
+import { UserRoomsComponent } from './profil/user-rooms/user-rooms.component';
+import { TestComponent } from './test/test.component';
+import {MatHeaderRow, MatHeaderRowDef, MatRowDef, MatTableModule} from '@angular/material/table';
+import { UserBookingsComponent } from './profil/user-bookings/user-bookings.component';
 
 
 const routes: Routes = [
+  {path: 'test', component: TestComponent},
   {path: '', component: HomePageComponent},
   {path: 'connexion', component: LoginPageComponent},
   {path: 'salles', component: RoomListPageComponent},
@@ -50,7 +55,9 @@ const routes: Routes = [
   {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService], children: [
       {path: '', redirectTo: 'infos', pathMatch: 'full'},
       {path: 'infos', component: ProfilInfoComponent},
-      {path: 'favoris', component: ProfilFavoriteComponent}
+      {path: 'favoris', component: ProfilFavoriteComponent},
+      {path: 'salles', component: UserRoomsComponent},
+      {path: 'réservations', component: UserBookingsComponent}
     ]}
 ];
 
@@ -78,7 +85,10 @@ const routes: Routes = [
     SidenavComponent,
     ProfilFavoriteComponent,
     RoomCardComponent,
-    RoomListComponent
+    RoomListComponent,
+    UserRoomsComponent,
+    TestComponent,
+    UserBookingsComponent
   ],
     imports: [
         BrowserModule,
@@ -92,6 +102,7 @@ const routes: Routes = [
         ExtendedModule,
         GridModule,
         CdkAccordionModule,
+        MatTableModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true},

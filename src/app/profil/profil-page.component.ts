@@ -12,7 +12,9 @@ export class ProfilPageComponent implements OnInit {
   user$: Observable<User>;
   navLinks = [
     {path: '/profil/infos', label: 'Infos'},
-    {path: '/profil/favoris', label: 'Favoris'}
+    {path: '/profil/favoris', label: 'Favoris'},
+    {path: '/profil/salles', label: 'Mes salles'},
+    {path: '/profil/réservations', label: 'Mes réservations'}
   ];
   constructor(private us: UserService) { }
 

@@ -26,9 +26,9 @@ export class ResourceService<T extends Resource> {
                 );
               }
 
-              public findByChildId(id: number): Observable<T> {
+              public findByChildId(id: number): Observable<T[]> {
                 return this.http.get(`${this.url}/${this.endpoint}/${this.childEndpoint}/${id}`).pipe(
-                  map(data => this.serializer.fromJson(data) as T)
+                  map(data => this.convert(data))
                 );
               }
               public findAll(options?: any): Observable<T[]> {

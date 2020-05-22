@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-vertical-stepper  *ngIf="mobile">
+  <mat-vertical-stepper  *ngIf="mobile" linear>
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
@@ -20,7 +20,7 @@
       </div>
     </mat-step>
   </mat-vertical-stepper>
-  <mat-horizontal-stepper *ngIf="!mobile" >
+  <mat-horizontal-stepper *ngIf="!mobile" linear>
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>

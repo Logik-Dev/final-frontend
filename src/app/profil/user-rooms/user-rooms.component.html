@@ -1,0 +1,57 @@
+<div class="container mat-elevation-z8" *ngIf="(rooms$ | async)?.length">
+  <table mat-table [dataSource]="rooms$">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let room"> {{room.name}} </td>
+    </ng-container>
+
+    <!-- City Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Ville </th>
+      <td mat-cell *matCellDef="let room"> {{room.address.city}} </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Prix </th>
+      <td mat-cell *matCellDef="let room"> {{room.price}} </td>
+    </ng-container>
+
+    <!-- Size   -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef> Taille </th>
+      <td mat-cell *matCellDef="let room"> {{room.size}} </td>
+    </ng-container>
+
+    <!-- Bookings -->
+    <ng-container matColumnDef="bookings">
+      <th mat-header-cell *matHeaderCellDef> Réservations </th>
+      <td mat-cell *matCellDef="let room"> {{room.bookings.length}} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container  matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Edition </th>
+      <td mat-cell *matCellDef="let room">
+        <button mat-icon-button>
+          <mat-icon class="update-icon">edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onClickDelete(room.id)">
+          <mat-icon class="delete-icon">delete</mat-icon>
+        </button>
+        <ng-template #confirmDialog let-data>
+          <div class="dialog">
+            <p>Etes vous sûr de vouloir supprimer cette salle ?</p>
+            <button mat-raised-button (click)="deleteRoom(data)">Oui</button>
+            <button mat-raised-button (click)="closeDialog()">Non</button>
+          </div>
+        </ng-template>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let room; columns: displayedColumns"></tr>
+  </table>
+
+</div>

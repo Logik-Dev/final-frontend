@@ -1,8 +1,6 @@
 .container {
-  max-width: 970px;
+  max-width:70rem;
   margin: 0 auto;
-  overflow: hidden;
-  min-height: 50vh;
   ::ng-deep.mat-tab-body-wrapper {
     margin-top: 20px;
     min-height: 50vh;
@@ -10,10 +8,11 @@
 
 }
 .mat-tab-nav-bar {
-  margin-top: -1rem;
+  margin-top: 1rem;
   margin-bottom: 2rem;
   border-radius: 3px;
   background-color: #FAFAFA;
+  padding-top: .5rem;
 }
 .mat-tab-link {
   color: black;
