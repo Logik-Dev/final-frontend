@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   API_URL: 'http://localhost:8080/api',
-  COMMISSION: 6
+  COMMISSION: 6,
+  TVA: 20,
 };
 
 /*

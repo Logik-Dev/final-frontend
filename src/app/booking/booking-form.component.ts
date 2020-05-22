@@ -10,6 +10,7 @@ import {Booking} from '../models/booking';
 import {TIME_FORMAT} from '../utils/dates';
 import {BookingService} from '../services/booking.service';
 import {UserService} from '../services/user.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-booking-form',
@@ -22,7 +23,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   @Output() closeDialog = new EventEmitter();
   form: FormGroup;
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
-  price = 0;
+  duration = 0;
   invalid = true;
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
@@ -60,9 +61,10 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   formChangeListener() {
     this.form.valueChanges.subscribe(_ => {
       this.invalid = this.form.invalid;
+      this.duration = 0;
       if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
-        this.price = this.bookingService.getPrice(booking, this.room.price);
+        this.duration = this.bookingService.getTotalHours(booking, this.room.price);
       }
     });
   }
@@ -99,7 +101,9 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     const finish = moment(data.endTime, TIME_FORMAT);
     const weekly = data.weekRepetition;
     const slots = BookingService.getSlots(start, end, begin, finish, weekly);
-    return {slots, client: {id: this.us.userId}, price: this.price, room: {id: this.room.id}};
+
+    const price = BookingService.calculateTotalPrice(this.duration, this.room.price);
+    return {slots, client: {id: this.us.userId}, price , room: {id: this.room.id}};
   }
   openDialog() {
     this.dialog.open(PaymentComponent, {
@@ -122,6 +126,25 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   }
   get endMax() {
     return this.startMax.add(1, 'week');
+  }
+  get commission() {
+    return ((this.room.price * this.duration) / 100 * this.COMMISSION).toFixed(2);
+  }
+
+  get tva() {
+    const result = (this.room.price * this.duration) + parseFloat(this.commission);
+    console.log(this.TVA);
+    console.log(result);
+    return (result / 100 * this.TVA).toFixed(2);
+  }
+  get total() {
+    return ((this.room.price * this.duration) + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(2);
+  }
+  get COMMISSION(): number {
+    return environment.COMMISSION;
+  }
+  get TVA(): number {
+    return environment.TVA;
   }
 
   get f() {

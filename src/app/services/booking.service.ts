@@ -20,6 +20,12 @@ export class BookingService extends ResourceService<Booking> {
       new BookingSerializer()
     );
   }
+  static calculateTotalPrice(hours: number, price: number): number {
+    let result = hours * price;
+    result += result / 100 * environment.COMMISSION;
+    result += result / 100 * environment.TVA;
+    return parseFloat(result.toFixed(2));
+  }
 
   static concatDateTime(start, end): Moment {
     return moment(start.format(DATE_FORMAT) + ' ' + end.format(TIME_FORMAT), DATE_TIME_FORMAT).locale('fr');
@@ -48,11 +54,10 @@ export class BookingService extends ResourceService<Booking> {
     return slots;
   }
 
-  getPrice(booking: Booking, roomPrice: number): number {
+  getTotalHours(booking: Booking, roomPrice: number): number {
     const hours = moment.duration(booking.slots[0].end.diff(booking.slots[0].start)).asHours();
-    let total = hours * roomPrice * booking.slots.length;
-    total += total / environment.COMMISSION;
-    return parseFloat(total.toFixed(1));
+    return hours * booking.slots.length;
+
   }
 
 }

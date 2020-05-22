@@ -1,6 +1,10 @@
 <div class="container mat-elevation-z8">
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form" ngClass.xs="xs">
   <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
+  <mat-error *ngIf="form.errors" class="errors">
+    <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
+    <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
+  </mat-error>
   <ng-template #unauthenticated>
     <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
   </ng-template>
@@ -31,14 +35,34 @@
     <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
     <mat-datepicker #endpicker [startAt]="endMin" disabled="false"></mat-datepicker>
   </mat-form-field>
-  <mat-error *ngIf="form.errors" class="errors">
-    <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
-    <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
-  </mat-error>
-  <button mat-flat-button color="primary" [disabled]="invalid || !(us.isLoggedIn | async)" type="submit">
+
+  <div class="price" *ngIf="duration">
+    <div class="price-row">
+      <div class="price-label">Tarif</div>
+      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price.toFixed(2)}}</div>
+      <mat-icon>euros</mat-icon>
+    </div>
+    <div class="price-row">
+      <div class="price-label">Commission ({{COMMISSION}}%)</div>
+      <div class="price-value">{{commission}}</div>
+      <mat-icon>euros</mat-icon>
+    </div>
+    <div class="price-row">
+      <div class="price-label">TVA ({{TVA}}%)</div>
+      <div class="price-value">{{tva}}</div>
+      <mat-icon>euros</mat-icon>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="price-row">
+      <div class="price-label">Total</div>
+      <div class="price-value">{{total}}</div>
+      <mat-icon>euros</mat-icon>
+    </div>
+  </div>
+  <button mat-flat-button color="primary" [disabled]="invalid || !(us.isLoggedIn | async)" type="submit" class="btn-pay">
     <span class="payer">Payer</span>
-    <span class="price" *ngIf="price">{{price}}</span>
-    <mat-icon *ngIf="price">euros</mat-icon>
+
   </button>
+
 </form>
 </div>
