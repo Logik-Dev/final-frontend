@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RoomTypeService} from '../services/room-type.service';
+import {Observable} from 'rxjs';
+import {RoomType} from '../models/room-type';
+import {Volume} from '../models/volume';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {PriceDialogComponent} from '../price-dialog/price-dialog.component';
+
+@Component({
+  selector: 'app-room-infos-form',
+  templateUrl: './room-infos-form.component.html',
+  styleUrls: ['./room-infos-form.component.scss']
+})
+export class RoomInfosFormComponent implements OnInit {
+  form: FormGroup;
+  volumes = Object.keys(Volume);
+  roomTypes$: Observable<RoomType[]>;
+
+  constructor(private fb: FormBuilder,
+              private roomTypeService: RoomTypeService,
+              private dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.roomTypes$ = this.roomTypeService.findAll();
+    this.createForm();
+  }
+
+  createForm() {
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      maxCapacity: ['', Validators.required],
+      size: ['', Validators.required],
+      type: ['', Validators.required],
+      maxVolume: ['', Validators.required],
+      price: [0, Validators.required]
+    });
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
+  openPriceDialog() {
+    const dialogRef = this.dialog.open(PriceDialogComponent);
+    dialogRef.afterClosed().subscribe(
+      value => {
+        this.form.controls.price.setValue(value);
+      }
+    );
+  }
+
+}

@@ -3,14 +3,14 @@
   text-align: center;
   max-width: 40rem;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 2rem 3rem;
   border-radius: 3px;
   background-color: $background-secondary;
   .form-title {
     font-weight: 300;
-    margin: -2rem;
-    margin-bottom: 2rem;
-    padding: 1.2rem;
+    margin: -2rem -3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
     background-color: lightgrey;
     font-size: 1.7rem;
     color: rgba(0,0,0,.8);
@@ -19,6 +19,9 @@
   .mat-form-field {
     display: block;
     width: 100%;
+    .mat-icon {
+      color: $primary-color;
+    }
   }
   .btn-submit {
     padding: .4rem 0;

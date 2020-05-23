@@ -4,16 +4,19 @@
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
+      <mat-icon matSuffix>face</mat-icon>
       <mat-error *ngIf="f.firstname.errors">Un prénom est requis</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastname">
+      <mat-icon matSuffix>person</mat-icon>
       <mat-error *ngIf="f.lastname.errors">Un nom est requis</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="email">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email">
+      <mat-icon matSuffix>mail</mat-icon>
       <mat-error *ngIf="f.email.errors && f.email.errors.emailExists">Cette adresse est déjà utilisée</mat-error>
       <mat-error *ngIf="f.email.errors && f.email.errors.required">Une adresse mail est requise</mat-error>
       <mat-error *ngIf="f.email.errors && f.email.errors.email">L'adresse mail est invalide</mat-error>
@@ -21,12 +24,14 @@
     <mat-form-field appearance="outline">
       <mat-label>Mot de passe</mat-label>
       <input type="password" matInput formControlName="password">
+      <mat-icon matSuffix>lock</mat-icon>
       <mat-error *ngIf="f.password.errors && f.password.errors.required">Un mot de passe est requis</mat-error>
       <mat-error *ngIf="f.password.errors && f.password.errors.minlength">8 caractères minimum</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Confirmez le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck">
+      <mat-icon matSuffix>lock</mat-icon>
       <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.required">Un mot de passe est requis</mat-error>
       <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.minlength">8 caractères minimum</mat-error>
       <mat-error *ngIf="f.passwordCheck.errors && f.passwordCheck.errors.mustMatch">Le mot de passe est différent</mat-error>

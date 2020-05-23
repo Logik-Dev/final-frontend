@@ -1,0 +1,32 @@
+<div class="container">
+  <mat-form-field>
+    <mat-label>Saisir le tarif souhaité</mat-label>
+    <input type="number" matInput [formControl]="price">
+  </mat-form-field>
+    <div class="price" *ngIf="price.value">
+      <div class="price-row">
+        <div class="price-label">Tarif</div>
+        <div class="price-value">{{price.value}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+      <div class="price-row">
+        <div class="price-label">Commission ({{COMMISSION}}%)</div>
+        <div class="price-value">{{commission}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+      <div class="price-row">
+        <div class="price-label">TVA ({{TVA}}%)</div>
+        <div class="price-value">{{tva}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="price-row">
+        <div class="price-label">Total TTC</div>
+        <div class="price-value">{{total}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+    </div>
+
+  <button mat-raised-button (click)="onSubmit()">Valider</button>
+</div>
+

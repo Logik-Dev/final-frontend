@@ -16,7 +16,7 @@ export class RoomCardComponent implements OnInit {
   Arr = Array;
   @Input() room: Room;
 
-  constructor(private us: UserService) {
+  constructor(private us: UserService, private notification: NotificationService) {
   }
 
 
@@ -26,14 +26,19 @@ export class RoomCardComponent implements OnInit {
   }
 
   isFavorite(): boolean {
-    const favorites = this.user$.value.favorites.filter(room => room.id === this.room.id);
-    return favorites.length === 1;
+    if (this.user$.value) {
+      const favorites = this.user$.value.favorites.filter(room => room.id === this.room.id);
+      return favorites.length === 1;
+    }
+
   }
 
   setFavorite() {
     if (this.user$.value) {
       this.favorite = !this.favorite;
       this.us.favorites({id: this.room.id}).subscribe();
+    } else {
+      this.notification.showError('Connectez vous pour ajouter cette salle à vos favoris')
     }
 
   }

@@ -1,0 +1,47 @@
+<form [formGroup]="form" class="form">
+
+  <!--  Nom  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de la salle</mat-label>
+    <input type="text" matInput formControlName="name">
+  </mat-form-field>
+
+  <!--  Capacité  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Capacité Max</mat-label>
+    <input type="number" matInput formControlName="maxCapacity">
+  </mat-form-field>
+
+  <!--  Taille  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Taille</mat-label>
+    <input type="number" matInput formControlName="size">
+  </mat-form-field>
+
+  <!--  Type  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let type of roomTypes$ | async" [value]="type">
+        {{type.id}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!--  Volume -->
+  <mat-form-field appearance="outline">
+    <mat-label>Ambiance sonore</mat-label>
+    <mat-select formControlName="maxVolume">
+      <mat-option *ngFor="let volume of volumes" [value]="volume">
+        {{volume | titlecase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!--  Prix  -->
+  <mat-form-field appearance="outline" (click)="openPriceDialog()">
+    <mat-label>Prix</mat-label>
+    <input type="number" matInput formControlName="price">
+  </mat-form-field>
+  <button mat-raised-button matStepperNext (click)="onSubmit()">Suivant</button>
+</form>

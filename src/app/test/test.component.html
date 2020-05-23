@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-select [compareWith]="compareFn" formControlName="type">
+      <mat-option *ngFor="let type of types" [value]="type">{{type.libelle}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button type="submit">Submit</button>
+</form>

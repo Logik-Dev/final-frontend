@@ -1,12 +1,12 @@
 <div class="container">
-  <mat-vertical-stepper  *ngIf="mobile" linear>
+  <mat-vertical-stepper  *ngIf="mobile" >
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
     </mat-step>
-    <mat-step [stepControl]="roomForm">
+    <mat-step [stepControl]="roomInfosForm">
       <ng-template matStepLabel>Informations</ng-template>
-      <app-room-form></app-room-form>
+      <app-room-infos-form></app-room-infos-form>
     </mat-step>
     <mat-step [stepControl]="addressForm">
       <ng-template matStepLabel>Adresse</ng-template>
@@ -20,14 +20,14 @@
       </div>
     </mat-step>
   </mat-vertical-stepper>
-  <mat-horizontal-stepper *ngIf="!mobile" linear>
+  <mat-horizontal-stepper *ngIf="!mobile" >
     <mat-step [stepControl]="photoForm">
       <ng-template matStepLabel>Photos</ng-template>
       <app-photo-form></app-photo-form>
     </mat-step>
-    <mat-step [stepControl]="roomForm">
+    <mat-step [stepControl]="roomInfosForm">
       <ng-template matStepLabel>Informations</ng-template>
-      <app-room-form></app-room-form>
+      <app-room-infos-form></app-room-infos-form>
     </mat-step>
     <mat-step [stepControl]="addressForm">
       <ng-template matStepLabel>Adresse</ng-template>

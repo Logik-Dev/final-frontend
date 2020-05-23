@@ -17,6 +17,7 @@ import {Router} from '@angular/router';
 import {Address} from '../../../models/address';
 import {UploadService} from '../../../services/upload.service';
 import {UserService} from '../../../services/user.service';
+import {RoomInfosFormComponent} from '../../../room-infos-form/room-infos-form.component';
 
 
 @Component({
@@ -26,10 +27,10 @@ import {UserService} from '../../../services/user.service';
 })
 export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   @ViewChild(PhotoFormComponent) photoFormComponent: PhotoFormComponent;
-  @ViewChild(RoomFormComponent) roomFormComponent: RoomFormComponent;
+  @ViewChild(RoomInfosFormComponent) roomInfosFormComponent: RoomInfosFormComponent;
   @ViewChild(AddressFormComponent) addressFormComponent: AddressFormComponent;
   photoForm: FormGroup;
-  roomForm: FormGroup;
+  roomInfosForm: FormGroup;
   addressForm: FormGroup;
   mobile = true;
 
@@ -48,7 +49,7 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked(): void {
     this.cd.detectChanges();
     this.photoForm = this.photoFormComponent.form;
-    this.roomForm = this.roomFormComponent.form;
+    this.roomInfosForm = this.roomInfosFormComponent.form;
     this.addressForm = this.addressFormComponent.form;
 
   }
@@ -57,7 +58,7 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
     const address: Address = this.addressForm.value;
     address.label = this.addressForm.get('label').value.properties.name;
     address.city = this.addressForm.get('city').value.nom;
-    const room: Room = this.roomForm.value;
+    const room: Room = this.roomInfosForm.value;
     room.address = address;
     room.owner = {id: this.us.userId};
     const photos: File[] = [];
