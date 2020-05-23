@@ -8,6 +8,7 @@ import {delay, switchMap, tap} from 'rxjs/operators';
 import {TokenResponse} from '../models/token-response';
 import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+import {Room} from '../models/room';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,12 @@ export class UserService extends ResourceService<User> {
       tap(user => this.storedUser = user),
     );
   }
+
+  favorites(room: Room): Observable<User> {
+    return this.http.put<Room>(`${this.url}/${this.endpoint}/favorites`, room)
+      .pipe(tap(user => this.storedUser = user));
+  }
+
   delete(id: number) {
     return super.delete(id).pipe(
       tap(_ => this.logout())
@@ -71,6 +78,7 @@ export class UserService extends ResourceService<User> {
 
   set storedUser(user: User) {
     sessionStorage.setItem('user', JSON.stringify(user));
+    this.currentUser.next(user);
   }
 
   get isLoggedIn(): BehaviorSubject<boolean> {

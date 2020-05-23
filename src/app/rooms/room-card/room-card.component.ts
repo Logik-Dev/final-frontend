@@ -1,46 +1,39 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Room} from '../../models/room';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {filter, flatMap, map, mergeAll} from 'rxjs/operators';
 import {NotificationService} from '../../services/notification.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-room-card',
   templateUrl: './room-card.component.html',
-  styleUrls: ['./room-card.component.scss']
+  styleUrls: ['./room-card.component.scss'],
 })
 export class RoomCardComponent implements OnInit {
-  user: User;
+  user$: BehaviorSubject<User>;
+  favorite: boolean;
   Arr = Array;
   @Input() room: Room;
-  constructor(private us: UserService, private notification: NotificationService) {}
+
+  constructor(private us: UserService) {
+  }
+
 
   ngOnInit(): void {
-    this.user = this.us.currentUser.value;
+    this.user$ = this.us.currentUser;
+    this.favorite = this.isFavorite();
   }
 
-  isFavorite(id: number): boolean {
-    if (this.user) {
-      const favorite = this.user.favorites.filter(room => room.id === id);
-      return favorite.length === 1;
-    }
-
+  isFavorite(): boolean {
+    const favorites = this.user$.value.favorites.filter(room => room.id === this.room.id);
+    return favorites.length === 1;
   }
 
-  setFavorite(id: number) {
-    if (this.user) {
-      const userToUpdate = {id: this.user.id, favorites: this.user.favorites};
-      if (this.isFavorite(id)) {
-        userToUpdate.favorites = userToUpdate.favorites.filter(room => room.id !== id);
-      } else {
-        userToUpdate.favorites.push({id});
-      }
-      userToUpdate.favorites = userToUpdate.favorites.map(room => {
-        return {id: room.id};
-      });
-      this.us.update(userToUpdate).subscribe(user => this.user = user);
+  setFavorite() {
+    if (this.user$.value) {
+      this.favorite = !this.favorite;
+      this.us.favorites({id: this.room.id}).subscribe();
     }
 
   }

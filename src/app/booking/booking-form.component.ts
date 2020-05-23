@@ -133,8 +133,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
   get tva() {
     const result = (this.room.price * this.duration) + parseFloat(this.commission);
-    console.log(this.TVA);
-    console.log(result);
     return (result / 100 * this.TVA).toFixed(2);
   }
   get total() {
