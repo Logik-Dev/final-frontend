@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {environment} from '../../environments/environment';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-price-dialog',
@@ -10,9 +10,11 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class PriceDialogComponent implements OnInit {
   price = new FormControl(0);
-  constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>) { }
+  constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.data.price && this.price.setValue(this.data.price);
   }
 
   onSubmit() {

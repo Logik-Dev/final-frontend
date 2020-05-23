@@ -44,6 +44,7 @@ export class RoomInfosFormComponent implements OnInit {
   }
   openPriceDialog() {
     const dialogRef = this.dialog.open(PriceDialogComponent, {
+      data: {price: this.form.controls.price.value},
       width: '20rem',
       panelClass: 'dialog-form'
     });
