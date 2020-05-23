@@ -1,0 +1,26 @@
+<div class="title">Ajouter des équipements</div>
+<div class="dialog-container">
+  <div class="equipment-field" *ngFor="let control of formArray.controls; index as i" ngClass.xs="xs">
+    <mat-form-field class="equipment">
+      <mat-label>Equipement</mat-label>
+      <mat-select [formControl]="control.controls.id" [compareWith]="compareFn">
+        <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment">
+          {{equipment.id}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="quantity">
+      <mat-label>Quantité</mat-label>
+      <input type="number" matInput [formControl]="control.controls.quantity">
+    </mat-form-field>
+    <div class="btn-container">
+      <button mat-icon-button (click)="addEquipment()" class="btn-add">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button (click)="removeEquipment(i)" class="btn-delete" >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <button mat-raised-button (click)="onSubmit()" color="primary">Valider</button>
+</div>

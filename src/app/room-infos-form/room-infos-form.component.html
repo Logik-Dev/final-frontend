@@ -43,5 +43,16 @@
     <mat-label>Prix</mat-label>
     <input type="number" matInput formControlName="price">
   </mat-form-field>
+
+  <!--  Equipements -->
+  <button mat-stroked-button (click)="openEquipmentDialog()">
+    <mat-icon>add</mat-icon>
+    <span>Ajouter des équipements</span>
+  </button>
+  <div class="equipments">
+    <div *ngFor="let control of equipments.controls">
+      <span>{{control}}</span>
+    </div>
+  </div>
   <button mat-raised-button matStepperNext (click)="onSubmit()">Suivant</button>
 </form>

@@ -125,3 +125,20 @@ ul {
   text-align: left;
   font-weight: 400;
 }
+
+.dialog-form .mat-dialog-container {
+  padding: 0;
+  .title {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color:  #2C8A92;
+    color: #FAFAFA;
+    padding: 1rem;
+  }
+  .dialog-container {
+    display: grid;
+    padding: 2rem;
+    grid-row-gap: 1rem;
+  }
+}

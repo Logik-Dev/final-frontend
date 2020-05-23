@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomTypeService} from '../services/room-type.service';
 import {Observable} from 'rxjs';
 import {RoomType} from '../models/room-type';
 import {Volume} from '../models/volume';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {PriceDialogComponent} from '../price-dialog/price-dialog.component';
+import {EquipmentDialogComponent} from '../equipment-dialog/equipment-dialog.component';
 
 @Component({
   selector: 'app-room-infos-form',
@@ -33,7 +34,8 @@ export class RoomInfosFormComponent implements OnInit {
       size: ['', Validators.required],
       type: ['', Validators.required],
       maxVolume: ['', Validators.required],
-      price: [0, Validators.required]
+      price: [0, Validators.required],
+      equipments: [this.fb.array([])]
     });
   }
 
@@ -41,7 +43,10 @@ export class RoomInfosFormComponent implements OnInit {
     console.log(this.form.value);
   }
   openPriceDialog() {
-    const dialogRef = this.dialog.open(PriceDialogComponent);
+    const dialogRef = this.dialog.open(PriceDialogComponent, {
+      width: '20rem',
+      panelClass: 'dialog-form'
+    });
     dialogRef.afterClosed().subscribe(
       value => {
         this.form.controls.price.setValue(value);
@@ -49,4 +54,16 @@ export class RoomInfosFormComponent implements OnInit {
     );
   }
 
+  openEquipmentDialog() {
+    const dialogRef = this.dialog.open(EquipmentDialogComponent, {
+      data: {equipments: this.equipments},
+      panelClass: 'dialog-form'
+    });
+    dialogRef.afterClosed().subscribe(
+      value => this.form.controls.equipments.setValue(value)
+    );
+  }
+  get equipments() {
+    return this.form.get('equipments') as FormArray;
+  }
 }

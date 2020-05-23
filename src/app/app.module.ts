@@ -45,6 +45,7 @@ import { UserBookingsComponent } from './profil/user-bookings/user-bookings.comp
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 import { RoomInfosFormComponent } from './room-infos-form/room-infos-form.component';
 import { PriceDialogComponent } from './price-dialog/price-dialog.component';
+import { EquipmentDialogComponent } from './equipment-dialog/equipment-dialog.component';
 
 
 const routes: Routes = [
@@ -94,7 +95,8 @@ const routes: Routes = [
     UserBookingsComponent,
     CommentDialogComponent,
     RoomInfosFormComponent,
-    PriceDialogComponent
+    PriceDialogComponent,
+    EquipmentDialogComponent
   ],
     imports: [
         BrowserModule,
