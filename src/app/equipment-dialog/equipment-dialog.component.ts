@@ -33,12 +33,13 @@ export class EquipmentDialogComponent implements OnInit {
   }
   initEquipment() {
     const equipments = this.data.equipments.value;
-    if (equipments.length) {
+    if (equipments && equipments.length) {
       equipments.forEach(e =>
         this.formArray.push(this.createEquipmentForm(e)));
     } else {
       this.formArray.push(this.createEquipmentForm());
     }
+    console.log('init equipment', this.formArray);
   }
 
   addEquipment() {
@@ -53,6 +54,6 @@ export class EquipmentDialogComponent implements OnInit {
     this.matDialogRef.close(this.formArray.value.filter(equipment => equipment.id));
   }
   compareFn(e1: any, e2: any) {
-    return e1.id === e2.id;
+    return e1 === e2;
   }
 }

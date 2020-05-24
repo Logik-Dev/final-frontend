@@ -7,6 +7,7 @@ import {Volume} from '../models/volume';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {PriceDialogComponent} from '../price-dialog/price-dialog.component';
 import {EquipmentDialogComponent} from '../equipment-dialog/equipment-dialog.component';
+import {EventTypeDialogComponent} from '../event-type-dialog/event-type-dialog.component';
 
 @Component({
   selector: 'app-room-infos-form',
@@ -35,7 +36,8 @@ export class RoomInfosFormComponent implements OnInit {
       type: ['', Validators.required],
       maxVolume: ['', Validators.required],
       price: [0, Validators.required],
-      equipments: [this.fb.array([])]
+      equipments: [this.fb.array([])],
+      eventTypes: [this.fb.array([])]
     });
   }
 
@@ -64,7 +66,22 @@ export class RoomInfosFormComponent implements OnInit {
       value => this.form.controls.equipments.setValue(value)
     );
   }
+
+  openEventTypeDialog() {
+    const dialogRef = this.dialog.open(EventTypeDialogComponent, {
+      data: {eventTypes: this.eventTypes},
+      panelClass: 'dialog-form'
+    });
+    dialogRef.afterClosed().subscribe(
+      value => this.form.controls.eventTypes.setValue(value)
+    );
+  }
+
   get equipments() {
     return this.form.get('equipments') as FormArray;
+  }
+
+  get eventTypes() {
+    return this.form.get('eventTypes') as FormArray;
   }
 }

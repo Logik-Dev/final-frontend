@@ -1,21 +1,24 @@
-<form [formGroup]="form" class="form">
-
+<form [formGroup]="form" class="infos-form">
+  <h2 class="category-title">Informations</h2>
   <!--  Nom  -->
   <mat-form-field appearance="outline">
     <mat-label>Nom de la salle</mat-label>
     <input type="text" matInput formControlName="name">
+    <mat-icon matSuffix>domain</mat-icon>
   </mat-form-field>
 
   <!--  Capacité  -->
   <mat-form-field appearance="outline">
     <mat-label>Capacité Max</mat-label>
     <input type="number" matInput formControlName="maxCapacity">
+    <mat-icon matSuffix>people</mat-icon>
   </mat-form-field>
 
   <!--  Taille  -->
   <mat-form-field appearance="outline">
     <mat-label>Taille</mat-label>
     <input type="number" matInput formControlName="size">
+    <mat-icon matSuffix>aspect_ration</mat-icon>
   </mat-form-field>
 
   <!--  Type  -->
@@ -26,6 +29,7 @@
         {{type.id}}
       </mat-option>
     </mat-select>
+    <mat-icon matSuffix>category</mat-icon>
   </mat-form-field>
 
   <!--  Volume -->
@@ -36,23 +40,53 @@
         {{volume | titlecase}}
       </mat-option>
     </mat-select>
+    <mat-icon matSuffix>volume_up</mat-icon>
   </mat-form-field>
 
   <!--  Prix  -->
   <mat-form-field appearance="outline" (click)="openPriceDialog()">
     <mat-label>Prix</mat-label>
     <input type="number" matInput formControlName="price">
+    <mat-icon matSuffix>euros</mat-icon>
   </mat-form-field>
 
   <!--  Equipements -->
+  <h2 class="category-title">Equipements</h2>
   <button mat-stroked-button (click)="openEquipmentDialog()">
     <mat-icon>add</mat-icon>
-    <span>Ajouter des équipements</span>
+    <span>Choisir</span>
   </button>
-  <div class="equipments">
-    <div *ngFor="let control of equipments.controls">
-      <span>{{control}}</span>
+  <button mat-stroked-button>
+    <mat-icon>add</mat-icon>
+    <span>Personnalisé</span>
+  </button>
+  <div class="equipments" *ngIf="equipments.value && equipments.value.length; else emptyEquipments">
+    <div *ngFor="let elem of equipments.value" class="badge">
+      <span>{{elem.id}}({{elem.quantity}})</span>
     </div>
   </div>
-  <button mat-raised-button matStepperNext (click)="onSubmit()">Suivant</button>
+  <ng-template #emptyEquipments>
+    <p class="empty-selection">Aucun équipement sélectionné</p>
+  </ng-template>
+
+  <!--  Evenements -->
+  <h2 class="category-title">Type d'évenements</h2>
+  <button mat-stroked-button (click)="openEventTypeDialog()" class="btn-event">
+    <mat-icon>add</mat-icon>
+    <span>Choisir</span>
+  </button>
+  <div class="events" *ngIf="eventTypes.value && eventTypes.value.length; else emptyEvents">
+    <div class="badge" *ngFor="let elem of eventTypes.value">
+      <span>{{elem.id}}</span>
+    </div>
+  </div>
+  <ng-template #emptyEvents>
+    <p class="empty-selection">Aucun évenement sélectionné</p>
+  </ng-template>
+
+  <div class="step">
+    <button mat-raised-button matStepperPrevious class="back-button">Précédent</button>
+    <button mat-raised-button matStepperNext (click)="onSubmit()" class="next-button">Suivant</button>
+  </div>
+
 </form>

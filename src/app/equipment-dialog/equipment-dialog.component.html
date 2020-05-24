@@ -4,7 +4,7 @@
     <mat-form-field class="equipment">
       <mat-label>Equipement</mat-label>
       <mat-select [formControl]="control.controls.id" [compareWith]="compareFn">
-        <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment">
+        <mat-option *ngFor="let equipment of equipments$ | async" [value]="equipment.id">
           {{equipment.id}}
         </mat-option>
       </mat-select>

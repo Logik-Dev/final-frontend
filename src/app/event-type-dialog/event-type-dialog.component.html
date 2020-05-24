@@ -1,0 +1,18 @@
+<div class="title">Types d'évenements</div>
+<div class="dialog-container">
+    <div class="event" *ngFor="let c of formArray.controls; index as i">
+      <mat-form-field>
+        <mat-label>Evenement</mat-label>
+        <mat-select [formControl]="c.controls.id" [compareWith]="compareFn">
+          <mat-option *ngFor="let t of eventTypes$ | async" [value]="t.id">{{t.id}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button (click)="addEvent()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button (click)="removeEvent(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <button mat-raised-button (click)="onSubmit()">Valider</button>
+</div>
