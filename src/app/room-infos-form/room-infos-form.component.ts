@@ -52,7 +52,9 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.form.controls.availableDays.setValue(this.days.value);
+    this.form.controls.equipments.setValue(this.equipments.value);
+    console.log(this.days, this.equipments);
   }
 
   openPriceDialog() {

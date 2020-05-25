@@ -3,22 +3,27 @@
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
+      <mat-icon matSuffix>face</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastname">
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline" class="large-input">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email">
+      <mat-icon matSuffix>mail</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nouveau mot de passe</mat-label>
       <input type="password" matInput formControlName="password">
+      <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Vérifier le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck">
+      <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
     <button mat-stroked-button color="primary" (click)="updateClick()" #dialogButtons>
       Modifier mes infos

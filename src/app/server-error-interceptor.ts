@@ -14,6 +14,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
         if (error.status >= 400) {
           return throwError(error);
         } else {
+          console.log(error);
           return throwError( {message: 'Une erreur est survenue'});
       }
       } )

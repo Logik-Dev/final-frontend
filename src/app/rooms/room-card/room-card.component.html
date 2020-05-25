@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="card-infos">
-    <h2 class="card-title">{{room.name}}</h2>
+    <h2 class="card-title">{{room.name | titlecase}}</h2>
     <div class="address">
       <mat-icon>place</mat-icon>
       {{room.address.city}} {{room.address.zipCode}}
@@ -15,10 +15,10 @@
       <mat-icon>person</mat-icon>
       {{room.maxCapacity}} personnes max.
     </div>
-    <div class="price">
+    <div class="room-price">
       <mat-icon>euros</mat-icon>
 
-      {{room.price + room.price / 10}} euro/h HT
+      {{price}} euros/h
     </div>
     <div class="btn-container">
       <button class="btn-favorite" mat-icon-button [ngClass]="favorite && 'favorite'" (click)="setFavorite()" type="button">

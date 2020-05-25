@@ -4,6 +4,7 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {NotificationService} from '../../services/notification.service';
 import {BehaviorSubject} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-room-card',
@@ -42,5 +43,9 @@ export class RoomCardComponent implements OnInit {
     }
 
   }
-
+  get price() {
+    const com = this.room.price / 100 * environment.COMMISSION;
+    const tva = (this.room.price + com) / 100 * environment.TVA;
+    return (this.room.price + com + tva).toFixed(1);
+  }
 }
