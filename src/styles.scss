@@ -25,8 +25,6 @@ body {
 .mat-sidenav-content.content::before {
   content: "";
   height: 30rem;
-  //border-bottom-left-radius: 15rem;
-  //border-bottom-right-radius: 15rem;
   border-radius: 50%;
   background-color: $primary-color;
   position: absolute;
@@ -142,7 +140,14 @@ ul {
     grid-row-gap: 1rem;
   }
 }
-
+.confirm-dialog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+  p {
+    grid-column: span 2;
+  }
+}
 
 .equipment-field {
   display: grid;

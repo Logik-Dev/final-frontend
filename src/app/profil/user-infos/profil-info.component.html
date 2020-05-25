@@ -20,12 +20,12 @@
       <mat-label>Vérifier le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck">
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="updateClick()">
+    <button mat-stroked-button color="primary" (click)="updateClick()" #dialogButtons>
       Modifier mes infos
     </button>
-    <button mat-flat-button color="warn" (click)="deleteClick()">Supprimer mon compte</button>
+    <button mat-stroked-button color="warn" (click)="deleteClick()" #dialogButtons>Supprimer mon compte</button>
     <ng-template #confirmDialog let-data>
-      <div class="dialog">
+      <div class="confirm-dialog">
         <p>Etes vous sur de vouloir
           <span *ngIf="data.update">modifier</span>
           <span *ngIf="!data.update">supprimer</span> votre profil ?

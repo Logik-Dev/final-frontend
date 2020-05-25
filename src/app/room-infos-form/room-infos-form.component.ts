@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomTypeService} from '../services/room-type.service';
 import {Observable} from 'rxjs';
@@ -16,18 +16,25 @@ import {MatButton} from '@angular/material/button';
   templateUrl: './room-infos-form.component.html',
   styleUrls: ['./room-infos-form.component.scss']
 })
-export class RoomInfosFormComponent implements OnInit {
+export class RoomInfosFormComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   volumes = Object.keys(Volume);
   roomTypes$: Observable<RoomType[]>;
   @ViewChildren('dialogButtons') dialogButtons: QueryList<MatButton>;
+
   constructor(private fb: FormBuilder,
               private roomTypeService: RoomTypeService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.roomTypes$ = this.roomTypeService.findAll();
     this.createForm();
+  }
+
+  ngAfterViewInit() {
+    this.dialog.afterAllClosed.subscribe(_ =>
+      this.clearDialogButtonFocus());
   }
 
   createForm() {
@@ -47,6 +54,7 @@ export class RoomInfosFormComponent implements OnInit {
   onSubmit() {
     console.log(this.form.value);
   }
+
   openPriceDialog() {
     const dialogRef = this.dialog.open(PriceDialogComponent, {
       data: {price: this.form.controls.price.value},
@@ -54,10 +62,7 @@ export class RoomInfosFormComponent implements OnInit {
       panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(
-      value => {
-        this.form.controls.price.setValue(value);
-        this.clearDialogButtonFocus();
-      }
+      value => value && this.form.controls.price.setValue(value)
     );
   }
 
@@ -67,10 +72,7 @@ export class RoomInfosFormComponent implements OnInit {
       panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(
-      value => {
-        value && this.mergeEquipments(value);
-        this.clearDialogButtonFocus();
-      }
+      value => value && this.mergeEquipments(value)
     );
   }
 
@@ -92,10 +94,7 @@ export class RoomInfosFormComponent implements OnInit {
       panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(
-      value => {
-        this.form.controls.eventTypes.setValue(value);
-        this.clearDialogButtonFocus();
-      }
+      value => value && this.form.controls.eventTypes.setValue(value)
     );
   }
 
@@ -105,10 +104,7 @@ export class RoomInfosFormComponent implements OnInit {
       panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(
-      value => {
-        value && this.form.controls.availableDays.setValue(value);
-        this.clearDialogButtonFocus();
-      }
+      value => value && this.form.controls.availableDays.setValue(value)
     );
   }
 

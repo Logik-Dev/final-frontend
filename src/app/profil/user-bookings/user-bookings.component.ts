@@ -1,16 +1,14 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {UserService} from '../../services/user.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {User} from '../../models/user';
 import {TimeSlot} from '../../models/time-slot';
 import {DATE_FORMAT, TIME_FORMAT} from '../../utils/dates';
 import * as moment from 'moment';
 import {MatDialog} from '@angular/material/dialog';
 import {Booking} from '../../models/booking';
-import {Room} from '../../models/room';
-import {RoomService} from '../../services/room.service';
-import {map, switchMap} from 'rxjs/operators';
 import {CommentDialogComponent} from '../../comment-dialog/comment-dialog.component';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-user-bookings',
@@ -20,6 +18,7 @@ import {CommentDialogComponent} from '../../comment-dialog/comment-dialog.compon
 export class UserBookingsComponent implements OnInit {
   user$: BehaviorSubject<User>;
   displayedColumns: string[] = ['salle', 'commence le', 'termine le', 'heure de début', 'heure de fin', 'commenter'];
+  @ViewChildren('dialogButtons') dialogButtons: QueryList<MatButton>;
 
   constructor(private us: UserService,
               private dialog: MatDialog) {
@@ -59,6 +58,8 @@ export class UserBookingsComponent implements OnInit {
         roomId: booking.room.id
       }
     });
+    dialogRef.afterClosed().subscribe(_ =>
+      this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused')));
   }
 
 }

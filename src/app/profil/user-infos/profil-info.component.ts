@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, TemplateRef, ViewChild, ViewChildren} from '@angular/core';
 import {User} from '../../models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
@@ -6,16 +6,19 @@ import {BehaviorSubject} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '../../services/notification.service';
 import {Router} from '@angular/router';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-profil-info',
   templateUrl: './profil-info.component.html',
   styleUrls: ['./profil-info.component.scss']
 })
-export class ProfilInfoComponent implements OnInit {
+export class ProfilInfoComponent implements OnInit, AfterViewInit {
   user$: BehaviorSubject<User>;
   form: FormGroup;
   @ViewChild('confirmDialog') confirmDialog: TemplateRef<any>;
+  @ViewChildren('dialogButtons') dialogButtons: QueryList<MatButton>;
+
   constructor(private fb: FormBuilder,
               private us: UserService,
               private dialog: MatDialog,
@@ -27,6 +30,13 @@ export class ProfilInfoComponent implements OnInit {
   ngOnInit(): void {
     this.user$ = this.us.currentUser;
     this.createForm();
+
+  }
+
+  ngAfterViewInit(): void {
+    this.dialog.afterAllClosed.subscribe(_ =>
+      this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused'))
+    );
   }
 
   createForm() {
@@ -75,10 +85,10 @@ export class ProfilInfoComponent implements OnInit {
         this.router.navigateByUrl('/').finally();
       });
   }
+
   closeDialog() {
     this.dialog.closeAll();
   }
-
 
 
 }
