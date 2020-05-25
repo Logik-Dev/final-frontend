@@ -47,6 +47,7 @@ import { RoomInfosFormComponent } from './room-infos-form/room-infos-form.compon
 import { PriceDialogComponent } from './price-dialog/price-dialog.component';
 import { EquipmentDialogComponent } from './equipment-dialog/equipment-dialog.component';
 import { EventTypeDialogComponent } from './event-type-dialog/event-type-dialog.component';
+import { DaysDialogComponent } from './days-dialog/days-dialog.component';
 
 
 const routes: Routes = [
@@ -98,7 +99,8 @@ const routes: Routes = [
     RoomInfosFormComponent,
     PriceDialogComponent,
     EquipmentDialogComponent,
-    EventTypeDialogComponent
+    EventTypeDialogComponent,
+    DaysDialogComponent
   ],
     imports: [
         BrowserModule,

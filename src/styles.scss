@@ -142,3 +142,36 @@ ul {
     grid-row-gap: 1rem;
   }
 }
+
+
+.equipment-field {
+  display: grid;
+  grid-template-columns: 1fr 5rem auto;
+  grid-gap: 1rem;
+  align-items: center;
+  &.xs {
+    border: 1px lightgrey solid;
+    border-radius: 3px;
+    padding: 1rem;
+    grid-template-columns: 50% 50%;
+    grid-gap: 0;
+    .equipment {
+      grid-column: span 2;
+    }
+  }
+}
+
+
+.add-delete {
+  display: flex;
+  color: lightgrey;
+  .btn-delete, .btn-add {
+    margin-left: auto;
+  }
+  .btn-delete {
+    margin-right: -.7rem;
+  }
+  .btn-add {
+    margin-right: -1rem;
+  }
+}

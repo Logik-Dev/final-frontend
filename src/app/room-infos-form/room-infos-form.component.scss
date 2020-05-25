@@ -19,7 +19,7 @@ mat-divider {
 ::ng-deep .mat-select-arrow {
    color: transparent;
 }
-.equipments, .events {
+.equipments, .events, .days {
   grid-column: span 2;
   margin-top: 1rem;
   text-align: center;
@@ -28,12 +28,13 @@ mat-divider {
   display: inline-block;
   background-color: $primary-color;
   color: $secondary-color;
-  border-radius: 10px;
-  padding: 0 1rem;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
   margin-left: .5rem;
+  font-size: .9rem;
 }
 
-.btn-event {
+.btn-event, .btn-days {
   grid-column: span 2;
   margin: 0 auto;
   width: 50%;

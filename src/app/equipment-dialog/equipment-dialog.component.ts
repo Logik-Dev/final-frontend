@@ -4,7 +4,6 @@ import {FormArray, FormBuilder, Validators} from '@angular/forms';
 import {EquipmentService} from '../services/equipment.service';
 import {Observable} from 'rxjs';
 import {Equipment} from '../models/equipment';
-import {RoomEquipment} from '../models/room-equipment';
 
 @Component({
   selector: 'app-equipment-dialog',
@@ -28,20 +27,27 @@ export class EquipmentDialogComponent implements OnInit {
   createEquipmentForm(equipment?: any) {
     return this.fb.group({
       id: [equipment ? equipment.id : '', Validators.required],
-      quantity: [equipment ? equipment.quantity : '', [Validators.min(1), Validators.required]]
+      quantity: [equipment ? equipment.quantity : '', [Validators.min(1), Validators.required]],
+      custom: [this.data.custom]
     });
   }
   initEquipment() {
-    const equipments = this.data.equipments.value;
+    let equipments = this.data.equipments;
     if (equipments && equipments.length) {
-      equipments.forEach(e =>
-        this.formArray.push(this.createEquipmentForm(e)));
+      equipments = this.data.custom ? equipments.filter(e => e.custom) : equipments.filter(e => !e.custom);
+      if (!equipments.length) {
+        this.emptyEquipments();
+      } else {
+        equipments.forEach(e => this.formArray.push(this.createEquipmentForm(e)));
+      }
     } else {
-      this.formArray.push(this.createEquipmentForm());
+      this.emptyEquipments();
     }
-    console.log('init equipment', this.formArray);
   }
 
+  emptyEquipments() {
+    this.formArray.push(this.createEquipmentForm());
+  }
   addEquipment() {
     this.formArray.valid && this.formArray.push(this.createEquipmentForm());
   }
@@ -51,7 +57,7 @@ export class EquipmentDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.matDialogRef.close(this.formArray.value.filter(equipment => equipment.id));
+    this.matDialogRef.close(this.formArray);
   }
   compareFn(e1: any, e2: any) {
     return e1 === e2;
