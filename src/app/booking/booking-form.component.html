@@ -3,7 +3,7 @@
   <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
   <mat-error *ngIf="form.errors" class="errors">
     <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
-    <span *ngIf="form.errors.dateUnavailable">Déjà réservée</span>
+    <span *ngIf="form.errors.dateUnavailable">Ce créneau est déjà réservé</span>
   </mat-error>
   <ng-template #unauthenticated>
     <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
@@ -39,7 +39,7 @@
   <div class="price" *ngIf="duration">
     <div class="price-row">
       <div class="price-label">Tarif</div>
-      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price.toFixed(2)}}</div>
+      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price.toFixed(1)}}</div>
       <mat-icon>euros</mat-icon>
     </div>
     <div class="price-row">

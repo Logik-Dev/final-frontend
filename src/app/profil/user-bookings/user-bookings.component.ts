@@ -56,7 +56,8 @@ export class UserBookingsComponent implements OnInit {
         lastDate: this.getLastDate(booking.slots),
         userId: this.user$.value.id,
         roomId: booking.room.id
-      }
+      },
+      panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(_ =>
       this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused')));

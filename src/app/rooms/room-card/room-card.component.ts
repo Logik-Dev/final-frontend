@@ -5,6 +5,7 @@ import {UserService} from '../../services/user.service';
 import {NotificationService} from '../../services/notification.service';
 import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {BookingService} from '../../services/booking.service';
 
 @Component({
   selector: 'app-room-card',
@@ -17,7 +18,7 @@ export class RoomCardComponent implements OnInit {
   Arr = Array;
   @Input() room: Room;
 
-  constructor(private us: UserService, private notification: NotificationService) {
+  constructor(private us: UserService, private notification: NotificationService, private bookingService: BookingService) {
   }
 
 
@@ -39,13 +40,11 @@ export class RoomCardComponent implements OnInit {
       this.favorite = !this.favorite;
       this.us.favorites({id: this.room.id}).subscribe();
     } else {
-      this.notification.showError('Connectez vous pour ajouter cette salle à vos favoris')
+      this.notification.showError('Connectez vous pour ajouter cette salle à vos favoris');
     }
 
   }
   get price() {
-    const com = this.room.price / 100 * environment.COMMISSION;
-    const tva = (this.room.price + com) / 100 * environment.TVA;
-    return (this.room.price + com + tva).toFixed(1);
+    return BookingService.getUnitPrice(this.room.price);
   }
 }

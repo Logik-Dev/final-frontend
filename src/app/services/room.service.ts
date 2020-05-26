@@ -4,6 +4,7 @@ import {Room} from '../models/room';
 import {ResourceService} from './resource.service';
 import {RoomSerializer} from '../utils/room-serializer';
 import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,7 @@ export class RoomService extends ResourceService<Room> {
   constructor(http: HttpClient) {
     super(http, 'rooms', new RoomSerializer(), 'users');
   }
-
+ public search(query: string): Observable<Room[]>{
+    return this.http.get<Room[]>(`${this.url}/${this.endpoint}/search?query=${query}`);
+ }
 }

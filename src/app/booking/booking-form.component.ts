@@ -128,15 +128,15 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     return this.startMax.add(1, 'week');
   }
   get commission() {
-    return ((this.room.price * this.duration) / 100 * this.COMMISSION).toFixed(2);
+    return ((this.room.price * this.duration) / 100 * this.COMMISSION).toFixed(1);
   }
 
   get tva() {
     const result = (this.room.price * this.duration) + parseFloat(this.commission);
-    return (result / 100 * this.TVA).toFixed(2);
+    return (result / 100 * this.TVA).toFixed(1);
   }
   get total() {
-    return ((this.room.price * this.duration) + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(2);
+    return ((this.room.price * this.duration) + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(1);
   }
   get COMMISSION(): number {
     return environment.COMMISSION;

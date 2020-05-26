@@ -1,16 +1,37 @@
 <div class="container" ngClass.xs="xs">
-  <div class="filters mat-elevation-z1" ngClass.xs="xs">
+  <div class="filters mat-elevation-z8" ngClass.xs="xs">
     <form [formGroup]="form" class="search-form" ngClass.xs="xs">
       <mat-form-field appearance="legacy">
-        <input type="text" matInput formControlName="search" placeholder="Rechercher">
+        <input type="text" matInput formControlName="search" placeholder="Taper un nom, événement ou type" >
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
     <div class="filter-menu">
       <button [matMenuTriggerFor]="menu" class="filter-btn" mat-stroked-button>
-        <span>Filtrer</span>
+        <span>Trier</span>
       </button>
-      <mat-menu #menu></mat-menu>
+      <mat-menu #menu>
+        <button mat-menu-item [matMenuTriggerFor]="priceMenu">Par prix</button>
+        <button mat-menu-item [matMenuTriggerFor]="ratingMenu">Par note</button>
+        <button mat-menu-item [matMenuTriggerFor]="sizeMenu">Par superficie</button>
+        <button mat-menu-item [matMenuTriggerFor]="capacityMenu">Par capacité</button>
+      </mat-menu>
+      <mat-menu #priceMenu>
+        <button mat-menu-item (click)="sort('price', 'asc')">Moins cher</button>
+        <button mat-menu-item (click)="sort('price', 'desc')">Plus cher</button>
+      </mat-menu>
+      <mat-menu #sizeMenu>
+        <button mat-menu-item (click)="sort('size', 'asc')">Plus petite</button>
+        <button mat-menu-item (click)="sort('size', 'desc')">Plus grande</button>
+      </mat-menu>
+      <mat-menu #capacityMenu>
+        <button mat-menu-item (click)="sort('maxCapacity', 'asc')">Moins de personne</button>
+        <button mat-menu-item (click)="sort('maxCapacity', 'desc')">Plus de personne</button>
+      </mat-menu>
+      <mat-menu #ratingMenu>
+        <button mat-menu-item (click)="sort('rating', 'asc')">Moins bien notée</button>
+        <button mat-menu-item (click)="sort('rating', 'desc')">Mieux notée</button>
+      </mat-menu>
     </div>
   </div>
   <app-room-list [rooms]="rooms$ | async"></app-room-list>

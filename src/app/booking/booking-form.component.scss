@@ -14,7 +14,7 @@
   padding: 1rem 2rem;
   background-color: #FAFAFA;
   display: grid;
-  grid-template-columns: minmax(7rem, 10rem) minmax(7rem, 10rem);
+  grid-template-columns: minmax(7rem, 15rem) minmax(7rem, 15rem);
   grid-gap: .5rem;
 }
 input {
@@ -33,9 +33,9 @@ input {
   text-align: center;
 }
 .unauthenticated {
-  grid-area: title;
   text-align: center;
   padding: 1rem;
+  grid-column: span 2;
   a {
     color: $primary-color;
     text-decoration: none;

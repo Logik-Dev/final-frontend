@@ -24,15 +24,15 @@ export class PriceDialogComponent implements OnInit {
   }
 
   get commission() {
-    return (this.price.value / 100 * this.COMMISSION).toFixed(2);
+    return (this.price.value / 100 * this.COMMISSION).toFixed(1);
   }
 
   get tva() {
-    return ((this.price.value + parseFloat(this.commission)) / 100 * this.TVA).toFixed(2);
+    return ((this.price.value + parseFloat(this.commission)) / 100 * this.TVA).toFixed(1);
   }
 
   get total() {
-    return (this.price.value + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(2);
+    return (this.price.value + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(1);
   }
 
   get TVA() {

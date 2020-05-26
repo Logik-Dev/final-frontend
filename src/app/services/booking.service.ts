@@ -20,11 +20,17 @@ export class BookingService extends ResourceService<Booking> {
       new BookingSerializer()
     );
   }
+
   static calculateTotalPrice(hours: number, price: number): number {
     let result = hours * price;
     result += result / 100 * environment.COMMISSION;
     result += result / 100 * environment.TVA;
-    return parseFloat(result.toFixed(2));
+    return parseFloat(result.toFixed(1));
+  }
+  static getUnitPrice(price: number) {
+    const com = price / 100 * environment.COMMISSION;
+    const tva = (price + com) / 100 * environment.TVA;
+    return (price + com + tva).toFixed(1);
   }
 
   static concatDateTime(start, end): Moment {
