@@ -1,8 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="container">
   <mat-form-field>
-    <mat-select [compareWith]="compareFn" formControlName="type">
-      <mat-option *ngFor="let type of types" [value]="type">{{type.libelle}}</mat-option>
-    </mat-select>
+    <input type="text" matInput [formControl]="searchInput" >
   </mat-form-field>
-  <button type="submit">Submit</button>
-</form>
+  <mat-selection-list (selectionChange)="selectionChange(list.selectedOptions.selected)" #list>
+    <mat-list-option [selected]="selectedCriteres.includes(critere.id)" *ngFor="let critere of criteres" [value]="critere.id">{{critere.nom}}</mat-list-option>
+  </mat-selection-list>
+</div>
+

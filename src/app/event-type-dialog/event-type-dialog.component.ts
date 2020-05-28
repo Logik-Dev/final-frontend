@@ -4,6 +4,7 @@ import {EventType} from '../models/event-type';
 import {EventTypeService} from '../services/event-type.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, Validators} from '@angular/forms';
+import {isSelectedValidator} from '../utils/validators';
 
 @Component({
   selector: 'app-event-type-dialog',
@@ -40,7 +41,9 @@ export class EventTypeDialogComponent implements OnInit {
   }
 
   addEvent() {
-    this.formArray.valid && this.formArray.push(this.createEventTypeForm());
+    const formGroup = this.createEventTypeForm();
+    formGroup.controls.id.setValidators([Validators.required, isSelectedValidator(this.formArray)]);
+    this.formArray.valid && this.formArray.push(formGroup);
   }
 
   removeEvent(index: number) {
@@ -48,7 +51,8 @@ export class EventTypeDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.matDialogRef.close(this.formArray.value.filter(v => v.id));
+    this.formArray.controls = this.formArray.controls.filter(c => c.value.id);
+    this.matDialogRef.close(this.formArray);
   }
 
   compareFn(e1: any, e2: any) {

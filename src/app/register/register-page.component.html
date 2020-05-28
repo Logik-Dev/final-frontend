@@ -1,10 +1,10 @@
 <div class="container">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form mat-elevation-z4" ngClass.xs="xs">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form mat-elevation-z8" ngClass.xs="xs">
     <h1 class="form-title">Enregistrement</h1>
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
-      <mat-icon matSuffix>face</mat-icon>
+      <mat-icon matSuffix>person</mat-icon>
       <mat-error *ngIf="f.firstname.errors">Un prénom est requis</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">

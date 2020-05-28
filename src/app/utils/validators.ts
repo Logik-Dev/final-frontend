@@ -1,4 +1,4 @@
-import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormArray, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {Room} from '../models/room';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -63,5 +63,13 @@ export const comparePasswords = (): ValidatorFn => {
     const password = formGroup.get('password').value;
     const passwordCheck = formGroup.get('passwordCheck').value;
     return password !== passwordCheck ? {mustMatch: true} : null;
+  };
+};
+
+export const isSelectedValidator = (array: FormArray): ValidatorFn => {
+  return (formControl: AbstractControl): ValidationErrors | null => {
+    const id = formControl.value;
+    const filtered = array.value.filter(v => v.id === id);
+    return filtered.length > 0 ? {isSelected: true} : null;
   };
 };

@@ -1,5 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MatListOption} from '@angular/material/list';
+
+interface Critere {
+  id: number;
+  nom: string;
+}
+const CRITERES_DATA = [
+  {id: 0, nom: 'renouvellement'},
+  {id: 1, nom: 'carte navigo' },
+  {id: 2, nom: 'carte bleu'},
+  {id: 3, nom: 'achat'}
+]
 
 @Component({
   selector: 'app-test',
@@ -7,24 +19,41 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  form: FormGroup;
-  selectedType = {id: 2, libelle: 'typenumero2'};
-  types = [
-    {id: 1, libelle: 'typenumero1'},
-    {id: 2, libelle: 'typenumero2'},
-    {id: 3, libelle: 'typenumero3'}
-  ];
+  searchInput = new FormControl('');
+  criteres: Critere[] = CRITERES_DATA;
+  selectedCriteres: number[] = [];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      type: this.selectedType
+    this.searchInput.valueChanges.subscribe(
+      value => this.findCritere(value)
+    );
+  }
+
+  findCritere(nom: string){
+    this.criteres = CRITERES_DATA.filter(c => c.nom.includes(nom));
+
+  }
+
+  selectionChange(selected: MatListOption[]) {
+    // On met tout les éléments séléctionné si il ne
+    // sont pas déjà dans la liste des éléments sléctionnés
+    selected.forEach(s => {
+      if (!this.selectedCriteres.includes(s.value)) {
+        this.selectedCriteres.push(s.value);
+      }
     });
-  }
-  compareFn(type1: any, type2: any) {
-    return type1.id === type2.id;
-  }
-  onSubmit() {
-    console.log(this.form.controls.type.value);
+    // liste des id séléctionné dans la page courante
+    const selectedIDs = selected.map(s => s.value);
+    // liste de tout les id de la page courante
+    const allIds = this.criteres.map(c => c.id);
+
+    // on retire les éléments de la liste de séléction si il ne sont pas checké
+    allIds.forEach(id => {
+      if(!selectedIDs.includes(id) && this.selectedCriteres.includes(id)) {
+        this.selectedCriteres.splice(this.selectedCriteres.indexOf(id), 1);
+      }
+    });
+    console.log(this.selectedCriteres);
   }
 }

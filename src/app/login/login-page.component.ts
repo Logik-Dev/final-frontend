@@ -21,7 +21,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
   onSubmit(data) {
-    if (!this.loginForm.invalid) {
+    if (this.loginForm.valid) {
       this.us.login(data.email, data.password)
         .subscribe(_ => this.location.back());
     }

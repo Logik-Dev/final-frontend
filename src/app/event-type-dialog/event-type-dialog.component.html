@@ -6,13 +6,17 @@
         <mat-select [formControl]="c.controls.id" [compareWith]="compareFn">
           <mat-option *ngFor="let t of eventTypes$ | async" [value]="t.id">{{t.id}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="c.controls.id.errors && c.controls.id.errors.isSelected">Déjà Sélectionné</mat-error>
       </mat-form-field>
-      <button mat-icon-button (click)="addEvent()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <button mat-icon-button (click)="removeEvent(i)">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <div class="add-delete">
+        <button mat-icon-button (click)="addEvent()" class="btn-add">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="removeEvent(i)" class="btn-delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
     </div>
-    <button mat-raised-button (click)="onSubmit()">Valider</button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="formArray.invalid" color="primary">Valider</button>
 </div>

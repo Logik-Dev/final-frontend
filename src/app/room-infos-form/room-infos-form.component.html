@@ -60,9 +60,10 @@
     <mat-icon>add</mat-icon>
     <span>Personnalisé</span>
   </button>
-  <div class="equipments" *ngIf="equipments.value && equipments.value.length; else emptyEquipments">
-    <div *ngFor="let elem of equipments.value" class="badge">
-      <span>{{elem.id | titlecase}}({{elem.quantity}})</span>
+  <div class="equipments" *ngIf="equipmentsFormArray.length; else emptyEquipments">
+    <div *ngFor="let c of equipmentsFormArray.value; index as i" class="badge">
+      <span>{{c.id | titlecase}}({{c.quantity}})</span>
+      <mat-icon class="delete" title="Supprimer" (click)="deleteEquipment(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyEquipments>
@@ -75,9 +76,10 @@
     <mat-icon>add</mat-icon>
     <span>Choisir</span>
   </button>
-  <div class="events" *ngIf="eventTypes.value && eventTypes.value.length; else emptyEvents">
-    <div class="badge" *ngFor="let elem of eventTypes.value">
-      <span>{{elem.id}}</span>
+  <div class="events" *ngIf="eventsFormArray.length; else emptyEvents">
+    <div class="badge" *ngFor="let c of eventsFormArray.value; index as i">
+      <span>{{c.id}}</span>
+      <mat-icon class="delete" title="supprimer" (click)="deleteEvent(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyEvents>
@@ -100,7 +102,7 @@
   </ng-template>
   <div class="step">
     <button mat-raised-button matStepperPrevious class="back-button">Précédent</button>
-    <button mat-raised-button matStepperNext (click)="onSubmit()" class="next-button">Suivant</button>
+    <button mat-raised-button matStepperNext (click)="onSubmit()" class="next-button" color="primary" [disabled]="form.invalid">Suivant</button>
   </div>
 
 </form>
