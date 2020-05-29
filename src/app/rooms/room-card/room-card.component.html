@@ -1,6 +1,6 @@
- <div class="card mat-elevation-z2" >
+ <div class="card mat-elevation-z2"  *ngIf="room">
   <div class="card-img" >
-    <img [src]="room.photos[0].url" alt="">
+    <img [src]="room.photos[0]?.url" alt="">
     <div class="rating">
       <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>
     </div>
@@ -17,8 +17,11 @@
     </div>
     <div class="room-price">
       <mat-icon>euros</mat-icon>
-
       {{price}} euros/h
+    </div>
+    <div class="surface">
+      <mat-icon>aspect_ratio</mat-icon>
+      {{room.size}} m²
     </div>
     <div class="btn-container">
       <button class="btn-favorite" mat-icon-button [ngClass]="favorite && 'favorite'" (click)="setFavorite()" type="button">

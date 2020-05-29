@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {DAYS} from '../utils/days';
-import {FormArray, FormBuilder, FormControl} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
@@ -50,6 +50,6 @@ export class DaysDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.matDialogRef.close(this.formArray);
+    this.formArray.value.length && this.matDialogRef.close(this.formArray);
   }
 }

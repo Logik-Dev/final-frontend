@@ -1,5 +1,5 @@
-<form [formGroup]="form" class="infos-form">
-  <h2 class="category-title">Informations</h2>
+<form [formGroup]="form" class="infos-form" ngClass.xs="xs" >
+  <h2 class="category-title span-2">Informations</h2>
   <!--  Nom  -->
   <mat-form-field appearance="outline">
     <mat-label>Nom de la salle</mat-label>
@@ -9,14 +9,14 @@
 
   <!--  Capacité  -->
   <mat-form-field appearance="outline">
-    <mat-label>Capacité Max</mat-label>
+    <mat-label>Nombre de personne maximum</mat-label>
     <input type="number" matInput formControlName="maxCapacity">
     <mat-icon matSuffix>people</mat-icon>
   </mat-form-field>
 
   <!--  Taille  -->
   <mat-form-field appearance="outline">
-    <mat-label>Taille</mat-label>
+    <mat-label>Surface</mat-label>
     <input type="number" matInput formControlName="size">
     <mat-icon matSuffix>aspect_ration</mat-icon>
   </mat-form-field>
@@ -51,7 +51,8 @@
   </mat-form-field>
 
   <!--  Equipements -->
-  <h2 class="category-title">Equipements</h2>
+  <h2 class="category-title span-2">Equipements</h2>
+  <div class="equipment-buttons span-2">
   <button mat-stroked-button (click)="openEquipmentDialog(false)" #dialogButtons>
     <mat-icon>add</mat-icon>
     <span>Choisir</span>
@@ -60,49 +61,51 @@
     <mat-icon>add</mat-icon>
     <span>Personnalisé</span>
   </button>
-  <div class="equipments" *ngIf="equipmentsFormArray.length; else emptyEquipments">
+  </div>
+  <div class="equipments span-2" *ngIf="equipmentsFormArray.length; else emptyEquipments">
     <div *ngFor="let c of equipmentsFormArray.value; index as i" class="badge">
       <span>{{c.id | titlecase}}({{c.quantity}})</span>
       <mat-icon class="delete" title="Supprimer" (click)="deleteEquipment(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyEquipments>
-    <p class="empty-selection">Aucun équipement sélectionné</p>
+    <p class="empty-selection span-2">Aucun équipement sélectionné</p>
   </ng-template>
 
   <!--  Evenements -->
-  <h2 class="category-title">Type d'évenements</h2>
-  <button mat-stroked-button (click)="openEventTypeDialog()" class="btn-event" #dialogButtons>
+  <h2 class="category-title span-2">Type d'évenements</h2>
+  <button mat-stroked-button (click)="openEventTypeDialog()" class="btn-event span-2" #dialogButtons >
     <mat-icon>add</mat-icon>
     <span>Choisir</span>
   </button>
-  <div class="events" *ngIf="eventsFormArray.length; else emptyEvents">
+  <div class="events span-2" *ngIf="eventsFormArray.length; else emptyEvents">
     <div class="badge" *ngFor="let c of eventsFormArray.value; index as i">
       <span>{{c.id}}</span>
       <mat-icon class="delete" title="supprimer" (click)="deleteEvent(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyEvents>
-    <p class="empty-selection">Aucun évenement sélectionné</p>
+    <p class="empty-selection span-2">Aucun évenement sélectionné</p>
   </ng-template>
 
 <!--  Disponibilité -->
-  <h2 class="category-title">Disponibilité</h2>
-  <button mat-stroked-button (click)="openDaysDialog()" class="btn-days" #dialogButtons>
+  <h2 class="category-title span-2">Disponibilité</h2>
+  <button mat-stroked-button (click)="openDaysDialog()" class="btn-days span-2" #dialogButtons>
     <mat-icon>date_range</mat-icon>
     <span>Définir</span>
   </button>
-  <div class="days" *ngIf="days.value && days.value.length; else emptyDays">
-    <div class="badge" *ngFor="let day of days.value">
+  <div class="days span-2" *ngIf="daysFormArray.value.length; else emptyDays">
+    <div class="badge" *ngFor="let day of daysFormArray.value; index as i">
       <span>{{day | titlecase}}</span>
+      <mat-icon class="delete" title="supprimer" (click)="deleteDay(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyDays>
-    <p class="empty-selection">Veuillez choisir des disponibilités</p>
+    <p class="empty-selection span-2">Veuillez choisir des disponibilités</p>
   </ng-template>
-  <div class="step">
-    <button mat-raised-button matStepperPrevious class="back-button">Précédent</button>
-    <button mat-raised-button matStepperNext (click)="onSubmit()" class="next-button" color="primary" [disabled]="form.invalid">Suivant</button>
+  <div class="step-buttons span-2">
+    <button mat-raised-button matStepperPrevious class="btn-back">Précédent</button>
+    <button mat-raised-button matStepperNext (click)="onSubmit()" class="btn-next" color="primary" [disabled]="form.invalid">Suivant</button>
   </div>
 
 </form>

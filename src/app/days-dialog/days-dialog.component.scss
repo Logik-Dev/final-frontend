@@ -1,4 +1,13 @@
 .dialog-container {
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 1rem;
+  &.xs {
+    grid-template-columns: 1fr 1fr;
+    .span-all {
+      grid-column: span 2;
+    }
+  }
+}
+.span-all {
+  grid-column: span 4;
 }

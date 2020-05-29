@@ -6,6 +6,7 @@ import {NotificationService} from '../../services/notification.service';
 import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {BookingService} from '../../services/booking.service';
+import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-room-card',
@@ -18,7 +19,8 @@ export class RoomCardComponent implements OnInit {
   Arr = Array;
   @Input() room: Room;
 
-  constructor(private us: UserService, private notification: NotificationService, private bookingService: BookingService) {
+  constructor(private us: UserService,
+              private notification: NotificationService) {
   }
 
 

@@ -34,7 +34,7 @@ export class PhotoFormComponent implements OnInit {
         this.notification.showError('Formats autorisés: jpg, jpeg, png');
       } else if (file.size / 1000 / 1024 > 2) {
         this.notification.showError('Taille maximale autorisée: 5MB');
-      } else if (this.photos.length >= 3) {
+      } else if (this.photos.length >= 6) {
         this.notification.showError('3 photos maximum autorisées');
       } else {
         const reader = new FileReader();

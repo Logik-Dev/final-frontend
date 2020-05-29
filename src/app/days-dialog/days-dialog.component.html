@@ -1,8 +1,8 @@
 <div class="title">Définir les disponibilités</div>
-<div class="dialog-container">
+<div class="dialog-container" ngClass.xs="xs">
   <mat-checkbox (change)="allDaysSelected($event)" #allDays [checked]="formArray.value.length === 7">Tout les jours
   </mat-checkbox>
   <mat-checkbox *ngFor="let day of days" [value]="day" (change)="daySelected($event)" [disabled]="allDays.checked"
                 [checked]="isChecked(day)">{{day | titlecase}}</mat-checkbox>
-  <button mat-raised-button (click)="onSubmit()">Valider</button>
+  <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="!formArray.value.length" class="span-all">Valider</button>
 </div>

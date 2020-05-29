@@ -15,6 +15,11 @@
         </button>
       </div>
     </div>
-    <button color="primary" mat-raised-button matStepperNext [disabled]="!photos.length || !us.isLoggedIn">Suivant</button>
+    <div class="step-buttons">
+      <div class="btn-back">
+        <mat-icon matTooltip="Entre 3 et 6 photos au format paysage (5Mb max par photo)">info</mat-icon>
+      </div>
+      <button color="primary" mat-raised-button matStepperNext [disabled]="!(photos.length > 2) || !us.isLoggedIn" class="btn-next">Suivant</button>
+    </div>
   </form>
 

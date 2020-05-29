@@ -13,7 +13,7 @@
       </mat-error>
     </mat-form-field>
     <ng-template #customField>
-      <mat-form-field>
+      <mat-form-field class="equipment">
         <mat-label>Nom</mat-label>
         <input type="text" matInput [formControl]="c.controls.id">
         <mat-error *ngIf="c.controls.id && c.controls.id.errors && c.controls.id.errors.isSelected">

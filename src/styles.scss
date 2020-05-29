@@ -79,13 +79,13 @@ mat-error span:first-child {
   display: block;
 }
 
-.step {
+.step-buttons {
   display: flex;
   width: 100%;
-  .back-button {
+  .btn-back {
     margin-right: auto;
   }
-  .next-button {
+  .btn-next {
     margin-left: auto;
   }
 }
@@ -158,7 +158,7 @@ ul {
     border: 1px lightgrey solid;
     border-radius: 3px;
     padding: 1rem;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr auto;
     grid-gap: 0;
     .equipment {
       grid-column: span 2;
@@ -179,4 +179,8 @@ ul {
   .btn-add {
     margin-right: -1rem;
   }
+}
+.mat-tooltip {
+  text-align: center;
+  font-size: 1rem;
 }

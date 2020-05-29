@@ -77,8 +77,8 @@
               Bruyant
             </div>
           </div>
-          <mat-divider></mat-divider>
-          <h2 class="category-title">Commentaires</h2>
+          <mat-divider *ngIf="room.comments.length"></mat-divider>
+          <h2 class="category-title" *ngIf="room.comments.length">Commentaires</h2>
           <div id="comments">
             <div class="comment" *ngFor="let comment of room.comments">
               <div class="comment-content">"{{comment.content}}"</div>
