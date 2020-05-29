@@ -49,7 +49,7 @@ form {
 }
 .btn-back {
   font-size: 1.1rem;
-  @include icon(1.2em, 1.5em, $primary-color);
+  @include icon(1.2em, 1.5em, grey);
   .mat-icon {
     display: flex;
     align-items: center;

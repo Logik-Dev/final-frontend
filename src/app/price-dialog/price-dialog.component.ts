@@ -9,7 +9,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./price-dialog.component.scss']
 })
 export class PriceDialogComponent implements OnInit {
-  price = new FormControl(0);
+  price = new FormControl('');
   constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 

@@ -60,6 +60,9 @@ export class AddRoomPageComponent implements OnInit, AfterContentChecked {
     address.city = this.addressForm.get('city').value.nom;
     const room: Room = this.roomInfosForm.value;
     room.address = address;
+    room.equipments = this.roomInfosForm.controls.equipments.value;
+    room.availableDays = this.roomInfosForm.controls.availableDays.value;
+    room.eventTypes = this.roomInfosForm.controls.eventTypes.value;
     const photos: File[] = [];
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
     this.roomService.create(room).subscribe(

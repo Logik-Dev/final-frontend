@@ -5,6 +5,7 @@
     <mat-label>Nom de la salle</mat-label>
     <input type="text" matInput formControlName="name">
     <mat-icon matSuffix>domain</mat-icon>
+    <mat-error *ngIf="form.controls.name.errors && form.controls.name.errors.nameExists">Ce nom est déjà utilisé</mat-error>
   </mat-form-field>
 
   <!--  Capacité  -->
@@ -62,8 +63,8 @@
     <span>Personnalisé</span>
   </button>
   </div>
-  <div class="equipments span-2" *ngIf="equipmentsFormArray.length; else emptyEquipments">
-    <div *ngFor="let c of equipmentsFormArray.value; index as i" class="badge">
+  <div class="equipments span-2" *ngIf="equipments.length; else emptyEquipments">
+    <div *ngFor="let c of equipments.value; index as i" class="badge">
       <span>{{c.id | titlecase}}({{c.quantity}})</span>
       <mat-icon class="delete" title="Supprimer" (click)="deleteEquipment(i)">delete</mat-icon>
     </div>
@@ -78,8 +79,8 @@
     <mat-icon>add</mat-icon>
     <span>Choisir</span>
   </button>
-  <div class="events span-2" *ngIf="eventsFormArray.length; else emptyEvents">
-    <div class="badge" *ngFor="let c of eventsFormArray.value; index as i">
+  <div class="events span-2" *ngIf="events.length; else emptyEvents">
+    <div class="badge" *ngFor="let c of events.value; index as i">
       <span>{{c.id}}</span>
       <mat-icon class="delete" title="supprimer" (click)="deleteEvent(i)">delete</mat-icon>
     </div>
@@ -94,18 +95,18 @@
     <mat-icon>date_range</mat-icon>
     <span>Définir</span>
   </button>
-  <div class="days span-2" *ngIf="daysFormArray.value.length; else emptyDays">
-    <div class="badge" *ngFor="let day of daysFormArray.value; index as i">
+  <div class="days span-2" *ngIf="days.length; else emptyDays">
+    <div class="badge" *ngFor="let day of days.value; index as i">
       <span>{{day | titlecase}}</span>
       <mat-icon class="delete" title="supprimer" (click)="deleteDay(i)">delete</mat-icon>
     </div>
   </div>
   <ng-template #emptyDays>
-    <p class="empty-selection span-2">Veuillez choisir des disponibilités</p>
+      <p class="empty-selection span-2">Veuillez choisir des disponibilités</p>
   </ng-template>
   <div class="step-buttons span-2">
     <button mat-raised-button matStepperPrevious class="btn-back">Précédent</button>
-    <button mat-raised-button matStepperNext (click)="onSubmit()" class="btn-next" color="primary" [disabled]="form.invalid">Suivant</button>
+    <button mat-raised-button matStepperNext (click)="onSubmit()" class="btn-next" color="primary" >Suivant</button>
   </div>
 
 </form>

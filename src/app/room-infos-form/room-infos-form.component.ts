@@ -1,5 +1,14 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn, Form,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors, ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {RoomTypeService} from '../services/room-type.service';
 import {Observable} from 'rxjs';
 import {RoomType} from '../models/room-type';
@@ -10,6 +19,10 @@ import {EquipmentDialogComponent} from '../equipment-dialog/equipment-dialog.com
 import {EventTypeDialogComponent} from '../event-type-dialog/event-type-dialog.component';
 import {DaysDialogComponent} from '../days-dialog/days-dialog.component';
 import {MatButton} from '@angular/material/button';
+import {map} from 'rxjs/operators';
+import {RoomService} from '../services/room.service';
+import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
+import {atLeastOne} from '../utils/validators';
 
 @Component({
   selector: 'app-room-infos-form',
@@ -20,13 +33,11 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   volumes = Object.keys(Volume);
   roomTypes$: Observable<RoomType[]>;
-  equipmentsFormArray = new FormArray([]);
-  eventsFormArray = new FormArray([]);
-  daysFormArray = new FormArray([]);
   @ViewChildren('dialogButtons') dialogButtons: QueryList<MatButton>;
 
   constructor(private fb: FormBuilder,
               private roomTypeService: RoomTypeService,
+              private roomService: RoomService,
               private dialog: MatDialog) {
   }
 
@@ -42,22 +53,29 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
 
   createForm() {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
+      name: new FormControl('', {
+        validators: [Validators.required],
+        asyncValidators: this.nameAvailable(),
+        updateOn: 'blur'
+      }),
       maxCapacity: ['', Validators.required],
       size: ['', Validators.required],
       type: ['', Validators.required],
       maxVolume: ['', Validators.required],
-      price: [0, Validators.required],
-      equipments: [this.equipmentsFormArray],
-      eventTypes: [this.eventsFormArray],
-      availableDays: [this.daysFormArray]
+      price: ['', Validators.required],
+      equipments: this.fb.array([]),
+      eventTypes: this.fb.array([]),
+      availableDays: this.fb.array([],  atLeastOne())
     });
   }
 
-  onSubmit() {
-    this.form.controls.availableDays.setValue(this.days.value);
-    this.form.controls.equipments.setValue(this.equipments.value);
-    console.log(this.days, this.equipments);
+  nameAvailable(): AsyncValidatorFn {
+    return (nameControl: AbstractControl): Observable<ValidationErrors | null> => {
+      const name = nameControl.value;
+      return this.roomService.exists({name}).pipe(
+        map(response => response.result ? {nameExists: true} : null)
+      );
+    };
   }
 
   openPriceDialog() {
@@ -83,22 +101,24 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
 
   mergeEquipments(value: FormArray) {
     value.controls.forEach(v =>
-      !this.isInclude(v, this.equipmentsFormArray) && this.equipmentsFormArray.push(v));
+      !this.isInclude(v, this.equipments) && this.equipments.push(v));
   }
 
   deleteEquipment(index: number) {
-    this.equipmentsFormArray.removeAt(index);
+    this.equipments.removeAt(index);
   }
 
   deleteEvent(index: number) {
-    this.eventsFormArray.removeAt(index);
+    this.events.removeAt(index);
   }
 
   deleteDay(index: number) {
-    this.daysFormArray.removeAt(index);
+    this.days.removeAt(index);
+
   }
 
   isInclude(control: AbstractControl, array: FormArray) {
+    console.log(array);
     const controls = array.controls.filter(c => c.value.id === control.value.id);
     return controls.length > 0;
   }
@@ -109,12 +129,13 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
       panelClass: 'dialog-form'
     });
     dialogRef.afterClosed().subscribe(
-      value => value &&  this.mergeEvents(value)
+      value => value && this.mergeEvents(value)
     );
   }
+
   mergeEvents(array: FormArray) {
     array.controls.forEach(c =>
-      !this.isInclude(c, this.eventsFormArray) && this.eventsFormArray.push(c));
+      !this.isInclude(c, this.events) && this.events.push(c));
   }
 
   openDaysDialog() {
@@ -126,26 +147,26 @@ export class RoomInfosFormComponent implements OnInit, AfterViewInit {
       value => value && this.mergeDays(value)
     );
   }
-  mergeDays(array: FormArray) {
-    array.controls.forEach(c => {
-      console.log(c.value);
-      !this.daysFormArray.value.includes(c.value) && this.daysFormArray.push(c);
-    });
 
+  mergeDays(array: FormArray) {
+    array.controls.forEach(c =>
+      !this.days.value.includes(c.value) && this.days.push(c)
+    );
   }
+
   clearDialogButtonFocus() {
     this.dialogButtons.forEach(c => c._getHostElement().classList.remove('cdk-program-focused'));
   }
 
   get equipments() {
-    return this.form.get('equipments').value;
+    return this.form.get('equipments') as FormArray;
   }
 
   get events() {
-    return this.form.get('eventTypes').value;
+    return this.form.get('eventTypes') as FormArray;
   }
 
   get days() {
-    return this.form.get('availableDays').value;
+    return this.form.get('availableDays') as FormArray;
   }
 }

@@ -45,7 +45,12 @@ const isAvailable = (room: Room, slots: TimeSlot[]): boolean => {
   );
   return result !== false;
 };
-
+export const atLeastOne = (): ValidatorFn => {
+  return (arrayControl: AbstractControl): ValidationErrors | null => {
+    console.log(arrayControl.value.length);
+    return arrayControl.value.length ?  null : {isEmpty: true} ;
+  };
+};
 export const cityInvalid = (): ValidatorFn => {
   return (cityControl: AbstractControl): ValidationErrors | null => {
     return !cityControl.value.nom || !cityControl.value.codesPostaux ? {cityInvalid: true} : null;

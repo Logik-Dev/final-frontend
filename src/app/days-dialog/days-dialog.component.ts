@@ -36,7 +36,6 @@ export class DaysDialogComponent implements OnInit {
       const controls = this.formArray.controls.filter(c => c.value !== event.source.value);
       this.formArray = new FormArray(controls);
     }
-    console.log(this.formArray);
   }
   allDaysSelected(event: any) {
     this.formArray = new FormArray([]);
