@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit, QueryList, TemplateRef, ViewChild, ViewChildren} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {User} from '../../models/user';
-import {UserService} from '../../services/user.service';
-import {RoomService} from '../../services/room.service';
-import {NotificationService} from '../../services/notification.service';
+import {User} from '../../../models/user';
+import {UserService} from '../../../services/user.service';
+import {RoomService} from '../../../services/room.service';
+import {NotificationService} from '../../../services/notification.service';
 import {MatDialog} from '@angular/material/dialog';
-import {Room} from '../../models/room';
+import {Room} from '../../../models/room';
 import {MatButton} from '@angular/material/button';
 
 @Component({

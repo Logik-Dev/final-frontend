@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {Room} from '../../models/room';
+import {Room} from '../../../models/room';
 
 @Component({
   selector: 'app-room-list',

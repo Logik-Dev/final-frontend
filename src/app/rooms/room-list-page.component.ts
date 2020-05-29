@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from '../models/room';
-import {RoomService} from '../services/room.service';
+import {Room} from '../../models/room';
+import {RoomService} from '../../services/room.service';
 import {ActivatedRoute} from '@angular/router';
-import {User} from '../models/user';
-import {UserService} from '../services/user.service';
+import {User} from '../../models/user';
+import {UserService} from '../../services/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';

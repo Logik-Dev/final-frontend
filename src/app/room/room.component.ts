@@ -1,0 +1,27 @@
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {RoomService} from '../../services/room.service';
+import {Observable} from 'rxjs';
+import {Room} from '../../models/room';
+import {BookingService} from '../../services/booking.service';
+
+@Component({
+  selector: 'app-room',
+  templateUrl: './room.component.html',
+  styleUrls: ['./room.component.scss']
+})
+export class RoomComponent implements OnInit {
+  room$: Observable<Room>;
+  Arr = Array;
+  constructor(private route: ActivatedRoute, private roomService: RoomService, private bookingService: BookingService) {}
+
+  ngOnInit(): void {
+    this.route.paramMap
+      .subscribe(params => this.room$ = this.roomService.findById(params.get('id')));
+  }
+
+  getUnitPrice(price: number): string {
+    return BookingService.getUnitPrice(price);
+  }
+}
+

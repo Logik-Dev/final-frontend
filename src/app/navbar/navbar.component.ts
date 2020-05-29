@@ -1,15 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {UserService} from '../services/user.service';
-import {User} from '../models/user';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user';
 import {FormGroup} from '@angular/forms';
-import {RoomTypeService} from '../services/room-type.service';
+import {RoomTypeService} from '../../services/room-type.service';
 import {Observable} from 'rxjs';
-import {RoomType} from '../models/room-type';
-import {EventTypeService} from '../services/event-type.service';
-import {EventType} from '../models/event-type';
-import {EquipmentService} from '../services/equipment.service';
-import {Equipment} from '../models/equipment';
-import {GeoService} from '../services/geo.service';
+import {RoomType} from '../../models/room-type';
+import {EventTypeService} from '../../services/event-type.service';
+import {EventType} from '../../models/event-type';
+import {EquipmentService} from '../../services/equipment.service';
+import {Equipment} from '../../models/equipment';
+import {GeoService} from '../../services/geo.service';
 import {Router} from '@angular/router';
 
 @Component({

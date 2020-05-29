@@ -1,8 +1,12 @@
 <app-navbar (toggleMenu)="snav.toggle()"></app-navbar>
+
 <mat-sidenav-container>
+  <!-- SideNav -->
   <mat-sidenav ngClass.xs="xs" #snav>
-    <app-sidenav (close)="snav.close()"></app-sidenav>
+    <app-sidenav (sidenavClose)="snav.close()"></app-sidenav>
   </mat-sidenav>
+
+  <!--  Content -->
   <mat-sidenav-content class="content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>

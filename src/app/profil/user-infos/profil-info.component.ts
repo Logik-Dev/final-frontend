@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnInit, QueryList, TemplateRef, ViewChild, ViewChildren} from '@angular/core';
-import {User} from '../../models/user';
+import {User} from '../../../models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../../services/user.service';
 import {BehaviorSubject} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {NotificationService} from '../../services/notification.service';
+import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 

@@ -1,0 +1,134 @@
+<form [formGroup]="form" class="infos-form" ngClass.xs="xs">
+  <h2 class="category-title span-2">Informations</h2>
+
+  <!--  Nom  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de la salle</mat-label>
+    <input type="text" matInput formControlName="name">
+    <mat-icon matSuffix>domain</mat-icon>
+    <mat-error *ngIf="form.controls.name.errors && form.controls.name.errors.nameExists">Ce nom est déjà utilisé
+    </mat-error>
+  </mat-form-field>
+
+  <!--  Capacité  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre de personne maximum</mat-label>
+    <input type="number" matInput formControlName="maxCapacity">
+    <mat-icon matSuffix>people</mat-icon>
+  </mat-form-field>
+
+  <!--  Taille  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Surface</mat-label>
+    <input type="number" matInput formControlName="size">
+    <mat-icon matSuffix>aspect_ration</mat-icon>
+  </mat-form-field>
+
+  <!--  Type  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let type of roomTypes$ | async" [value]="type">
+        {{type.id}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>category</mat-icon>
+  </mat-form-field>
+
+  <!--  Volume  -->
+  <mat-form-field appearance="outline">
+    <mat-label>Ambiance sonore</mat-label>
+    <mat-select formControlName="maxVolume">
+      <mat-option *ngFor="let volume of volumes" [value]="volume">
+        {{volume | titlecase}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>volume_up</mat-icon>
+  </mat-form-field>
+
+  <!--  Prix  -->
+  <mat-form-field appearance="outline" (click)="openPriceDialog()">
+    <mat-label>Prix</mat-label>
+    <input type="number" matInput formControlName="price">
+    <mat-icon matSuffix>euros</mat-icon>
+  </mat-form-field>
+
+
+  <h2 class="category-title span-2">Equipements</h2>
+
+  <!--  Boutons équipements  -->
+  <div class="equipment-buttons span-2">
+    <button mat-stroked-button (click)="openEquipmentDialog(false)" #dialogButtons>
+      <mat-icon>add</mat-icon>
+      <span>Choisir</span>
+    </button>
+    <button mat-stroked-button (click)="openEquipmentDialog(true)" #dialogButtons>
+      <mat-icon>add</mat-icon>
+      <span>Personnalisé</span>
+    </button>
+  </div>
+
+  <!--  Liste équipements  -->
+  <div class="equipments span-2" *ngIf="equipments.length; else emptyEquipments">
+    <div *ngFor="let c of equipments.value; index as i" class="badge">
+      <span>{{c.id | titlecase}}({{c.quantity}})</span>
+      <mat-icon class="delete" title="Supprimer" (click)="deleteFormArrayElement(i, equipments)">delete</mat-icon>
+    </div>
+  </div>
+
+  <!--  Pas d'équipements  -->
+  <ng-template #emptyEquipments>
+    <p class="empty-selection span-2">Aucun équipement sélectionné</p>
+  </ng-template>
+
+  <!--  Evenements -->
+  <h2 class="category-title span-2">Type d'évenements</h2>
+
+  <!--  Ajouter évenement-->
+  <button mat-stroked-button (click)="openEventTypeDialog()" class="btn-event span-2" #dialogButtons>
+    <mat-icon>add</mat-icon>
+    <span>Choisir</span>
+  </button>
+
+  <!--  Liste d'évènement  -->
+  <div class="events span-2" *ngIf="events.length; else emptyEvents">
+    <div class="badge" *ngFor="let c of events.value; index as i">
+      <span>{{c.id}}</span>
+      <mat-icon class="delete" title="supprimer" (click)="deleteFormArrayElement(i, events)">delete</mat-icon>
+    </div>
+  </div>
+
+  <!--  Aucun évènement  -->
+  <ng-template #emptyEvents>
+    <p class="empty-selection span-2">Aucun évenement sélectionné</p>
+  </ng-template>
+
+
+  <h2 class="category-title span-2">Disponibilité</h2>
+
+  <!--  Ajouter jours  -->
+  <button mat-stroked-button (click)="openDaysDialog()" class="btn-days span-2" #dialogButtons>
+    <mat-icon>date_range</mat-icon>
+    <span>Définir</span>
+  </button>
+
+  <!--  Liste de jours  -->
+  <div class="days span-2" *ngIf="days.length; else emptyDays">
+    <div class="badge" *ngFor="let day of days.value; index as i">
+      <span>{{day | titlecase}}</span>
+      <mat-icon class="delete" title="supprimer" (click)="deleteFormArrayElement(i, days)">delete</mat-icon>
+    </div>
+  </div>
+
+  <!--  Aucun jour  -->
+  <ng-template #emptyDays>
+    <p class="empty-selection span-2">Veuillez choisir des disponibilités</p>
+  </ng-template>
+
+  <!--  Précédent / Suivant  -->
+  <div class="step-buttons span-2">
+    <button mat-raised-button matStepperPrevious class="btn-back">Précédent</button>
+    <button mat-raised-button matStepperNext class="btn-next" color="primary">Suivant</button>
+  </div>
+
+</form>

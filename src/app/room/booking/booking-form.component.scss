@@ -1,0 +1,43 @@
+@import "src/variables";
+@import "src/mixins";
+
+.container {
+  margin-top: 6rem;
+  padding: .3rem;
+  background-color: $primary-color;
+  border-radius: 3px;
+  z-index: 5;
+  position: relative;
+}
+.booking-form {
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  background-color: #FAFAFA;
+  display: grid;
+  grid-template-columns: minmax(7rem, 15rem) minmax(7rem, 15rem);
+  grid-gap: .5rem;
+}
+input {
+  color: black;
+}
+.form-title {
+  font-weight: 400;
+  color: $primary-color;
+  text-align: center;
+  margin: 0;
+}
+.startDate, .endDate, .weekly, .btn-pay, .weekRepetition, .price, .form-title, .errors {
+  grid-column: span 2;
+}
+.errors {
+  text-align: center;
+}
+.unauthenticated {
+  text-align: center;
+  padding: 1rem;
+  grid-column: span 2;
+  a {
+    color: $primary-color;
+    text-decoration: none;
+  }
+}

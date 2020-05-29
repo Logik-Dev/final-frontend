@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter} from '@angular/material/core';
 import {debounceTime, switchMap} from 'rxjs/operators';
-import {GeoService} from '../services/geo.service';
-import {City} from '../models/city';
+import {GeoService} from '../../services/geo.service';
+import {City} from '../../models/city';
 import {Router} from '@angular/router';
-import {DATE_FORMAT} from '../utils/dates';
+import {DATE_FORMAT} from '../../utils/dates';
 import * as moment from 'moment';
-import {NotificationService} from '../services/notification.service';
+import {NotificationService} from '../../services/notification.service';
 
 interface Query {
   city: string;

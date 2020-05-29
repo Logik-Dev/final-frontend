@@ -1,13 +1,13 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../../services/user.service';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../../models/user';
-import {TimeSlot} from '../../models/time-slot';
-import {DATE_FORMAT, TIME_FORMAT} from '../../utils/dates';
+import {User} from '../../../models/user';
+import {TimeSlot} from '../../../models/time-slot';
+import {DATE_FORMAT, TIME_FORMAT} from '../../../utils/dates';
 import * as moment from 'moment';
 import {MatDialog} from '@angular/material/dialog';
-import {Booking} from '../../models/booking';
-import {CommentDialogComponent} from '../../comment-dialog/comment-dialog.component';
+import {Booking} from '../../../models/booking';
+import {CommentDialogComponent} from './comment-dialog/comment-dialog.component';
 import {MatButton} from '@angular/material/button';
 
 @Component({

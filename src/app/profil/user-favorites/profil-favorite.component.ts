@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {Room} from '../../models/room';
+import {UserService} from '../../../services/user.service';
+import {Room} from '../../../models/room';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
