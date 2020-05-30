@@ -13,15 +13,13 @@ import {BookingService} from '../../services/booking.service';
 export class RoomComponent implements OnInit {
   room$: Observable<Room>;
   Arr = Array;
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private bookingService: BookingService) {}
+  constructor(private route: ActivatedRoute,
+              private roomService: RoomService) {}
 
   ngOnInit(): void {
     this.route.paramMap
       .subscribe(params => this.room$ = this.roomService.findById(params.get('id')));
   }
 
-  getUnitPrice(price: number): string {
-    return BookingService.getUnitPrice(price);
-  }
 }
 

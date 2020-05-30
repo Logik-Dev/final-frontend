@@ -38,24 +38,24 @@
 
   <div class="price" *ngIf="duration">
     <div class="price-row">
-      <div class="price-label">Tarif</div>
-      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price.toFixed(1)}}</div>
+      <div class="price-label">Tarif HT</div>
+      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price | unitPrice}}</div>
       <mat-icon>euros</mat-icon>
     </div>
     <div class="price-row">
-      <div class="price-label">Commission ({{COMMISSION}}%)</div>
-      <div class="price-value">{{commission}}</div>
+      <div class="price-label">Commission ({{COM}}%)</div>
+      <div class="price-value">{{room.price | commission: duration}}</div>
       <mat-icon>euros</mat-icon>
     </div>
     <div class="price-row">
       <div class="price-label">TVA ({{TVA}}%)</div>
-      <div class="price-value">{{tva}}</div>
+      <div class="price-value">{{room.price | tva: duration}}</div>
       <mat-icon>euros</mat-icon>
     </div>
     <mat-divider></mat-divider>
     <div class="price-row">
       <div class="price-label">Total TTC</div>
-      <div class="price-value">{{total}}</div>
+      <div class="price-value">{{room.price | total: duration}}</div>
       <mat-icon>euros</mat-icon>
     </div>
   </div>

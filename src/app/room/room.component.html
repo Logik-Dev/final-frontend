@@ -23,7 +23,7 @@
             <div class="property">
               <mat-icon class="icon">euro</mat-icon>
               <div class="label">Prix
-                <div class="value">{{getUnitPrice(room.price)}} euros/h</div>
+                <div class="value">{{room.price | unitPrice}} euros/h</div>
               </div>
             </div>
             <div class="property">

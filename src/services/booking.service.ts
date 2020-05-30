@@ -3,11 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Booking} from '../models/booking';
 import {ResourceService} from './resource.service';
 import {BookingSerializer} from '../utils/booking-serializer';
-import { Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {TimeSlot} from '../models/time-slot';
 import {DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT} from '../utils/dates';
-import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +18,6 @@ export class BookingService extends ResourceService<Booking> {
       'bookings',
       new BookingSerializer()
     );
-  }
-
-  static calculateTotalPrice(hours: number, price: number): number {
-    let result = hours * price;
-    result += result / 100 * environment.COMMISSION;
-    result += result / 100 * environment.TVA;
-    return parseFloat(result.toFixed(1));
-  }
-  static getUnitPrice(price: number) {
-    const com = price / 100 * environment.COMMISSION;
-    const tva = (price + com) / 100 * environment.TVA;
-    return (price + com + tva).toFixed(1);
   }
 
   static concatDateTime(start, end): Moment {
@@ -60,10 +47,9 @@ export class BookingService extends ResourceService<Booking> {
     return slots;
   }
 
-  getTotalHours(booking: Booking, roomPrice: number): number {
+  getTotalHours(booking: Booking): number {
     const hours = moment.duration(booking.slots[0].end.diff(booking.slots[0].start)).asHours();
     return hours * booking.slots.length;
 
   }
-
 }

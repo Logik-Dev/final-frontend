@@ -1,12 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../../../models/room';
 import {User} from '../../../models/user';
 import {UserService} from '../../../services/user.service';
 import {NotificationService} from '../../../services/notification.service';
 import {BehaviorSubject} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {BookingService} from '../../../services/booking.service';
-import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-room-card',
@@ -46,7 +43,5 @@ export class RoomCardComponent implements OnInit {
     }
 
   }
-  get price() {
-    return BookingService.getUnitPrice(this.room.price);
-  }
+
 }

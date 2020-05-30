@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BookingService} from '../../../../services/booking.service';
+import {COM, TVA} from '../../../../utils/price-utils';
 
 @Component({
   selector: 'app-price-dialog',
@@ -9,6 +11,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./price-dialog.component.scss']
 })
 export class PriceDialogComponent implements OnInit {
+  readonly TVA = TVA;
+  readonly COM = COM;
   price = new FormControl('');
   constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -23,24 +27,5 @@ export class PriceDialogComponent implements OnInit {
     }
   }
 
-  get commission() {
-    return (this.price.value / 100 * this.COMMISSION).toFixed(1);
-  }
-
-  get tva() {
-    return ((this.price.value + parseFloat(this.commission)) / 100 * this.TVA).toFixed(1);
-  }
-
-  get total() {
-    return (this.price.value + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(1);
-  }
-
-  get TVA() {
-    return environment.TVA;
-  }
-
-  get COMMISSION() {
-    return environment.COMMISSION;
-  }
 
 }

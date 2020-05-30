@@ -50,6 +50,10 @@ import {DaysDialogComponent} from './add-room/infos/days-dialog/days-dialog.comp
 import {RoomListPageComponent} from './rooms/room-list-page.component';
 import {RoomCardComponent} from './rooms/room-card/room-card.component';
 import {RoomListComponent} from './rooms/room-list/room-list.component';
+import { UnitPricePipe } from './unit-price.pipe';
+import { TvaPipe } from './tva.pipe';
+import { CommissionPipe } from './commission.pipe';
+import { TotalPipe } from './total.pipe';
 
 
 const routes: Routes = [
@@ -99,7 +103,11 @@ const routes: Routes = [
     PriceDialogComponent,
     EquipmentDialogComponent,
     EventTypeDialogComponent,
-    DaysDialogComponent
+    DaysDialogComponent,
+    UnitPricePipe,
+    TvaPipe,
+    CommissionPipe,
+    TotalPipe
   ],
     imports: [
         BrowserModule,

@@ -128,7 +128,7 @@
   <!--  Précédent / Suivant  -->
   <div class="step-buttons span-2">
     <button mat-raised-button matStepperPrevious class="btn-back">Précédent</button>
-    <button mat-raised-button matStepperNext class="btn-next" color="primary">Suivant</button>
+    <button mat-raised-button matStepperNext class="btn-next" color="primary" [disabled]="form.invalid">Suivant</button>
   </div>
 
 </form>

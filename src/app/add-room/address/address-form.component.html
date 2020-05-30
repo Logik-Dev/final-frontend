@@ -1,28 +1,37 @@
 <form [formGroup]="form" fxLayout="row wrap">
+
+  <!--  Ville  -->
   <mat-form-field appearance="outline" fxFlex="1 0 300px">
     <mat-label>Ville</mat-label>
     <input type="text" matInput [matAutocomplete]="cityComplete" formControlName="city">
     <mat-autocomplete #cityComplete [displayWith]="displayCity" (optionSelected)="onCitySelected()">
       <mat-option *ngFor="let city of cities$ | async" [value]="city">
-        {{city.nom +' (' + city.codeDepartement +')'}}
+        {{city.nom + ' (' + city.codeDepartement + ')'}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+
+  <!--  Code postal  -->
   <mat-form-field appearance="outline" fxFlex="2 0 150px">
     <mat-label>Code postal</mat-label>
     <input type="text" matInput [value]="zipCode" formControlName="zipCode">
   </mat-form-field>
+
+  <!--  Adresse  -->
   <mat-form-field appearance="outline" fxFlex="0 2 680px">
     <mat-label>Adresse</mat-label>
-    <input type="text" matInput  [matAutocomplete]="addressComplete" formControlName="label">
+    <input type="text" matInput [matAutocomplete]="addressComplete" formControlName="label">
     <mat-autocomplete #addressComplete [displayWith]="displayAddress" (optionSelected)="onAddressSelected()">
       <mat-option *ngFor="let address of addresses$ | async" [value]="address">
         {{address.properties.label}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <div class="step-buttons">
-    <button matStepperPrevious mat-raised-button class="btn-back">Revenir</button>
-    <button mat-raised-button class="btn-next" color="primary" [disabled]="form.invalid" matStepperNext>Valider</button>
+
+  <!--  Précédent / Suivant  -->
+  <div class="step-buttons span-2">
+    <button mat-raised-button matStepperPrevious class="btn-back">Précédent</button>
+    <button mat-raised-button matStepperNext class="btn-next" color="primary" [disabled]="form.invalid">Suivant</button>
   </div>
+
 </form>

@@ -48,16 +48,23 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
   }
 
   submit() {
-    const address: Address = this.addressForm.value;
-    address.label = this.addressForm.get('label').value.properties.name;
-    address.city = this.addressForm.get('city').value.nom;
+    // Infos
     const room: Room = this.roomInfosForm.value;
-    room.address = address;
     room.equipments = this.roomInfosForm.controls.equipments.value;
     room.availableDays = this.roomInfosForm.controls.availableDays.value;
     room.eventTypes = this.roomInfosForm.controls.eventTypes.value;
+
+    // Adresse
+    const address: Address = this.addressForm.value;
+    address.label = this.addressForm.get('label').value.properties.name;
+    address.city = this.addressForm.get('city').value.nom;
+    room.address = address;
+
+    // Photos
     const photos: File[] = [];
     this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
+
+    // Enregistrement
     this.roomService.create(room).subscribe(
       result =>
         this.uploadService.upload(photos, result.id).subscribe(

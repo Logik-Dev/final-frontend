@@ -10,7 +10,7 @@ import {Booking} from '../../../models/booking';
 import {TIME_FORMAT} from '../../../utils/dates';
 import {BookingService} from '../../../services/booking.service';
 import {UserService} from '../../../services/user.service';
-import {environment} from '../../../environments/environment';
+import {COM, totalPrice, TVA} from '../../../utils/price-utils';
 
 @Component({
   selector: 'app-booking-form',
@@ -19,17 +19,19 @@ import {environment} from '../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingFormComponent implements OnInit, OnDestroy {
-  @Input() room: Room;
-  @Output() closeDialog = new EventEmitter();
+  readonly TVA = TVA;
+  readonly COM = COM;
   form: FormGroup;
   weekRepetition = [1, 2, 3, 4, 5, 6, 7, 8];
   duration = 0;
   invalid = true;
+  @Input() room: Room;
+  @Output() closeDialog = new EventEmitter();
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               public us: UserService,
               public dialog: MatDialog,
-              private bookingService: BookingService) {
+              private bs: BookingService) {
     this.adapter.setLocale('fr');
   }
 
@@ -64,7 +66,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       this.duration = 0;
       if (!this.form.invalid && this.form.enabled) {
         const booking = this.createBooking();
-        this.duration = this.bookingService.getTotalHours(booking, this.room.price);
+        this.duration = this.bs.getTotalHours(booking);
       }
     });
   }
@@ -102,8 +104,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     const weekly = data.weekRepetition;
     const slots = BookingService.getSlots(start, end, begin, finish, weekly);
 
-    const price = BookingService.calculateTotalPrice(this.duration, this.room.price);
-    return {slots, client: {id: this.us.userId}, price , room: {id: this.room.id}};
+    const price = totalPrice(this.room.price, this.duration);
+    return {slots, client: {id: this.us.userId}, price: parseFloat(price) , room: {id: this.room.id}};
   }
   openDialog() {
     this.dialog.open(PaymentComponent, {
@@ -126,23 +128,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   }
   get endMax() {
     return this.startMax.add(1, 'week');
-  }
-  get commission() {
-    return ((this.room.price * this.duration) / 100 * this.COMMISSION).toFixed(1);
-  }
-
-  get tva() {
-    const result = (this.room.price * this.duration) + parseFloat(this.commission);
-    return (result / 100 * this.TVA).toFixed(1);
-  }
-  get total() {
-    return ((this.room.price * this.duration) + parseFloat(this.commission) + parseFloat(this.tva)).toFixed(1);
-  }
-  get COMMISSION(): number {
-    return environment.COMMISSION;
-  }
-  get TVA(): number {
-    return environment.TVA;
   }
 
   get f() {
