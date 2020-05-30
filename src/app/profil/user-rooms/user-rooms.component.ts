@@ -36,23 +36,37 @@ export class UserRoomsComponent implements OnInit, AfterViewInit {
       this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused')));
   }
 
+  /**
+   * Obtenir les salles
+   */
   fetchRooms() {
     this.rooms$ = this.roomService.findByChildId(this.user$.value.id);
   }
 
-  onClickDelete(id: number) {
+  /**
+   * Ouvrir la dialog de confirmation
+   * @param id l'identifiant de la salle à supprimer
+   */
+  openConfirmDialog(id: number) {
     this.dialog.open(this.confirmDialog, {data: id});
   }
 
-  closeDialog() {
-    this.dialog.closeAll();
-  }
-
+  /**
+   * Supprimer une salle
+   * @param id l'identifiant de la salle à supprimer
+   */
   deleteRoom(id: number) {
     this.roomService.delete(id).subscribe(_ => {
       this.notification.showSuccess('Salle supprimée');
       this.closeDialog();
       this.fetchRooms();
     });
+  }
+
+  /**
+   * Fermer la dialog
+   */
+  closeDialog() {
+    this.dialog.closeAll();
   }
 }

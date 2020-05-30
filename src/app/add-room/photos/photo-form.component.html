@@ -1,25 +1,36 @@
 
-  <form [formGroup]="form">
-    <button mat-raised-button  class="file-button" color="warn" (click)="onFileClick()" *ngIf="us.isLoggedIn | async; else unauthenticated">
-      <span>Ajouter une photo</span><mat-icon>cloud_download</mat-icon>
+  <!--  Bouton upload  -->
+  <button mat-raised-button class="file-button" color="warn" (click)="onFileClick()"
+          *ngIf="us.isLoggedIn | async; else unauthenticated">
+    <span>Ajouter une photo</span>
+    <mat-icon>cloud_download</mat-icon>
+  </button>
+  <input type="file" (change)="addFile($event)" class="fileinput" #fileInput accept=".jpg, .png, .jpeg">
+
+  <!-- Non Authentifié  -->
+  <ng-template #unauthenticated>
+    <p class="unauthenticated">Pour ajouter une salle, veuillez vous <a routerLink="/connexion">connecter</a></p>
+  </ng-template>
+
+  <!--  Preview  -->
+  <div class="preview" *ngIf="formArray.length" fxLayout="row wrap" fxLayoutAlign="center">
+    <div class="img-container mat-elevation-z4" *ngFor="let photo of formArray.controls; let i = index;">
+      <img [src]="photo.value.url" alt="">
+
+      <!-- Supprimer  -->
+      <button mat-icon-button (click)="deletePhoto(i)" title="supprimer la photo">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!--  Précédent / Suivant  -->
+  <div class="step-buttons">
+    <div class="btn-back">
+      <mat-icon matTooltip="Entre 3 et 6 photos au format paysage (5Mb max par photo)">info</mat-icon>
+    </div>
+    <button color="primary" mat-raised-button matStepperNext [disabled]="!(formArray.length > 2) || !us.isLoggedIn"
+            class="btn-next">Suivant
     </button>
-    <ng-template #unauthenticated>
-      <p class="unauthenticated">Pour ajouter une salle, veuillez vous <a routerLink="/connexion">connecter</a></p>
-    </ng-template>
-    <input type="file" (change)="addFile($event)" class="fileinput" #fileInput accept=".jpg, .png, .jpeg">
-    <div class="preview" *ngIf="photos.length" fxLayout="row wrap" fxLayoutAlign="center">
-      <div class="img-container mat-elevation-z4" *ngFor="let photo of photos.controls; let i = index;">
-        <img [src]="photo.value.url" alt="">
-        <button mat-icon-button (click)="deletePhoto(i)" title="supprimer la photo">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="step-buttons">
-      <div class="btn-back">
-        <mat-icon matTooltip="Entre 3 et 6 photos au format paysage (5Mb max par photo)">info</mat-icon>
-      </div>
-      <button color="primary" mat-raised-button matStepperNext [disabled]="!(photos.length > 2) || !us.isLoggedIn" class="btn-next">Suivant</button>
-    </div>
-  </form>
+  </div>
 

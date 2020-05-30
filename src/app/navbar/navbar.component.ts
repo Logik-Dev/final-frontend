@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   types$: Observable<RoomType[]>;
   events$: Observable<EventType[]>;
   equipments$: Observable<Equipment[]>;
+
   constructor(public us: UserService,
               private roomTypeService: RoomTypeService,
               private eventTypeService: EventTypeService,
@@ -32,23 +33,28 @@ export class NavbarComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.getUser();
-    this.getTypes();
-    this.getEvents();
-    this.getEquipments();
+    this.fetchUser();
+    this.fetchTypes();
+    this.fetchEvents();
+    this.fetchEquipments();
   }
-  getUser() {
+
+  fetchUser() {
     this.user$ = this.us.currentUser;
   }
-  getTypes() {
+
+  fetchTypes() {
     this.types$ = this.roomTypeService.findAll();
   }
-  getEvents() {
+
+  fetchEvents() {
     this.events$ = this.eventTypeService.findAll();
   }
-  getEquipments() {
+
+  fetchEquipments() {
     this.equipments$ = this.equipmentService.findAll();
   }
+
   aroundMe() {
     this.geoService.getPosition().subscribe(
       coords => this.router.navigate(['salles', coords])

@@ -1,17 +1,24 @@
 <div class="bar">
+  <!--  Réserver  -->
   <div class="item" (click)="openDialog()">
     <mat-icon>booking</mat-icon>
     <div class="label">Réserver</div>
   </div>
+
+  <!--  Ajouter aux favoris  -->
   <div class="item">
     <mat-icon>favorite</mat-icon>
     <div class="label">Favoris</div>
   </div>
+
+  <!--  Laisser un message  -->
   <div class="item">
     <mat-icon>mail</mat-icon>
     <div class="label">Message</div>
   </div>
 </div>
+
+<!-- Dialog réservation  -->
 <ng-template #dialogRef let-data>
   <app-booking-form [room]="room" (closeDialog)="closeDialog()"></app-booking-form>
 </ng-template>

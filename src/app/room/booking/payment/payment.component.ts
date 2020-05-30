@@ -5,6 +5,8 @@ import {NotificationService} from '../../../../services/notification.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Booking} from '../../../../models/booking';
 import {DATE_FORMAT} from '../../../../utils/dates';
+import {UserService} from '../../../../services/user.service';
+
 declare var paypal;
 
 interface BookingData {
@@ -18,42 +20,63 @@ interface BookingData {
 })
 export class PaymentComponent implements OnInit {
   @ViewChild('paypal', {static: true}) paypalElement: ElementRef;
+
   constructor(private bookingService: BookingService,
               private router: Router,
               private notification: NotificationService,
-              @Inject(MAT_DIALOG_DATA) public data: BookingData) { }
+              private us: UserService,
+              @Inject(MAT_DIALOG_DATA) public data: BookingData) {
+  }
 
   ngOnInit(): void {
-    const slots = this.data.booking.slots;
-    paypal
-      .Buttons({
-        createOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                description: `Réservation du ${slots[0].start.format(DATE_FORMAT)}` +
-                  ` au ${slots[slots.length - 1].end.format(DATE_FORMAT)}`,
-                amount: {
-                  currency_code: 'EUR',
-                  value: this.data.booking.price
-                }
-              }
-            ]
-          });
-        },
-        onApprove: async (data, actions) => {
-          this.makeRequest();
-          const order = await actions.order.capture();
-        }
-      })
+    this.generatePaypalButtons();
+  }
+
+  /**
+   * Créer les boutons Paypal
+   */
+  generatePaypalButtons() {
+    paypal.Buttons({createOrder: this.createOrder(), onApprove: this.onApprove()})
       .render(this.paypalElement.nativeElement);
   }
-  makeRequest() {
-    this.bookingService.create(this.data.booking).subscribe(
-      result => {
-        this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
-        this.router.navigateByUrl(`/salles`);
 
+  /**
+   * Initialiser le paiment par paypal
+   */
+  createOrder() {
+    return (data, actions) => {
+      const slots = this.data.booking.slots;
+      const price = this.data.booking.price;
+      return actions.order.create({
+        purchase_units: [{
+          description: `Réservation du ${slots[0].start.format(DATE_FORMAT)}` +
+            ` au ${slots[slots.length - 1].end.format(DATE_FORMAT)}`,
+          amount: {currency_code: 'EUR', value: price}
+        }]
+      });
+    };
+  }
+
+  /**
+   * Paiment autorisé par le client
+   */
+  onApprove() {
+    return async (data, actions) => {
+      const order = await actions.order.capture();
+      console.log(order);
+      this.saveBooking();
+    };
+  }
+
+  /**
+   * Effectuer la requête d'enregistrement de la résevation
+   */
+  saveBooking() {
+    this.bookingService.create(this.data.booking).subscribe(_ => {
+        this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
+        this.us.refreshUser().subscribe(() =>
+          this.router.navigateByUrl(`/profil/réservations`).finally()
+        );
       }
     );
   }

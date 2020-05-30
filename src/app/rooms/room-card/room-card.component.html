@@ -1,37 +1,59 @@
- <div class="card mat-elevation-z2"  *ngIf="room">
-  <div class="card-img" >
+<div class="card mat-elevation-z2" *ngIf="room">
+
+  <!--  Photo -->
+  <div class="card-img">
     <img [src]="room.photos[0]?.url" alt="">
+
+    <!--  Note  -->
     <div class="rating">
       <mat-icon *ngFor="let star of Arr(room.rating).fill('grade')">{{star}}</mat-icon>
     </div>
   </div>
+
+  <!--  Infos  -->
   <div class="card-infos">
+
+    <!--  Nom  -->
     <h2 class="card-title">{{room.name | titlecase}}</h2>
+
+    <!--  Adresse  -->
     <div class="address">
       <mat-icon>place</mat-icon>
       {{room.address.city}} {{room.address.zipCode}}
     </div>
+
+    <!--  Capacité  -->
     <div class="capacity">
       <mat-icon>person</mat-icon>
       {{room.maxCapacity}} personnes max.
     </div>
+
+    <!--  Prix  -->
     <div class="room-price">
       <mat-icon>euros</mat-icon>
       {{room.price | unitPrice}} euros/h
     </div>
+
+    <!--  Surface  -->
     <div class="surface">
       <mat-icon>aspect_ratio</mat-icon>
       {{room.size}} m²
     </div>
+
+    <!-- Boutons -->
     <div class="btn-container">
-      <button class="btn-favorite" mat-icon-button [ngClass]="favorite && 'favorite'" (click)="setFavorite()" type="button">
+
+      <!-- Ajouter aux favoris  -->
+      <button class="btn-favorite" mat-icon-button [ngClass]="favorite && 'favorite'" (click)="setFavorite()"
+              type="button">
         <mat-icon class="icon-favorite">favorite</mat-icon>
       </button>
+
+      <!--  Voir le détail  -->
       <button class="btn-more" mat-stroked-button [routerLink]="['/salles', room.id]">
         En détail
       </button>
     </div>
-
   </div>
 </div>
 

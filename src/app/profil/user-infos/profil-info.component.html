@@ -1,34 +1,50 @@
 <div class="container" ngClass.xs="xs">
   <form [formGroup]="form" ngClass.gt-xs="sm" class="update-form mat-elevation-z8">
+
+    <!--  Prénom  -->
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstname">
       <mat-icon matSuffix>face</mat-icon>
     </mat-form-field>
+
+    <!--  Nom  -->
     <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastname">
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
+
+    <!--  Email  -->
     <mat-form-field appearance="outline" class="large-input">
       <mat-label>Adresse email</mat-label>
       <input type="email" matInput formControlName="email">
       <mat-icon matSuffix>mail</mat-icon>
     </mat-form-field>
+
+    <!--  Mot de passe  -->
     <mat-form-field appearance="outline">
       <mat-label>Nouveau mot de passe</mat-label>
       <input type="password" matInput formControlName="password">
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
+
+    <!--  Confirmation du mot de passe  -->
     <mat-form-field appearance="outline">
       <mat-label>Vérifier le mot de passe</mat-label>
       <input type="password" matInput formControlName="passwordCheck">
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
-    <button mat-stroked-button color="primary" (click)="updateClick()" #dialogButtons>
+
+    <!--  Modifier les infos -->
+    <button mat-stroked-button color="primary" (click)="openConfirmDialog(true)" #dialogButtons>
       Modifier mes infos
     </button>
-    <button mat-stroked-button color="warn" (click)="deleteClick()" #dialogButtons>Supprimer mon compte</button>
+
+    <!--  Supprimer le compte  -->
+    <button mat-stroked-button color="warn" (click)="openConfirmDialog(false)" #dialogButtons>Supprimer mon compte</button>
+
+    <!--  Dialog de confirmation  -->
     <ng-template #confirmDialog let-data>
       <div class="confirm-dialog">
         <p>Etes vous sur de vouloir

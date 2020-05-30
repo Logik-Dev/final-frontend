@@ -13,6 +13,13 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.createMap();
+  }
+
+  /**
+   * Créer la carte leaflet
+   */
+  createMap(): void {
     const map = L.map('map').setView([this.latitude, this.longitude], 15);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: 'Localisation'
@@ -20,7 +27,6 @@ export class MapComponent implements OnInit {
     const myIcon = L.icon({
       iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
     });
-    L.marker([this.latitude, this.longitude], {icon: myIcon}).bindPopup(this.address).addTo(map).openPopup()
+    L.marker([this.latitude, this.longitude], {icon: myIcon}).bindPopup(this.address).addTo(map).openPopup();
   }
-
 }

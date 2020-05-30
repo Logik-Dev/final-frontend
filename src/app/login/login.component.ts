@@ -15,12 +15,24 @@ export class LoginPageComponent implements OnInit {
               private location: Location) { }
 
   ngOnInit(): void {
+    this.createForm();
+  }
+
+  /**
+   * Créer le formulaire
+   */
+  createForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
-  onSubmit(data) {
+
+  /**
+   * Connexion et redirection
+   * @param data les données du formulaire
+   */
+  onSubmit(data): void {
     if (this.loginForm.valid) {
       this.us.login(data.email, data.password)
         .subscribe(_ => this.location.back());

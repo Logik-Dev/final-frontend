@@ -1,6 +1,9 @@
+<!--  Liste des salles  -->
 <div class="container" *ngIf="(rooms$ | async) && (rooms$ |async).length; else noFavorites">
-  <app-room-list [rooms]="rooms$ | async" ></app-room-list>
+  <app-room-list [rooms]="rooms$ | async"></app-room-list>
 </div>
+
+<!--  Aucune salle  -->
 <ng-template #noFavorites>
   <p class="no-favorites">Vous n'avez aucune salle favorite</p>
 </ng-template>

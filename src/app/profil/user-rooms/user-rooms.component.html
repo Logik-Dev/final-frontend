@@ -1,46 +1,52 @@
 <div class="container" *ngIf="(rooms$ | async)?.length">
   <table mat-table [dataSource]="rooms$" class="mat-elevation-z8">
 
-    <!-- Name Column -->
+    <!-- Nom -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <th mat-header-cell *matHeaderCellDef> Nom</th>
       <td mat-cell *matCellDef="let room"> {{room.name}} </td>
     </ng-container>
 
-    <!-- City Column -->
+    <!-- Ville -->
     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Ville </th>
+      <th mat-header-cell *matHeaderCellDef> Ville</th>
       <td mat-cell *matCellDef="let room"> {{room.address.city}} </td>
     </ng-container>
 
-    <!-- Price Column -->
+    <!-- Prix -->
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Prix </th>
+      <th mat-header-cell *matHeaderCellDef> Prix</th>
       <td mat-cell *matCellDef="let room"> {{room.price}} </td>
     </ng-container>
 
-    <!-- Size   -->
+    <!-- Surface  -->
     <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef> Taille </th>
+      <th mat-header-cell *matHeaderCellDef> Surface</th>
       <td mat-cell *matCellDef="let room"> {{room.size}} </td>
     </ng-container>
 
-    <!-- Bookings -->
+    <!-- Réservations -->
     <ng-container matColumnDef="bookings">
-      <th mat-header-cell *matHeaderCellDef> Réservations </th>
+      <th mat-header-cell *matHeaderCellDef> Réservations</th>
       <td mat-cell *matCellDef="let room"> {{room.bookings.length}} </td>
     </ng-container>
 
     <!-- Actions -->
-    <ng-container  matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Edition </th>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Edition</th>
       <td mat-cell *matCellDef="let room">
+
+        <!--  Modifier  -->
         <button mat-icon-button #dialogButtons>
           <mat-icon class="update-icon">edit</mat-icon>
         </button>
-        <button mat-icon-button (click)="onClickDelete(room.id)"  #dialogButtons>
+
+        <!--  Supprimer  -->
+        <button mat-icon-button (click)="openConfirmDialog(room.id)" #dialogButtons>
           <mat-icon class="delete-icon">delete</mat-icon>
         </button>
+
+        <!--  Dialog confirmation  -->
         <ng-template #confirmDialog let-data>
           <div class="confirm-dialog">
             <p>Etes vous sûr de vouloir supprimer cette salle ?</p>

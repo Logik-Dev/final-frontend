@@ -47,6 +47,7 @@ export class BookingService extends ResourceService<Booking> {
     return slots;
   }
 
+
   getTotalHours(booking: Booking): number {
     const hours = moment.duration(booking.slots[0].end.diff(booking.slots[0].start)).asHours();
     return hours * booking.slots.length;

@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {RoomService} from '../../services/room.service';
 import {Observable} from 'rxjs';
 import {Room} from '../../models/room';
-import {BookingService} from '../../services/booking.service';
 
 @Component({
   selector: 'app-room',

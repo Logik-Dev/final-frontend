@@ -28,29 +28,49 @@ export class UserBookingsComponent implements OnInit {
     this.user$ = this.us.currentUser;
   }
 
-  getFirstDate(timeSlots: TimeSlot[]) {
+  /**
+   * Obtenir la date de début de la réservation
+   * @param timeSlots les TimeSlot de la réservation
+   */
+  getFirstDate(timeSlots: TimeSlot[]): string {
     const filtered = timeSlots.reduce((slot1, slot2) => {
       return slot1.start < slot2.start ? slot1 : slot2;
     });
     return moment(filtered.start).format(DATE_FORMAT);
   }
 
-  getLastDate(timeSlots: TimeSlot[]) {
+  /**
+   * Obtenir la date de fin de la réservation
+   * @param timeSlots les TimeSlot de la réservation
+   */
+  getLastDate(timeSlots: TimeSlot[]): string {
     const filtered = timeSlots.reduce((slot1, slot2) => {
       return slot1.end > slot2.end ? slot1 : slot2;
     });
     return moment(filtered.end).format(DATE_FORMAT);
   }
 
-  getStartHour(timeSlots: TimeSlot[]) {
+  /**
+   * Obtenir l'heure de début de la réservation
+   * @param timeSlots les TimeSlot de la réservation
+   */
+  getStartHour(timeSlots: TimeSlot[]): string {
     return moment(timeSlots[0].start).format(TIME_FORMAT);
   }
 
-  getEndHour(timeSlots: TimeSlot[]) {
+  /**
+   * Obtenir l'heure de fin de la réservation
+   * @param timeSlots les TimeSlot de la réservation
+   */
+  getEndHour(timeSlots: TimeSlot[]): string {
     return moment(timeSlots[0].end).format(TIME_FORMAT);
   }
 
-  openDialog(booking: Booking) {
+  /**
+   * Ouvrir la dialog commentaire
+   * @param booking la réservation concernée
+   */
+  openDialog(booking: Booking): void {
     const dialogRef = this.dialog.open(CommentDialogComponent, {
       data: {
         lastDate: this.getLastDate(booking.slots),
@@ -59,8 +79,13 @@ export class UserBookingsComponent implements OnInit {
       },
       panelClass: 'dialog-form'
     });
-    dialogRef.afterClosed().subscribe(_ =>
-      this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused')));
+    dialogRef.afterClosed().subscribe(_ => this.clearIconFocus());
   }
 
+  /**
+   * Supprimer le focus des icones après fermeture de la dialog
+   */
+  clearIconFocus(): void {
+    this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused'));
+  }
 }

@@ -1,7 +1,7 @@
 import {AfterContentChecked, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
 import {PhotoFormComponent} from './photos/photo-form.component';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import {AddressFormComponent} from './address/address-form.component';
 import {Room} from '../../models/room';
 import {RoomService} from '../../services/room.service';
@@ -22,7 +22,7 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
   @ViewChild(PhotoFormComponent) photoFormComponent: PhotoFormComponent;
   @ViewChild(RoomInfosFormComponent) roomInfosFormComponent: RoomInfosFormComponent;
   @ViewChild(AddressFormComponent) addressFormComponent: AddressFormComponent;
-  photoForm: FormGroup;
+  photoForm: FormArray;
   roomInfosForm: FormGroup;
   addressForm: FormGroup;
   mobile = true;
@@ -41,12 +41,15 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked(): void {
     this.cd.detectChanges();
-    this.photoForm = this.photoFormComponent.form;
+    this.photoForm = this.photoFormComponent.formArray;
     this.roomInfosForm = this.roomInfosFormComponent.form;
     this.addressForm = this.addressFormComponent.form;
 
   }
 
+  /**
+   * Remplir l'objet Room puis effectuer les requêtes (photos et salle)
+   */
   submit() {
     // Infos
     const room: Room = this.roomInfosForm.value;
@@ -76,6 +79,10 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
     );
   }
 
+  /**
+   * Définir la variable mobile pour afficher le formulaire adapté (horizontal ou vertical)
+   * @param event surveiller le redimensionnement
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.mobile = event.target.innerWidth <= 600;

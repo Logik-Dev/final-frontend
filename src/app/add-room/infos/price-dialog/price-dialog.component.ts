@@ -14,13 +14,21 @@ export class PriceDialogComponent implements OnInit {
   readonly TVA = TVA;
   readonly COM = COM;
   price = new FormControl('');
-  constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  constructor(public matDialogRef: MatDialogRef<PriceDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+
+  /**
+   * Initialiser le champ prix si fourni
+   */
   ngOnInit(): void {
     this.data.price && this.price.setValue(this.data.price);
   }
 
+  /**
+   * Fermer la dialog
+   */
   onSubmit() {
     if (this.price.value) {
       this.matDialogRef.close(this.price.value);

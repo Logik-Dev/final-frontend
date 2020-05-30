@@ -1,6 +1,9 @@
+<!--  Banière  -->
 <div class="banner" ngClass.xs="xs">
   <form [formGroup]="searchForm" class="search-form" (ngSubmit)="submitForm(searchForm.value)">
-    <mat-form-field appearance="fill" >
+
+    <!--    Input ville  -->
+    <mat-form-field appearance="fill">
       <mat-label>Localisation</mat-label>
       <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="city">
       <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayCity">
@@ -8,26 +11,32 @@
           <mat-icon matSuffix>place</mat-icon>
           Autour de moi
         </mat-option>
-        <mat-option *ngFor="let city of cities" [value]="city" >
-          {{city.nom +' (' + city.codeDepartement +')'}}
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{city.nom + ' (' + city.codeDepartement + ')'}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
+
+    <!--  Input date  -->
     <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date" (focus)="picker.open()" [min]="min">
-      <mat-datepicker #picker ></mat-datepicker>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+    <!--  Rechercher  -->
     <button type="submit" mat-flat-button class="btn-submit">Rechercher</button>
   </form>
 </div>
+
+<!--  Présentation  -->
 <div class="container" ngClass.gt-xs="sm">
   <div class="presentation-item">
     <mat-icon>search</mat-icon>
     <h3 class="presentation-title">Trouvez la salle adaptée à votre besoin</h3>
     <p class="presentation-subtitle">Capacité, prix et notes des utilisateurs</p>
   </div>
-  <div class="presentation-item" >
+  <div class="presentation-item">
     <mat-icon>add</mat-icon>
     <h3 class="presentation-title">Ajoutez facilement une salle</h3>
     <p class="presentation-subtitle">Il suffit de vous inscrire</p>
@@ -37,5 +46,4 @@
     <h3 class="presentation-title">Partagez votre expérience</h3>
     <p class="presentation-subtitle">En notant et commentant les salles</p>
   </div>
-
 </div>

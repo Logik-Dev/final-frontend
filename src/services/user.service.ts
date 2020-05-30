@@ -55,6 +55,12 @@ export class UserService extends ResourceService<User> {
     this.router.navigate(['/connexion']).finally();
   }
 
+  refreshUser() {
+    return this.findById(this.currentUser.value.id).pipe(
+      tap(user => this.storedUser = user)
+    );
+  }
+
   get token(): string {
     return sessionStorage.getItem('jwt');
   }

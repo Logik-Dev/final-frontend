@@ -1,63 +1,100 @@
 <nav ngClass.sm="sm">
+  <!--  Menu burger (mobile)  -->
   <div class="burger" fxHide.gt-sm>
     <button mat-icon-button (click)="toggleMenu.emit()" class="burger-btn">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
+
+  <!--  Logo  -->
   <div class="logo" routerLink="/">
     TocTocToc
   </div>
 
+  <!--  Menu desktop -->
   <div class="menu" fxHide.lt-md>
+
+    <!--  Ajouter une salle  -->
     <button mat-stroked-button class="btn" routerLink="/ajouter">
       <mat-icon>add</mat-icon>
       <span>Ajouter une salle</span>
     </button>
-    <button mat-stroked-button  class="room-btn btn" routerLink="/salles">
+
+    <!--  Toutes les salles  -->
+    <button mat-stroked-button class="room-btn btn" routerLink="/salles">
       <mat-icon>list</mat-icon>
       <span>Toutes les salles</span>
     </button>
+
+    <!--  Salles par critère  -->
     <button mat-stroked-button class="room-btn btn" [matMenuTriggerFor]="menus">
       <mat-icon>search</mat-icon>
       <span>Trouver</span>
     </button>
+
+    <!--  Sous menus -->
     <mat-menu #menus>
+
+      <!--  Autour de moi  -->
       <button mat-menu-item (click)="aroundMe()">
         <mat-icon>place</mat-icon>
         <span>Autour de moi</span>
       </button>
+
+      <!--  Par type  -->
       <button mat-menu-item [matMenuTriggerFor]="typesMenu">
         <mat-icon>category</mat-icon>
         <span>Type</span>
       </button>
+
+      <!--  Par évènement  -->
       <button mat-menu-item [matMenuTriggerFor]="eventsMenu">
         <mat-icon>cake</mat-icon>
         <span>Evènement</span>
       </button>
+
+      <!--  Par équipement  -->
       <button mat-menu-item [matMenuTriggerFor]="equipmentsMenu">
         <mat-icon>mic</mat-icon>
         <span>Equipement</span>
       </button>
     </mat-menu>
+
+    <!--  Types  -->
     <mat-menu #typesMenu>
-      <button mat-menu-item *ngFor="let type of types$ | async" [routerLink]="['salles', {type: type.id}]">{{type.id | titlecase}}</button>
+      <button mat-menu-item *ngFor="let type of types$ | async"
+              [routerLink]="['salles', {type: type.id}]">{{type.id | titlecase}}</button>
     </mat-menu>
+
+    <!--  Evènements  -->
     <mat-menu #eventsMenu>
-      <button mat-menu-item *ngFor="let event of events$ | async" [routerLink]="['salles', {event: event.id}]">{{event.id | titlecase}}</button>
+      <button mat-menu-item *ngFor="let event of events$ | async"
+              [routerLink]="['salles', {event: event.id}]">{{event.id | titlecase}}</button>
     </mat-menu>
+
+    <!--  Equipements  -->
     <mat-menu #equipmentsMenu>
-      <button mat-menu-item *ngFor="let equipment of equipments$ | async" [routerLink]="['salles', {equipment: equipment.id}]">{{equipment.id | titlecase}}</button>
+      <button mat-menu-item *ngFor="let equipment of equipments$ | async"
+              [routerLink]="['salles', {equipment: equipment.id}]">{{equipment.id | titlecase}}</button>
     </mat-menu>
   </div>
+
+  <!--  Boutons utilisateur -->
   <div class="account-buttons" fxHide.lt-md>
+
+    <!--  Non authentifié  -->
     <div class="unauthenticated-buttons" *ngIf="!(us.isLoggedIn | async); else userButton">
       <button class="register" mat-flat-button routerLink="/enregistrement">S'inscrire</button>
       <button class="connexion" mat-flat-button routerLink="/connexion">Se connecter</button>
     </div>
+
+    <!--  Authentifié  -->
     <ng-template #userButton>
       <button mat-icon-button class="user-menu-btn" [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
       </button>
+
+      <!--  Menu utilisateur  -->
       <mat-menu #userMenu>
         <button mat-menu-item routerLink="/profil">Profil</button>
         <button mat-menu-item routerLink="/profil/favoris">Mes favoris</button>

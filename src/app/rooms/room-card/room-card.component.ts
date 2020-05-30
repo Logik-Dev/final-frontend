@@ -26,6 +26,9 @@ export class RoomCardComponent implements OnInit {
     this.favorite = this.isFavorite();
   }
 
+  /**
+   * Vérifier si la salle est dans les favoris de l'utilisateur
+   */
   isFavorite(): boolean {
     if (this.user$.value) {
       const favorites = this.user$.value.favorites.filter(room => room.id === this.room.id);
@@ -34,6 +37,9 @@ export class RoomCardComponent implements OnInit {
 
   }
 
+  /**
+   * Ajouter ou supprimer la salle des favoris
+   */
   setFavorite() {
     if (this.user$.value) {
       this.favorite = !this.favorite;

@@ -1,11 +1,11 @@
 <div class="title">Définir les disponibilités</div>
 
 <div class="dialog-container" ngClass.xs="xs">
-  <!--  Tout les jours  -->
+  <!--  Checkbox tous les jours  -->
   <mat-checkbox (change)="allDaysSelected($event)" #allDays [checked]="formArray.value.length === 7">Tout les jours
   </mat-checkbox>
 
-  <!--  Jours  -->
+  <!--  Checkbox pour chaque jour  -->
   <mat-checkbox *ngFor="let day of days" [value]="day" (change)="daySelected($event)" [disabled]="allDays.checked"
                 [checked]="isChecked(day)">{{day | titlecase}}</mat-checkbox>
 

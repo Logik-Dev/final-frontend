@@ -14,10 +14,16 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Propager l'évènement de fermeture
+   */
   doClose() {
     this.sidenavClose.emit();
   }
 
+  /**
+   * Déconnecter l'utilisateur
+   */
   logout() {
     this.us.logout();
     this.doClose();

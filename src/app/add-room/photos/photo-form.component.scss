@@ -1,63 +1,72 @@
 @import "src/variables";
 @import "src/mixins";
-form {
-  .fileinput {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+
+.fileinput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-button {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    font-size: 1.4rem;
+    margin: 0 0 0 5px;
   }
-  .file-button {
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    mat-icon {
-      font-size: 1.4rem;
-      margin: 0 0 0 5px;
+}
+
+.preview {
+  margin-top: 1rem;
+
+  .img-container {
+    position: relative;
+    background-color: lightgray;
+    margin: 15px;
+
+    img {
+      object-fit: cover;
+      width: 200px;
+      height: 130px;
     }
-  }
-  .preview {
-    margin-top: 1rem;
-    .img-container {
-      position: relative;
-      background-color: lightgray;
-      margin: 15px;
 
-      img {
-        object-fit: cover;
-        width: 200px;
-        height: 130px;
-      }
+    button {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background-color: rgba(255, 255, 255, .8);
 
-      button {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        background-color: rgba(255,255,255,.8);
-        mat-icon {
-          color: red;
-        }
+      mat-icon {
+        color: red;
       }
     }
   }
 }
+
 .step-buttons {
   align-items: center;
   margin-top: 2rem;
 }
+
 .btn-back {
   font-size: 1.1rem;
   @include icon(1.2em, 1.5em, grey);
+
   .mat-icon {
     display: flex;
     align-items: center;
   }
 
 }
+
 .unauthenticated {
   text-align: center;
+
   a {
     text-decoration: none;
     color: $primary-color;

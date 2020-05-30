@@ -14,11 +14,19 @@ export class StickyBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  /**
+   * Ouvrir la dialog réservation
+   */
   openDialog(): void {
     this.dialog.open(this.dialogRef, {
       panelClass: 'booking-dialog'
     });
   }
+
+  /**
+   * Fermer la dialog
+   */
   closeDialog(): void {
     this.dialog.closeAll();
   }

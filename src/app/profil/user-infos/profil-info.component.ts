@@ -34,11 +34,14 @@ export class ProfilInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dialog.afterAllClosed.subscribe(_ =>
-      this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused'))
+    this.dialog.afterAllClosed.subscribe(
+      _ => this.clearIconsFocus()
     );
   }
 
+  /**
+   * Créer le formulaire
+   */
   createForm() {
     this.form = this.fb.group({
       firstname: [this.user$.value.firstname, Validators.required],
@@ -49,14 +52,12 @@ export class ProfilInfoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateClick() {
-    this.dialog.open(this.confirmDialog, {
-      data: {update: true}
-    });
-  }
-
+  /**
+   * Mettre à jour les infos de l'utilisateur
+   */
   updateUser() {
     this.closeDialog();
+    // Remplir l'objet User
     const userToUpdate: User = {};
     for (const key in this.form.value) {
       if (this.form.value[key]) {
@@ -64,6 +65,8 @@ export class ProfilInfoComponent implements OnInit, AfterViewInit {
       }
     }
     userToUpdate.id = this.user$.value.id;
+
+    // Effectuer la requête de modification
     this.us.update(userToUpdate)
       .subscribe(_ => {
         this.notification.showSuccess('Profil modifié !');
@@ -71,12 +74,19 @@ export class ProfilInfoComponent implements OnInit, AfterViewInit {
       });
   }
 
-  deleteClick() {
+  /**
+   * Ouvrir la dialog de confirmation
+   * @param update true si c'est une mise à jour false si c'est une suppression
+   */
+  openConfirmDialog(update: boolean): void {
     this.dialog.open(this.confirmDialog, {
-      data: {update: false}
+      data: {update}
     });
   }
 
+  /**
+   * Supprimer le compte utilisateur
+   */
   deleteUser() {
     this.closeDialog();
     this.us.delete(this.user$.value.id)
@@ -86,9 +96,18 @@ export class ProfilInfoComponent implements OnInit, AfterViewInit {
       });
   }
 
-  closeDialog() {
-    this.dialog.closeAll();
+  /**
+   * Supprimer le focus sur les icones après fermeture de la dialog
+   */
+  clearIconsFocus(): void {
+    this.dialogButtons.forEach(b => b._getHostElement().classList.remove('cdk-program-focused'));
   }
 
+  /**
+   * Fermer la dialog
+   */
+  closeDialog(): void {
+    this.dialog.closeAll();
+  }
 
 }

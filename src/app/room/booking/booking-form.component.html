@@ -1,68 +1,101 @@
 <div class="container mat-elevation-z8">
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form" ngClass.xs="xs">
-  <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
-  <mat-error *ngIf="form.errors" class="errors">
-    <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
-    <span *ngIf="form.errors.dateUnavailable">Ce créneau est déjà réservé</span>
-  </mat-error>
-  <ng-template #unauthenticated>
-    <div class="unauthenticated">Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a></div>
-  </ng-template>
-  <mat-form-field appearance="outline" class="startDate">
-    <mat-label>Date</mat-label>
-    <input matInput [matDatepicker]="startpicker" formControlName="startDate" [min]="startMin" [max]="startMax" [matDatepickerFilter]="filterDays()">
-    <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
-    <mat-datepicker #startpicker [disabled]="!(us.isLoggedIn | async)"></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="startTime">
-    <mat-label>Début</mat-label>
-    <input type="time" matInput formControlName="startTime">
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="endTime">
-    <mat-label>Fin</mat-label>
-    <input type="time" matInput formControlName="endTime">
-  </mat-form-field>
-  <mat-checkbox formControlName="weekly" class="weekly">Recurrente</mat-checkbox>
-  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline"  class="weekRepetition">
-    <mat-label>Toutes les</mat-label>
-    <mat-select formControlName="weekRepetition">
-      <mat-option *ngFor="let repeat of weekRepetition" [value]="repeat">{{repeat}} semaines</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" id="end" class="endDate">
-    <mat-label>Termine le</mat-label>
-    <input matInput [matDatepicker]="endpicker" formControlName="endDate" [min]="endMin" [max]="endMax" [matDatepickerFilter]="filterDays()">
-    <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
-    <mat-datepicker #endpicker [startAt]="endMin" disabled="false"></mat-datepicker>
-  </mat-form-field>
+  <form [formGroup]="form" class="booking-form" ngClass.xs="xs">
 
-  <div class="price" *ngIf="duration">
-    <div class="price-row">
-      <div class="price-label">Tarif HT</div>
-      <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price | unitPrice}}</div>
-      <mat-icon>euros</mat-icon>
-    </div>
-    <div class="price-row">
-      <div class="price-label">Commission ({{COM}}%)</div>
-      <div class="price-value">{{room.price | commission: duration}}</div>
-      <mat-icon>euros</mat-icon>
-    </div>
-    <div class="price-row">
-      <div class="price-label">TVA ({{TVA}}%)</div>
-      <div class="price-value">{{room.price | tva: duration}}</div>
-      <mat-icon>euros</mat-icon>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="price-row">
-      <div class="price-label">Total TTC</div>
-      <div class="price-value">{{room.price | total: duration}}</div>
-      <mat-icon>euros</mat-icon>
-    </div>
-  </div>
-  <button mat-flat-button color="primary" [disabled]="invalid || !(us.isLoggedIn | async)" type="submit" class="btn-pay">
-    <span class="payer">Payer</span>
+    <!-- Titre  -->
+    <h2 class="form-title" *ngIf="us.isLoggedIn | async; else unauthenticated">Réserver</h2>
 
-  </button>
 
-</form>
+    <!--  Erreurs  -->
+    <mat-error *ngIf="form.errors" class="errors">
+      <span *ngIf="(f.startTime.dirty && f.endTime.dirty) && form.errors.hoursInvalid">L'heure n'est pas valide</span>
+      <span *ngIf="form.errors.dateUnavailable">Ce créneau est déjà réservé</span>
+    </mat-error>
+
+    <!--  Non authentifié  -->
+    <ng-template #unauthenticated>
+      <div class="unauthenticated">
+        Pour réserver, merci de vous <a routerLink="/connexion" (click)="closeDialog.emit(true)">connecter</a>
+      </div>
+    </ng-template>
+
+    <!-- Date de début  -->
+    <mat-form-field appearance="outline" class="startDate">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="startpicker" formControlName="startDate" [min]="startMin" [max]="startMax"
+             [matDatepickerFilter]="filterDays()">
+      <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+      <mat-datepicker #startpicker [disabled]="!(us.isLoggedIn | async)"></mat-datepicker>
+    </mat-form-field>
+
+    <!--  Heure de début  -->
+    <mat-form-field appearance="outline" class="startTime">
+      <mat-label>Début</mat-label>
+      <input type="time" matInput formControlName="startTime">
+    </mat-form-field>
+
+    <!--  Heure de fin  -->
+    <mat-form-field appearance="outline" class="endTime">
+      <mat-label>Fin</mat-label>
+      <input type="time" matInput formControlName="endTime">
+    </mat-form-field>
+
+    <!--  Valider récurrence -->
+    <mat-checkbox formControlName="weekly" class="weekly">Recurrente</mat-checkbox>
+
+    <!--  Choix de récurrence  -->
+    <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" class="weekRepetition">
+      <mat-label>Toutes les</mat-label>
+      <mat-select formControlName="weekRepetition">
+        <mat-option *ngFor="let repeat of weekRepetition" [value]="repeat">{{repeat}} semaines</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--  Date de fin  -->
+    <mat-form-field *ngIf="f.weekly && f.weekly.value" appearance="outline" id="end" class="endDate">
+      <mat-label>Termine le</mat-label>
+      <input matInput [matDatepicker]="endpicker" formControlName="endDate" [min]="endMin" [max]="endMax"
+             [matDatepickerFilter]="filterDays()">
+      <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+      <mat-datepicker #endpicker [startAt]="endMin" disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <!--  Détail tarification  -->
+    <div class="price" *ngIf="duration">
+
+      <!-- Tarif HT  -->
+      <div class="price-row">
+        <div class="price-label">Tarif HT</div>
+        <div class="price-value"><span *ngIf="duration > 1">{{duration}} x </span>{{room.price | unitPrice}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+
+      <!--  Commission  -->
+      <div class="price-row">
+        <div class="price-label">Commission ({{COM}}%)</div>
+        <div class="price-value">{{room.price | commission: duration}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+
+      <!--  TVA  -->
+      <div class="price-row">
+        <div class="price-label">TVA ({{TVA}}%)</div>
+        <div class="price-value">{{room.price | tva: duration}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+      <mat-divider></mat-divider>
+
+      <!--  Total TTC  -->
+      <div class="price-row">
+        <div class="price-label">Total TTC</div>
+        <div class="price-value">{{room.price | total: duration}}</div>
+        <mat-icon>euros</mat-icon>
+      </div>
+    </div>
+
+    <!--  Payer la réservation  -->
+    <button mat-flat-button color="primary" [disabled]="invalid || !(us.isLoggedIn | async)" class="btn-pay"
+            (click)="openDialog()">
+      Payer
+    </button>
+  </form>
 </div>

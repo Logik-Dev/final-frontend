@@ -7,7 +7,6 @@ import {City} from '../../models/city';
 import {Router} from '@angular/router';
 import {DATE_FORMAT} from '../../utils/dates';
 import * as moment from 'moment';
-import {NotificationService} from '../../services/notification.service';
 
 interface Query {
   city: string;
@@ -30,24 +29,40 @@ export class HomePageComponent implements OnInit {
               private geoService: GeoService,
               private router: Router) {
     this.adapter.setLocale('fr');
+
+  }
+
+  ngOnInit(): void {
+    this.createForm();
+    this.autocompleteCity();
+  }
+
+  /**
+   * Créer le formulaire
+   */
+  createForm(): void {
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
       date: null
     });
   }
 
-  ngOnInit(): void {
+  /**
+   * Gérer l'autocomplete
+   */
+  autocompleteCity(): void {
     this.searchForm.get('city').valueChanges.pipe(
       debounceTime(300),
       switchMap(value => this.geoService.findCityByName(value))
     ).subscribe(cities => this.cities = cities);
   }
 
+  /**
+   * Rechercher une salle par ville ou date
+   * @param formData les données du formulaire
+   */
   submitForm(formData) {
-    if (!formData.city.nom) {
-      return;
-    }
-    if (!this.searchForm.invalid) {
+    if (this.searchForm.valid && formData.city.nom) {
       const city = formData.city.nom;
       const zipCode = formData.city.codesPostaux[0];
       const date = formData.date;
@@ -55,18 +70,27 @@ export class HomePageComponent implements OnInit {
       if (date) {
         query.date = date.locale('fr').format(DATE_FORMAT);
       }
-      this.router.navigate(['salles', query]);
+      this.router.navigate(['salles', query]).finally();
     }
   }
 
-  displayCity(city: City) {
-    return city.nom;
-  }
-
+  /**
+   * Rechercher une salle par coordonnées
+   */
   aroundMe() {
     this.geoService.getPosition().subscribe(coords =>
       this.router.navigate(['salles', coords])
         .then(_ => location.reload())
     );
   }
+
+  /**
+   * Afficher le nom de la ville dans le select
+   * @param city l'objet City à traiter
+   */
+  displayCity(city: City) {
+    return city.nom;
+  }
+
+
 }

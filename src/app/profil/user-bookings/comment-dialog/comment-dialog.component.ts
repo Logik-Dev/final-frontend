@@ -14,17 +14,22 @@ import {NotificationService} from '../../../../services/notification.service';
 })
 export class CommentDialogComponent implements OnInit {
   form: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<CommentDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private fb: FormBuilder,
               private commentService: CommentService,
-              private notification: NotificationService) { }
+              private notification: NotificationService) {
+  }
 
   ngOnInit(): void {
     this.createForm();
   }
 
-  createForm() {
+  /**
+   * Créer le formulaire
+   */
+  createForm(): void {
     this.form = this.fb.group({
       content: ['', Validators.required],
       rating: [5, Validators.required],
@@ -33,24 +38,33 @@ export class CommentDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Vérifier si la date de fin de la réservation est passée
+   */
   canComment(): boolean {
     return moment(this.data.lastDate, DATE_FORMAT).isBefore(moment());
   }
 
-  onSubmit(data: Comment) {
+  /**
+   * Enregistrer le commentaire
+   * @param data l'objet Comment à enregistrer
+   */
+  onSubmit(data: Comment): void {
     if (this.form.invalid) {
-      this.notification.showError('Veuillez remplir tout les champs')
+      this.notification.showError('Veuillez remplir tout les champs');
     } else {
-      this.commentService.create(data).subscribe(
-        _ => {
+      this.commentService.create(data).subscribe(_ => {
           this.notification.showSuccess('Merci pour votre commentaire');
-          this.dialogRef.close();
+          this.closeDialog();
         }
       );
     }
   }
 
-  cancel() {
+  /**
+   * Fermer la dialog
+   */
+  closeDialog(): void {
     this.dialogRef.close();
   }
 }

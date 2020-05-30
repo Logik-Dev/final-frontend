@@ -1,31 +1,49 @@
 <mat-nav-list id="room-list">
+
+  <!--  Accueil  -->
   <mat-list-item routerLink="/" (click)="doClose()">
     <mat-icon>home</mat-icon>
     <span>Accueil</span>
   </mat-list-item>
+
+  <!--  Ajouter une salle  -->
   <mat-list-item (click)="doClose()" routerLink="/ajouter">
     <mat-icon>add</mat-icon>
     <span>Ajouter une salle</span>
   </mat-list-item>
+
+  <!--  Toutes les salles  -->
   <mat-list-item routerLink="/salles" (click)="doClose()">
     <mat-icon>list</mat-icon>
     <span>Toutes les salles</span>
   </mat-list-item>
+
+  <!--  Non authentifié  -->
   <ng-container *ngIf="!(us.isLoggedIn | async); else authenticated">
+
+    <!--  Se connecter  -->
     <mat-list-item routerLink="/connexion" (click)="doClose()">
       <mat-icon>power_settings_new</mat-icon>
       <span>Se connecter</span>
     </mat-list-item>
+
+    <!--  S'inscrire -->
     <mat-list-item routerLink="/enregistrement" (click)="doClose()">
       <mat-icon>how_to_reg</mat-icon>
       <span>S'inscrire</span>
     </mat-list-item>
   </ng-container>
+
+  <!--  Authentifié -->
   <ng-template #authenticated>
+
+    <!--  Profil  -->
     <mat-list-item (click)="doClose()" routerLink="/profil">
       <mat-icon>person</mat-icon>
       <span>Profil</span>
     </mat-list-item>
+
+    <!--  Déconnexion  -->
     <mat-list-item (click)="logout()">
       <mat-icon>power_settings_new</mat-icon>
       <span>Déconnexion</span>
