@@ -6,10 +6,10 @@ import {Room} from '../../models/room';
 
 @Component({
   selector: 'app-room',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.scss']
+  templateUrl: './room-detail.component.html',
+  styleUrls: ['./room-detail.component.scss']
 })
-export class RoomComponent implements OnInit {
+export class RoomDetailComponent implements OnInit {
   room$: Observable<Room>;
   Arr = Array;
   constructor(private route: ActivatedRoute,

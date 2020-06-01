@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfilFavoriteComponent } from './profil-favorite.component';
+import { RoomDetailComponent } from './room-detail.component';
 
-describe('ProfilFavoriteComponent', () => {
-  let component: ProfilFavoriteComponent;
-  let fixture: ComponentFixture<ProfilFavoriteComponent>;
+describe('RoomComponent', () => {
+  let component: RoomDetailComponent;
+  let fixture: ComponentFixture<RoomDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfilFavoriteComponent ]
+      declarations: [ RoomDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfilFavoriteComponent);
+    fixture = TestBed.createComponent(RoomDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

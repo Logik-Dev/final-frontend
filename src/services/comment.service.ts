@@ -7,7 +7,7 @@ import {CommentSerializer} from '../utils/comment-serializer';
 @Injectable({
   providedIn: 'root'
 })
-export class CommentService extends ResourceService<Comment>{
+export class CommentService extends ResourceService<Comment> {
 
   constructor(http: HttpClient) {
     super(http, 'comments', new CommentSerializer());

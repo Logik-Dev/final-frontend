@@ -6,11 +6,11 @@ import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profil-favorite',
-  templateUrl: './profil-favorite.component.html',
-  styleUrls: ['./profil-favorite.component.scss'],
+  templateUrl: './user-favorites.component.html',
+  styleUrls: ['./user-favorites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilFavoriteComponent implements OnInit {
+export class UserFavoritesComponent implements OnInit {
   rooms$: Observable<Room[]>;
   constructor(private us: UserService) {}
 

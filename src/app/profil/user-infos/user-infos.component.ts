@@ -10,10 +10,10 @@ import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-profil-info',
-  templateUrl: './profil-info.component.html',
-  styleUrls: ['./profil-info.component.scss']
+  templateUrl: './user-infos.component.html',
+  styleUrls: ['./user-infos.component.scss']
 })
-export class ProfilInfoComponent implements OnInit, AfterViewInit {
+export class UserInfosComponent implements OnInit, AfterViewInit {
   user$: BehaviorSubject<User>;
   form: FormGroup;
   @ViewChild('confirmDialog') confirmDialog: TemplateRef<any>;

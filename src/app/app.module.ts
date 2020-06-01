@@ -12,7 +12,7 @@ import {LoginPageComponent} from './login/login.component';
 import {RequestInterceptorService} from '../services/request-interceptor.service';
 import {RouterModule, Routes} from '@angular/router';
 import {ServerErrorInterceptor} from './server-error-interceptor';
-import {ProfilPageComponent} from './profil/profil-page.component';
+import {ProfilComponent} from './profil/profil.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {ExtendedModule, FlexModule, GridModule} from '@angular/flex-layout';
 import {HomePageComponent} from './home/home-page.component';
@@ -24,21 +24,20 @@ import {AddRoomComponent} from './add-room/add-room.component';
 import {PhotoFormComponent} from './add-room/photos/photo-form.component';
 
 import {AddressFormComponent} from './add-room/address/address-form.component';
-import {BookingFormComponent} from './room/booking/booking-form.component';
+import {BookingFormComponent} from './room-detail/booking/booking-form.component';
 
-import {ProfilInfoComponent} from './profil/user-infos/profil-info.component';
+import {UserInfosComponent} from './profil/user-infos/user-infos.component';
 
-import {PaymentComponent} from './room/booking/payment/payment.component';
-import {MapComponent} from './room/map/map.component';
+import {PaymentComponent} from './room-detail/booking/payment/payment.component';
+import {MapComponent} from './room-detail/map/map.component';
 
-import {RoomComponent} from './room/room.component';
-import {StickyBarComponent} from './room/fixed-bar/sticky-bar.component';
+import {RoomDetailComponent} from './room-detail/room-detail.component';
+import {StickyBarComponent} from './room-detail/fixed-bar/sticky-bar.component';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import {ProfilFavoriteComponent} from './profil/user-favorites/profil-favorite.component';
+import {UserFavoritesComponent} from './profil/user-favorites/user-favorites.component';
 
 import {UserRoomsComponent} from './profil/user-rooms/user-rooms.component';
-import {TestComponent} from './test/test.component';
 import {MatTableModule} from '@angular/material/table';
 import {UserBookingsComponent} from './profil/user-bookings/user-bookings.component';
 import {CommentDialogComponent} from './profil/user-bookings/comment-dialog/comment-dialog.component';
@@ -47,27 +46,26 @@ import {PriceDialogComponent} from './add-room/infos/price-dialog/price-dialog.c
 import {EquipmentDialogComponent} from './add-room/infos/equipment-dialog/equipment-dialog.component';
 import {EventTypeDialogComponent} from './add-room/infos/event-type-dialog/event-type-dialog.component';
 import {DaysDialogComponent} from './add-room/infos/days-dialog/days-dialog.component';
-import {RoomListPageComponent} from './rooms/room-list-page.component';
-import {RoomCardComponent} from './rooms/room-card/room-card.component';
-import {RoomListComponent} from './rooms/room-list/room-list.component';
-import { UnitPricePipe } from './unit-price.pipe';
-import { TvaPipe } from './tva.pipe';
-import { CommissionPipe } from './commission.pipe';
-import { TotalPipe } from './total.pipe';
+import {RoomListPageComponent} from './room-list/room-list-page.component';
+import {RoomCardComponent} from './room-list/room-card/room-card.component';
+import {RoomListComponent} from './room-list/room-list/room-list.component';
+import {UnitPricePipe} from '../pipes/unit-price.pipe';
+import {TvaPipe} from '../pipes/tva.pipe';
+import {CommissionPipe} from '../pipes/commission.pipe';
+import {TotalPipe} from '../pipes/total.pipe';
 
 
 const routes: Routes = [
-  {path: 'test', component: TestComponent},
   {path: '', component: HomePageComponent},
   {path: 'connexion', component: LoginPageComponent},
   {path: 'salles', component: RoomListPageComponent},
-  {path: 'salles/:id', component: RoomComponent},
+  {path: 'salles/:id', component: RoomDetailComponent},
   {path: 'enregistrement', component: RegisterComponent},
   {path: 'ajouter', component: AddRoomComponent},
-  {path: 'profil', component: ProfilPageComponent, canActivate: [AuthGuardService], children: [
+  {path: 'profil', component: ProfilComponent, canActivate: [AuthGuardService], children: [
       {path: '', redirectTo: 'infos', pathMatch: 'full'},
-      {path: 'infos', component: ProfilInfoComponent},
-      {path: 'favoris', component: ProfilFavoriteComponent},
+      {path: 'infos', component: UserInfosComponent},
+      {path: 'favoris', component: UserFavoritesComponent},
       {path: 'salles', component: UserRoomsComponent},
       {path: 'réservations', component: UserBookingsComponent}
     ]}
@@ -77,7 +75,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginPageComponent,
-    ProfilPageComponent,
+    ProfilComponent,
     NavbarComponent,
     HomePageComponent,
     RegisterComponent,
@@ -85,18 +83,17 @@ const routes: Routes = [
     PhotoFormComponent,
     AddressFormComponent,
     BookingFormComponent,
-    ProfilInfoComponent,
+    UserInfosComponent,
     PaymentComponent,
     MapComponent,
     RoomListPageComponent,
-    RoomComponent,
+    RoomDetailComponent,
     StickyBarComponent,
     SidenavComponent,
-    ProfilFavoriteComponent,
+    UserFavoritesComponent,
     RoomCardComponent,
     RoomListComponent,
     UserRoomsComponent,
-    TestComponent,
     UserBookingsComponent,
     CommentDialogComponent,
     RoomInfosFormComponent,

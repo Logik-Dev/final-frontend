@@ -5,10 +5,10 @@ import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profil-page',
-  templateUrl: './profil-page.component.html',
-  styleUrls: ['./profil-page.component.scss']
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.scss']
 })
-export class ProfilPageComponent implements OnInit {
+export class ProfilComponent implements OnInit {
   user$: Observable<User>;
   navLinks = [
     {path: '/profil/infos', label: 'Infos'},
