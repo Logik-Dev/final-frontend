@@ -51,6 +51,8 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
    * Remplir l'objet Room puis effectuer les requêtes (photos et salle)
    */
   submit() {
+
+
     // Infos
     const room: Room = this.roomInfosForm.value;
     room.equipments = this.roomInfosForm.controls.equipments.value;
@@ -65,7 +67,7 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
 
     // Photos
     const photos: File[] = [];
-    this.photoForm.value.photos.forEach(photo => photos.push(photo.file));
+    this.photoForm.value.forEach(photo => photos.push(photo.file));
 
     // Enregistrement
     this.roomService.create(room).subscribe(

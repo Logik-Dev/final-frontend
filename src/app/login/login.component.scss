@@ -1,5 +1,14 @@
 @import "../../variables";
-
+.container.xs {
+  padding: 0;
+  .form {
+    margin-top: 0;
+  }
+  .form-title {
+    background-color: $primary-color;
+    color: #FAFAFA;
+  }
+}
 .form {
   .question {
     margin-top: 1.3rem;

@@ -5,13 +5,13 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) {
+  }
 
   handleError(error: any): void {
     const errorService = this.injector.get(ErrorService);
     const notificationService = this.injector.get(NotificationService);
 
-    // TODO implémenter logging
     let message;
     if (error instanceof HttpErrorResponse) {
       // Erreur serveur
@@ -25,7 +25,5 @@ export class GlobalErrorHandler implements ErrorHandler {
         notificationService.showError(message);
       }
     }
-    console.log(error);
   }
-
 }

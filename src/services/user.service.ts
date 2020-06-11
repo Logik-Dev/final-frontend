@@ -42,7 +42,10 @@ export class UserService extends ResourceService<User> {
   login(email: string, password: string): Observable<User> {
     return this.http.post<TokenResponse>(`${this.url}/${this.endpoint}/login`, {email, password})
       .pipe(
-        tap(response => sessionStorage.setItem('jwt', response.jwt)),
+        tap(response => {
+          sessionStorage.setItem('jwt', response.jwt);
+          document.cookie = response.jwt;
+        }),
         switchMap(_ => this.findById(this.userId)
           .pipe(tap(user => this.storedUser = user))
         ));

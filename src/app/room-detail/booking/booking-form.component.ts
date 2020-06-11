@@ -11,8 +11,8 @@ import {TIME_FORMAT} from '../../../utils/dates';
 import {BookingService} from '../../../services/booking.service';
 import {UserService} from '../../../services/user.service';
 import {COM, totalPrice, TVA} from '../../../utils/price-utils';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {TimeSlot} from '../../../models/time-slot';
+
 
 @Component({
   selector: 'app-booking-form',
@@ -42,6 +42,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.createForm();
     // désactiver le formulaire si non authentifié
     !this.us.isLoggedIn.value && this.form.disable();
+    this.changeListeners();
 
   }
 
@@ -63,7 +64,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     }, {
       validators: [hoursValid(), dateAvailable(this.room)]
     });
-    this.changeListeners();
+
   }
 
   /**
@@ -78,9 +79,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
    * Générer la réservation ainsi que la durée lors d'une saisie dans le formulaire
    */
   formChangeListener() {
-    this.form.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged()).subscribe(_ => {
+    this.form.valueChanges
+    .subscribe(value => {
       this.invalid = this.form.invalid;
       this.duration = 0;
       if (this.form.valid && this.form.enabled) {

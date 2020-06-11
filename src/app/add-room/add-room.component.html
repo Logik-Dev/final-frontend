@@ -1,7 +1,7 @@
 <div class="container" ngClass.xs="xs">
 
   <!--  Formulaire vertical  -->
-  <mat-vertical-stepper *ngIf="mobile" class="mat-elevation-z8" linear>
+  <mat-vertical-stepper *ngIf="mobile" class="mat-elevation-z8" >
 
     <!--  Photos  -->
     <mat-step [stepControl]="photoForm">
@@ -32,7 +32,7 @@
   </mat-vertical-stepper>
 
   <!--  Formulaire horizontal -->
-  <mat-horizontal-stepper *ngIf="!mobile" class="mat-elevation-z8" linear>
+  <mat-horizontal-stepper *ngIf="!mobile" class="mat-elevation-z8" >
 
     <!--  Photos  -->
     <mat-step [stepControl]="photoForm">
