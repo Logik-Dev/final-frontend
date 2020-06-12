@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {NotificationService} from '../../../services/notification.service';
 import {UserService} from '../../../services/user.service';
 
@@ -10,7 +10,7 @@ import {UserService} from '../../../services/user.service';
 })
 export class PhotoFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
-  formArray = new FormArray([]);
+  formArray = new FormArray([], this.enoughPhotos());
 
   constructor(private fb: FormBuilder,
               private notification: NotificationService,
@@ -34,6 +34,7 @@ export class PhotoFormComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+
   }
 
   /**
@@ -89,5 +90,9 @@ export class PhotoFormComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-
+  enoughPhotos(): ValidatorFn {
+    return (array: FormArray): ValidationErrors | null => {
+      return array.value.length < 3 ? {notEnoughPhotos: true} : null;
+    };
+  }
 }
