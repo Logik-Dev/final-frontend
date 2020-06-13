@@ -22,6 +22,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const modules: any[] = [
@@ -47,7 +48,8 @@ const modules: any[] = [
   MatBadgeModule,
   MatDividerModule,
   MatListModule,
-  MatSliderModule
+  MatSliderModule,
+  MatProgressSpinnerModule
 ];
 @NgModule({
   declarations: [],

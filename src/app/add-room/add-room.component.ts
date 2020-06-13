@@ -11,6 +11,7 @@ import {Address} from '../../models/address';
 import {UploadService} from '../../services/upload.service';
 import {UserService} from '../../services/user.service';
 import {RoomInfosFormComponent} from './infos/room-infos-form.component';
+import {delay} from 'rxjs/operators';
 
 
 @Component({
@@ -70,7 +71,8 @@ export class AddRoomComponent implements OnInit, AfterContentChecked {
     this.photoForm.value.forEach(photo => photos.push(photo.file));
 
     // Enregistrement
-    this.roomService.create(room).subscribe(
+    this.roomService.create(room)
+      .subscribe(
       result =>
         this.uploadService.upload(photos, result.id).subscribe(
           _ => {

@@ -64,9 +64,11 @@ export class RegisterComponent implements OnInit {
    */
   onSubmit(data: User) {
     if (this.registerForm.valid) {
-      this.us.create(data).subscribe(
+      this.us.create(data)
+        .subscribe(
         user => this.router.navigate(['/connexion'])
-          .then(_ => this.notification.showSuccess('Merci pour votre enregistrement, vous pouvez maintenant vous connecter'))
+          .then(_ =>
+            this.notification.showSuccess('Merci pour votre enregistrement, vous pouvez maintenant vous connecter'))
       );
     }
   }

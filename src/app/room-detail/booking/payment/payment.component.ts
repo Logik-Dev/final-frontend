@@ -2,10 +2,11 @@ import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, View
 import {BookingService} from '../../../../services/booking.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../../../services/notification.service';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Booking} from '../../../../models/booking';
 import {DATE_FORMAT} from '../../../../utils/dates';
 import {UserService} from '../../../../services/user.service';
+import {delay} from 'rxjs/operators';
 
 declare var paypal;
 
@@ -61,6 +62,7 @@ export class PaymentComponent implements OnInit {
    * Paiment autorisé par le client
    */
   onApprove() {
+
     return async (data, actions) => {
       const order = await actions.order.capture();
       console.log(order);
@@ -72,7 +74,8 @@ export class PaymentComponent implements OnInit {
    * Effectuer la requête d'enregistrement de la résevation
    */
   saveBooking() {
-    this.bookingService.create(this.data.booking).subscribe(_ => {
+    this.bookingService.create(this.data.booking)
+      .subscribe(_ => {
         this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
         this.us.refreshUser().subscribe(() =>
           this.router.navigateByUrl(`/profil/réservations`).finally()

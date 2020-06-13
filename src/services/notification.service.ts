@@ -1,11 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-
+  public isLoading = new BehaviorSubject(false);
   constructor(private snackBar: MatSnackBar,
               private zone: NgZone) { }
 
