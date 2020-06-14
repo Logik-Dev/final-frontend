@@ -7,6 +7,7 @@ import {City} from '../../models/city';
 import {Router} from '@angular/router';
 import {DATE_FORMAT} from '../../utils/dates';
 import * as moment from 'moment';
+import {NotificationService} from '../../services/notification.service';
 
 interface Query {
   city: string;
@@ -27,6 +28,7 @@ export class HomePageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private adapter: DateAdapter<any>,
               private geoService: GeoService,
+              private notification: NotificationService,
               private router: Router) {
     this.adapter.setLocale('fr');
 
@@ -35,6 +37,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.autocompleteCity();
+
   }
 
   /**
@@ -61,8 +64,9 @@ export class HomePageComponent implements OnInit {
    * Rechercher une salle par ville ou date
    * @param formData les données du formulaire
    */
-  submitForm(formData) {
+  submitForm(formData): void {
     if (this.searchForm.valid && formData.city.nom) {
+      this.setLoading();
       const city = formData.city.nom;
       const zipCode = formData.city.codesPostaux[0];
       const date = formData.date;
@@ -77,7 +81,8 @@ export class HomePageComponent implements OnInit {
   /**
    * Rechercher une salle par coordonnées
    */
-  aroundMe() {
+  aroundMe(): void {
+    this.setLoading();
     this.geoService.getPosition().subscribe(coords =>
       this.router.navigate(['salles', coords])
         .then(_ => location.reload())
@@ -88,9 +93,12 @@ export class HomePageComponent implements OnInit {
    * Afficher le nom de la ville dans le select
    * @param city l'objet City à traiter
    */
-  displayCity(city: City) {
+  displayCity(city: City): string {
     return city.nom;
   }
 
+  setLoading(): void {
+    this.notification.isLoading.next(true);
+  }
 
 }

@@ -1,137 +1,164 @@
 <!--  Carousel  -->
-<div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
-  <mat-carousel *ngIf="room$ | async as room" [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false">
-    <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
-  </mat-carousel>
-</div>
+<ng-container *ngIf="room$ | async as room">
+  <div class="carousel" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
+    <!--  Medium to XL  -->
+    <mat-carousel [autoplay]="false" [maintainAspectRatio]="false" fxHide.lt-sm>
+      <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
+    </mat-carousel>
 
-<!--  Contenu  -->
-<div class="page">
-  <div class="container" ngClass.xs="xs">
+    <!--  XS  -->
+    <mat-carousel [autoplay]="false" [maintainAspectRatio]="false" [hideArrows]="false" fxHide.gt-xs>
+      <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
+    </mat-carousel>
 
-    <!--  Card  -->
-    <div class="card-container" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
-      <div class="card-wrapper mat-elevation-z8">
-        <div class="card" *ngIf="room$ | async as room">
+    <!-- Bouton voir les photos -->
+    <button mat-icon-button class="show-photos" matTooltip="Voir les photos" (click)="showPhotos = true" fxHide.lt-sm>
+      <mat-icon>photo_library</mat-icon>
+    </button>
+  </div>
+  <!--  Overlay  -->
+  <div class="overlay" *ngIf="showPhotos">
+    <!--  Close Overlay  -->
+    <button mat-icon-button class="close-overlay" (click)="showPhotos = false">
+      <mat-icon>close</mat-icon>
+    </button>
+    <!--  Overlay Carousel  -->
+    <div class="carousel-overlay mat-elevation-z8">
+      <mat-carousel proportion="50" [hideArrows]="false" timings="500ms ease-in"
+                    interval="3000">
+        <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
+      </mat-carousel>
+    </div>
+  </div>
 
-          <!--  Nom  -->
-          <h1 class="card-title">{{room.name}}</h1>
+  <!--  Contenu  -->
+  <div class="page">
+    <div class="container" ngClass.xs="xs">
 
-          <!--  Adresse  -->
-          <p class="address">{{room.address.label | titlecase}} {{room.address.city}} {{room.address.zipCode}}</p>
+      <!--  Card  -->
+      <div class="card-container" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.gt-md="lg">
+        <div class="card-wrapper mat-elevation-z8">
+          <div class="card">
 
-          <!--  Note  -->
-          <div class="rating-infos">
-            <div class="stars">
-              <mat-icon *ngFor="let start of Arr(room.rating)" class="star">star</mat-icon>
+            <!--  Nom  -->
+            <h1 class="card-title">{{room.name | titlecase}}</h1>
+
+            <!--  Adresse  -->
+            <p class="address">{{room.address.label | titlecase}} {{room.address.city}} {{room.address.zipCode}}</p>
+
+            <!--  Note  -->
+            <div class="rating-infos">
+              <div class="stars">
+                <mat-icon *ngFor="let start of Arr(room.rating)" class="star">star</mat-icon>
+              </div>
+
+              <!--  Nombre de commentaire  -->
+              <a class="comments-number" [href]="'/salles/'+ room.id + '#comments'" title="Voir les commentaires">
+                {{room.comments.length ? room.comments.length : 'Aucun'}} avis
+              </a>
             </div>
 
-            <!--  Nombre de commentaire  -->
-            <a class="comments-number" [href]="'/salles/'+ room.id + '#comments'" title="Voir les commentaires">
-              {{room.comments.length ? room.comments.length : 'Aucun'}} avis
-            </a>
-          </div>
+            <!--  Infos  -->
+            <h2 class="category-title">Infos</h2>
+            <div class="properties">
 
-          <!--  Infos  -->
-          <h2 class="category-title">Infos</h2>
-          <div class="properties">
+              <!--  Prix  -->
+              <div class="property">
+                <mat-icon class="icon">euro</mat-icon>
+                <div class="label">Prix
+                  <div class="value">{{room.price | unitPrice}} euros/h</div>
+                </div>
+              </div>
 
-            <!--  Prix  -->
-            <div class="property">
-              <mat-icon class="icon">euro</mat-icon>
-              <div class="label">Prix
-                <div class="value">{{room.price | unitPrice}} euros/h</div>
+              <!-- Capacité  -->
+              <div class="property">
+                <mat-icon class="icon">people</mat-icon>
+                <div class="label">Capacité max.
+                  <div class="value">{{room.maxCapacity}} personnes</div>
+                </div>
+              </div>
+
+              <!--  Type  -->
+              <div class="property">
+                <mat-icon class="icon">category</mat-icon>
+                <div class="label">Type
+                  <div class="value">{{room.type.id | titlecase}}</div>
+                </div>
+              </div>
+
+              <!--  Surface  -->
+              <div class="property">
+                <mat-icon class="icon">home</mat-icon>
+                <div class="label">Surface
+                  <div class="value">{{room.size}}m²</div>
+                </div>
               </div>
             </div>
+            <mat-divider></mat-divider>
 
-            <!-- Capacité  -->
-            <div class="property">
-              <mat-icon class="icon">people</mat-icon>
-              <div class="label">Capacité max.
-                <div class="value">{{room.maxCapacity}} personnes</div>
-              </div>
+            <!--  Carte  -->
+            <h2 class="category-title">Localisation</h2>
+            <app-map [longitude]="room.address.longitude" [latitude]="room.address.latitude"
+                     [address]="room.address.label"></app-map>
+            <mat-divider></mat-divider>
+
+            <!--  Evènements -->
+            <h2 class="category-title">Type d'évenement</h2>
+            <div class="events">
+              <span class="badge" *ngFor="let event of room.eventTypes">{{event.id}}</span>
             </div>
+            <mat-divider></mat-divider>
 
-            <!--  Type  -->
-            <div class="property">
-              <mat-icon class="icon">category</mat-icon>
-              <div class="label">Type
-                <div class="value">{{room.type.id | titlecase}}</div>
-              </div>
-            </div>
-
-            <!--  Surface  -->
-            <div class="property">
-              <mat-icon class="icon">home</mat-icon>
-              <div class="label">Surface
-                <div class="value">{{room.size}}m²</div>
-              </div>
-            </div>
-          </div>
-          <mat-divider></mat-divider>
-
-          <!--  Carte  -->
-          <h2 class="category-title">Localisation</h2>
-          <app-map [longitude]="room.address.longitude" [latitude]="room.address.latitude"
-                   [address]="room.address.label"></app-map>
-          <mat-divider></mat-divider>
-
-          <!--  Evènements -->
-          <h2 class="category-title">Type d'évenement</h2>
-          <div class="events">
-            <span class="badge" *ngFor="let event of room.eventTypes">{{event.id}}</span>
-          </div>
-          <mat-divider></mat-divider>
-
-          <!--  Equipements  -->
-          <h2 class="category-title">Equipements</h2>
-          <div class="equipments">
+            <!--  Equipements  -->
+            <h2 class="category-title">Equipements</h2>
+            <div class="equipments">
             <span class="badge" *ngFor="let equipment of room.equipments">
               {{equipment.equipment.id | titlecase}}<span *ngIf="equipment.quantity > 1">({{equipment.quantity}})</span>
             </span>
-          </div>
-          <mat-divider></mat-divider>
+            </div>
+            <mat-divider></mat-divider>
 
-          <!-- Ambiance -->
-          <h2 class="category-title">Ambiance</h2>
-          <div class="volumes">
-            <div class="volume" *ngIf="room.maxVolume === 'CALME'">
-              <mat-icon class="icon">volume_mute</mat-icon>
-              Calme
+            <!-- Ambiance -->
+            <h2 class="category-title">Ambiance</h2>
+            <div class="volumes">
+              <div class="volume" *ngIf="room.maxVolume === 'CALME'">
+                <mat-icon class="icon">volume_mute</mat-icon>
+                Calme
+              </div>
+              <div class="volume" *ngIf="room.maxVolume === 'MOYEN'">
+                <mat-icon class="icon">volume_down</mat-icon>
+                Résonnable
+              </div>
+              <div class="volume" *ngIf="room.maxVolume === 'BRUYANT'">
+                <mat-icon class="icon">volume_up</mat-icon>
+                Bruyant
+              </div>
             </div>
-            <div class="volume" *ngIf="room.maxVolume === 'MOYEN'">
-              <mat-icon class="icon">volume_down</mat-icon>
-              Résonnable
-            </div>
-            <div class="volume" *ngIf="room.maxVolume === 'BRUYANT'">
-              <mat-icon class="icon">volume_up</mat-icon>
-              Bruyant
-            </div>
-          </div>
-          <mat-divider *ngIf="room.comments.length"></mat-divider>
+            <mat-divider *ngIf="room.comments.length"></mat-divider>
 
-          <!--  Commentaires  -->
-          <h2 class="category-title" *ngIf="room.comments.length">Commentaires</h2>
-          <div id="comments">
-            <div class="comment" *ngFor="let comment of room.comments">
-              <div class="comment-content">"{{comment.content}}"</div>
-              <div class="author">{{comment.author.firstname | titlecase}}
-                le {{comment.publishedOn.locale('fr').format('LL')}} :
+            <!--  Commentaires  -->
+            <h2 class="category-title" *ngIf="room.comments.length">Commentaires</h2>
+            <div id="comments">
+              <div class="comment" *ngFor="let comment of room.comments">
+                <div class="comment-content">"{{comment.content}}"</div>
+                <div class="author">{{comment.author.firstname | titlecase}}
+                  le {{comment.publishedOn.locale('fr').format('LL')}} :
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!--  Réserver  -->
-      <div *ngIf="room$ | async as room">
-        <app-booking-form fxHide.lt-md [room]="room"></app-booking-form>
+        <!--  Réserver  -->
+        <div>
+          <app-booking-form fxHide.lt-md [room]="room"></app-booking-form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!--  Navbar du bas -->
-<div *ngIf="room$ | async as room">
-  <app-sticky-bar fxHide.gt-sm [room]="room"></app-sticky-bar>
-</div>
+  <!--  Navbar du bas -->
+  <div>
+    <app-sticky-bar fxHide.gt-sm [room]="room"></app-sticky-bar>
+  </div>
+</ng-container>

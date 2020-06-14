@@ -16,11 +16,49 @@
   &.lg {
     height: 30rem;
   }
+}
+
+mat-carousel, .carousel {
   ::ng-deep .mat-icon {
     font-size: 2rem;
     color: rgba(150,150,150,.9);
   }
 }
+
+.show-photos {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  z-index: 100;
+}
+@keyframes appear {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+.overlay {
+  position: fixed;
+  top: $navbar-height; left: 0; right: 0; bottom: 0;
+  z-index: 999;
+  background-color: rgba(74,74,74,.9);
+  transition: background-color 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: appear ease-out 500ms;
+}
+.close-overlay {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  color: white;
+  font-size: 2rem;
+}
+.carousel-overlay {
+  width: 80%;
+  border-radius: 3px;
+  mat-carousel {
+    border-radius: 3px;
+  }
+}
+
 .page {
   background-color: rgba(0,0,0,.05);
   min-height: 160vh;
@@ -29,7 +67,7 @@
   padding: 0;
 }
 .card-container {
-  max-width: 70rem;
+  max-width: fit-content;
   margin: 0 auto;
   position: relative;
   display: grid;

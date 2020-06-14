@@ -8,8 +8,11 @@
 
   <!--  Content -->
   <mat-sidenav-content class="content">
-    <div class="loader" *ngIf="notification.isLoading | async">
-      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <div class="overlay" *ngIf="notification.isLoading | async">
+      <div class="loader">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+
     </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -6,8 +6,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Booking} from '../../../../models/booking';
 import {DATE_FORMAT} from '../../../../utils/dates';
 import {UserService} from '../../../../services/user.service';
-import {delay} from 'rxjs/operators';
-
 declare var paypal;
 
 interface BookingData {
@@ -26,7 +24,8 @@ export class PaymentComponent implements OnInit {
               private router: Router,
               private notification: NotificationService,
               private us: UserService,
-              @Inject(MAT_DIALOG_DATA) public data: BookingData) {
+              @Inject(MAT_DIALOG_DATA) public data: BookingData,
+              private dialogRef: MatDialogRef<PaymentComponent>) {
   }
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class PaymentComponent implements OnInit {
    * Créer les boutons Paypal
    */
   generatePaypalButtons() {
-    paypal.Buttons({createOrder: this.createOrder(), onApprove: this.onApprove()})
+    paypal.Buttons({createOrder: this.createOrder(), onApprove: this.onApprove(), onError: this.onError()})
       .render(this.paypalElement.nativeElement);
   }
 
@@ -62,21 +61,25 @@ export class PaymentComponent implements OnInit {
    * Paiment autorisé par le client
    */
   onApprove() {
-
     return async (data, actions) => {
       const order = await actions.order.capture();
       console.log(order);
       this.saveBooking();
     };
   }
-
+  onError() {
+    return () => {
+      this.dialogRef.close();
+      this.notification.showError('Impossible d\'effectuer la réservation');
+    };
+  }
   /**
    * Effectuer la requête d'enregistrement de la résevation
    */
   saveBooking() {
     this.bookingService.create(this.data.booking)
       .subscribe(_ => {
-        this.notification.showSuccess('Réservation effectuée, merci de nous faire confiance');
+        this.notification.showSuccess('Réservation enregistrée, merci de nous faire confiance');
         this.us.refreshUser().subscribe(() =>
           this.router.navigateByUrl(`/profil/réservations`).finally()
         );

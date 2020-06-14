@@ -12,6 +12,7 @@ import {Room} from '../../models/room';
 export class RoomDetailComponent implements OnInit {
   room$: Observable<Room>;
   Arr = Array;
+  showPhotos = false;
   constructor(private route: ActivatedRoute,
               private roomService: RoomService) {}
 

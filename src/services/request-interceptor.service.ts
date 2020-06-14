@@ -3,7 +3,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {NotificationService} from './notification.service';
-import {delay, finalize} from 'rxjs/operators';
+import {debounceTime, delay, finalize} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 
 @Injectable({
@@ -31,8 +31,11 @@ export class RequestInterceptorService implements HttpInterceptor {
 
     return next.handle(authRequest)
       .pipe(
-        delay(600),
-        finalize(() => this.notification.isLoading.next(false)));
+        finalize(() =>
+          setTimeout(() =>
+            this.notification.isLoading.next(false),
+            700)
+          ));
   }
 
   shouldNotShowLoader(req: HttpRequest<any>): boolean {
