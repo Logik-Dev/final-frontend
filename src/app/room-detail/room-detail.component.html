@@ -16,14 +16,17 @@
       <mat-icon>photo_library</mat-icon>
     </button>
   </div>
+
   <!--  Overlay  -->
-  <div class="overlay" *ngIf="showPhotos">
+  <div class="overlay" *ngIf="showPhotos" (click)="showPhotos = false">
+
     <!--  Close Overlay  -->
     <button mat-icon-button class="close-overlay" (click)="showPhotos = false">
       <mat-icon>close</mat-icon>
     </button>
+
     <!--  Overlay Carousel  -->
-    <div class="carousel-overlay mat-elevation-z8">
+    <div class="carousel-overlay mat-elevation-z8" (click)="$event.stopPropagation()">
       <mat-carousel proportion="50" [hideArrows]="false" timings="500ms ease-in"
                     interval="3000">
         <mat-carousel-slide *ngFor="let photo of room.photos" [image]="photo.url"></mat-carousel-slide>
